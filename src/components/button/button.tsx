@@ -1,144 +1,133 @@
-import {ReactNode} from "react"
+'use client'
+import {MouseEventHandler, ReactNode} from "react"
 import '../../styles/components/button/button.sass'
 
-enum buttonType{
-    BG1='big grey-1',
-    MG1='medium grey-1',
-    BN1='big negative-1',
-    MN1='medium negative-1',
-    BD='big disabled',
-    MD='medium disabled',
-    BB1='big brand-1',
-    MB1='medium brand-1',
-    BBO='big brand-opacity',
-    MBO='medium brand-opacity',
-    BL='big ligth',
-    ML='medium ligth',
-    BOL='big outline-light',
-    MOL='medium outline-light',
-    B45='big b45',
-    M44='medium b45',
-    BO2='big outline-2',
-    MO2='medium outline-2',
-    BOB1='big outline-brand-1',
-    MOB1='medium outline-brand-1',
-    BBT='big big-text',
-    MBT='medium big-text',
-    BBD='big brand-disbaled',
-    MBD='medium brand-disabled',
+enum buttonSize{
+    Big="big ",
+    Medium="medium "
 }
 
-type iTypes= 
-"BG1" | 
-"MG1" | 
-"BN1" | 
-"MN1"| 
-"BD" | 
-"MD" | 
-"BB1" | 
-"MB1" | 
-"BBO" | 
-"MBO" | 
-"BL" | 
-"ML"|
-"BOL"| 
-"MOL"| 
-"B45"| 
-"M44"| 
-"BO2"| 
-"MO2"| 
-"BOB1"|
-"MOB1"| 
-"BBT"| 
-"MBT"| 
-"BBD"
+enum buttonType{
+    GREY1="grey-1",
+    NEGATIVE1="negative-1",
+    DISABLED="disabled",
+    BRAND1="brand-1",
+    BrandOpacity="brand-opacity",
+    Light="light",
+    OutlineLight="outline-light",
+    B45="b45",
+    Outline2="outline-2",
+    OutlineBrand1="outline-brand-1",
+    BigText="big-text",
+    BrandDisabled="brand-disbaled",
+    Alert="alert",
+    Confirm="confirm"
+}
+
+type tSizeButton= "big" | "medium"
+
+
+type tTypes= 
+"grey-1" | 
+"negative-1" | 
+"disabled" | 
+"brand-1" | 
+"brand-opacity" | 
+"ligth" |
+"outline-light"|  
+"b45"| 
+"m44"| 
+"outline-2"|
+"outline-brand-1"| 
+"big-text"| 
+"brand-disabled"|
+"alert"|
+"cancel"|
+"confirm"|
+"sucess"
 
 interface iButton{
     children: ReactNode
-    style?: iTypes
+    onClick?: MouseEventHandler<HTMLButtonElement>
+    style?: tTypes
+    size?: tSizeButton
+    type?: "submit" | "button" | "reset"
+    id?: string
 }
 
-export const Button=({children,style}:iButton):React.JSX.Element=>{
+const Button=({children,style,onClick,size,type="submit",id}:iButton):React.JSX.Element=>{
 
     let className=null
-    switch(style){
-        case "BG1":
-            className=buttonType.BG1
+
+    switch(size){
+        case "big":
+            className=buttonSize.Big
             break
-        case "MG1":
-            className=buttonType.MG1
-            break
-        case "BN1":
-            className=buttonType.BN1
-            break
-        case "MN1":
-            className=buttonType.MN1
-            break
-        case "BD":
-            className=buttonType.BD
-            break
-        case "MD":
-            className=buttonType.MD 
-            break
-        case "BB1": 
-            className=buttonType.BB1
-            break
-        case "MB1":
-            className=buttonType.MB1
-            break
-        case "BBO":
-            className=buttonType.BBO
-            break
-        case "MBO":
-            className=buttonType.MBO 
-            break
-        case "BL":
-            className=buttonType.BL 
-            break
-        case "ML":
-            className=buttonType.ML
-            break
-        case "BOL":
-            className=buttonType.BOL
-            break
-        case "MOL":
-            className=buttonType.MOL
-            break
-        case "B45":
-            className=buttonType.B45
-            break
-        case "M44":
-            className=buttonType.M44
-            break
-        case "BO2":
-            className=buttonType.BO2
-            break
-        case "MO2":
-            className=buttonType.MO2
-            break
-        case "BOB1":
-            className=buttonType.BOB1
-            break
-        case "MOB1":
-            className=buttonType.MOB1
-            break 
-        case "BBT":
-            className=buttonType.BBT
-            break
-        case "MBT":
-            className=buttonType.MBT
-            break
-        case "BBD":
-            className=buttonType.BBD
+        case "medium":
+            className=buttonSize.Medium
             break
         default:
-            className=buttonType.BB1
+            className=buttonSize.Big
+    }
+
+    switch(style){
+        case "grey-1":
+            className= className + buttonType.GREY1
+            break
+        case "negative-1":
+            className=className + buttonType.NEGATIVE1
+            break
+        case "disabled":
+            className=className + buttonType.DISABLED
+            break
+        case "brand-1": 
+            className=className + buttonType.BRAND1
+            break
+        case "brand-opacity":
+            className=className + buttonType.BrandOpacity
+            break
+        case "ligth":
+            className= className + buttonType.Light
+            break
+        case "outline-light":
+            className=className + buttonType.OutlineLight
+            break       
+        case "b45":
+            className=className + buttonType.B45
+            break
+        case "m44":
+            className=className + buttonType.B45
+            break
+        case "outline-2":
+            className=className + buttonType.Outline2
+            break
+        case "outline-brand-1":
+            className=className + buttonType.OutlineBrand1
+            break
+        
+        case "big-text":
+            className=className + buttonType.BigText
+            break
+        case "brand-disabled":
+            className=className + buttonType.BrandDisabled
+            break
+        case "alert":
+        case "cancel":
+            className=className + buttonType.Alert
+            break
+        case "confirm":
+        case "sucess":
+            className=className + buttonType.Confirm
+            break
+        default:
+            className=className + buttonType.BRAND1
     }
 
     return(
-        <button className={className}>
+        <button type={type} onClick={onClick} id={id} className={className}>
             {children}
         </button>
+
     )
 }
 
