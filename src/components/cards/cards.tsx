@@ -1,6 +1,6 @@
 import '../../styles/components/cards/cards.sass'
 
-import { Elipsis, Tag } from "../tag/tags"
+import { Elipsis, Tag } from "../tags/tags"
 
 interface carro{
     "id": string
@@ -13,10 +13,11 @@ interface carro{
 
 interface props{
     carro: carro
+    advertisement?: "ative" | "inative" | "cash"
 }
 
 
-const Cards=({carro}:props)=>{
+const Cards=({carro,advertisement="ative"}:props)=>{
 
     const{brand,year,value,name,fuel}=carro
     
@@ -24,6 +25,7 @@ const Cards=({carro}:props)=>{
         <div className="product">
             <div className="img-product">
                 <img src='https://th.bing.com/th/id/OIP.C1qWSN1AqoIc8dcARjikywHaEo?pid=ImgDet&rs=1' alt="" />
+                <Tag type={advertisement}>{advertisement}</Tag>
             </div>
             <div className="product-description">
                 <h2>{`${name}`}</h2>

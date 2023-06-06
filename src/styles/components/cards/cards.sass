@@ -22,9 +22,17 @@
     .img-product
         max-width: 300px
         background-color: variables.$color-grey-7
+        position: relative
         img
             padding:0px 25px
             width: -webkit-fill-available
+            border: 1px solid transparent
+            &:hover
+                border-color: variables.$color-brand-1
+        div
+            position: absolute
+            top: 0px
+
 
     .product-infos
         justify-content: space-between
