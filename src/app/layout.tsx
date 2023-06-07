@@ -1,6 +1,5 @@
-import { ReactNode } from "react"
+import { ReactNode} from "react"
 import '../styles/reset.sass'
-
 
 interface iRootLayout{
   children:ReactNode
