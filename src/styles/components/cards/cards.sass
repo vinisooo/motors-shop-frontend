@@ -1,0 +1,46 @@
+@use '../../variables'
+
+.product
+    max-width: 312px
+
+    h2
+        font-family: 'Lexend'
+        font-style: normal
+        font-weight: 600
+        font-size: 16px
+        line-height: 20px
+        color: variables.$color-grey-1
+    
+    p
+        font-family: 'Inter'
+        font-style: normal
+        font-weight: 400
+        font-size: 14px
+        line-height: 24px
+        color: variables.$color-grey-2
+
+    .img-product
+        max-width: 300px
+        background-color: variables.$color-grey-7
+        position: relative
+        img
+            padding:0px 25px
+            width: -webkit-fill-available
+            border: 1px solid transparent
+            &:hover
+                border-color: variables.$color-brand-1
+        div
+            position: absolute
+            top: 0px
+
+
+    .product-infos
+        justify-content: space-between
+        align-items: center
+        display: flex
+        span
+            font-size: 16px
+        .km-year
+            display: flex
+            gap:12px
+

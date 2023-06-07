@@ -1,0 +1,108 @@
+@use '../../variables'
+
+button
+    border: 1.5px solid
+    border-radius: 4px
+    &.big
+        font-size: 16px
+        display: flex
+        flex-direction: row
+        justify-content: center
+        align-items: center
+        padding: 12px 28px
+        gap: 10px
+    
+    &.medium
+        font-size:14px
+        display: flex
+        flex-direction: row
+        justify-content: center
+        align-items: center
+        padding: 12px 20px
+        gap: 10px
+
+.grey-1
+    background-color: variables.$color-grey-0
+    border: variables.$color-grey-0
+    color: variables.$color-white-fixed
+    &:hover
+        background-color: variables.$color-grey-1
+
+.negative-1
+    background-color: variables.$color-grey-6
+    border: variables.$color-grey-6
+    color: variables.$color-grey-2
+    &:hover
+        background-color: variables.$color-grey-5
+
+.disabled
+    background-color: variables.$color-grey-5
+    border: variables.$color-grey-5
+    color: variables.$color-white-fixed
+
+.brand-1
+    background-color: variables.$color-brand-1
+    border: variables.$color-brand-1
+    color: variables.$color-white-fixed
+    &:hover
+        background-color:  variables.$color-brand-2
+
+.brand-opacity
+    background-color: variables.$color-brand-4
+    border: variables.$color-brand-4
+    color: variables.$color-brand-1
+
+.ligth
+    background-color: variables.$color-grey-10
+    color: variables.$color-grey-1
+
+.outline-light
+    background: variables.$color-grey-10
+    border: variables.$color-grey-10
+    &:hover
+        color: variables.$color-grey-1
+
+.b45
+    background-color: variables.$color-white-fixed
+    color: variables.$color-grey-0
+    border: variables.$color-grey-0
+    &:hover
+        color: variables.$color-white-fixed
+        background-color: variables.$color-grey-0
+
+.outline-2
+    background-color: variables.$color-white-fixed
+    color: variables.$color-grey-0
+    border: variables.$color-grey-1
+    &:hover
+        color: variables.$color-white-fixed
+        background-color: variables.$color-grey-1
+
+.outline-brand1
+    color: variables.$color-brand-1
+    border: variables.$color-brand-1
+    background: variables.$color-white-fixed
+    &:hover
+        color: variables.$color-brand-4
+
+.big-text
+    color: variables.$color-grey-0
+    background: variables.$color-white-fixed
+    border: variables.$color-white-fixed
+    
+
+.brand-disabled
+    background-color: variables.$color-brand-3
+    color: variables.$color-white-fixed
+
+.confirm
+    background-color: variables.$color-sucess-3
+    color: variables.$color-sucess-1
+    &:hover
+        background-color: variables.$color-sucess-2
+
+.alert
+    background-color: variables.$color-alert-3
+    color: variables.$color-alert-1
+    &:hover
+        background-color: variables.$color-alert-2

@@ -1,0 +1,46 @@
+@use '../variables'
+    
+label
+    font-size: 20px
+    color: variables.$color-grey-1
+
+.label
+    display: flex
+    flex-direction: column
+
+input,textarea
+    font-family: 'lexend'
+    display: flex
+    flex-direction: row
+    width: 200px
+    padding: 8px 16px
+    gap: 10px
+    align-items: center
+    border-radius: 4px
+    border: 1.5px solid variables.$color-grey-8
+    resize: none
+
+    &:hover
+        outline: variables.$color-brand-3
+        border-color: variables.$color-brand-3 
+    &:focus
+        outline: variables.$color-brand-2
+        border-color: variables.$color-brand-2
+
+select
+    padding: 4px 30px 4px 10px
+    font-size: 14px
+    border: 1px solid variables.$color-grey-8
+    height: 30px
+    border-radius: 4px
+    -webkit-appearance: none
+    -moz-appearance: none
+    appearance: none
+    background: url('../../img/vector.svg') no-repeat 90%/10%
+    width: 200px
+    &:hover
+        outline: variables.$color-brand-3
+        border-color: variables.$color-brand-3
+    &:focus
+        border-color: variables.$color-brand-1
+
