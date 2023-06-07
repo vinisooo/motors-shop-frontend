@@ -1,0 +1,56 @@
+@use '../../variables'
+
+footer
+    position: fixed
+    bottom: 0px
+    left: 0px
+    right: 0px
+    color: variables.$color-white-fixed
+    background-color: variables.$color-grey-0
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    padding: 45px 59px
+    gap: 60px
+
+    p
+        font-family: 'Inter'
+        font-style: normal
+        font-weight: 400
+        font-size: 14px
+        line-height: 24px
+
+    div
+        cursor: pointer
+        display: flex
+        justify-content: center
+        align-items: center
+        background-color: variables.$color-grey-1
+        width: 53px
+        height: 50px
+
+        i
+            font-family: 'Font Awesome 5 Free'
+            font-style: normal
+            font-weight: 900
+            font-size: 16px
+            line-height: 18px
+
+        svg
+            width: 30px
+            height: 38px
+
+
+@media screen and (min-width: 376px) 
+
+    footer
+        flex-direction: row
+        justify-content: space-between
+        gap: 10px
+        
+
+    
+
+    
+    
