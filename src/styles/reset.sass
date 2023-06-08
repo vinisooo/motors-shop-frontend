@@ -1,4 +1,5 @@
 @use './components/inputs/inputs'
+@use './variables'
   
 :root
     font-size: 60%
@@ -6,7 +7,7 @@
 @media (min-width: 700px)
 :root
     font-size: 62.5%
-    font-family: 'Lexend'
+    font-family: variables.$default-font
 
 *
     margin: 0
@@ -34,6 +35,7 @@ strong
 
 button
     cursor: pointer
+
 
 a
     text-decoration: none
