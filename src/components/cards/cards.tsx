@@ -4,7 +4,7 @@ import '../../styles/components/cards/cards.sass'
 import { Elipsis, Tag } from "../tags/tags"
 
 interface carro{
-    "id": string
+    "id": string,
     "name": string,
     "brand": string,
     "year": string,
@@ -16,7 +16,6 @@ interface props{
     carro: carro
     advertisement?: "ative" | "inative" | "cash"
 }
-
 
 const Cards=({carro,advertisement="ative"}:props)=>{
 
