@@ -1,6 +1,25 @@
 .cars-section
     width: 100%
 
+    display: flex
+    justify-content: space-between
+    align-items: flex-start
+
+    .cars-list
+        display: flex
+        gap: 25px
+        width: 80%
+
+        overflow-x: scroll
+        justify-content: flex-end
+
+        padding: 20px
+
+
 @media (min-width: 768px)
     .cars-section
         padding: 59px
+        
+        .cars-list
+            overflow-x: hidden
+            flex-wrap: wrap
