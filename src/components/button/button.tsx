@@ -7,6 +7,12 @@ enum buttonSize{
     Medium="medium "
 }
 
+enum buttonWidth{
+    w30="w30 ",
+    w50="w50 ",
+    w80="w80 "
+}
+
 enum buttonType{
     GREY1="grey-1",
     NEGATIVE1="negative-1",
@@ -53,9 +59,10 @@ interface iButton{
     size?: tSizeButton
     type?: "submit" | "button" | "reset"
     id?: string
+    width?: number
 }
 
-const Button=({children,style,onClick,size,type="submit",id}:iButton):React.JSX.Element=>{
+const Button=({children,style,onClick,size,type="submit",id, width}:iButton):React.JSX.Element=>{
 
     let className=null
 
@@ -68,6 +75,20 @@ const Button=({children,style,onClick,size,type="submit",id}:iButton):React.JSX.
             break
         default:
             className=buttonSize.Big
+    }
+
+    switch(width){
+        case 30:
+            className= `${className} ${buttonWidth.w30}`
+            break
+        case 50:
+            className= `${className} ${buttonWidth.w50}`
+            break
+        case 80:
+            className= `${className} ${buttonWidth.w80}`
+            break
+        default:
+            className= className
     }
 
     switch(style){
