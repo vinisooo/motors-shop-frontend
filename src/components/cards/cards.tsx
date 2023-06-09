@@ -25,7 +25,7 @@ const Cards=({carro,advertisement="ative"}:props)=>{
     return(
         <div className="product">
             <div className="img-product">
-                <Image src='https://th.bing.com/th/id/OIP.C1qWSN1AqoIc8dcARjikywHaEo?pid=ImgDet&rs=1' alt="" />
+                <img src='https://th.bing.com/th/id/OIP.C1qWSN1AqoIc8dcARjikywHaEo?pid=ImgDet&rs=1' alt="" />
                 <Tag type={advertisement}>{advertisement}</Tag>
             </div>
             <div className="product-description">

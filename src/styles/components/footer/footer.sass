@@ -1,18 +1,19 @@
 @use '../../variables'
 
 footer
-    position: fixed
-    bottom: 0px
-    left: 0px
-    right: 0px
+    width: 100%
     color: variables.$color-white-fixed
     background-color: variables.$color-grey-0
     display: flex
     flex-direction: column
     justify-content: center
     align-items: center
+    flex-wrap: wrap
     padding: 45px 59px
     gap: 60px
+    text-align: center
+    margin-top: 100px
+
 
     p
         font-family: 'Inter'
@@ -40,7 +41,6 @@ footer
         svg
             width: 30px
             height: 38px
-
 
 @media screen and (min-width: 376px) 
 
