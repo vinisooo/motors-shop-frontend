@@ -6,7 +6,7 @@ import { useState } from "react"
 
 
 const Header = () => {
-    const [active, setActive] = useState<boolean>(false);
+    const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
 
     return(
         <header className="main-header">
@@ -14,12 +14,12 @@ const Header = () => {
                 <Logo/>
             </Link>
 
-            <nav>
+            <nav className={dropdownMenu ? "" : "hidden-dropdown-menu"}>
                 <Link href="/login">Fazer Login</Link>
                 <Link href="/register">Cadastrar</Link>
             </nav>
 
-            <button onClick={() => setActive(!active)} className={active ? "active-dropdown": ""}>
+            <button onClick={() => setDropdownMenu(!dropdownMenu)} className={dropdownMenu ? "active-dropdown": ""}>
                 <span></span>
                 <span></span>
                 <span></span>
