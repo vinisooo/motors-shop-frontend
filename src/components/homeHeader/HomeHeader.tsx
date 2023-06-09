@@ -1,4 +1,4 @@
-import "../../styles/components/homeHeader/homeHeader.sass"
+import "../../styles/pages/home/homeHeader.sass"
 
 const HomeHeader = () => {
     return(
