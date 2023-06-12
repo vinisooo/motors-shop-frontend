@@ -3,23 +3,18 @@
 button
     border: 1.5px solid
     border-radius: 4px
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+    gap: 10px
     &.big
         font-size: 16px
-        display: flex
-        flex-direction: row
-        justify-content: center
-        align-items: center
         padding: 12px 28px
-        gap: 10px
     
     &.medium
         font-size:14px
-        display: flex
-        flex-direction: row
-        justify-content: center
-        align-items: center
         padding: 12px 20px
-        gap: 10px
     
     &.w30
         width: 30%
@@ -88,15 +83,15 @@ button
         background-color: variables.$color-grey-1
 
 .outline-brand1
+    background-color: variables.$color-white-fixed
     color: variables.$color-brand-1
     border: variables.$color-brand-1
-    background: variables.$color-white-fixed
     &:hover
         color: variables.$color-brand-4
 
 .big-text
     color: variables.$color-grey-0
-    background: variables.$color-white-fixed
+    background-color: variables.$color-white-fixed
     border: variables.$color-white-fixed
     
 
