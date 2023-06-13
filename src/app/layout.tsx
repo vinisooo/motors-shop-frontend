@@ -1,5 +1,5 @@
 import { ReactNode} from "react"
-import '../styles/reset.sass'
+import '../styles/style.sass'
 
 import ModalProvider from "@/context/modalContext"
 
