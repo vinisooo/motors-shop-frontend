@@ -10,8 +10,9 @@ import Link from "next/link"
 
 import { useContext } from "react"
 import { ModalContext } from "@/context/modalContext"
+import { iFilterListProps } from "@/components/filterList/FilterList"
 
-const Home = () => {
+const Home = ({searchParams}: iFilterListProps) => {
   const { filterDropdown,setFilterDropdown} = useContext(ModalContext)
 
   return (
@@ -20,7 +21,7 @@ const Home = () => {
       <main>
       <HomeHeader/>
       <section className="cars-section">
-        <FilterList/>
+        <FilterList searchParams={searchParams}/>
         <div className="cars-page">
           <div className="cars-list">
             <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>

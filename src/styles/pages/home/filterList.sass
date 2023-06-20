@@ -14,6 +14,9 @@
     flex-direction: column
     box-shadow: 0 0 32px variables.$color-grey-3
 
+    max-height: 90vh
+    overflow-y: auto
+
     .filter-header
         margin-bottom: 30px
         display: flex
@@ -83,7 +86,7 @@
 
     &.hidden-aside-filter
         opacity: 0.4
-        top: -100vh
+        top: -300vh
 
 @media (min-width: 768px) 
     .aside-filter
@@ -97,6 +100,9 @@
         display: flex  
         position: relative
         width: 20%
+
+        max-height: none
+        overflow-y: hidden
 
         .filter-header
             display: none
