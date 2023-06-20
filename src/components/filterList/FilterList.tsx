@@ -8,14 +8,16 @@ import { filterData } from "./filterData"
 
 import { AiOutlineClose } from 'react-icons/ai';
 
+export interface iFilters {
+    brand: string | undefined,
+    model: string | undefined,
+    color: string | undefined,
+    year: string | undefined,
+    fuel: string | undefined,
+}
+
 export interface iFilterListProps {
-    searchParams: {
-        brand: string | undefined,
-        model: string | undefined,
-        color: string | undefined,
-        year: string | undefined,
-        fuel: string | undefined,
-    }
+    searchParams: iFilters
 }
 
 const FilterList = ({searchParams}: any) => {

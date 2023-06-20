@@ -1,4 +1,3 @@
-'use client'
 import Footer from "@/components/footer/footer"
 import Header from "@/components/header/header"
 import HomeHeader from "@/components/homeHeader/HomeHeader"
@@ -11,16 +10,23 @@ import Link from "next/link"
 import { useContext } from "react"
 import { ModalContext } from "@/context/modalContext"
 import { iFilterListProps } from "@/components/filterList/FilterList"
+import { iFilters } from "@/components/filterList/FilterList"
 
-const getCars = () => {
-  
+import FilterButton from "@/components/filterButton/filterButton"
+
+import { use } from "react"
+
+const getAdvertisements = async(searchParams: iFilters) => {
+  const advertisements = await fetch("http://localhost:3001/adverts/?perPage=12");
+
+  return advertisements.json()
 }
 
-const Home = ({searchParams}: iFilterListProps) => {
-  const { filterDropdown,setFilterDropdown} = useContext(ModalContext)
-
+const Home = async({searchParams}: iFilterListProps) => {
+  const advertisements = await getAdvertisements(searchParams)
+  console.log(advertisements)
   return (
-    <main>
+    <>
       <Header/>
       <main>
       <HomeHeader/>
@@ -28,13 +34,16 @@ const Home = ({searchParams}: iFilterListProps) => {
         <FilterList searchParams={searchParams}/>
         <div className="cars-page">
           <div className="cars-list">
-            <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>
-            <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>
-            <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>
-            <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>
-            <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>
+            {
+              advertisements.adverts.map((ad: any) => {
+                return(
+                  <Cards carro={{id: ad.id, name: ad.model, brand: ad.brand, year: "string", fuel: 10, "value": 100}}/>
+                )
+              })
+            }
           </div>
-          <Button onClick={() => setFilterDropdown(true)} width={80} size="medium">Filtros</Button>
+          <FilterButton/>
+          {/* <Button onClick={() => setFilterDropdown(true)} width={80} size="medium">Filtros</Button> */}
           <nav>
             <Link href="previous-page">{"<"} Anterior</Link>
             <p> <span>1</span> de 2 </p>
@@ -44,7 +53,7 @@ const Home = ({searchParams}: iFilterListProps) => {
       </section>
       </main>
       <Footer/>
-    </main>
+    </>
   )
 }
 
