@@ -25,7 +25,7 @@ const Cards=({carro,advertisement="ative"}:props)=>{
     return(
         <div className="product">
             <div className="img-product">
-                <img src='https://th.bing.com/th/id/OIP.C1qWSN1AqoIc8dcARjikywHaEo?pid=ImgDet&rs=1' alt="" />
+                <img src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn3.vectorstock.com%2Fi%2F1000x1000%2F55%2F12%2Fcar-icon-line-drawing-symbol-vector-21085512.jpg&f=1&nofb=1&ipt=772d2f7a37024457b1ae4b5d5d4eb3f05cd78d354868efdbb54a91dcfcedebf5&ipo=images' alt="" />
                 <Tag type={advertisement}>{advertisement}</Tag>
             </div>
             <div className="product-description">

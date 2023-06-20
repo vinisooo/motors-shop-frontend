@@ -14,17 +14,32 @@ export interface iFilters {
     color: string | undefined,
     year: string | undefined,
     fuel: string | undefined,
+    page: string | undefined,
+    [key: string]: string | undefined;
 }
 
 export interface iFilterListProps {
     searchParams: iFilters
 }
 
-const FilterList = ({searchParams}: any) => {
+const FilterList = ({searchParams}: iFilterListProps) => {
     const {filterDropdown, setFilterDropdown} = useContext(ModalContext)
 
-    console.log(searchParams);
-
+    const handleFilter = (filterCategory: string, filter: string) => {
+        if(searchParams[filterCategory] === filter){
+            let newParams = {...searchParams}
+            delete newParams[filterCategory]
+            return {
+                query: newParams
+            }
+        }
+        return {
+            query: {
+                ...searchParams,
+                [filterCategory]: filter
+            }
+        }
+    }
     return(
         <aside className={`aside-filter ${filterDropdown ? "" : "hidden-aside-filter"}`}>
             <header className="filter-header">
@@ -36,25 +51,22 @@ const FilterList = ({searchParams}: any) => {
                 </button>
             </header>
             {
-                filterData.map((filter, index) => {
+                filterData.map((filterCategory, index) => {
                     return(
                         <div key={index}>
-                            <h4>{filter.title}</h4>
+                            <h4>{filterCategory.title}</h4>
                             <ul className="filter-list">
                                 {
-                                    filter.filters.map((filters, index) => {
+                                    filterCategory.filters.map((filter, index) => {
                                         return(
                                             <li key={index}>
                                                 <Link
-                                                    replace={true}
-                                                    href={{
-                                                        query: {
-                                                            ...searchParams,
-                                                            [filter.name.toLowerCase()]: filters.toLowerCase()
-                                                        }
-                                                    }}
+                                                    className={
+                                                        searchParams[filterCategory.name] === filter ? "selected" : ""
+                                                    }
+                                                    href={handleFilter(filterCategory.name, filter)}
                                                 >
-                                                    {filters}
+                                                    {filter}
                                                 </Link>
                                             </li>
                                         )

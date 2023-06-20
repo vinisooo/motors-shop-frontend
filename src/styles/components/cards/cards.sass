@@ -23,12 +23,22 @@
         width: 96%
         
     .img-product
+        height: 40%
+        max-height: 300px
+        margin-bottom: 10px
         max-width: 300px
         background-color: variables.$color-grey-7
         position: relative
+
+        display: flex
+        align-items: center
+
+        overflow: hidden
         img
+            object-fit: cover
             width: 100%
-            padding:0px 25px
+            height: 100%
+            // padding:0px 25px
             width: -webkit-fill-available
             border: 1px solid transparent
             &:hover
