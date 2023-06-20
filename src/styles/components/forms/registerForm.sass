@@ -1,0 +1,62 @@
+@use '../../variables'
+
+.register-form
+    width: 343px
+
+    margin: 80px auto
+    padding: 44px 28px
+    gap: 32px
+
+    border: 1px solid variables.$color-grey-10
+    border-radius: 4px
+
+    background: variables.$color-grey-10
+
+    display: flex
+    flex-direction: column
+
+    align-items: flex-start
+    justify-content: center
+
+    h1
+        font-size: 24px
+        font-weight: 500
+
+    form
+        width: 100%
+        display: flex
+        flex-direction: column
+        gap: 24px
+    
+        h1
+            font-size: 14px
+
+        .flex-horizontal
+            flex-direction: row
+            gap: 10px
+
+            button
+                width: 139px
+
+        div
+            display: flex
+            flex-direction: column
+
+            a
+                align-self: flex-end
+                padding-right: 10px
+                margin-top: 4px
+
+            label
+                font-size: 14px
+                font-weight: 500
+
+                margin-bottom: 8px
+            
+            input
+                width: 100%
+            
+            textarea
+                width: 100%
+
+            
