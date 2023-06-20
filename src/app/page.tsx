@@ -12,6 +12,10 @@ import { useContext } from "react"
 import { ModalContext } from "@/context/modalContext"
 import { iFilterListProps } from "@/components/filterList/FilterList"
 
+const getCars = () => {
+  
+}
+
 const Home = ({searchParams}: iFilterListProps) => {
   const { filterDropdown,setFilterDropdown} = useContext(ModalContext)
 
