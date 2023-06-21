@@ -19,9 +19,14 @@ const getAdvertisements = async(searchParams: iFilters) => {
       params.append(key, searchParams[key]!);
     }
   }
-  const advertisements = await fetch(`http://localhost:3001/adverts/?perPage=12&${params}`);
+  try{
+    const advertisements = await fetch(`http://localhost:3001/adverts/?perPage=12&${params}`);
+    return await advertisements.json()
 
-  return advertisements.json()
+  }catch(err: unknown){
+    console.log(err)
+  }
+
 }
 
 const Home = async({searchParams}: iFilterListProps) => {
@@ -37,8 +42,8 @@ const Home = async({searchParams}: iFilterListProps) => {
         <div className="cars-page">
           <div className="cars-list">
             {
-              advertisements.count > 0 &&
-              advertisements.adverts.map((ad: any) => {
+              advertisements?.count > 0 &&
+              advertisements?.adverts.map((ad: any) => {
                 return(
                   <Cards carro={{id: ad.id, name: ad.model, brand: ad.brand, year: "string", fuel: ad.fuel, "value": ad.price}}/>
                 )
@@ -49,21 +54,21 @@ const Home = async({searchParams}: iFilterListProps) => {
           {/* <Button onClick={() => setFilterDropdown(true)} width={80} size="medium">Filtros</Button> */}
           <nav>
             {
-              advertisements.prev !== "null" &&
+              advertisements?.prev !== "null" &&
               <Link href={{
                 query: {
                   ...searchParams,
-                  page: advertisements.prev ? advertisements.prev[advertisements.prev.length - 1] : ""
+                  page: advertisements?.prev ? advertisements?.prev[advertisements?.prev.length - 1] : ""
                 }
               }}>{"<"} Anterior</Link>
             }
-            <p> <span>{searchParams.page ? searchParams.page : "1"}</span> de 20 </p>
+            <p> <span>{searchParams?.page ? searchParams?.page : "1"}</span> de 20 </p>
             {
-              advertisements.count === 12 &&
+              advertisements?.count === 12 &&
               <Link href={{
                 query: {
                   ...searchParams,
-                  page: advertisements.next ? advertisements.next[advertisements.next.length - 1] : ""
+                  page: advertisements?.next ? advertisements?.next[advertisements?.next.length - 1] : ""
                 }
               }}>Seguinte {">"}</Link>
             }

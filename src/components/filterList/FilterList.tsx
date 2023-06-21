@@ -25,6 +25,7 @@ export interface iFilterListProps {
 const FilterList = ({searchParams}: iFilterListProps) => {
     const {filterDropdown, setFilterDropdown} = useContext(ModalContext)
 
+    console.log(searchParams)
     const handleFilter = (filterCategory: string, filter: string) => {
         if(searchParams[filterCategory] === filter){
             let newParams = {...searchParams}
@@ -33,13 +34,18 @@ const FilterList = ({searchParams}: iFilterListProps) => {
                 query: newParams
             }
         }
+        delete searchParams.page
         return {
             query: {
                 ...searchParams,
-                [filterCategory]: filter
+                [filterCategory]: filter,
             }
         }
     }
+
+    let filterWithoutPage = {...searchParams}
+    delete filterWithoutPage["page"];
+
     return(
         <aside className={`aside-filter ${filterDropdown ? "" : "hidden-aside-filter"}`}>
             <header className="filter-header">
@@ -79,14 +85,21 @@ const FilterList = ({searchParams}: iFilterListProps) => {
             }
             <div>
                 <h4>Km</h4>
-                <input placeholder="mínimo" className="filter-input"></input>
-                <input placeholder="máximo" className="filter-input"></input>
+                <input type="number" placeholder="mínimo" className="filter-input"></input>
+                <input type="number" placeholder="máximo" className="filter-input"></input>
             </div>
             <div>
-                <h4>preço</h4>
-                <input placeholder="mínimo" className="filter-input"></input>
-                <input placeholder="máximo" className="filter-input"></input>
+                <h4>Preço</h4>
+                <input type="number" placeholder="mínimo" className="filter-input"></input>
+                <input type="number" placeholder="máximo" className="filter-input"></input>
             </div>
+            {
+                <Link className={`clear-filter ${Object.keys(filterWithoutPage).length === 0 && "hidden-clear-filter"}`} href={{
+                    query: {
+                        page: searchParams.page
+                    }
+                }}>Limpar filtros</Link>
+            }
         </aside>
     )
 }
