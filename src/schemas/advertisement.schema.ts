@@ -19,3 +19,11 @@ export const advertisementSchema = z.object({
 })
 
 export type TAdvertisementRes = z.infer<typeof advertisementSchema>
+export interface iPaginatedAdverts {
+    prev?: string | null,
+    page?: string | null,
+    next?: string | null,
+    maxPage?: string | null,
+    count?: number,
+    adverts: TAdvertisementRes[]
+}

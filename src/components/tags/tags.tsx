@@ -7,16 +7,16 @@ interface iTag{
 }
 
 interface iElipsis{
-    children: React.ReactNode
-    name?:string
+    name:string
     color?: "purple-1" | "purple-2" |"purple-3"| "purple-4" | "purple-5" |"purple-6" | "green-1" | "green-2" | "green-3" | "pink-1" | "pink-2" | "pink-3" 
 } 
 
-const Elipsis=({children,color='purple-1',name}:iElipsis)=>{
+const Elipsis=({color='purple-1',name}:iElipsis)=>{
+    const initials = `${name?.split(" ")[0][0]}${name?.split(" ")[1][0]}`
     return(
         <div className="div-elipsis">
             <div className={`elipsis ${color}`}>
-                <p>{children}</p>
+                <p>{initials}</p>
             </div> 
             {
                 name && <p className="anunciant">{name}</p>

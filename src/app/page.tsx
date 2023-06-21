@@ -10,6 +10,7 @@ import { iFilterListProps } from "@/components/filterList/FilterList"
 import { iFilters } from "@/components/filterList/FilterList"
 
 import FilterButton from "@/components/filterButton/filterButton"
+import { TAdvertisementRes } from "@/schemas/advertisement.schema"
 
 const getAdvertisements = async(searchParams: iFilters) => {
   let params: URLSearchParams | string = new URLSearchParams();
@@ -61,9 +62,9 @@ const Home = async({searchParams}: iFilterListProps) => {
           <div className="cars-list">
             {
               advertisements?.count > 0 &&
-              advertisements?.adverts.map((ad: any) => {
+              advertisements?.adverts.map((ad: TAdvertisementRes) => {
                 return(
-                  <Cards carro={ad}/>
+                  <Cards carro={ad} username={ad.user.name}/>
                 )
               })
             }
