@@ -57,7 +57,7 @@ export const filterData = [
         filters: [
             "Diesel",
             "Etanol",
-            "Gosolina",
+            "Gasolina",
             "Flex"
         ]
     },

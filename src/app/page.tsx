@@ -31,7 +31,6 @@ const getAdvertisements = async(searchParams: iFilters) => {
 
 const Home = async({searchParams}: iFilterListProps) => {
   const advertisements = await getAdvertisements(searchParams)
-  console.log(advertisements)
   return (
     <>
       <Header/>
