@@ -20,40 +20,58 @@ const getAdvertisements = async(searchParams: iFilters) => {
     }
   }
   try{
-    const advertisements = await fetch(`http://localhost:3001/adverts/?perPage=12&${params}`);
+    const advertisements = await fetch(`http://localhost:3001/adverts/?perPage=12&${params}`, {
+      next: {
+        revalidate: 20
+      }
+    });
     return await advertisements.json()
 
   }catch(err: unknown){
     console.log(err)
   }
+}
 
+const getNotPaginated = async() => {
+  try{
+    const notPaginatedAdverts = await fetch(`http://localhost:3001/adverts/?perPage=999`, {
+      next: {
+        revalidate: 60
+      }
+    });
+
+    return await notPaginatedAdverts.json()
+  }catch(err: unknown){
+    console.log(err)
+  }
 }
 
 const Home = async({searchParams}: iFilterListProps) => {
   const advertisements = await getAdvertisements(searchParams)
+  const notPaginatedAdverts = await getNotPaginated()
+
   return (
     <>
       <Header/>
       <main>
       <HomeHeader/>
       <section className="cars-section">
-        <FilterList searchParams={searchParams}/>
+        <FilterList searchParams={searchParams} advertisements={notPaginatedAdverts}/>
         <div className="cars-page">
           <div className="cars-list">
             {
               advertisements?.count > 0 &&
               advertisements?.adverts.map((ad: any) => {
                 return(
-                  <Cards carro={{id: ad.id, name: ad.model, brand: ad.brand, year: "string", fuel: ad.fuel, "value": ad.price}}/>
+                  <Cards carro={ad}/>
                 )
               })
             }
           </div>
           <FilterButton/>
-          {/* <Button onClick={() => setFilterDropdown(true)} width={80} size="medium">Filtros</Button> */}
           <nav>
             {
-              advertisements?.prev !== "null" &&
+              advertisements?.prev !== null &&
               <Link href={{
                 query: {
                   ...searchParams,
@@ -61,9 +79,9 @@ const Home = async({searchParams}: iFilterListProps) => {
                 }
               }}>{"<"} Anterior</Link>
             }
-            <p> <span>{searchParams?.page ? searchParams?.page : "1"}</span> de 20 </p>
+            <p> <span>{searchParams?.page ? searchParams?.page : "1"}</span> de {advertisements?.maxPage} </p>
             {
-              advertisements?.count === 12 &&
+              advertisements?.next !== null &&
               <Link href={{
                 query: {
                   ...searchParams,
