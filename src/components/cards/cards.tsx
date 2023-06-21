@@ -2,42 +2,35 @@ import Image from 'next/image'
 import '../../styles/components/cards/cards.sass'
 
 import { Elipsis, Tag } from "../tags/tags"
-
-interface carro{
-    "id": string
-    "name": string,
-    "brand": string,
-    "year": string,
-    "fuel": number,
-    "value": number
-}
+import { TCar } from '@/schemas/advertsSchema'
 
 interface props{
-    carro: carro
+    car: TCar
     advertisement?: "ative" | "inative" | "cash"
 }
 
 
-const Cards=({carro,advertisement="ative"}:props)=>{
+const Cards=({car,advertisement="ative"}:props)=>{
 
-    const{brand,year,value,name,fuel}=carro
+    const{brand,year,price,color,coverImage:img,model,quilometers:km,description,isAvailable,fuel}=car
+
     
     return(
         <div className="product">
             <div className="img-product">
-                <img src='https://th.bing.com/th/id/OIP.C1qWSN1AqoIc8dcARjikywHaEo?pid=ImgDet&rs=1' alt="" />
+                <img src={img} alt="" />
                 <Tag type={advertisement}>{advertisement}</Tag>
             </div>
             <div className="product-description">
-                <h2>{`${name}`}</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...</p>
+                <h2>{`${brand} ${model} ${color}`}</h2>
+                <p>{description}</p>
                 <Elipsis name="Matheus Silva">MS</Elipsis>
                 <div className="product-infos">
                     <div className="km-year">
-                        <Tag>0KM</Tag>
+                        <Tag>{km} km </Tag>
                         <Tag>{`${year} `}</Tag>
                     </div>
-                    <span>RS:{`${value}`}</span>
+                    <span>RS:{price}</span>
                 </div>
             </div>
 

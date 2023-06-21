@@ -6,7 +6,10 @@ import { useState } from "react"
 import { Elipsis } from "../tags/tags"
 
 
-const HeaderProfile = () => {
+const HeaderProfile = ({name,iniciais}:{
+    name:string,
+    iniciais:string
+}) => {
     const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
 
     return(
@@ -16,7 +19,7 @@ const HeaderProfile = () => {
             </Link>
 
             <nav className={dropdownMenu ? "" : "hidden-dropdown-menu"}>
-            <Elipsis name="Matheus Silva">MS</Elipsis> 
+            <Elipsis name={name}>{iniciais}</Elipsis> 
             </nav>
 
             <button onClick={() => setDropdownMenu(!dropdownMenu)} className={dropdownMenu ? "active-dropdown": ""}>
