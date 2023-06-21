@@ -1,45 +1,101 @@
-'use client'
 import Footer from "@/components/footer/footer"
 import Header from "@/components/header/header"
 import HomeHeader from "@/components/homeHeader/HomeHeader"
 import "../styles/pages/home/home.sass"
 import FilterList from "@/components/filterList/FilterList"
 import { Cards } from "@/components/cards/cards"
-import Button from "@/components/button/button"
 import Link from "next/link"
 
-import { useContext } from "react"
-import { ModalContext } from "@/context/modalContext"
+import { iFilterListProps } from "@/components/filterList/FilterList"
+import { iFilters } from "@/components/filterList/FilterList"
 
-const Home = () => {
-  const { filterDropdown,setFilterDropdown} = useContext(ModalContext)
+import FilterButton from "@/components/filterButton/filterButton"
+import { TAdvertisementRes } from "@/schemas/advertisement.schema"
+
+const getAdvertisements = async(searchParams: iFilters) => {
+  let params: URLSearchParams | string = new URLSearchParams();
+
+  for (const key in searchParams) {
+    if (searchParams.hasOwnProperty(key) && searchParams[key] !== undefined) {
+      params.append(key, searchParams[key]!);
+    }
+  }
+  try{
+    const advertisements = await fetch(`http://localhost:3001/adverts/?perPage=12&${params}`, {
+      next: {
+        revalidate: 20
+      }
+    });
+    return await advertisements.json()
+
+  }catch(err: unknown){
+    console.log(err)
+  }
+}
+
+const getNotPaginated = async() => {
+  try{
+    const notPaginatedAdverts = await fetch(`http://localhost:3001/adverts/?perPage=999`, {
+      next: {
+        revalidate: 60
+      }
+    });
+
+    return await notPaginatedAdverts.json()
+  }catch(err: unknown){
+    console.log(err)
+  }
+}
+
+const Home = async({searchParams}: iFilterListProps) => {
+  const advertisements = await getAdvertisements(searchParams)
+  const notPaginatedAdverts = await getNotPaginated()
 
   return (
-    <main>
+    <>
       <Header/>
       <main>
       <HomeHeader/>
       <section className="cars-section">
-        <FilterList/>
+        <FilterList searchParams={searchParams} advertisements={notPaginatedAdverts}/>
         <div className="cars-page">
           <div className="cars-list">
-            <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>
-            <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>
-            <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>
-            <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>
-            <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>
+            {
+              advertisements?.count > 0 &&
+              advertisements?.adverts.map((ad: TAdvertisementRes) => {
+                return(
+                  <Cards carro={ad} username={ad.user.name}/>
+                )
+              })
+            }
           </div>
-          <Button onClick={() => setFilterDropdown(true)} width={80} size="medium">Filtros</Button>
+          <FilterButton/>
           <nav>
-            <Link href="previous-page">{"<"} Anterior</Link>
-            <p> <span>1</span> de 2 </p>
-            <Link href="next-page">Seguinte {">"}</Link>
+            {
+              advertisements?.prev !== null &&
+              <Link href={{
+                query: {
+                  ...searchParams,
+                  page: advertisements?.prev ? advertisements?.prev[advertisements?.prev.length - 1] : ""
+                }
+              }}>{"<"} Anterior</Link>
+            }
+            <p> <span>{searchParams?.page ? searchParams?.page : "1"}</span> de {advertisements?.maxPage} </p>
+            {
+              advertisements?.next !== null &&
+              <Link href={{
+                query: {
+                  ...searchParams,
+                  page: advertisements?.next ? advertisements?.next[advertisements?.next.length - 1] : ""
+                }
+              }}>Seguinte {">"}</Link>
+            }
           </nav>
         </div>
       </section>
       </main>
       <Footer/>
-    </main>
+    </>
   )
 }
 
