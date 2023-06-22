@@ -8,9 +8,10 @@ export const ModalContext = createContext({} as iModalContextValues)
 
 const ModalProvider = ({children}: iChildrenProps) => {
     const [filterDropdown, setFilterDropdown] = useState<boolean>(false)
+    const [resetPasswordModal, setResetPasswordModal] = useState<boolean>(false)
 
     return(
-        <ModalContext.Provider value={{filterDropdown, setFilterDropdown}}>
+        <ModalContext.Provider value={{filterDropdown, setFilterDropdown, resetPasswordModal, setResetPasswordModal}}>
             {children}
         </ModalContext.Provider>
     )
