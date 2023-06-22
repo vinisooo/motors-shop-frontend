@@ -25,7 +25,7 @@ const getAdvertisements = async(searchParams: iFilters) => {
       next: {
         revalidate: 20
       }
-    });
+    })
     return await advertisements.json()
 
   }catch(err: unknown){
@@ -39,7 +39,7 @@ const getNotPaginated = async() => {
       next: {
         revalidate: 60
       }
-    });
+    })
 
     return await notPaginatedAdverts.json()
   }catch(err: unknown){
