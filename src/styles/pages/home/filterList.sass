@@ -14,11 +14,26 @@
     flex-direction: column
     box-shadow: 0 0 32px variables.$color-grey-3
 
-    .filter-header
-        margin-bottom: 30px
-        display: flex
-        align-items: center
-        justify-content: space-between
+    max-height: 90vh
+    overflow-y: auto
+
+    .clear-filter
+        width: 100%
+        padding: 1.3rem
+        
+        font-size: 1.5rem
+        text-align: center
+
+        background-color: variables.$color-brand-2
+        color: variables.$color-grey-10
+
+        transition: 0.6s ease
+
+        &:hover
+            background-color: variables.$color-brand-1
+        
+        &:active
+            background-color: variables.$color-sucess-3
 
         h3
             font-weight: 500
@@ -50,6 +65,10 @@
         list-style: none
         padding: 0 10px
 
+        .selected
+            color: variables.$color-brand-2
+            font-weight: 600
+
         li
             margin-bottom: 10px
             a
@@ -65,8 +84,8 @@
         padding: 8px 15px
         background-color: variables.$color-grey-5
         color: variables.$color-grey-2
-        width: 40%
-        margin-right: 10px
+        width: 47%
+        margin-right: 5px
 
         font-family: variables.$default-font
         font-size: 1.5rem
@@ -83,7 +102,18 @@
 
     &.hidden-aside-filter
         opacity: 0.4
-        top: -100vh
+        top: -300vh
+
+    
+    .hidden-clear-filter
+        opacity: 0.3
+        transform: translateX(-100vw)
+
+    .filter-header
+        margin-bottom: 30px
+        display: flex
+        align-items: center
+        justify-content: space-between
 
 @media (min-width: 768px) 
     .aside-filter
@@ -98,6 +128,9 @@
         position: relative
         width: 20%
 
+        max-height: none
+        overflow-y: hidden
+
         .filter-header
             display: none
 
@@ -105,3 +138,5 @@
             position: relative
             opacity: 1
             top: 0
+            .hidden-clear-filter
+        

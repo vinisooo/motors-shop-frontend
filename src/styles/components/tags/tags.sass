@@ -17,32 +17,19 @@
         font-weight: 500
         font-size: 14px
         line-height: 24px
+        text-transform: capitalize
+        padding: 0px 8px
 
 
 .tag-inative
     background: variables.$color-grey-4
     p
-        text-transform: capitalize
         color: variables.$color-white-fixed
-        font-family: 'Inter'
-        font-style: normal
-        font-weight: 500
-        font-size: 14px
-        line-height: 24px
-        padding: 0px 8px
-
 
 .tag-ative
     background: variables.$color-brand-1
     p
-        text-transform: capitalize
         color: variables.$color-white-fixed
-        font-family: 'Inter'
-        font-style: normal
-        font-weight: 500
-        font-size: 14px
-        line-height: 24px
-        padding: 0px 8px
 
 .tag-cash
     background-color: variables.$color-random-7
@@ -54,6 +41,7 @@
 
 .div-elipsis
     display: flex
+    justify-content: center
     align-items: center
     padding: 5px
     gap:8px
@@ -62,56 +50,65 @@
         font-size: 14px
         padding: 3px
         color: variables.$color-grey-2
+        text-transform: capitalize
 
-.elipsis
-    height: fit-content
-    width: fit-content
-    border-radius: 50%
-    padding: 8px
-    p
-        font-family: 'Inter'
-        font-style: normal
-        font-weight: 500
-        font-size: 14px
-        color: variables.$color-white-fixed
+    .elipsis
+        height: 40px
+        width: 40px
+        border-radius: 50%
+        padding: 8px
 
-    &.pink-1
-        background-color: variables.$color-random-1
+        display: flex
+        align-items: center
+        justify-content: center
+        
+        p
+            font-family: 'Inter'
+            font-style: normal
+            font-weight: 500
+            font-size: 14px
+            padding: 0
+            margin: 0
+            text-transform: uppercase
+            color: variables.$color-white-fixed
 
-    &.pink-2
-        background-color: variables.$color-random-2
+        &.pink-1
+            background-color: variables.$color-random-1
 
-    &.pink-3
-        background-color: variables.$color-random-3    
+        &.pink-2
+            background-color: variables.$color-random-2
 
-    &.purple-4
-        background-color: variables.$color-random-4
+        &.pink-3
+            background-color: variables.$color-random-3    
 
-    &.purple-5
-        background-color: variables.$color-random-5
+        &.purple-4
+            background-color: variables.$color-random-4
 
-    &.purple-6
-        background-color: variables.$color-random-6   
+        &.purple-5
+            background-color: variables.$color-random-5
 
-    &.green-1
-        background-color: variables.$color-random-7
-    
-    &.green-2
-        background-color: variables.$color-random-8
-    
-    &.green-3
-        background-color: variables.$color-random-9 
-    
-    &.purple-1
-        background-color: variables.$color-random-10
+        &.purple-6
+            background-color: variables.$color-random-6   
 
-    &.purple-2
-        background-color: variables.$color-random-11
+        &.green-1
+            background-color: variables.$color-random-7
+        
+        &.green-2
+            background-color: variables.$color-random-8
+        
+        &.green-3
+            background-color: variables.$color-random-9 
+        
+        &.purple-1
+            background-color: variables.$color-random-10
 
-    &.purple-3
-        background-color: variables.$color-random-12
+        &.purple-2
+            background-color: variables.$color-random-11
 
-    
+        &.purple-3
+            background-color: variables.$color-random-12
+
+        
 
     
 

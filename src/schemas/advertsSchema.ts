@@ -1,8 +1,7 @@
 import {z} from 'zod'
 import { User } from './userSchema'
-import { truncate } from 'fs/promises'
 
-const Advert=z.object({
+const AdvertSchema=z.object({
     brand: z.string(),
     color: z.string(),
     coverImage: z.string(),
@@ -18,18 +17,18 @@ const Advert=z.object({
     user:User
 })
 
-const Adverts=z.array(Advert)
+const Adverts=z.array(AdvertSchema)
 
-const Car=Advert.omit({
+const Car=AdvertSchema.omit({
     user:true
 })
 
 const Cars=z.array(Car)
 
-type TAdvert=z.infer<typeof Advert>
+type TAdvert=z.infer<typeof AdvertSchema>
 type TAdverts=z.infer<typeof Adverts>
 type TCar=z.infer<typeof Car>
 type TCars=z.infer<typeof Cars>
 
-export {Advert,Adverts,Car}
+export {AdvertSchema,Adverts,Car}
 export type {TAdvert,TAdverts,TCar,TCars}

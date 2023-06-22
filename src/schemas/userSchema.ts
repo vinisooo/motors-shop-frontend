@@ -1,8 +1,8 @@
 import {z} from 'zod'
 
 const User=z.object({
-    birthdate:z.date(),
-    createdAt:z.string().datetime(),
+    birthdate:z.string().or(z.date()),
+    createdAt:z.string().or(z.date()),
     description: z.string().nullish(),
     email:z.string().email(),
     id:z.string(),

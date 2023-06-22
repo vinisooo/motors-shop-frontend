@@ -2,7 +2,10 @@
 
 .product
     max-width: 312px
-
+    display: flex
+    flex-direction: column
+    gap:15px
+    
     h2
         font-family: variables.$default-font
         font-style: normal
@@ -19,16 +22,29 @@
         line-height: 24px
         color: variables.$color-grey-2
 
+    .div-elipsis
+        justify-content: flex-start
+
     .product-description
         width: 96%
         
     .img-product
+        height: 40%
+        max-height: 300px
+        margin-bottom: 10px
         max-width: 300px
         background-color: variables.$color-grey-7
         position: relative
+
+        display: flex
+        align-items: center
+
+        overflow: hidden
         img
+            object-fit: cover
             width: 100%
-            padding:0px 25px
+            height: 100%
+            //padding:0px 25px
             width: -webkit-fill-available
             border: 1px solid transparent
             &:hover
@@ -48,3 +64,7 @@
             display: flex
             gap:12px
 
+    .buttons
+        margin-top: 25px
+        display: flex
+        gap: 20px

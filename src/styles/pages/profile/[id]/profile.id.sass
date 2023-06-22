@@ -1,0 +1,54 @@
+@use '../../../variables'
+
+body
+    width: 100vw
+    height: 100%
+
+    header
+        width: 100%
+
+
+    main 
+        background-color: variables.$color-grey-8
+        width: 100%
+    
+    .cars-section
+        margin-top: 80px
+        h2
+            font-weight: 600
+            font-size: 24px
+            font-family: 'lexend'
+    
+        & .cars-list
+            margin-top: 25px
+            display: flex
+            flex-direction: row
+            align-items: flex-start
+            gap: 30px
+        
+            margin-right:100px
+            width: 1000px
+
+            overflow-x: scroll
+            justify-content: center
+
+        
+            margin-bottom: 30px
+        
+
+
+@media (min-width: 768px)
+    .cars-section
+        padding: 59px
+        
+        .cars-list
+            width: 100%
+            overflow-x: hidden
+            justify-content: flex-start
+            flex-wrap: wrap
+            padding-left:20px
+            margin-left:100px
+            
+            & .div-elipsis
+                justify-content: flex-start
+            
