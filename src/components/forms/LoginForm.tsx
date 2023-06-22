@@ -10,7 +10,7 @@ import Button from "../button/button"
 import { useAuthContext } from "@/context/authContext"
 import { useContext } from "react"
 import { ModalContext } from "@/context/modalContext"
-import Modal from "../modal/modal"
+import Modal from "../modals/modal"
 
 const LoginForm = () => {
     const {
@@ -66,7 +66,7 @@ const LoginForm = () => {
             </div>
             {
                 resetPasswordModal && 
-                <Modal title="Redefinir senha"/>
+                <Modal title="Redefinir Senha"/>
             }
         </>
     )
