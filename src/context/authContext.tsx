@@ -117,7 +117,7 @@ export const AuthProvider = ({children}: TProviderProps) => {
     const resetPassword = async(data: TResetPasswordReq,token: string) => {
         setExistantUser(true)
         try{
-            const request = await api.patch(`/users/resetPassword/${token}`)
+            const request = await api.patch(`/users/resetPassword/${token}`,data)
 
             router.push("/login")
             return request

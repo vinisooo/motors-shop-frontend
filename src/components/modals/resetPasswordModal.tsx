@@ -1,7 +1,7 @@
 'use client'
 import api from "@/services"
 import Modal from "./modal"
-import { useContext, useState } from "react"
+import {  useEffect  } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { resetPasswordEmailReqSchema } from "@/schemas/users.schema"
@@ -10,8 +10,6 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import "../../styles/components/modals/resetPasswordModal.sass"
 import Button from "../button/button"
 
-import { TResetPasswordReq } from "@/schemas/users.schema"
-import axios from "axios"
 
 import { Input } from "../inputs/inputs"
 import { useAuthContext } from "@/context/authContext"
@@ -37,6 +35,13 @@ const ResetPasswordModal = () => {
         sendResetPasswordEmail(data)
     }
 
+    useEffect(() => {
+        return () => {
+            setSentEmail(false)
+            setExistantUser(true)
+            setLoading(false)
+        }
+    }, [])
 
     return(
         <Modal title="Redefinir Senha">
