@@ -66,7 +66,7 @@ const Home = async({searchParams}: iFilterListProps) => {
               advertisements?.count > 0 &&
               advertisements?.adverts.map((ad: TAdvertisementRes) => {
                 return(
-                  <Cards key={ad.id} car={ Car.parse(ad)} username={ad.user.name} userId={ad.user.id}/>
+                  <Cards key={ad.id} car={ Car.parse(ad)} user={ad.user} userId={''}/>
                 )
               })
             }

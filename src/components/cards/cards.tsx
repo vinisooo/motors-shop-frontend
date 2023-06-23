@@ -1,22 +1,32 @@
-import Image from 'next/image'
+"use client"
 import '../../styles/components/cards/cards.sass'
-
-import { Elipsis, Tag } from "../tags/tags"
+import { Tag } from "../tags/tags"
 import { TCar } from '@/schemas/advertsSchema'
 import Button from '../button/button'
+import { TUser } from '@/schemas/userSchema'
+import Elipsis from '../tags/elipse'
 
 interface props{
     car: TCar,
-    username: string,
-    owern?:boolean
+    user: TUser,
     advertisement?: "ative" | "inative" | "cash"
     userId?:string
 }
 
 
-const Cards=({car,advertisement="ative", username,owern=false,userId}:props)=>{
+const Cards=({car,advertisement="ative", user,userId}:props)=>{
+
+    const owern= userId==user.id
 
     const{brand,year,price,color,coverImage:img,model,quilometers:km,description,isAvailable,fuel}=car
+
+    const editar=()=>{
+        console.log('editar')
+    }
+
+    const detalhes=()=>{
+        console.log('detalhes')
+    }
 
     return(
         <div className="product">
@@ -30,7 +40,7 @@ const Cards=({car,advertisement="ative", username,owern=false,userId}:props)=>{
                 <p>{description}</p>
                 {
                     !owern &&
-                    <Elipsis className={userId} name={username}/>
+                    <Elipsis className={user.id} name={user.name}/>
                 }
                 <div className="product-infos">
                     <div className="km-year">
@@ -42,8 +52,8 @@ const Cards=({car,advertisement="ative", username,owern=false,userId}:props)=>{
                 {
                     owern &&
                     <div className='buttons'>
-                        <Button style={'outline-brand-1'} size={'medium'}>Editar</Button>
-                        <Button style={'outline-brand-1'} size={'medium'}>Ver Detalhes</Button>
+                        <Button onClick={editar} style={'outline-brand-1'} size={'medium'}>Editar</Button>
+                        <Button onClick={detalhes} style={'outline-brand-1'} size={'medium'}>Ver Detalhes</Button>
                     </div>
                 }
             </div>

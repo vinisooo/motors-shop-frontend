@@ -24,11 +24,11 @@ const getUser=async(token:string)=>{
 
 const Profile = async({params}:{params:any}) =>{
     const {id}=params
-    const {user}=await getAdverts(id)
+    const {data}=await getAdverts(id)
     const userToken=cookies().get('userToken')
     const profile:TUser=await getUser(userToken!.value)
-    const anunciant:TUser=User.parse(user)
-    const {adverts}:{adverts:TCars}=user
+    const adverts=data.adverts 
+    const anunciant=data.user
 
     return ( 
         <>
@@ -42,7 +42,7 @@ const Profile = async({params}:{params:any}) =>{
                     <h2>Anúncios</h2>
                     <div className="cars-list">
                         {
-                            adverts.map((advert:TCar)=><Cards key={advert.id} car={advert} username={anunciant.name}/>)
+                            adverts.map((advert:TCar)=><Cards key={advert.id} car={advert} user={anunciant} userId={profile.id} />)
                         }
                     </div>
                 </section>
