@@ -3,7 +3,7 @@ interface iInput{
     placeholder?:string
     id?:string
     type?: "text" | "number" | "email" | "password" | "select" | "radio" 
-    rest?: object
+    register: object
 }
 
 interface iTextArea{
@@ -20,11 +20,11 @@ interface iSelect{
     label?: string
 }
 
-const Input=({children,id,placeholder,type='text', rest}:iInput)=>{
+const Input=({children,id,placeholder,type='text', register}:iInput)=>{
     return(
         <div className="label">
             <label htmlFor={ id}>{children}</label>
-            <input id={id} type={type} placeholder={placeholder} {...rest}/>
+            <input id={id} type={type} placeholder={placeholder} {...register}/>
         </div>
     )
 }

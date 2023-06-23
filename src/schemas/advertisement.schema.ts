@@ -18,7 +18,19 @@ export const advertisementSchema = z.object({
     galleryAdvertisement: z.array(z.string())
 })
 
+export const advertisementReqSchema = advertisementSchema.omit({
+    id: true,
+    isAvailable: true,
+    use: true,
+    createdAt: true,
+    updatedAt: true,
+}).extend({
+    fipePrice: z.number()
+})
+
+export type TAdvertisementReq = z.infer<typeof advertisementReqSchema>
 export type TAdvertisementRes = z.infer<typeof advertisementSchema>
+
 export interface iPaginatedAdverts {
     prev?: string | null,
     page?: string | null,

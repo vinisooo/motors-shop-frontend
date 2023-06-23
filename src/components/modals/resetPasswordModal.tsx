@@ -48,7 +48,7 @@ const ResetPasswordModal = () => {
                 <h4>Insira seu email cadastrado</h4>
                 <p>Enviaremos uma mensagem para redefinir sua senha para o seu e-mail cadastrado</p>
                 <form onSubmit={handleSubmit(sendEmailSubmit)}>
-                    <Input id="email" rest={register("email")}>Email</Input>
+                    <Input id="email" register={register("email")}>Email</Input>
                     {
                         loading && 
                         <div className="sending-email">

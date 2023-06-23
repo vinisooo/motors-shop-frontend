@@ -9,7 +9,7 @@ import { TUser } from "@/schemas/userSchema"
 import { cookies } from "next/dist/client/components/headers"
 
 const getAdverts=async()=>{
-    const response=await getData('/adverts',{next:{revalidate:30}})
+    const response=await getData('/adverts', {cache:"no-cache"})
     return response
 }
 
@@ -17,7 +17,8 @@ const getUser=async(token:string)=>{
     const response=await getData('/users/loggedUser',{
         headers:{
             Authorization: `Bearer ${token}`
-        }
+        },
+        cache: "no-cache"
     })
     return response
 }
@@ -30,7 +31,6 @@ const Profile = async() =>{
 
     const {adverts}:{adverts:TAdverts}=await getAdverts()
 
-    
     return ( 
         <div>
             <header>
@@ -42,7 +42,7 @@ const Profile = async() =>{
                     <h2>Anúncios</h2>
                     <div className="cars-list">
                         {
-                            adverts.map((advert:TAdvert)=><Cards key={advert.id} car={advert} user={advert.user} userId={profile.id}/>)
+                            adverts?.map((advert:TAdvert)=><Cards key={advert.id} car={advert} user={advert.user} userId={profile.id}/>)
                         } 
                     </div>
                 </section>
