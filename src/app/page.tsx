@@ -3,7 +3,6 @@ import Header from "@/components/header/header"
 import HomeHeader from "@/components/homeHeader/HomeHeader"
 import "../styles/pages/home/home.sass"
 import FilterList from "@/components/filterList/FilterList"
-import { Cards } from "@/components/cards/cards"
 import Link from "next/link"
 
 import { iFilterListProps } from "@/components/filterList/FilterList"
@@ -12,6 +11,7 @@ import { iFilters } from "@/components/filterList/FilterList"
 import FilterButton from "@/components/filterButton/filterButton"
 import { TAdvertisementRes, iPaginatedAdverts } from "@/schemas/advertisement.schema"
 import { Car } from "@/schemas/advertsSchema"
+import { Cards } from "@/components/cards/cards"
 
 const getAdvertisements = async(searchParams: iFilters) => {
   let params: URLSearchParams | string = new URLSearchParams();
@@ -41,6 +41,7 @@ const getNotPaginated = async() => {
         revalidate: 60
       }
     });
+
     return await notPaginatedAdverts.json()
   }catch(err: unknown){
     console.log(err)
