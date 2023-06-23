@@ -1,5 +1,4 @@
 'use client'
-import api from "@/services"
 import Modal from "./modal"
 import {  useEffect  } from "react"
 
