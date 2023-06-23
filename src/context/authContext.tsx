@@ -1,10 +1,10 @@
 "use client"
+import api from "@/services";
+import { TLoginReq, TLoginRes, TProviderProps, TUserRes, TValidationSchema } from "@/types/user.types";
+import { useRouter } from "next/navigation";
+import { setCookie,destroyCookie } from "nookies";
+import { createContext, useContext, useState } from "react";
 import { TResetPasswordEmailReq, TResetPasswordReq } from "@/schemas/users.schema"
-import api from "@/services"
-import { TLoginReq, TLoginRes, TProviderProps, TUserRes, TValidationSchema } from "@/types/user.types"
-import { useRouter } from "next/navigation"
-import { setCookie } from "nookies"
-import { createContext, useContext, useState } from "react"
 import axios,{ AxiosResponse } from "axios"
 
 import { SetStateAction } from "react";
@@ -14,6 +14,7 @@ export interface IAuthContext {
   login: (dataLogin: TLoginReq, callback: () => void) => Promise<void>
   getUserProfile: (token: string) => Promise<void>
   user: TUserRes
+  logout: () => void
   sentEmail: boolean
   existantUser: boolean
   loading: boolean
@@ -29,7 +30,6 @@ const AuthContext = createContext<IAuthContext>({} as IAuthContext)
 export const AuthProvider = ({children}: TProviderProps) => {
     const [user, setUser] = useState({} as TUserRes)
     const router = useRouter()
-
     const [sentEmail, setSentEmail] = useState<boolean>(false)
     const [existantUser, setExistantUser] = useState<boolean>(true)
     const [loading, setLoading] = useState<boolean>(false)
@@ -43,12 +43,17 @@ export const AuthProvider = ({children}: TProviderProps) => {
             })
             setUser(newUser)
             console.log(newUser)
-            await router.push("/login")
+            router.push("/login")
         } catch (err) {
             console.error(err)
         }
     }
 
+    const logout=()=>{
+        destroyCookie(null, 'userToken')
+        router.push('/')
+    }
+    
     const getUserProfile = async (token: string) => {
         try {
             const { data } = await api.get<TUserRes>("/users/loggedUser", {
@@ -58,7 +63,7 @@ export const AuthProvider = ({children}: TProviderProps) => {
                 }
             })
             setUser(data)
-            await router.push("/")
+            router.push("/user")
         } catch (err) {
             console.error(err)
         }
@@ -76,7 +81,7 @@ export const AuthProvider = ({children}: TProviderProps) => {
             if (callback) {
                 callback()
             }
-            router.push("/")
+            router.push("/user")
       } catch (err) {
             if (axios.isAxiosError(err)) {
                 if (err.response) {
@@ -86,6 +91,9 @@ export const AuthProvider = ({children}: TProviderProps) => {
                 }
             }
             console.error(err)
+      }
+      finally{
+        setLoading(false)
       }
     }
 
@@ -140,6 +148,7 @@ export const AuthProvider = ({children}: TProviderProps) => {
                 login,
                 user,
                 getUserProfile,
+                logout,
                 sentEmail,
                 existantUser,
                 loading,
@@ -155,4 +164,4 @@ export const AuthProvider = ({children}: TProviderProps) => {
     )
 }
 
-export const useAuthContext = () => useContext(AuthContext)
+export const useAuthContext =() => useContext(AuthContext)

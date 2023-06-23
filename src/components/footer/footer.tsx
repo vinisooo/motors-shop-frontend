@@ -15,8 +15,8 @@ const Footer=()=>{
         <footer>
             <h1>Motors shop</h1>
             <p>&copy; 2022 -  Todos os direitos reservados.</p>
-            <div>
-                <i onClick={goToTop} className="top"><MdOutlineKeyboardArrowUp/></i>
+            <div onClick={goToTop} className="top">
+                <i><MdOutlineKeyboardArrowUp/></i>
             </div>
         </footer>
     )

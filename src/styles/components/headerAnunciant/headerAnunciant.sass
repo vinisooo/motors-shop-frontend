@@ -1,0 +1,47 @@
+@use '../../variables'
+
+.header-profile
+    height: 400px
+    position: relative
+
+    display: flex
+    top: 12px
+    align-items: center
+    justify-content: center
+    border: none
+    z-index: 3
+    margin-bottom:200px
+
+    background-color: variables.$color-brand-1
+
+    .profile
+        position: relative
+        display: flex
+        justify-content: space-evenly
+        padding: 50px
+        background-color: variables.$color-grey-10
+        height: 327px
+        width: 80%
+        top: 150px
+        align-items: flex-start
+        flex-direction: column
+    
+        div
+            display: flex
+            align-items: flex-end
+
+            .tag
+                margin-left: 18px
+                margin-bottom: 5px
+
+            .div-elipsis
+                flex-direction: column
+                align-items: center
+                .elipsis
+                    display: flex
+                    align-items: center
+                    height: 100px
+                    width: 100px
+                    p
+                        margin: 12px
+                        font-size: 36px

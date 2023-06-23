@@ -60,21 +60,22 @@ interface iButton{
     type?: "submit" | "button" | "reset"
     id?: string
     width?: number
+    className?: string
 }
 
-const Button=({children,style,onClick,size,type="submit",id, width}:iButton):React.JSX.Element=>{
+const Button=({children,style,onClick,size,type="submit",id, width,className:name}:iButton):React.JSX.Element=>{
 
-    let className=null
+    let className= name ? name : ''
 
     switch(size){
         case "big":
-            className=buttonSize.Big
+            className= className + " " + buttonSize.Big
             break
         case "medium":
-            className=buttonSize.Medium
+            className=className + " " + buttonSize.Medium
             break
         default:
-            className=buttonSize.Big
+            className=className + " " + buttonSize.Big
     }
 
     switch(width){

@@ -1,42 +1,54 @@
-"use client"
 import { Cards } from "@/components/cards/cards"
 import Footer from "@/components/footer/footer"
 import HeaderProfile from "@/components/headerProfile/header"
-import "../../styles/pages/profile/profile.sass"
+import '../../styles/pages/profile/profile.sass'
+import { TAdvert, TAdverts} from "@/schemas/advertsSchema"
+import HeaderAnunciant from "@/components/headerAnunciant/headerAnunciant"
+import { getData } from "@/uteis/api"
+import { TUser } from "@/schemas/userSchema"
+import { cookies } from "next/dist/client/components/headers"
 
+const getAdverts=async()=>{
+    const response=await getData('/adverts',{next:{revalidate:30}})
+    return response
+}
 
+const getUser=async(token:string)=>{
+    const response=await getData('/users/loggedUser',{
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+    })
+    return response
+}
 
-const Profile = () =>{
+const Profile = async() =>{
+
+    const cookieStore = cookies()
+    const userToken= cookieStore.get('userToken')
+    const profile:TUser=await getUser( userToken!.value)
+
+    const {adverts}:{adverts:TAdverts}=await getAdverts()
+
+    
     return ( 
-        <main>
-            <HeaderProfile />
-        <main>
-        <header className="header-profile" >
-        <div className="profile">  
-        <span className="iniciais">MS</span> 
-        <div className="anunciant">
-            <p className="name">Matheus Silva</p>
-            <p className="tag">Anunciante</p>
-        </div>            
-            <p className="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam placeat repellendus doloremque.</p>
-            <button>Criar anúncio</button>        
+        <div>
+            <header>
+                <HeaderProfile name={profile.name}/>
+                <HeaderAnunciant anunciant={profile} profile={profile}/>
+            </header>
+            <main>
+                <section className="cars">
+                    <h2>Anúncios</h2>
+                    <div className="cars-list">
+                        {
+                            adverts.map((advert:TAdvert)=><Cards key={advert.id} car={advert} user={advert.user} userId={profile.id}/>)
+                        } 
+                    </div>
+                </section>
+            </main>        
+            <Footer/>
         </div>
-        </header>
-        <section className="cars-section">
-            <div className="cars-list">
-                <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>
-                <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>
-                <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>
-                <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>
-                <Cards carro={{ id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100 }} />
-                <Cards carro={{ id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100 }} />
-                <Cards carro={{ id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100 }} />
-                <Cards carro={{id: "1", name: "carro maneiro", brand: "string", year: "string", fuel: 10, "value": 100}}/>
-            </div>
-        </section>         
-        </main>
-        <Footer/>
-        </main>
     )
 }
 

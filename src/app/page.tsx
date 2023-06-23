@@ -3,14 +3,15 @@ import Header from "@/components/header/header"
 import HomeHeader from "@/components/homeHeader/HomeHeader"
 import "../styles/pages/home/home.sass"
 import FilterList from "@/components/filterList/FilterList"
-import { Cards } from "@/components/cards/cards"
 import Link from "next/link"
 
 import { iFilterListProps } from "@/components/filterList/FilterList"
 import { iFilters } from "@/components/filterList/FilterList"
 
 import FilterButton from "@/components/filterButton/filterButton"
-import { TAdvertisementRes } from "@/schemas/advertisement.schema"
+import { TAdvertisementRes, iPaginatedAdverts } from "@/schemas/advertisement.schema"
+import { Car } from "@/schemas/advertsSchema"
+import { Cards } from "@/components/cards/cards"
 
 const getAdvertisements = async(searchParams: iFilters) => {
   let params: URLSearchParams | string = new URLSearchParams();
@@ -47,9 +48,10 @@ const getNotPaginated = async() => {
   }
 }
 
+
 const Home = async({searchParams}: iFilterListProps) => {
   const advertisements = await getAdvertisements(searchParams)
-  const notPaginatedAdverts = await getNotPaginated()
+  const notPaginatedAdverts:iPaginatedAdverts = await getNotPaginated()
 
   return (
     <>
@@ -57,14 +59,14 @@ const Home = async({searchParams}: iFilterListProps) => {
       <main>
       <HomeHeader/>
       <section className="cars-section">
-        <FilterList searchParams={searchParams} advertisements={notPaginatedAdverts}/>
+        <FilterList searchParams={searchParams} advertisements={notPaginatedAdverts.adverts}/>
         <div className="cars-page">
           <div className="cars-list">
             {
               advertisements?.count > 0 &&
               advertisements?.adverts.map((ad: TAdvertisementRes) => {
                 return(
-                  <Cards carro={ad} username={ad.user.name}/>
+                  <Cards key={ad.id} car={ Car.parse(ad)} user={ad.user} userId={''}/>
                 )
               })
             }
