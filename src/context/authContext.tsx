@@ -1,17 +1,26 @@
 "use client"
-import { TResetPasswordEmailReq } from "@/schemas/users.schema";
-import api from "@/services";
-import { TLoginReq, TLoginRes, TProviderProps, TUserRes, TValidationSchema } from "@/types/user.types";
-import { useRouter } from "next/navigation";
-import { setCookie } from "nookies";
-import { createContext, useContext, useState } from "react";
-import axios from "axios";
+import { TResetPasswordEmailReq } from "@/schemas/users.schema"
+import api from "@/services"
+import { TLoginReq, TLoginRes, TProviderProps, TUserRes, TValidationSchema } from "@/types/user.types"
+import { useRouter } from "next/navigation"
+import { setCookie } from "nookies"
+import { createContext, useContext, useState } from "react"
+import axios,{ AxiosResponse } from "axios"
+
+import { SetStateAction } from "react";
 
 export interface IAuthContext {
-  registerUser: (data: TValidationSchema) => Promise<void>;
+  registerUser: (data: TValidationSchema) => Promise<void>
   login: (dataLogin: TLoginReq, callback: () => void) => Promise<void>
   getUserProfile: (token: string) => Promise<void>
   user: TUserRes
+  sentEmail: boolean
+  existantUser: boolean
+  loading: boolean
+  setSentEmail: React.Dispatch<SetStateAction<boolean>>
+  setExistantUser: React.Dispatch<SetStateAction<boolean>>
+  setLoading: React.Dispatch<SetStateAction<boolean>>
+  sendResetPasswordEmail: (data: TResetPasswordEmailReq) => Promise<AxiosResponse<any, any> | undefined>
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext)
@@ -102,7 +111,14 @@ export const AuthProvider = ({children}: TProviderProps) => {
                 registerUser,
                 login,
                 user,
-                getUserProfile
+                getUserProfile,
+                sentEmail,
+                existantUser,
+                loading,
+                setSentEmail,
+                setExistantUser,
+                setLoading,
+                sendResetPasswordEmail
             }}
         >
             {children}

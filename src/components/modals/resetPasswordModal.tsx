@@ -1,7 +1,7 @@
 'use client'
 import api from "@/services"
 import Modal from "./modal"
-import { useState } from "react"
+import { useContext, useState } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { resetPasswordEmailReqSchema } from "@/schemas/users.schema"
@@ -14,11 +14,15 @@ import { TResetPasswordReq } from "@/schemas/users.schema"
 import axios from "axios"
 
 import { Input } from "../inputs/inputs"
+import { useAuthContext } from "@/context/authContext"
 
 const ResetPasswordModal = () => {
-    const [sentEmail, setSentEmail] = useState<boolean>(false)
-    const [existantUser, setExistantUser] = useState<boolean>(true)
-    const [loading, setLoading] = useState<boolean>(false)
+
+    const {
+        sentEmail, setSentEmail,
+        existantUser, setExistantUser,
+        loading, setLoading, sendResetPasswordEmail
+    }= useAuthContext()
 
     const {
         register,
@@ -29,34 +33,9 @@ const ResetPasswordModal = () => {
         resolver: zodResolver(resetPasswordEmailReqSchema)
     })
 
-    const sendEmail = async(data: TResetPasswordReq) => {
-        setLoading(true)
-        setExistantUser(true)
-        setSentEmail(false)
-        try{
-            const request = await api.post("/users/resetPassword",data)
-
-            if(request.status === 200){
-                setSentEmail(true)
-            }
-            return request
-        }catch(err: unknown){
-            if (axios.isAxiosError(err)) {
-                if (err.response) {
-                    if(err.response.status === 404){
-                        setExistantUser(false)
-                    }
-                }
-              }
-            console.log(err)
-        }finally{
-            setLoading(false)
-        }
-    }
-
     const sendEmailSubmit = (data: any) => {
         console.log(data)
-        sendEmail(data)
+        sendResetPasswordEmail(data)
     }
 
     console.log(errors)
