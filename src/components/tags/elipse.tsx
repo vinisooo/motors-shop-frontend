@@ -15,7 +15,6 @@ const Elipsis=({color='purple-1',name='nome',className}:iElipsis)=>{
     const router=useRouter()
 
     const visitAnunciant=(e:any)=>{
-        console.log(e.currentTarget)
         const page=e.currentTarget.classList[1]
         router.push(`http://localhost:3000/user/${page}`)
     }

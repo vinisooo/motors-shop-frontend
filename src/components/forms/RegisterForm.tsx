@@ -32,66 +32,66 @@ const RegisterForm = () => {
                 <div>
                     <label htmlFor="name">Nome</label>
                     <input type="text" id="name" {...register("name")}/>
-                    {errors.name && <p>{errors.name.message}</p>}
+                    {errors.name && <span className="error">{errors.name.message}</span>}
                 </div>
                 <div>
                     <label htmlFor="email">Email</label>
                     <input type="text" id="email" {...register("email")}/>
-                    {errors.email && <p>{errors.email.message}</p>}
+                    {errors.email && <span className="error">{errors.email.message}</span>}
                 </div>
                 <div>
                     <label htmlFor="cpf">CPF</label>
                     <input type="text" id="cpf" {...register("cpf")}/>
-                    {errors.cpf && <p>{errors.cpf.message}</p>}
+                    {errors.cpf && <span className="error">{errors.cpf.message}</span>}
                 </div>
                 <div>
                     <label htmlFor="phone">Celular</label>
                     <input type="text" id="phone" {...register("phone")}/>
-                    {errors.phone && <p>{errors.phone.message}</p>}
+                    {errors.phone && <span className="error">{errors.phone.message}</span>}
                 </div>
                 <div>
                     <label htmlFor="birthdate">Data de nascimento</label>
                     <input type="date" id="birthdate" {...register("birthdate")}/>
-                    {errors.birthdate && <p>{errors.birthdate.message}</p>}
+                    {errors.birthdate && <span className="error">{errors.birthdate.message}</span>}
                 </div>
                 <div>
                     <label htmlFor="description">Descrição</label>
                     <textarea id="description" {...register("description")}/>
-                    {errors.description && <p>{errors.description.message}</p>}
+                    {errors.description && <span className="error">{errors.description.message}</span>}
                 </div>
                 <h1>Informações de endereço</h1>
                 <div>
                     <label htmlFor="zipCode">CEP</label>
                     <input type="text" id="zipCode" {...register("address.zipCode")}/>
-                    {errors.address?.zipCode && <p>{errors.address?.zipCode.message}</p>}
+                    {errors.address?.zipCode && <span className="error">{errors.address?.zipCode.message}</span>}
                 </div>
                 <div className="flex-horizontal">
                     <div>
                         <label htmlFor="state">Estado</label>
                         <input type="text" id="state" {...register("address.state")}/>
-                        {errors.address?.state && <p>{errors.address?.state.message}</p>}
+                        {errors.address?.state && <span className="error">{errors.address?.state.message}</span>}
                     </div>
                     <div>
                         <label htmlFor="city">Cidade</label>
                         <input type="text" id="city" {...register("address.city")}/>
-                        {errors.address?.city && <p>{errors.address?.city.message}</p>}
+                        {errors.address?.city && <span className="error">{errors.address?.city.message}</span>}
                     </div>
                 </div>
                 <div>
                     <label htmlFor="street">Rua</label>
                     <input type="text" id="street" {...register("address.street")}/>
-                    {errors.address?.street && <p>{errors.address?.street.message}</p>}
+                    {errors.address?.street && <span className="error">{errors.address?.street.message}</span>}
                 </div>
                 <div className="flex-horizontal">
                     <div>
                         <label htmlFor="number">Número</label>
                         <input type="number" id="number" {...register("address.number")}/>
-                        {errors.address?.number && <p>{errors.address?.number.message}</p>}
+                        {errors.address?.number && <span className="error">{errors.address?.number.message}</span>}
                     </div>
                     <div>
                         <label htmlFor="complement">Complemento</label>
                         <input type="text" id="complement" {...register("address.complement")}/>
-                        {errors.address?.complement && <p>{errors.address?.complement.message}</p>}
+                        {errors.address?.complement && <span className="error">{errors.address?.complement.message}</span>}
                     </div>
                 </div>
                 <h1>Tipo de conta</h1>
@@ -106,12 +106,12 @@ const RegisterForm = () => {
                 <div>
                     <label htmlFor="password">Senha</label>
                     <input type="password" id="password" {...register("password")}/>
-                    {errors.password && <p>{errors.password.message}</p>}
+                    {errors.password && <span className="error">{errors.password.message}</span>}
                 </div>
                 <div>
                     <label htmlFor="confirmPassword">Confirmar senha</label>
                     <input type="password" id="confirmPassword" {...register("confirmPassword")}/>
-                    {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+                    {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
                 </div>
                 <Button type={"submit"}>
                     Finalizar cadastro

@@ -3,13 +3,13 @@ import Footer from "@/components/footer/footer"
 import '../../../styles/pages/profile/profile.sass'
 import HeaderAnunciant from "@/components/headerAnunciant/headerAnunciant"
 import HeaderProfile from "@/components/headerProfile/header"
-import { TCar, TCars } from "@/schemas/advertsSchema"
-import { TUser, User } from "@/schemas/userSchema"
+import {TCar, TCars } from "@/schemas/advertsSchema"
+import { TUser } from "@/schemas/userSchema"
 import { getData } from "@/uteis/api"
 import { cookies } from "next/dist/client/components/headers"
 
 const getAdverts=async(id:string)=>{
-    const response=await getData(`/users/${id}/adverts`)
+    const response=await getData(`/users/${id}/adverts`,{next:{revalidate:60}})
     return response
 }
 
@@ -24,11 +24,13 @@ const getUser=async(token:string)=>{
 
 const Profile = async({params}:{params:any}) =>{
     const {id}=params
+    console.log(id)
     const {data}=await getAdverts(id)
+    console.log(data)
     const userToken=cookies().get('userToken')
     const profile:TUser=await getUser(userToken!.value)
-    const adverts=data.adverts 
-    const anunciant=data.user
+    const adverts:TCars=data.adverts 
+    const anunciant:TUser=data.user
 
     return ( 
         <>

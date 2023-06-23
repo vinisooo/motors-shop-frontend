@@ -10,7 +10,7 @@ import Button from "../button/button"
 import { useAuthContext } from "@/context/authContext"
 import { useContext } from "react"
 import { ModalContext } from "@/context/modalContext"
-import Modal from "../modals/modal"
+import ResetPasswordModal from "../modals/resetPasswordModal"
 
 const LoginForm = () => {
     const {
@@ -24,7 +24,7 @@ const LoginForm = () => {
 
     const { resetPasswordModal, setResetPasswordModal } = useContext(ModalContext)
 
-    const { login } = useAuthContext()
+    const { login, existantUser } = useAuthContext()
 
     const onLoginSubmit: SubmitHandler<TLoginReq> = async (data) => {
         await login(data, () => {
@@ -32,7 +32,6 @@ const LoginForm = () => {
         })
     }
 
-    console.log(resetPasswordModal)
     return (
         <>
             <div className="login-form">
@@ -41,12 +40,16 @@ const LoginForm = () => {
                     <div>
                         <label htmlFor="email">Email</label>
                         <input type="text" id="email" {...register("email")}/>
-                        {errors.email && <p>{errors.email.message}</p>}
+                        {errors.email && <span className="error">{errors.email.message}</span>}
                     </div>
                     <div>
                         <label htmlFor="password">Senha</label>
                         <input type="password" id="password" {...register("password")}/>
-                        {errors.password && <p>{errors.password.message}</p>}
+                        {errors.password && <span className="error">{errors.password.message}</span>}
+                        {
+                            !existantUser &&
+                            <span className="error">Senha ou email incorretos.</span>
+                        }
                         <button className="reset-password-btn" type="button" onClick={() => {setResetPasswordModal(true)}}>
                             Esqueci minha senha
                         </button>
@@ -66,7 +69,7 @@ const LoginForm = () => {
             </div>
             {
                 resetPasswordModal && 
-                <Modal title="Redefinir Senha"/>
+                <ResetPasswordModal/>
             }
         </>
     )

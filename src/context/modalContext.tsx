@@ -1,8 +1,20 @@
-'use client'
-import { createContext, useContext } from "react";
-import { useState } from "react";
+"use client"
+import { createContext, useContext } from "react"
+import { useState } from "react"
 
-import { iChildrenProps, iModalContextValues } from "./interfaces";
+import { SetStateAction } from "react"
+
+interface iChildrenProps{
+    children: React.ReactNode
+}
+
+interface iModalContextValues{
+    filterDropdown: boolean
+    setFilterDropdown: React.Dispatch<SetStateAction<boolean>>
+    resetPasswordModal: boolean
+    setResetPasswordModal: React.Dispatch<SetStateAction<boolean>>
+}
+
 
 export const ModalContext = createContext({} as iModalContextValues)
 

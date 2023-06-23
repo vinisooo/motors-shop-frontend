@@ -3,7 +3,7 @@ import { ModalContext } from "@/context/modalContext";
 import { useContext, useEffect, useRef } from "react";
 import { AiOutlineClose } from "react-icons/ai"
 
-import "../../styles/components/modal/modal.sass"
+import "../../styles/components/modals/modal.sass"
 
 interface iModalProps{
     children?: React.ReactNode;
