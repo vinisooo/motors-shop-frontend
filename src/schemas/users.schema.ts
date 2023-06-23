@@ -3,7 +3,7 @@ import { addressReqSchema } from "./address.schema";
 
 export const usersReqSchema = z.object({
     name: z.string().max(60),
-    email: z.string().email().max(60),
+    email: z.string().email("Email inválido").max(60, "Seu email deve conter no máximo 60 caracteres"),
     password: z
       .string()
       .min(8, "A senha deve conter pelo menos 8 caracteres.")
@@ -13,7 +13,7 @@ export const usersReqSchema = z.object({
       .regex(/^(?=.*[A-Z])/, "A senha deve conter pelo menos uma letra maiúscula.")
       .regex(/^(?=.*[?!*$&@#])/, "A senha deve conter pelo menos um dos seguintes caracteres especiais: ?!*$&@#.")
       .regex(/^[0-9a-zA-Z?!*$&@#]{8,}$/, "A senha deve ter no mínimo 8 caracteres."),
-    cpf: z.string().min(11).max(11),
+    cpf: z.string().min(11, "Seu CPF deve conter exatamente 11 caracteres").max(11, "Seu CPF deve conter exatamente 11 caracteres"),
     phone: z.string(),
     birthdate: z.string(),
     profileImg: z.string().url().optional(),

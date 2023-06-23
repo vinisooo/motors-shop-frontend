@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import Button from "../button/button"
 import { Input } from "../inputs/inputs"
 import { TResetPasswordReq, resetPasswordReqSchema } from "@/schemas/users.schema"
+import { useAuthContext } from "@/context/authContext"
 
 interface iResetPasswordFormProps{
     token: string
@@ -21,8 +22,10 @@ const ResetPasswordForm = ({token}: iResetPasswordFormProps) => {
         resolver: zodResolver(resetPasswordReqSchema)
     })
 
+    const { resetPassword, existantUser } = useAuthContext()
+
     const resetPasswordSubmit: SubmitHandler<TResetPasswordReq> = async (data) => {
-        console.log(data, token)
+        resetPassword(data, token)
     }
 
     return (
@@ -37,6 +40,10 @@ const ResetPasswordForm = ({token}: iResetPasswordFormProps) => {
                     <div>
                         <Input type="password" id="confirm-password" rest={register("confirmPassword")}>Confirmar senha</Input>
                         {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
+                        {
+                            !existantUser &&
+                            <span className="error">Sua senha já foi alterada.</span>
+                        }
                     </div>
                     <Button type="submit">
                         Redefinir senha

@@ -5,7 +5,7 @@ import { useContext, useState } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { resetPasswordEmailReqSchema } from "@/schemas/users.schema"
-import { useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
 
 import "../../styles/components/modals/resetPasswordModal.sass"
 import Button from "../button/button"
@@ -33,13 +33,11 @@ const ResetPasswordModal = () => {
         resolver: zodResolver(resetPasswordEmailReqSchema)
     })
 
-    const sendEmailSubmit = (data: any) => {
-        console.log(data)
+    const sendEmailSubmit: SubmitHandler<any> = (data) => {
         sendResetPasswordEmail(data)
     }
 
-    console.log(errors)
-    
+
     return(
         <Modal title="Redefinir Senha">
             <div className="reset-password">

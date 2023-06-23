@@ -1,5 +1,5 @@
 "use client"
-import { TResetPasswordEmailReq } from "@/schemas/users.schema"
+import { TResetPasswordEmailReq, TResetPasswordReq } from "@/schemas/users.schema"
 import api from "@/services"
 import { TLoginReq, TLoginRes, TProviderProps, TUserRes, TValidationSchema } from "@/types/user.types"
 import { useRouter } from "next/navigation"
@@ -21,6 +21,7 @@ export interface IAuthContext {
   setExistantUser: React.Dispatch<SetStateAction<boolean>>
   setLoading: React.Dispatch<SetStateAction<boolean>>
   sendResetPasswordEmail: (data: TResetPasswordEmailReq) => Promise<AxiosResponse<any, any> | undefined>
+  resetPassword: (data: TResetPasswordReq, token: string) => Promise<AxiosResponse<any, any> | undefined>
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext)
@@ -29,6 +30,10 @@ export const AuthProvider = ({children}: TProviderProps) => {
     const [user, setUser] = useState({} as TUserRes)
     const router = useRouter()
 
+    const [sentEmail, setSentEmail] = useState<boolean>(false)
+    const [existantUser, setExistantUser] = useState<boolean>(true)
+    const [loading, setLoading] = useState<boolean>(false)
+    
     const registerUser = async (data: TValidationSchema) => {
         try {
             const newUser: TUserRes = await api.post("/users/register", data, {
@@ -60,6 +65,7 @@ export const AuthProvider = ({children}: TProviderProps) => {
     }
 
     const login = async (dataLogin: TLoginReq, callback: () => void) => {
+        setExistantUser(true)
         try {
             const { data } = await api.post<TLoginRes>("/users/login", dataLogin)
             const { token } = data
@@ -72,14 +78,17 @@ export const AuthProvider = ({children}: TProviderProps) => {
             }
             router.push("/")
       } catch (err) {
+            if (axios.isAxiosError(err)) {
+                if (err.response) {
+                    if(err.response.status === 400){
+                        setExistantUser(false)
+                    }
+                }
+            }
             console.error(err)
       }
     }
 
-    const [sentEmail, setSentEmail] = useState<boolean>(false)
-    const [existantUser, setExistantUser] = useState<boolean>(true)
-    const [loading, setLoading] = useState<boolean>(false)
-    
     const sendResetPasswordEmail = async(data: TResetPasswordEmailReq) => {
         setLoading(true)
         setExistantUser(true)
@@ -104,6 +113,25 @@ export const AuthProvider = ({children}: TProviderProps) => {
             setLoading(false)
         }
     }
+
+    const resetPassword = async(data: TResetPasswordReq,token: string) => {
+        setExistantUser(true)
+        try{
+            const request = await api.patch(`/users/resetPassword/${token}`)
+
+            router.push("/login")
+            return request
+        }catch(err: unknown){
+            if (axios.isAxiosError(err)) {
+                if (err.response) {
+                    if(err.response.status === 404){
+                        setExistantUser(false)
+                    }
+                }
+              }
+            console.log(err)
+        }
+    }
     
     return (
         <AuthContext.Provider 
@@ -118,7 +146,8 @@ export const AuthProvider = ({children}: TProviderProps) => {
                 setSentEmail,
                 setExistantUser,
                 setLoading,
-                sendResetPasswordEmail
+                sendResetPasswordEmail,
+                resetPassword
             }}
         >
             {children}

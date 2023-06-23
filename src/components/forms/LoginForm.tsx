@@ -24,7 +24,7 @@ const LoginForm = () => {
 
     const { resetPasswordModal, setResetPasswordModal } = useContext(ModalContext)
 
-    const { login } = useAuthContext()
+    const { login, existantUser } = useAuthContext()
 
     const onLoginSubmit: SubmitHandler<TLoginReq> = async (data) => {
         await login(data, () => {
@@ -46,6 +46,10 @@ const LoginForm = () => {
                         <label htmlFor="password">Senha</label>
                         <input type="password" id="password" {...register("password")}/>
                         {errors.password && <span className="error">{errors.password.message}</span>}
+                        {
+                            !existantUser &&
+                            <span className="error">Senha ou email incorretos.</span>
+                        }
                         <button className="reset-password-btn" type="button" onClick={() => {setResetPasswordModal(true)}}>
                             Esqueci minha senha
                         </button>
