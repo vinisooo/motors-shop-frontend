@@ -2,8 +2,8 @@
 import api from "@/services";
 import { TLoginReq, TLoginRes, TProviderProps, TUserRes, TValidationSchema } from "@/types/user.types";
 import { useRouter } from "next/navigation";
-import { setCookie,parseCookies,destroyCookie } from "nookies";
-import { createContext, useContext, useEffect, useState } from "react";
+import { setCookie,destroyCookie } from "nookies";
+import { createContext, useContext, useState } from "react";
 
 export interface IAuthContext {
   registerUser: (data: TValidationSchema) => Promise<void>;
@@ -54,15 +54,6 @@ export const AuthProvider = ({children}: TProviderProps) => {
             console.error(err)
         }
     }
-
-    useEffect(()=>{
-        if(!loading){
-            const {userToken} = parseCookies()
-            getUserProfile(userToken)
-        }
-
-    },[loading])
-    
 
     const login = async (dataLogin: TLoginReq, callback: () => void) => {
         setLoading(true)

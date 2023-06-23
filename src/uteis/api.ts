@@ -1,25 +1,43 @@
 const baseUrl='http://localhost:3001'
 
-async function getData(url:string='',method:'GET'| 'POST' | 'PATCH' | 'PUT' | 'DELETE' = 'GET', body=undefined ) {
+interface config{
+    method?:'GET'| 'POST' | 'PATCH' | 'PUT' | 'DELETE'
+    body?:any 
+    headers?:{
+        "Content-Type"?:string,
+        Authorization?:string
+    }
+    next?:{
+        revalidate?: number
+    }
+    cache?: "force-cache"| "reload" | "no-cache" | "no-store" | "only-if-cached" | "default"
+}
+
+async function getData(url:string='',config:config={body:null,headers:{"Content-Type":'',Authorization:''},method:'GET',cache:"force-cache"} ) {
+
+    const {body,headers,method,next,cache}=config
+    const head= !headers ? {"Content-Type":"application/json"} : {"Content-Type":"application/json",...headers}
     
     let response:string | Promise<any>
     let res
     
+
     switch(method){
         case 'POST':
         case 'PATCH':
         case 'PUT':
-            res = await fetch(`${baseUrl}${url}`,{
-                method: method,
-                body,
-                headers: {
-                    "Content-type": "application/json",
-                },
-            });
-            if (!res.ok) {
-              throw new Error('Failed to fetch data')
+            try{
+                res = await fetch(`${baseUrl}${url}`,{
+                    method: method,
+                    body,
+                    headers:head,
+                    next
+                });
+                response = await res.json()
+                return response
+            }catch(err){
+                console.log(err)
             }
-            response = await res.json()
             break
         case "DELETE":
             console.log('configurar delete')
@@ -27,19 +45,20 @@ async function getData(url:string='',method:'GET'| 'POST' | 'PATCH' | 'PUT' | 'D
             break
         case "GET":
         default:
-            res = await fetch(`${baseUrl}${url}`,{
-                method: method,
-                headers: {
-                    "Content-type": "application/json",
-                },
-            });
-            if (!res.ok) {
-                throw new Error('Failed to fetch data')
+            try{
+                res = await fetch(`${baseUrl}${url}`,{
+                    method: method,
+                    headers:head,
+                    cache: cache || "force-cache",
+                    next
+                });
+                response = await res.json()
+                return response
+            }catch(err){
+                console.log(err)
             }
-            response = await res.json()
         }
         
-       return response
 }
 
 export {getData}

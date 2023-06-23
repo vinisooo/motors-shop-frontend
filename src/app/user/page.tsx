@@ -1,4 +1,3 @@
-'use client'
 import { Cards } from "@/components/cards/cards"
 import Footer from "@/components/footer/footer"
 import HeaderProfile from "@/components/headerProfile/header"
@@ -7,20 +6,31 @@ import { TAdvert, TAdverts} from "@/schemas/advertsSchema"
 import HeaderAnunciant from "@/components/headerAnunciant/headerAnunciant"
 import { getData } from "@/uteis/api"
 import { TUser } from "@/schemas/userSchema"
-import { useAuthContext } from "@/context/authContext"
+import { cookies } from "next/dist/client/components/headers"
 
 const getAdverts=async()=>{
     const response=await getData('/adverts')
     return response
 }
 
+const getUser=async(token:string)=>{
+    const response=await getData('/users/loggedUser',{
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+    })
+    return response
+}
+
 const Profile = async() =>{
 
-    const {user:profile}:{user:TUser}=useAuthContext()
-    console.log(profile)
-    const {adverts}:{adverts:TAdverts}=await getAdverts()
-    
+    const cookieStore = cookies()
+    const userToken= cookieStore.get('userToken')
+    const profile:TUser=await getUser( userToken!.value)
 
+    const {adverts}:{adverts:TAdverts}=await getAdverts()
+
+    
     return ( 
         <div>
             <header>
