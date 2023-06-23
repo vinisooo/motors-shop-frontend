@@ -4,7 +4,7 @@ import Modal from "./modal"
 import { useState } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { resetPasswordReq } from "@/schemas/users.schema"
+import { resetPasswordEmailReqSchema } from "@/schemas/users.schema"
 import { useForm } from "react-hook-form"
 
 import "../../styles/components/modals/resetPasswordModal.sass"
@@ -26,7 +26,7 @@ const ResetPasswordModal = () => {
         reset,
         formState: { errors }
     } = useForm({
-        resolver: zodResolver(resetPasswordReq)
+        resolver: zodResolver(resetPasswordEmailReqSchema)
     })
 
     const sendEmail = async(data: TResetPasswordReq) => {
