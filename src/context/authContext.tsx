@@ -1,9 +1,11 @@
 "use client"
+import { TResetPasswordEmailReq } from "@/schemas/users.schema";
 import api from "@/services";
 import { TLoginReq, TLoginRes, TProviderProps, TUserRes, TValidationSchema } from "@/types/user.types";
 import { useRouter } from "next/navigation";
 import { setCookie } from "nookies";
 import { createContext, useContext, useState } from "react";
+import axios from "axios";
 
 export interface IAuthContext {
   registerUser: (data: TValidationSchema) => Promise<void>;
@@ -63,6 +65,35 @@ export const AuthProvider = ({children}: TProviderProps) => {
       } catch (err) {
             console.error(err)
       }
+    }
+
+    const [sentEmail, setSentEmail] = useState<boolean>(false)
+    const [existantUser, setExistantUser] = useState<boolean>(true)
+    const [loading, setLoading] = useState<boolean>(false)
+    
+    const sendResetPasswordEmail = async(data: TResetPasswordEmailReq) => {
+        setLoading(true)
+        setExistantUser(true)
+        setSentEmail(false)
+        try{
+            const request = await api.post("/users/resetPassword",data)
+
+            if(request.status === 200){
+                setSentEmail(true)
+            }
+            return request
+        }catch(err: unknown){
+            if (axios.isAxiosError(err)) {
+                if (err.response) {
+                    if(err.response.status === 404){
+                        setExistantUser(false)
+                    }
+                }
+              }
+            console.log(err)
+        }finally{
+            setLoading(false)
+        }
     }
     
     return (
