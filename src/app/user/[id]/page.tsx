@@ -6,19 +6,9 @@ import HeaderProfile from "@/components/headerProfile/header"
 import {TCar, TCars } from "@/schemas/advertsSchema"
 import { TUser } from "@/schemas/userSchema"
 import { getData } from "@/uteis/api"
-import { cookies } from "next/dist/client/components/headers"
 
 const getAdverts=async(id:string)=>{
     const response=await getData(`/users/${id}/adverts`,{next:{revalidate:60}})
-    return response
-}
-
-const getUser=async(token:string)=>{
-    const response =await getData('/users/loggedUser',{
-        headers:{
-            Authorization: `Bearer ${token}`
-        }
-    })
     return response
 }
 
@@ -27,8 +17,6 @@ const Profile = async({params}:{params:any}) =>{
     console.log(id)
     const {data}=await getAdverts(id)
     console.log(data)
-    const userToken=cookies().get('userToken')
-    const profile:TUser=await getUser(userToken!.value)
     const adverts:TCars=data.adverts 
     const anunciant:TUser=data.user
 
@@ -36,15 +24,15 @@ const Profile = async({params}:{params:any}) =>{
         <>
             <h1>ops</h1>
             <header>
-                <HeaderProfile name={profile.name}/>
-                <HeaderAnunciant anunciant={anunciant} profile={profile}/>
+                <HeaderProfile name={"profile.name"}/>
+                <HeaderAnunciant anunciant={anunciant} profile={anunciant}/>
             </header>
             <main>
                 <section className="cars-section">
                     <h2>Anúncios</h2>
                     <div className="cars-list">
                         {
-                            adverts.map((advert:TCar)=><Cards key={advert.id} car={advert} user={anunciant} userId={profile.id} />)
+                            adverts.map((advert:TCar)=><Cards key={advert.id} car={advert} user={anunciant} userId={anunciant.id} />)
                         }
                     </div>
                 </section>

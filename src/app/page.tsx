@@ -51,7 +51,7 @@ const getNotPaginated = async() => {
 
 const Home = async({searchParams}: iFilterListProps) => {
   const advertisements = await getAdvertisements(searchParams)
-  const notPaginatedAdverts:iPaginatedAdverts = await getNotPaginated()
+  const notPaginatedAdverts: TAdvertisementRes[] = await getNotPaginated()
 
   return (
     <>
@@ -59,7 +59,7 @@ const Home = async({searchParams}: iFilterListProps) => {
       <main>
       <HomeHeader/>
       <section className="cars-section">
-        <FilterList searchParams={searchParams} advertisements={notPaginatedAdverts.adverts}/>
+        <FilterList searchParams={searchParams} advertisements={notPaginatedAdverts}/>
         <div className="cars-page">
           <div className="cars-list">
             {

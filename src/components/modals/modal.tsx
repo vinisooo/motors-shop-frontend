@@ -13,11 +13,14 @@ interface iModalProps{
 const Modal = ({children, title}: iModalProps) => {
     const modalRef = useRef<HTMLDivElement>(null);
 
-    const { setResetPasswordModal } = useContext(ModalContext)
+    const { setResetPasswordModal, setCreateAdvertModal, createAdvertModal } = useContext(ModalContext)
 
     const closeModal = () => {
         setResetPasswordModal(false)
+        setCreateAdvertModal(false)
     }
+
+    console.log(createAdvertModal)
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {

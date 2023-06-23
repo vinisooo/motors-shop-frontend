@@ -34,11 +34,11 @@ const ResetPasswordForm = ({token}: iResetPasswordFormProps) => {
                 <h1>Redefinição de senha</h1>
                 <form onSubmit={handleSubmit(resetPasswordSubmit)}>
                     <div>
-                        <Input type="password" id="password" rest={register("password")}>Senha</Input>
+                        <Input type="password" id="password" register={register("password")}>Senha</Input>
                         {errors.password && <span className="error">{errors.password.message}</span>}
                     </div>
                     <div>
-                        <Input type="password" id="confirm-password" rest={register("confirmPassword")}>Confirmar senha</Input>
+                        <Input type="password" id="confirm-password" register={register("confirmPassword")}>Confirmar senha</Input>
                         {errors.confirmPassword && <span className="error">{errors.confirmPassword.message}</span>}
                         {
                             !existantUser &&

@@ -13,6 +13,8 @@ interface iModalContextValues{
     setFilterDropdown: React.Dispatch<SetStateAction<boolean>>
     resetPasswordModal: boolean
     setResetPasswordModal: React.Dispatch<SetStateAction<boolean>>
+    createAdvertModal: boolean
+    setCreateAdvertModal: React.Dispatch<SetStateAction<boolean>>
 }
 
 
@@ -21,9 +23,10 @@ export const ModalContext = createContext({} as iModalContextValues)
 const ModalProvider = ({children}: iChildrenProps) => {
     const [filterDropdown, setFilterDropdown] = useState<boolean>(false)
     const [resetPasswordModal, setResetPasswordModal] = useState<boolean>(false)
+    const [createAdvertModal, setCreateAdvertModal] = useState<boolean>(true)
     
     return(
-        <ModalContext.Provider value={{filterDropdown, setFilterDropdown, resetPasswordModal, setResetPasswordModal}}>
+        <ModalContext.Provider value={{filterDropdown, setFilterDropdown, resetPasswordModal, setResetPasswordModal, createAdvertModal, setCreateAdvertModal}}>
             {children}
         </ModalContext.Provider>
     )
