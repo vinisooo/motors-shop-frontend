@@ -10,10 +10,11 @@ interface props{
     username: string,
     owern?:boolean
     advertisement?: "ative" | "inative" | "cash"
+    userId?:string
 }
 
 
-const Cards=({car,advertisement="ative", username,owern=false}:props)=>{
+const Cards=({car,advertisement="ative", username,owern=false,userId}:props)=>{
 
     const{brand,year,price,color,coverImage:img,model,quilometers:km,description,isAvailable,fuel}=car
 
@@ -29,7 +30,7 @@ const Cards=({car,advertisement="ative", username,owern=false}:props)=>{
                 <p>{description}</p>
                 {
                     !owern &&
-                    <Elipsis name={username}/>
+                    <Elipsis className={userId} name={username}/>
                 }
                 <div className="product-infos">
                     <div className="km-year">
