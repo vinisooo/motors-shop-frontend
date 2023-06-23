@@ -23,4 +23,10 @@ export const registerValidationSchema = usersReqSchema.extend({
     }
 )
 
+export const resetPasswordReq = z.object({
+    email: z.string().email("Email inválido").max(60, "Seu Email deve conter no máximo 60 caracteres"),
+})
+
+export type TResetPasswordReq = z.infer<typeof resetPasswordReq>
+
 export const usersUpdateReqSchema = usersReqSchema.partial()
