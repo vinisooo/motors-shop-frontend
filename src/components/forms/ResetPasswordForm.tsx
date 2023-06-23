@@ -1,16 +1,9 @@
 "use client"
 
-import "../../styles/components/forms/resetPasswordForm.sass"
-import { loginReqSchema } from "@/schemas/login.schema"
-import { TLoginReq } from "@/types/user.types"
+import "../../styles/components/forms/loginForm.sass"
 import { zodResolver } from "@hookform/resolvers/zod"
-import Link from "next/link"
 import { SubmitHandler, useForm } from "react-hook-form"
 import Button from "../button/button"
-import { useAuthContext } from "@/context/authContext"
-import { useContext } from "react"
-import { ModalContext } from "@/context/modalContext"
-import ResetPasswordModal from "../modals/resetPasswordModal"
 import { Input } from "../inputs/inputs"
 import { TResetPasswordReq, resetPasswordReqSchema } from "@/schemas/users.schema"
 
@@ -34,7 +27,7 @@ const ResetPasswordForm = ({token}: iResetPasswordFormProps) => {
 
     return (
         <>
-            <div className="reset-password-form">
+            <div className="login-form">
                 <h1>Redefinição de senha</h1>
                 <form onSubmit={handleSubmit(resetPasswordSubmit)}>
                     <div>
