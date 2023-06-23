@@ -1,0 +1,27 @@
+@use '../../_variables'
+
+.loader-bg
+  width: 100vw
+  height: 100vh
+  display: flex
+  align-items: center
+  justify-content: center
+
+.custom-loader 
+  width: 45px 
+  height: 40px
+  --c: linear-gradient(#4529E6 calc(50% - 10px), #0000 0 calc(50% + 10px), #4529E6 0)
+  background: var(--c) 0% 100%,var(--c) 50% 100%, var(--c) 100% 100%
+  background-size: 9px calc(200% + 20px)
+  background-repeat: no-repeat
+  animation: b4 1s infinite linear 
+
+@keyframes b4 
+  33%  
+    background-position: 0% 50%, 50% 100%, 100% 100%
+  50%  
+    background-position: 0% 0%, 50% 50%, 100% 100%
+  66%  
+    background-position: 0% 0%, 50% 0%, 100% 50%
+  100% 
+    background-position: 0% 0%, 50% 0%, 100% 0%

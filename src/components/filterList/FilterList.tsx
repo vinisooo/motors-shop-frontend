@@ -48,22 +48,22 @@ const FilterList = ({searchParams, advertisements}: iFilterListProps) => {
         const colorList: string[] = [];
         const yearList: number[] = [];
         const fuelList: string[] = [];
-      
+        
         for (let item of data) {
             if (!brandList.includes(item.brand)) {
                 brandList.push(item.brand);
             }
             if (!modelList.includes(item.model)) {
-            modelList.push(item.model);
+                modelList.push(item.model);
             }
             if (!colorList.includes(item.color)) {
-            colorList.push(item.color);
+                colorList.push(item.color);
             }
             if (!yearList.includes(item.year)) {
-            yearList.push(item.year);
+                yearList.push(item.year);
             }
             if (!fuelList.includes(item.fuel)) {
-            fuelList.push(item.fuel);
+                fuelList.push(item.fuel);
             }
         }
         return {

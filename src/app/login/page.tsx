@@ -9,6 +9,7 @@ const LoginPage = () => {
       <Header/>
       <LoginForm/>
       <Footer/>
+      
     </main>
   )
 }
