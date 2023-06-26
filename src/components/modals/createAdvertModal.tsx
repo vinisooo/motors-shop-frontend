@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { createPortal } from "react-dom"
 import { Input, TextArea } from "../inputs/inputs"
 import "../../styles/components/modals/createAdvertisementModal.sass"
@@ -9,9 +9,13 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { CreateAnnouncementData, CreateAnnouncementSchema } from "./validator"
 import { TAdvertisementReq, advertisementReqSchema } from "@/schemas/advertisement.schema"
 import Modal from "./modal"
+import Button from "../button/button"
+import { ModalContext } from "@/context/modalContext"
 
 
 const CreateAdvertisementModal = ( ) => {
+
+    const {setCreateAdvertModal} = useContext(ModalContext)
 
     const {
         register,
@@ -48,15 +52,14 @@ const CreateAdvertisementModal = ( ) => {
                 <Input children="Imagem da capa" id="coverImage" placeholder="https://image.com" register={register("coverImage")}/>
                 {/* <Input children="1ª imagem da galeria" id="firstGalleryImage" placeholder="https://image.com"/>
                 <Input children="2ª imagem da galeria" id="secondGalleryImage" placeholder="https://image.com"/> */}
-                <button>Adicionar campo para imagem da galeria</button>
+                <Button style="brand-opacity">Adicionar campo para imagem da galeria</Button>   
                 <div className="modal-form-buttons">
-                    <button>Cancelar</button>
-                    <button type="submit">Criar anúncio</button>
+                    <Button style="negative-1" type="button" onClick={()=>setCreateAdvertModal(false)} width={30}>Cancelar</Button>
+                    <Button style="brand-1" type="submit" size="big" width={50}>Criar Anúncio</Button>
                 </div>
             </form>
         </Modal>
     )
 }
-
 
 export {CreateAdvertisementModal}
