@@ -19,12 +19,12 @@ const CreateAdvertisementModal = ( ) => {
     const {setCreateAdvertModal} = useContext(ModalContext)
 
     const [brand, setBrand] = useState<string>("")
-    const [fipe, setFipe] = useState<string>("")
-    const [year, setYear] = useState<string>("")
+    const [fipe, setFipe] = useState<number>()
+    const [year, setYear] = useState<number>()
 
     const [images, setImages] = useState<(string | null)[]>([])
 
-    const {getCarsByBrand, cars} = useContext(CarsContext)
+    const {getCarsByBrand, cars, postAdvertisement} = useContext(CarsContext)
 
     const {
         register,
@@ -37,7 +37,7 @@ const CreateAdvertisementModal = ( ) => {
 
     const onSubmitAd: SubmitHandler<any> = async(data) => {
         data.galleryAdvertisement = images.filter((image) => image !== null && image.trim() !== "")
-        console.log(data)
+        postAdvertisement(data)
     }
 
     const getFipePrice = (e:ChangeEvent<HTMLInputElement>) => {
@@ -46,16 +46,16 @@ const CreateAdvertisementModal = ( ) => {
         })
         if(foundCar) {
             if(foundCar.value){
-                setFipe(foundCar.value.toString())
+                setFipe(foundCar.value)
             }
             if(foundCar.year){
-                setYear(foundCar.year.toString())
+                setYear(foundCar.year)
             }
         }
     }
 
     const addImageInput = () => {
-        if(images.length <6){
+        if(images.length < 6){
             setImages([...images, null])
         }
     }
@@ -69,7 +69,6 @@ const CreateAdvertisementModal = ( ) => {
         setImages(imagesAux)
         console.log(imagesAux)
     }
-    console.log(errors)
 
     return (
         <Modal title="Cadastro de veículo">
@@ -110,7 +109,7 @@ const CreateAdvertisementModal = ( ) => {
                 {errors.model && <span className="error">{errors.model.message}</span>}
                 <div className="div-labels">
                     <div className="input-box">
-                        <Input value={year} onChangeCallBack={(e) => setYear(e.target.value)} type="number" children="Ano" id="year" placeholder="2018" register={register("year", { valueAsNumber: true })}/>
+                        <Input value={year?.toString()} onChangeCallBack={(e) => setYear(Number(e.target.value))} type="number" children="Ano" id="year" placeholder="2018" register={register("year", { valueAsNumber: true })}/>
                         {errors.year && <span className="error">{errors.year.message}</span>}
                     </div>
                     <div className="input-box">
@@ -149,7 +148,7 @@ const CreateAdvertisementModal = ( ) => {
                 </div>
                 <div>
                     <div className="input-box">
-                        <Input value={fipe} onChangeCallBack={(e)=>setFipe(e.target.value)} type="number" children="Preço tabela FIPE" id="fipePrice" placeholder="R$ 48.000,00" register={register("fipePrice", { valueAsNumber: true })} />
+                        <Input value={fipe?.toString()} onChangeCallBack={(e)=>setFipe(Number(e.target.value))} type="number" children="Preço tabela FIPE" id="fipePrice" placeholder="R$ 48.000,00" register={register("fipePrice", { valueAsNumber: true })} />
                         {errors.fipePrice && <span className="error">{errors.fipePrice.message}</span>}
                     </div>
                     <div className="input-box">

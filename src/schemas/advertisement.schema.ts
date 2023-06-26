@@ -2,14 +2,14 @@ import { object, z } from "zod"
 
 export const advertisementSchema = z.object({
     id: z.string(),
-    brand: z.string().max(60),
-    model: z.string().max(120),
+    brand: z.string().max(60, "Marca deve ter no máximo 60 caracteres"),
+    model: z.string().max(120,  "Modelo deve ter no máximo 120 caracteres"),
     year: z.number(),
-    fuel: z.string().max(20),
-    color: z.string().max(20),
+    fuel: z.string().max(20, "Combustível deve ter no máximo 20 caracteres"),
+    color: z.string().max(20, "Cor deve conter no máximo 20 caracteres"),
     quilometers: z.number(),
     price: z.number(),
-    coverImage: z.string().max(150),
+    coverImage: z.string().max(150, "Imagem deve conter no máximo 150 caracteres"),
     description: z.string(),
     isAvailable: z.boolean(),
     user: z.any(),
@@ -26,7 +26,10 @@ export const advertisementReqSchema = advertisementSchema.omit({
     updatedAt: true,
 }).extend({
     fipePrice: z.number()
-})
+}).refine((data) => data.year >= 1900 && data.year <= new Date().getFullYear(), {
+    message: "O ano deve ser válido.",
+    path: ["year"],
+  });
 
 export type TAdvertisementReq = z.infer<typeof advertisementReqSchema>
 export type TAdvertisementRes = z.infer<typeof advertisementSchema>
