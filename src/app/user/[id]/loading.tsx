@@ -1,10 +1,9 @@
 import LoadingPage from "@/components/loading/loading"
 
-const loading=()=>{
-
-    return (
+const Loading = () => {
+    return(
         <LoadingPage/>
     )
 }
 
-export default loading
+export default Loading

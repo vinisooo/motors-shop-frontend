@@ -1,31 +1,30 @@
-'use client'
 import "../../styles/components/header/header.sass"
 import Link from "next/link"
 import Logo from "../logo/logo"
-import { useState } from "react"
-import { Elipsis } from "../tags/tags"
+import { getData } from "@/uteis/api"
+import { cookies } from 'next/headers'
+import NavHeader from "./navHeader"
 
+const getUserToken=async()=>{
+    const userToken = cookies().get('userToken')
+    const request= userToken && await getData('/users/loggedUser',{
+        headers:{
+            Authorization: `Bearer ${userToken?.value}`
+        }
+    })
+    return request
+}
 
-const HeaderProfile = ({name}:{
-    name:string,
-}) => {
-    const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
+const HeaderProfile = async() => {
+    const user=await getUserToken()
+    console.log(user)
 
     return(
         <div className="main-header">
             <Link href="/">
                 <Logo/>
             </Link>
-
-            <nav className={dropdownMenu ? "" : "hidden-dropdown-menu"}>
-                <Elipsis name={name}/>
-            </nav>
-
-            <button onClick={() => setDropdownMenu(!dropdownMenu)} className={dropdownMenu ? "active-dropdown": ""}>
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <NavHeader {...user}/>
         </div>
     )
 }

@@ -13,7 +13,6 @@ import { Dispatch, SetStateAction, EventHandler } from "react"
 import { useRouter } from "next/navigation"
 import { TAdvertisementRes } from "@/schemas/advertisement.schema"
 
-
 export interface iFilters {
     brand: string | undefined,
     model: string | undefined,
@@ -33,9 +32,10 @@ export interface iFilterListProps {
     advertisements: TAdvertisementRes[]
 }
 
-const FilterList = ({searchParams, advertisements}: iFilterListProps) => {
+
+const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
     const {filterDropdown, setFilterDropdown} = useContext(ModalContext)
-    const router = useRouter()
+    const router=useRouter()
 
     const [minKm, setMinKm] = useState<string>(searchParams.minKm ? searchParams.minKm : "");
     const [maxKm, setMaxKm] = useState<string>(searchParams.maxKm ? searchParams.maxKm : "");
