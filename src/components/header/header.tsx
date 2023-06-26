@@ -3,6 +3,7 @@ import "../../styles/components/header/header.sass"
 import Link from "next/link"
 import Logo from "../logo/logo"
 import { useState } from "react"
+import { useAuthContext } from "@/context/authContext"
 
 
 const Header = () => {
