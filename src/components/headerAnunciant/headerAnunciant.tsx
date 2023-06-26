@@ -6,7 +6,7 @@ import Button from "../button/button"
 import { Elipsis, Tag } from '../tags/tags'
 import { useContext } from 'react'
 import { ModalContext } from '@/context/modalContext'
-import { CreateAdvertisementModal } from '../modals/modals'
+import { CreateAdvertisementModal } from '../modals/createAdvertModal'
 
 const HeaderAnunciant=({anunciant,profile}:{anunciant:TUser,profile:TUser})=>{
 

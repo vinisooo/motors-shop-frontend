@@ -23,7 +23,7 @@ export const ModalContext = createContext({} as iModalContextValues)
 const ModalProvider = ({children}: iChildrenProps) => {
     const [filterDropdown, setFilterDropdown] = useState<boolean>(false)
     const [resetPasswordModal, setResetPasswordModal] = useState<boolean>(false)
-    const [createAdvertModal, setCreateAdvertModal] = useState<boolean>(true)
+    const [createAdvertModal, setCreateAdvertModal] = useState<boolean>(false)
     
     return(
         <ModalContext.Provider value={{filterDropdown, setFilterDropdown, resetPasswordModal, setResetPasswordModal, createAdvertModal, setCreateAdvertModal}}>

@@ -2,7 +2,7 @@
 import api from "@/services";
 import { TLoginReq, TLoginRes, TProviderProps, TUserRes, TValidationSchema } from "@/types/user.types";
 import { useRouter } from "next/navigation";
-import { setCookie,destroyCookie } from "nookies";
+import { setCookie,destroyCookie, parseCookies } from "nookies";
 import { createContext, useContext, useState } from "react";
 import { TResetPasswordEmailReq, TResetPasswordReq } from "@/schemas/users.schema"
 import axios,{ AxiosResponse } from "axios"
