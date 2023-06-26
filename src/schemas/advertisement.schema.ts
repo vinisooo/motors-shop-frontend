@@ -15,7 +15,7 @@ export const advertisementSchema = z.object({
     user: z.any(),
     createdAt: z.date(),
     updatedAt: z.date().nullable(),
-    galleryAdvertisement: z.array(z.string())
+    galleryAdvertisement: z.array(z.string()).optional()
 })
 
 export const advertisementReqSchema = advertisementSchema.omit({

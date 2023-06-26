@@ -5,7 +5,7 @@ interface iInput{
     placeholder?:string
     id?:string
     type?: "text" | "number" | "email" | "password" | "select" | "radio" 
-    register: object
+    register?: object
     list?: string
     value?: string
     onChangeCallBack?: (e:ChangeEvent<HTMLInputElement>)=> void | any
@@ -17,6 +17,7 @@ interface iTextArea{
     children?:React.ReactNode
     placeholder?:string
     id?:string
+    register?:object
 }
 
 interface iSelect{
@@ -24,7 +25,7 @@ interface iSelect{
     placeholder?:string
     id:string
     label?: string
-    register: object
+    register?: object
 }
 
 const Input=({children,id,placeholder,type='text', register, list, value, onChangeCallBack, onClickCallBack, maxLength}:iInput)=>{
@@ -36,12 +37,12 @@ const Input=({children,id,placeholder,type='text', register, list, value, onChan
     )
 }
 
-const TextArea=({ children,id,placeholder,}:iTextArea)=>{
+const TextArea=({ children,id,placeholder,register}:iTextArea)=>{
 
     return(
         <div className="label">
             <label htmlFor={id}>{children}</label>
-            <textarea name={id} id={id} cols={50} rows={10} placeholder={placeholder}></textarea>
+            <textarea name={id} id={id} cols={50} rows={10} placeholder={placeholder} {...register}></textarea>
         </div>
     )
 }

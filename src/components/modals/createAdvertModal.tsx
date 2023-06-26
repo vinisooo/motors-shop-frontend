@@ -22,7 +22,7 @@ const CreateAdvertisementModal = ( ) => {
     const [fipe, setFipe] = useState<string>("")
     const [year, setYear] = useState<string>("")
 
-    const [imagesCounter, setImagesCounter] = useState<string[]>([])
+    const [images, setImages] = useState<(string | null)[]>([])
 
     const {getCarsByBrand, cars} = useContext(CarsContext)
 
@@ -36,6 +36,7 @@ const CreateAdvertisementModal = ( ) => {
     })
 
     const onSubmitAd: SubmitHandler<any> = async(data) => {
+        data.galleryAdvertisement = images.filter((image) => image !== null && image.trim() !== "")
         console.log(data)
     }
 
@@ -52,6 +53,23 @@ const CreateAdvertisementModal = ( ) => {
             }
         }
     }
+
+    const addImageInput = () => {
+        if(images.length <6){
+            setImages([...images, null])
+        }
+    }
+    const addImage = (e:ChangeEvent<HTMLInputElement>, index: number) => {
+        let imagesAux = images.map((image,imageIndex) => {
+            if(imageIndex === index){
+                return image = e.target.value
+            }
+            return image
+        })
+        setImages(imagesAux)
+        console.log(imagesAux)
+    }
+    console.log(errors)
 
     return (
         <Modal title="Cadastro de veículo">
@@ -92,7 +110,7 @@ const CreateAdvertisementModal = ( ) => {
                 {errors.model && <span className="error">{errors.model.message}</span>}
                 <div className="div-labels">
                     <div className="input-box">
-                        <Input value={year} onChangeCallBack={(e) => setYear(e.target.value)} type="number" children="Ano" id="year" placeholder="2018" register={register("year")}/>
+                        <Input value={year} onChangeCallBack={(e) => setYear(e.target.value)} type="number" children="Ano" id="year" placeholder="2018" register={register("year", { valueAsNumber: true })}/>
                         {errors.year && <span className="error">{errors.year.message}</span>}
                     </div>
                     <div className="input-box">
@@ -109,7 +127,7 @@ const CreateAdvertisementModal = ( ) => {
                 </div>
                 <div>
                     <div className="input-box">
-                        <Input type="number" maxLength={10}  children="Quilometragem" id="quilometers" placeholder="30.000" register={register("quilometers")}/>
+                        <Input type="number" maxLength={10}  children="Quilometragem" id="quilometers" placeholder="30.000" register={register("quilometers", { valueAsNumber: true })}/>
                         {errors.quilometers && <span className="error">{errors.quilometers.message}</span>}
                     </div>
                     <div className="input-box">
@@ -131,19 +149,29 @@ const CreateAdvertisementModal = ( ) => {
                 </div>
                 <div>
                     <div className="input-box">
-                        <Input value={fipe} onChangeCallBack={(e)=>setFipe(e.target.value)} type="number" children="Preço tabela FIPE" id="fipePrice" placeholder="R$ 48.000,00" register={register("fipePrice")} />
+                        <Input value={fipe} onChangeCallBack={(e)=>setFipe(e.target.value)} type="number" children="Preço tabela FIPE" id="fipePrice" placeholder="R$ 48.000,00" register={register("fipePrice", { valueAsNumber: true })} />
                         {errors.fipePrice && <span className="error">{errors.fipePrice.message}</span>}
                     </div>
                     <div className="input-box">
-                        <Input type="number" children="Preço" id="price" placeholder="R$ 50.000,00" register={register("price")}/>
+                        <Input type="number" children="Preço" id="price" placeholder="R$ 50.000,00" register={register("price", { valueAsNumber: true })}/>
                         {errors.price && <span className="error">{errors.price.message}</span>}
                     </div>
                 </div>
-                <TextArea children="Descrição" id="description" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et ante ac enim porta luctus. Sed leo est, tempus ac sapien ut, rhoncus ultrices mauris. Phasellus consectetur non neque at varius." {...register("description")}/>
+                <TextArea children="Descrição" id="description" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et ante ac enim porta luctus. Sed leo est, tempus ac sapien ut, rhoncus ultrices mauris. Phasellus consectetur non neque at varius." register={register("description")}/>
                 {errors.description && <span className="error">{errors.description.message}</span>}
                 <Input children="Imagem da capa" id="coverImage" placeholder="https://image.com" register={register("coverImage")}/>
                 {errors.coverImage && <span className="error">{errors.coverImage.message}</span>}
-                <Button style="brand-opacity" type="button" onClick={()=>setImagesCounter([...imagesCounter, "image"])}>Adicionar campo para imagem da galeria</Button>   
+                {
+                    images.map((image, index) => {
+                        return(
+                            <Input onChangeCallBack={(e:ChangeEvent<HTMLInputElement>)=>addImage(e, index)}>{`${index + 1}ª`} Imagem da galeria</Input>
+                        )
+                    })
+                }
+                {
+                    images.length < 6 &&
+                    <Button style="brand-opacity" type="button" onClick={addImageInput}>Adicionar campo para imagem da galeria</Button>   
+                }
                 <div className="modal-form-buttons">
                     <Button style="negative-1" type="button" onClick={()=>setCreateAdvertModal(false)} width={30}>Cancelar</Button>
                     <Button style="brand-1" type="submit" size="big" width={50}>Criar Anúncio</Button>
