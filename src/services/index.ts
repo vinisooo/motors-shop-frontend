@@ -5,4 +5,9 @@ const api = axios.create({
   timeout: 15000,
 })
 
+export const carsApi = axios.create({
+  baseURL: "https://kenzie-kars.herokuapp.com",
+  timeout: 15000,
+})
+
 export default api

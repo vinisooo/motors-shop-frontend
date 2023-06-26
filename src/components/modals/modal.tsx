@@ -19,9 +19,7 @@ const Modal = ({children, title}: iModalProps) => {
         setResetPasswordModal(false)
         setCreateAdvertModal(false)
     }
-
-    console.log(createAdvertModal)
-
+    
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
