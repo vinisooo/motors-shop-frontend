@@ -1,10 +1,11 @@
 'use client'
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import { useState } from "react";
 import { AxiosResponse } from "axios";
 import nookies from "nookies";
 import { TAdvertisementReq, TAdvertisementRes } from "@/schemas/advertisement.schema";
 import api, { carsApi } from "@/services";
+import { ModalContext } from "./modalContext";
 
 interface iChildrenProps {
   children: React.ReactNode;
@@ -25,9 +26,10 @@ export interface iCar {
 }
 
 const CarsProvider = ({ children }: iChildrenProps) => {
-  const [cars, setCars] = useState<iCar[]>([]);
+  const [cars, setCars] = useState<iCar[]>([])
+  const {setCreateAdvertModal} = useContext(ModalContext)
 
-  const token = nookies.get()["userToken"];
+  const token = nookies.get()["userToken"]
 
   const getCarsByBrand = async (brand?: string) => {
     try {
@@ -62,7 +64,7 @@ const CarsProvider = ({ children }: iChildrenProps) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(request);
+      setCreateAdvertModal(false)
       return request;
     } catch (err: unknown) {
       console.log(err);
