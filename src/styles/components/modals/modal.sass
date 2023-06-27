@@ -15,12 +15,7 @@
     justify-content: center
 
     animation: display-modal-bg 0.3s ease
-
-    max-height: 100vh
-    overflow-y: auto
-
-    padding-top: 50px
-
+    
     .modal
         background-color: variables.$color-grey-10
 
@@ -30,9 +25,26 @@
         border-radius: 8px
 
         width: 100%
-        max-width: 520px
+        max-width: 520px 
+
+        max-height: 95vh
+        overflow-y: auto
 
         animation: display-modal 0.5s ease
+
+        &::-webkit-scrollbar 
+            width: 8px // Largura da barra de rolagem
+        
+
+        &::-webkit-scrollbar-thumb 
+            background-color: variables.$color-grey-5 // Cor do polegar da barra de rolagem
+            border-radius: 4px // Raio do canto do polegar
+        
+
+        &::-webkit-scrollbar-track 
+            background-color: variables.$color-grey-10 // Cor do track (fundo) da barra de rolagem
+            border-radius: 4px // Raio do canto do track
+        
 
         header
             display: flex

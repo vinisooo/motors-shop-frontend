@@ -3,6 +3,7 @@ import '../styles/style.sass'
 
 import ModalProvider from "@/context/modalContext"
 import { AuthProvider } from "@/context/authContext"
+import CarsProvider from "@/context/carsContext"
 
 interface iRootLayout{
   children:ReactNode
@@ -14,7 +15,9 @@ const RootLayout=({children}:iRootLayout)=>{
       <body>
         <AuthProvider>
           <ModalProvider>
-            {children}
+            <CarsProvider>
+              {children}
+            </CarsProvider>
           </ModalProvider>
         </AuthProvider>
       </body>

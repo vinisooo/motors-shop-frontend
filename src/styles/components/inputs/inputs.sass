@@ -21,6 +21,8 @@ input,textarea
     resize: none
     color: variables.$color-grey-2
 
+    font-family: variables.$default-font
+
     &:hover
         outline: variables.$color-brand-3
         border-color: variables.$color-brand-3 
@@ -29,14 +31,14 @@ input,textarea
         border-color: variables.$color-brand-2
 
 select
-    padding: 4px 30px 4px 10px
+    padding: 16px 16px
     font-size: 14px
     border: 1px solid variables.$color-grey-8
-    height: 30px
     border-radius: 4px
     -webkit-appearance: none
     -moz-appearance: none
     appearance: none
+    color: variables.$color-grey-2
     //background: url('../../../img/vector.svg') no-repeat 90%/10%
     width: 200px
     &:hover
@@ -44,4 +46,7 @@ select
         border-color: variables.$color-brand-3
     &:focus
         border-color: variables.$color-brand-1
+
+    option
+        color: variables.$color-grey-2
 
