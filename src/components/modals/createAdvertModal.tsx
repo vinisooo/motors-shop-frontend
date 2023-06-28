@@ -75,20 +75,21 @@ const CreateAdvertisementModal = ( ) => {
                 <datalist id="brands">
                     <option value="outra">Outra</option>
                     <option value="audi">Audi</option>
+                    <option value="bmw">BMW</option>
+                    <option value="citroën">Citroën</option>
                     <option value="chevrolet">Chevrolet</option>
+                    <option value="fiat">Fiat</option>
                     <option value="ford">Ford</option>
                     <option value="honda">Honda</option>
                     <option value="hyundai">Hyundai</option>
-                    <option value="nissan">Nissan</option>
-                    <option value="toyota">Toyota</option>
-                    <option value="volkswagen">Volkswagen</option>
-                    <option value="fiat">Fiat</option>
-                    <option value="peugeot">Peugeot</option>
-                    <option value="renault">Renault</option>
-                    <option value="citroën">Citroën</option>
-                    <option value="subaru">Subaru</option>
                     <option value="mazda">Mazda</option>
                     <option value="mitsubishi">Mitsubishi</option>
+                    <option value="nissan">Nissan</option>
+                    <option value="peugeot">Peugeot</option>
+                    <option value="renault">Renault</option>
+                    <option value="subaru">Subaru</option>
+                    <option value="toyota">Toyota</option>
+                    <option value="volkswagen">Volkswagen</option>
                 </datalist>
                 {errors.brand && <span className="error">{errors.brand.message}</span>}
                 <Input onClick={()=>getCarsByBrand(brand)} onChange={(e)=>getFipePrice(e)} children="Modelo" id="model" placeholder="A 200 CGI ADVANCE SEDAN" register={register("model")} list="models"/>
@@ -106,7 +107,7 @@ const CreateAdvertisementModal = ( ) => {
                 {errors.model && <span className="error">{errors.model.message}</span>}
                 <div className="div-labels">
                     <div className="input-box">
-                        <Input value={year?.toString()} onChange={(e) => setYear(Number(e.target.value))} type="number" children="Ano" id="year" placeholder="2018"  register={register("year", { valueAsNumber: true })}/>
+                        <Input value={year?.toString()} onChange={(e) => setYear(Number(e.target.value))} type="number"  min="1900" max="2099"  children="Ano" id="year" placeholder="2018"  register={register("year", { valueAsNumber: true })}/>
                         {errors.year && <span className="error">{errors.year.message}</span>}
                     </div>
                     <div className="input-box">
@@ -123,7 +124,7 @@ const CreateAdvertisementModal = ( ) => {
                 </div>
                 <div>
                     <div className="input-box">
-                        <Input type="number" maxLength={10}  children="Quilometragem" id="quilometers" placeholder="30.000" register={register("quilometers", { valueAsNumber: true })}/>
+                        <Input type="number" maxLength={10} min={0}  children="Quilometragem" id="quilometers" placeholder="30.000" register={register("quilometers", { valueAsNumber: true })}/>
                         {errors.quilometers && <span className="error">{errors.quilometers.message}</span>}
                     </div>
                     <div className="input-box">
@@ -145,11 +146,11 @@ const CreateAdvertisementModal = ( ) => {
                 </div>
                 <div>
                     <div className="input-box">
-                        <Input value={fipe?.toString()} onChange={(e)=>setFipe(Number(e.target.value))} type="number" children="Preço tabela FIPE" id="fipePrice" placeholder="R$ 48.000,00" register={register("fipePrice", { valueAsNumber: true })} />
+                        <Input value={fipe?.toString()} onChange={(e)=>setFipe(Number(e.target.value))} min={0} type="number" children="Preço tabela FIPE" id="fipePrice" placeholder="R$ 48.000,00" register={register("fipePrice", { valueAsNumber: true })} />
                         {errors.fipePrice && <span className="error">{errors.fipePrice.message}</span>}
                     </div>
                     <div className="input-box">
-                        <Input type="number" children="Preço" id="price" placeholder="R$ 50.000,00" register={register("price", { valueAsNumber: true })}/>
+                        <Input type="number" children="Preço" id="price" placeholder="R$ 50.000,00" min={0} register={register("price", { valueAsNumber: true })}/>
                         {errors.price && <span className="error">{errors.price.message}</span>}
                     </div>
                 </div>

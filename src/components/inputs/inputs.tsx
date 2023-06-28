@@ -1,10 +1,6 @@
-import { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from "react"
-
 interface iInput extends React.InputHTMLAttributes<HTMLInputElement>{
     children?:React.ReactNode
-    placeholder?:string
     register?: object
-    list?: string
 }
 
 interface iTextArea extends React.TextareaHTMLAttributes<HTMLTextAreaElement>{
@@ -18,11 +14,11 @@ interface iSelect extends React.SelectHTMLAttributes<HTMLSelectElement>{
     register?: object
 }
 
-const Input=({children,register, list, ...props}:iInput)=>{
+const Input=({children,register, ...props}:iInput)=>{
     return(
         <div className="label">
             <label htmlFor={ props.id}>{children}</label>
-            <input {...register}  list={list} {...props}/>
+            <input {...register}  {...props}/>
         </div>
     )
 }
