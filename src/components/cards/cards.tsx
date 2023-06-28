@@ -8,15 +8,16 @@ import Elipsis from '../tags/elipse'
 
 interface props{
     car: TCar,
-    user: TUser,
+    user?: TUser,
     advertisement?: "ative" | "inative" | "cash"
-    userId?:string
+    anunciant:TUser
 }
 
 
-const Cards=({car,advertisement="ative", user,userId}:props)=>{
+const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
 
-    const owern= userId==user.id
+
+    const owern= anunciant.id==user?.id
 
     const{brand,year,price,color,coverImage:img,model,quilometers:km,description,isAvailable,fuel}=car
 
@@ -40,7 +41,7 @@ const Cards=({car,advertisement="ative", user,userId}:props)=>{
                 <p>{description}</p>
                 {
                     !owern &&
-                    <Elipsis className={user.id} name={user.name}/>
+                    <Elipsis className={anunciant.id} name={anunciant.name}/>
                 }
                 <div className="product-infos">
                     <div className="km-year">

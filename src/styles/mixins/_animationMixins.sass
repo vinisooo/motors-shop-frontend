@@ -1,0 +1,17 @@
+@keyframes pulse 
+    0% 
+        filter: brightness(40%)
+    100% 
+        filter: brightness(100%)
+
+
+@mixin animatePulse
+    animation: pulse 0.7s infinite
+    animation-direction: alternate
+
+
+@mixin animateFilter
+    animation: pulse 0.8 infinite
+    animation-direction: alternate
+
+    
