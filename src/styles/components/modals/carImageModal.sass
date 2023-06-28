@@ -1,0 +1,41 @@
+@use '../../_variables'
+
+.figure-modal
+    height: 85%
+    width: 100%
+
+    display: flex
+    flex-direction: columns
+    align-items: center
+
+    position: relative
+
+    overflow: hidden
+    border-radius: 4px
+
+    background-color: variables.$color-grey-6
+
+    cursor: grab
+
+    img
+        width: 100%
+        height: 100%
+        object-fit: cover
+
+    .tools
+        position: absolute
+        top: 20px
+        left: 20px
+        z-index: 21
+
+        display: flex
+        align-items: center
+        gap: 7px
+
+        button
+            font-weight: 800
+            padding: 10px 20px
+    
+.car-image-modal
+    height: 70vh
+    max-width: 1000px !important

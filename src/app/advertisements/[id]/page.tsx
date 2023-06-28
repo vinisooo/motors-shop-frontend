@@ -4,6 +4,8 @@ import { cache } from "react"
 import "../../../styles/pages/advertisement/advertisement.sass"
 import HeaderProfile from "@/components/headerProfile/header"
 import AdvertisementInfo from "@/components/advertisementInfo/advertisementInfo"
+import Footer from "@/components/footer/footer"
+import CarImageModal from "@/components/modals/carImageModal"
 
 export const getAdvertisement = cache(async (id: string) => {
     try{
@@ -19,13 +21,15 @@ const Advertisement = async({params}: {params:{id: string}}) => {
     const advertisement: TAdvertisementRes = await getAdvertisement(params.id)
 
     return(
-        <div className="darker-bg">
-            <HeaderProfile/>
-            <div className="advertisement-header"/>
-            <main className="container">
-                <AdvertisementInfo advertisement={advertisement}/>
-            </main>
-        </div>
+            <div className="darker-bg">
+                <HeaderProfile/>
+                <div className="advertisement-header"/>
+                <main className="container">
+                    <AdvertisementInfo advertisement={advertisement}/>
+                </main>
+                <CarImageModal/>
+                <Footer/>
+            </div>
     )
 }
 

@@ -9,16 +9,18 @@ import Button from "../button/button";
 interface iModalProps{
     children?: React.ReactNode;
     title?: string;
+    className?: string
 }
 
-const Modal = ({children, title}: iModalProps) => {
+const Modal = ({children, title, className}: iModalProps) => {
     const modalRef = useRef<HTMLDivElement>(null);
 
-    const { setResetPasswordModal, setCreateAdvertModal, createAdvertModal } = useContext(ModalContext)
+    const { setResetPasswordModal, setCreateAdvertModal, createAdvertModal, setCarImageModal } = useContext(ModalContext)
 
     const closeModal = () => {
         setResetPasswordModal(false)
         setCreateAdvertModal(false)
+        setCarImageModal(false)
     }
     
     useEffect(() => {
@@ -36,7 +38,7 @@ const Modal = ({children, title}: iModalProps) => {
 
     return(
         <div className="modal-bg">
-            <div ref={modalRef} className="modal">
+            <div ref={modalRef} className={`modal ${className}`}>
                 <header>
                     <h2>{title}</h2>
                     <Button onClick={closeModal}>
