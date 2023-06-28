@@ -1,5 +1,5 @@
 'use client'
-import {MouseEventHandler, ReactNode} from "react"
+import {Children, MouseEventHandler, ReactNode} from "react"
 import '../../styles/components/button/button.sass'
 
 enum buttonSize{
@@ -52,7 +52,14 @@ type tTypes=
 "confirm"|
 "sucess"
 
-interface iButton{
+interface IButton extends React.ButtonHTMLAttributes<HTMLButtonElement>{
+    children: ReactNode
+    size?: tSizeButton
+    Style?:  tTypes
+    width?: number
+}
+
+interface iButton  {
     children: ReactNode
     onClick?: MouseEventHandler<HTMLButtonElement>
     style?: tTypes
@@ -63,9 +70,9 @@ interface iButton{
     className?: string
 }
 
-const Button=({children,style,onClick,size,type="submit",id, width,className:name}:iButton):React.JSX.Element=>{
+const Button=({children,Style,size,width, ...props}:IButton):React.JSX.Element=>{
 
-    let className= name ? name : ''
+    let className= props.className ? props.className : ''
 
     switch(size){
         case "big":
@@ -92,7 +99,7 @@ const Button=({children,style,onClick,size,type="submit",id, width,className:nam
             className= className
     }
 
-    switch(style){
+    switch(Style){
         case "grey-1":
             className= className + buttonType.GREY1
             break
@@ -146,11 +153,14 @@ const Button=({children,style,onClick,size,type="submit",id, width,className:nam
     }
 
     return(
-        <button type={type} onClick={onClick} id={id} className={className}>
+        <button {...props} className={className}>
             {children}
         </button>
 
     )
 }
+
+
+import React from 'react';
 
 export default Button

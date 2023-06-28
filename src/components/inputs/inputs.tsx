@@ -1,57 +1,47 @@
 import { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from "react"
 
-interface iInput{
+interface iInput extends React.InputHTMLAttributes<HTMLInputElement>{
     children?:React.ReactNode
     placeholder?:string
-    id?:string
-    type?: "text" | "number" | "email" | "password" | "select" | "radio" 
     register?: object
     list?: string
-    value?: string
-    onChangeCallBack?: (e:ChangeEvent<HTMLInputElement>)=> void | any
-    onClickCallBack?: ()=> void | any
-    maxLength?: number
 }
 
-interface iTextArea{
+interface iTextArea extends React.TextareaHTMLAttributes<HTMLTextAreaElement>{
     children?:React.ReactNode
-    placeholder?:string
-    id?:string
     register?:object
 }
 
-interface iSelect{
+interface iSelect extends React.SelectHTMLAttributes<HTMLSelectElement>{
     children?:React.ReactNode
-    placeholder?:string
-    id:string
     label?: string
     register?: object
 }
 
-const Input=({children,id,placeholder,type='text', register, list, value, onChangeCallBack, onClickCallBack, maxLength}:iInput)=>{
+const Input=({children,register, list, ...props}:iInput)=>{
     return(
         <div className="label">
-            <label htmlFor={ id}>{children}</label>
-            <input {...register} value={value} onChange={onChangeCallBack} onClick={onClickCallBack} id={id} type={type} placeholder={placeholder} list={list} maxLength={maxLength}/>
+            <label htmlFor={ props.id}>{children}</label>
+            <input {...register}  list={list} {...props}/>
         </div>
     )
 }
 
-const TextArea=({ children,id,placeholder,register}:iTextArea)=>{
+const TextArea=({ children,register, ...props}:iTextArea)=>{
 
     return(
         <div className="label">
-            <label htmlFor={id}>{children}</label>
-            <textarea name={id} id={id} cols={50} rows={10} placeholder={placeholder} {...register}></textarea>
+            <label htmlFor={props.id}>{children}</label>
+            <textarea name={props.id}  cols={50} rows={10} {...props} {...register}></textarea>
         </div>
     )
 }
 
-const Select=({label,children,id,placeholder, register}:iSelect)=>{
+const Select=({label,children, register, ...props}:iSelect)=>{
     return(
         <div className="label">
-            <label htmlFor={id}>{label}</label>
-            <select {...register} defaultValue={placeholder}> 
+            <label htmlFor={props.id}>{label}</label>
+            <select {...register} defaultValue={props.placeholder}> 
                 {children}
             </select>
         </div>

@@ -1,17 +1,14 @@
 "use client"
-import { ChangeEvent, EventHandler, useContext, useState } from "react"
-import { createPortal } from "react-dom"
+import { ChangeEvent, useContext, useState } from "react"
 import { Input, Select, TextArea } from "../inputs/inputs"
 import "../../styles/components/modals/createAdvertisementModal.sass"
-import { useEffect, useRef } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { CreateAnnouncementData, CreateAnnouncementSchema } from "./validator"
 import { TAdvertisementReq, advertisementReqSchema } from "@/schemas/advertisement.schema"
 import Modal from "./modal"
 import Button from "../button/button"
 import { ModalContext } from "@/context/modalContext"
-import { CarsContext, iCar } from "@/context/carsContext"
+import { CarsContext} from "@/context/carsContext"
 
 
 const CreateAdvertisementModal = ( ) => {
@@ -74,7 +71,7 @@ const CreateAdvertisementModal = ( ) => {
         <Modal title="Cadastro de veículo">
             <form className="modal-form" onSubmit={handleSubmit(onSubmitAd)}>
                 <h2>Informações do veículo</h2>
-                <Input value={brand} onChangeCallBack={(e) => setBrand(e.target.value)} children="Marca" id="model" placeholder="Marca do Veículo" register={register("brand")} list="brands"/>
+                <Input value={brand} onChange={(e) => setBrand(e.target.value)} children="Marca" id="model" placeholder="Marca do Veículo" register={register("brand")} list="brands"/>
                 <datalist id="brands">
                     <option value="outra">Outra</option>
                     <option value="audi">Audi</option>
@@ -94,7 +91,7 @@ const CreateAdvertisementModal = ( ) => {
                     <option value="mitsubishi">Mitsubishi</option>
                 </datalist>
                 {errors.brand && <span className="error">{errors.brand.message}</span>}
-                <Input onClickCallBack={()=>getCarsByBrand(brand)} onChangeCallBack={(e)=>getFipePrice(e)} children="Modelo" id="model" placeholder="A 200 CGI ADVANCE SEDAN" register={register("model")} list="models"/>
+                <Input onClick={()=>getCarsByBrand(brand)} onChange={(e)=>getFipePrice(e)} children="Modelo" id="model" placeholder="A 200 CGI ADVANCE SEDAN" register={register("model")} list="models"/>
                 <datalist id="models">
                     {
                         cars?.map((car) => {
@@ -109,7 +106,7 @@ const CreateAdvertisementModal = ( ) => {
                 {errors.model && <span className="error">{errors.model.message}</span>}
                 <div className="div-labels">
                     <div className="input-box">
-                        <Input value={year?.toString()} onChangeCallBack={(e) => setYear(Number(e.target.value))} type="number" children="Ano" id="year" placeholder="2018" register={register("year", { valueAsNumber: true })}/>
+                        <Input value={year?.toString()} onChange={(e) => setYear(Number(e.target.value))} type="number" children="Ano" id="year" placeholder="2018"  register={register("year", { valueAsNumber: true })}/>
                         {errors.year && <span className="error">{errors.year.message}</span>}
                     </div>
                     <div className="input-box">
@@ -148,7 +145,7 @@ const CreateAdvertisementModal = ( ) => {
                 </div>
                 <div>
                     <div className="input-box">
-                        <Input value={fipe?.toString()} onChangeCallBack={(e)=>setFipe(Number(e.target.value))} type="number" children="Preço tabela FIPE" id="fipePrice" placeholder="R$ 48.000,00" register={register("fipePrice", { valueAsNumber: true })} />
+                        <Input value={fipe?.toString()} onChange={(e)=>setFipe(Number(e.target.value))} type="number" children="Preço tabela FIPE" id="fipePrice" placeholder="R$ 48.000,00" register={register("fipePrice", { valueAsNumber: true })} />
                         {errors.fipePrice && <span className="error">{errors.fipePrice.message}</span>}
                     </div>
                     <div className="input-box">
@@ -163,17 +160,17 @@ const CreateAdvertisementModal = ( ) => {
                 {
                     images.map((image, index) => {
                         return(
-                            <Input onChangeCallBack={(e:ChangeEvent<HTMLInputElement>)=>addImage(e, index)}>{`${index + 1}ª`} Imagem da galeria</Input>
+                            <Input onChange={(e:ChangeEvent<HTMLInputElement>)=>addImage(e, index)}>{`${index + 1}ª`} Imagem da galeria</Input>
                         )
                     })
                 }
                 {
                     images.length < 6 &&
-                    <Button style="brand-opacity" type="button" onClick={addImageInput}>Adicionar campo para imagem da galeria</Button>   
+                    <Button Style="brand-opacity" type="button" onClick={addImageInput}>Adicionar campo para imagem da galeria</Button>   
                 }
                 <div className="modal-form-buttons">
-                    <Button style="negative-1" type="button" onClick={()=>setCreateAdvertModal(false)} width={30}>Cancelar</Button>
-                    <Button style="brand-1" type="submit" size="big" width={50}>Criar Anúncio</Button>
+                    <Button Style="negative-1" type="button" onClick={()=>setCreateAdvertModal(false)} width={30}>Cancelar</Button>
+                    <Button Style="brand-1" type="submit" size="big" width={50}>Criar Anúncio</Button>
                 </div>
             </form>
         </Modal>

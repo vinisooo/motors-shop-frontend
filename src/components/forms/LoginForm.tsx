@@ -61,8 +61,8 @@ const LoginForm = () => {
                 <h3>
                     Ainda não possui conta?
                 </h3>
-                <Link href={"/"}>
-                    <Button type="submit" style="outline-2">
+                <Link href={"/register"}>
+                    <Button type="submit" Style="outline-2">
                         Cadastrar
                     </Button>
                 </Link>

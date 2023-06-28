@@ -53,8 +53,8 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
                 {
                     owern &&
                     <div className='buttons'>
-                        <Button onClick={editar} style={'outline-brand-1'} size={'medium'}>Editar</Button>
-                        <Button onClick={detalhes} style={'outline-brand-1'} size={'medium'}>Ver Detalhes</Button>
+                        <Button onClick={editar} Style={'outline-brand-1'} size={'medium'}>Editar</Button>
+                        <Button onClick={detalhes} Style={'outline-brand-1'} size={'medium'}>Ver Detalhes</Button>
                     </div>
                 }
             </div>
