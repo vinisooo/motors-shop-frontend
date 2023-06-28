@@ -8,10 +8,10 @@ import Link from "next/link"
 import PageCard from "../pageCard/pageCard"
 import Elipsis from "../tags/elipse"
 import { ModalContext } from "@/context/modalContext"
-import CarImageModal from "../modals/carImageModal"
+import Autoplay from 'embla-carousel-autoplay'
 
 const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) => {
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({delay: 2500})])
     const {carImageModal, setCarImageModal} = useContext(ModalContext)
 
     const {setCarImage} = useContext(ModalContext)
@@ -48,7 +48,7 @@ const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) =>
                                     images.map((img, index) => {
                                         return(
                                             <img src={img} key={index} className="embla__slide"/>
-                                        )
+                                            )
                                     })
                                 }
                             </figure>
