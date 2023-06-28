@@ -53,7 +53,7 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
                         <Tag>{Number(km)}KM</Tag>
                         <Tag>{year}</Tag>
                     </div>
-                    <span>RS:{price}</span>
+                    <span>R${Number(price).toFixed(0)}</span>
                 </div>
                 {
                     owern &&

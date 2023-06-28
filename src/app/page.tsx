@@ -5,11 +5,9 @@ import "../styles/pages/home/home.sass"
 import { iFilterListProps } from "@/components/filterList/FilterList"
 import { cookies } from "next/headers"
 import HeaderProfile from "@/components/headerProfile/header"
-import { FilterLoading } from "@/components/loadings/filterLoading/filterLoading" 
 import { Suspense } from "react"
 import CarsHome from "@/components/cardsList/carsHome"
 import { HomePageLoading } from "@/components/loadings/homePageLoading/homePageLoading"
-import Button from "@/components/button/button"
 
 const getUser=()=>{
   const userToken=cookies().get('userToken')
