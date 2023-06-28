@@ -17,7 +17,6 @@ const getUserToken=async()=>{
 
 const HeaderProfile = async() => {
     const user=await getUserToken()
-    console.log(user)
 
     return(
         <div className="main-header">

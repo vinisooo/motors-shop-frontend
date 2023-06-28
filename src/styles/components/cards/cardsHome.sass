@@ -1,0 +1,53 @@
+@use '../../variables'
+
+.cars
+    width: 100%
+
+    display: flex
+    justify-content: space-between
+    align-items: flex-start
+
+    &-page
+        display: flex
+        width: 100%
+        flex-direction: column
+        justify-content: center
+        align-items: center
+
+    &-list
+        display: flex
+        gap: 25px
+
+        width: 100%
+
+        overflow-x: scroll
+        justify-content: flex-start
+
+        padding: 20px
+        margin-bottom: 30px
+    
+    .w80
+        margin: 30px 0
+
+    nav
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100%
+
+        font-weight: 600
+        font-size: 1.5rem
+
+        p
+            margin: 20px
+            color: variables.$color-grey-4
+
+            span
+                color: variables.$color-grey-2
+
+        a
+            color: variables.$color-brand-2
+            &:hover
+                color: variables.$color-brand-1
+                font-weight: 700
+    

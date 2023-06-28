@@ -1,4 +1,4 @@
-import "../../styles/pages/Loading/loading.sass"
+import "../../../styles/components/loadings/loading/loading.sass"
 
 const LoadingPage = () => {
     return(
