@@ -2,98 +2,35 @@ import Footer from "@/components/footer/footer"
 import Header from "@/components/header/header"
 import HomeHeader from "@/components/homeHeader/HomeHeader"
 import "../styles/pages/home/home.sass"
-import FilterList from "@/components/filterList/FilterList"
-import Link from "next/link"
-
 import { iFilterListProps } from "@/components/filterList/FilterList"
-import { iFilters } from "@/components/filterList/FilterList"
+import { cookies } from "next/headers"
+import HeaderProfile from "@/components/headerProfile/header"
+import { FilterLoading } from "@/components/loadings/filterLoading/filterLoading" 
+import { Suspense } from "react"
+import CarsHome from "@/components/cardsList/carsHome"
+import { HomePageLoading } from "@/components/loadings/homePageLoading/homePageLoading"
+import Button from "@/components/button/button"
 
-import FilterButton from "@/components/filterButton/filterButton"
-import { TAdvertisementRes, iPaginatedAdverts } from "@/schemas/advertisement.schema"
-import { Car } from "@/schemas/advertsSchema"
-import { Cards } from "@/components/cards/cards"
-
-const getAdvertisements = async(searchParams: iFilters) => {
-  let params: URLSearchParams | string = new URLSearchParams();
-
-  for (const key in searchParams) {
-    if (searchParams.hasOwnProperty(key) && searchParams[key] !== undefined) {
-      params.append(key, searchParams[key]!);
-    }
-  }
-  try{
-    const advertisements = await fetch(`http://localhost:3001/adverts/?perPage=12&${params}`, {
-      next: {
-        revalidate: 20
-      }
-    })
-    return await advertisements.json()
-
-  }catch(err: unknown){
-    console.log(err)
-  }
+const getUser=()=>{
+  const userToken=cookies().get('userToken')
+  return userToken
 }
-
-const getNotPaginated = async() => {
-  try{
-    const notPaginatedAdverts = await fetch(`http://localhost:3001/adverts/?perPage=999`, {
-      next: {
-        revalidate: 60
-      }
-    })
-
-    return await notPaginatedAdverts.json()
-  }catch(err: unknown){
-    console.log(err)
-  }
-}
-
 
 const Home = async({searchParams}: iFilterListProps) => {
-  const advertisements = await getAdvertisements(searchParams)
-  const notPaginatedAdverts: TAdvertisementRes[] = await getNotPaginated()
+  const userToken=getUser()
 
   return (
     <>
-      <Header/>
+      {
+        !userToken ?
+        <Header/> : <HeaderProfile/>
+      }
       <main>
       <HomeHeader/>
       <section className="cars-section">
-        <FilterList searchParams={searchParams} advertisements={notPaginatedAdverts}/>
-        <div className="cars-page">
-          <div className="cars-list">
-            {
-              advertisements?.count > 0 &&
-              advertisements?.adverts.map((ad: TAdvertisementRes) => {
-                return(
-                  <Cards key={ad.id} car={ Car.parse(ad)} user={ad.user} userId={''}/>
-                )
-              })
-            }
-          </div>
-          <FilterButton/>
-          <nav>
-            {
-              advertisements?.prev !== null &&
-              <Link href={{
-                query: {
-                  ...searchParams,
-                  page: advertisements?.prev ? advertisements?.prev[advertisements?.prev.length - 1] : ""
-                }
-              }}>{"<"} Anterior</Link>
-            }
-            <p> <span>{searchParams?.page ? searchParams?.page : "1"}</span> de {advertisements?.maxPage} </p>
-            {
-              advertisements?.next !== null &&
-              <Link href={{
-                query: {
-                  ...searchParams,
-                  page: advertisements?.next ? advertisements?.next[advertisements?.next.length - 1] : ""
-                }
-              }}>Seguinte {">"}</Link>
-            }
-          </nav>
-        </div>
+        <Suspense fallback={<HomePageLoading/>}>
+          <CarsHome searchParams={searchParams}/>
+        </Suspense>
       </section>
       </main>
       <Footer/>

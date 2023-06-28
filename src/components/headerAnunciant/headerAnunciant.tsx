@@ -25,7 +25,7 @@ const HeaderAnunciant=({anunciant,profile}:{anunciant:TUser,profile:TUser})=>{
                     </div> 
                     <p className="description">{anunciant.description}</p>
                     {
-                        profile.id==anunciant.id && profile.isAdvertiser && <Button style={'outline-brand-1'} onClick={()=> setCreateAdvertModal(true)}>Criar anúncio</Button>        
+                        profile.id==anunciant.id && profile.isAdvertiser && <Button Style={'outline-brand-1'} onClick={()=> setCreateAdvertModal(true)}>Criar anúncio</Button>        
                     }
                 </div>
             </section>

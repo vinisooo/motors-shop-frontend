@@ -32,7 +32,6 @@ export interface iFilterListProps {
     advertisements: TAdvertisementRes[]
 }
 
-
 const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
     const {filterDropdown, setFilterDropdown} = useContext(ModalContext)
     const router=useRouter()

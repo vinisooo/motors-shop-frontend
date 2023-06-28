@@ -1,0 +1,78 @@
+@use '../../../variables'
+@use '../../../mixins/mixins'
+
+#loading
+    max-width: 312px
+    display: flex
+    flex-direction: column
+    gap:15px
+    @include mixins.animatePulse
+
+    .product
+        &-img
+            height: 150px
+            width: 300px
+            background-color: transparentize(variables.$color-brand-2,0.5 )
+            svg
+                color: variables.$color-grey-4
+                height: 150px
+                width: 300px
+                object-fit: fill
+        
+        &-infos
+            display: flex
+            flex-direction: column
+            justify-content: flex-start
+            align-items: flex-start
+            gap: 15px
+
+            &-name
+                border-radius: 15px
+                width: 150px
+                height: 15px
+                background-color: transparentize(variables.$color-brand-2,0.5 )
+            
+            &-description
+                border-radius: 8px
+                height: 45px
+                width: 300px
+                background-color: transparentize(variables.$color-brand-2,0.5 )
+            
+            &-advertiser
+                display: flex
+                gap: 18px
+                align-items: center
+
+                &-elipse
+                    border-radius: 50%
+                    height: 40px
+                    width: 40px
+                    background-color: transparentize(variables.$color-brand-2,0.5 )
+                
+                &-name
+                    border-radius: 8px
+                    height: 15px
+                    width: 150px
+                    background-color: transparentize(variables.$color-brand-2,0.5 )
+
+            &-details
+                display: flex
+                justify-content: space-between
+                width: 100%
+
+                &-km, &-year
+                    height: 15px
+                    width: 25px
+                    background-color: transparentize(variables.$color-brand-2,0.5 )
+
+                &-value
+                    height: 15px
+                    width: 150px
+                    background-color: transparentize(variables.$color-brand-2,0.5 )
+
+                    
+.cars-list
+    display: flex
+    flex-wrap: wrap
+    gap: 15px
+                

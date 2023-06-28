@@ -81,7 +81,7 @@ export const AuthProvider = ({children}: TProviderProps) => {
             if (callback) {
                 callback()
             }
-            router.push("/user")
+            router.push("/")
       } catch (err) {
             if (axios.isAxiosError(err)) {
                 if (err.response) {
