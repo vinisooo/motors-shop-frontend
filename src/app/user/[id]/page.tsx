@@ -43,7 +43,7 @@ const Profile = async({params}:{params:any}) =>{
     return ( 
         <>
             <header>
-                <HeaderProfile name={"profile.name"}/>
+                <HeaderProfile/>
                 <HeaderAnunciant anunciant={anunciant} profile={anunciant}/>
             </header>
             <main>
