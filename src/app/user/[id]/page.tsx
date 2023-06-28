@@ -24,7 +24,7 @@ const Profile = async({params}:{params:any}) =>{
         <>
             <h1>ops</h1>
             <header>
-                <HeaderProfile name={"profile.name"}/>
+                <HeaderProfile/>
                 <HeaderAnunciant anunciant={anunciant} profile={anunciant}/>
             </header>
             <main>

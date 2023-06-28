@@ -1,0 +1,95 @@
+"use client"
+import { TAdvertisementRes } from "@/schemas/advertisement.schema"
+import { Tag } from "../tags/tags"
+import Button from "../button/button"
+import useEmblaCarousel from 'embla-carousel-react'
+import { useEffect } from "react"
+import Link from "next/link"
+import PageCard from "../pageCard/pageCard"
+import Elipsis from "../tags/elipse"
+
+const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) => {
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
+
+    useEffect(() => {
+        if (emblaApi) {
+            console.log(emblaApi.slideNodes()) // Access API
+        }
+    }, [emblaApi])
+
+    let images = [advertisement.coverImage]
+    
+    if(advertisement.galleryAdvertisement){
+        const galleryImages = advertisement.galleryAdvertisement.map((img) => {
+            return img.imageUrl
+        })
+        images = [...images, ...galleryImages]
+    }
+
+    return(
+        <section>
+            <PageCard className="cover-image">
+                <div className="embla" ref={emblaRef}>
+                    <div className="embla__container">
+                        {
+                            images.map((img, index) => {
+                                return(
+                                    <img src={img} key={index} className="embla__slide"/>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+            </PageCard>
+            <PageCard className="advert-description">
+                <h1>{advertisement.brand}</h1>
+                <div>
+                    <div className="year-km">
+                        <Tag>{advertisement.year}</Tag>
+                        <Tag>{advertisement.quilometers} KM</Tag>
+                    </div>
+                    <h3>R$ {advertisement.price}</h3>
+                </div>
+                <Button>
+                    <Link target="_blank" href={`http://api.whatsapp.com/send?1=pt_BR&phone=55${advertisement.user.phone}`}>Comprar</Link>
+                </Button>
+            </PageCard>
+            {
+                advertisement.description &&
+                <PageCard className="advert-description">
+                    <header>
+                        <h4>Descrição</h4>
+                    </header>
+                    <p>{advertisement.description}</p>
+                </PageCard>
+            }
+            <PageCard>
+                <header>
+                    <h4>
+                        Fotos
+                    </h4>
+                    <ul className="car-pics">
+                        {
+                            images.map((img, index) => {
+                                return (
+                                    <li key={index}>
+                                        <figure className="car-pic">
+                                            <img src={img}/>
+                                        </figure>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                </header>
+            </PageCard>
+            <PageCard className="advert-owner">
+                <Elipsis name={advertisement.user.name}></Elipsis>
+                <p className="user-description">{advertisement.user.description}</p>
+                <Button>Ver todos anúncios</Button>
+            </PageCard>
+        </section>
+    )
+}
+
+export default AdvertisementInfo
