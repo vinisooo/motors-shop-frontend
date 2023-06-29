@@ -5,7 +5,13 @@ interface iInput extends React.InputHTMLAttributes<HTMLInputElement>{
 
 interface iTextArea extends React.TextareaHTMLAttributes<HTMLTextAreaElement>{
     children?:React.ReactNode
-    register?:object
+    register?:object,
+    size?:{
+        heigth?:number
+        heigthType?:string
+        width?:number
+        widthType?:string
+    }
 }
 
 interface iSelect extends React.SelectHTMLAttributes<HTMLSelectElement>{
@@ -23,12 +29,12 @@ const Input=({children,register, ...props}:iInput)=>{
     )
 }
 
-const TextArea=({ children,register, ...props}:iTextArea)=>{
+const TextArea=({ children,size,register, ...props}:iTextArea)=>{
 
     return(
         <div className="label">
             <label htmlFor={props.id}>{children}</label>
-            <textarea name={props.id}  cols={50} rows={10} {...props} {...register}></textarea>
+            <textarea name={props.id}  cols={props.cols || 50} rows={props.rows || 10} {...props} {...register}></textarea>
         </div>
     )
 }

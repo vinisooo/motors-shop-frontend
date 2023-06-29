@@ -8,6 +8,7 @@ import { TResetPasswordEmailReq, TResetPasswordReq } from "@/schemas/users.schem
 import axios,{ AxiosResponse } from "axios"
 
 import { SetStateAction } from "react";
+import { TCommentReqSchema } from "@/schemas/comment.schema";
 
 export interface IAuthContext {
   registerUser: (data: TValidationSchema) => Promise<void>
@@ -23,6 +24,7 @@ export interface IAuthContext {
   setLoading: React.Dispatch<SetStateAction<boolean>>
   sendResetPasswordEmail: (data: TResetPasswordEmailReq) => Promise<AxiosResponse<any, any> | undefined>
   resetPassword: (data: TResetPasswordReq, token: string) => Promise<AxiosResponse<any, any> | undefined>
+  createComment:(data:TCommentReqSchema)=>void
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext)
@@ -67,6 +69,11 @@ export const AuthProvider = ({children}: TProviderProps) => {
         } catch (err) {
             console.error(err)
         }
+    }
+
+    const getUserToken=()=>{
+        const {userToken}=parseCookies()
+        return userToken
     }
 
     const login = async (dataLogin: TLoginReq, callback: () => void) => {
@@ -141,6 +148,23 @@ export const AuthProvider = ({children}: TProviderProps) => {
         }
     }
     
+    const createComment=(data:TCommentReqSchema)=>{
+
+        const token=getUserToken()
+        const {postId,comment}=data
+        
+        try{
+            const response=api.post(`/comments/${postId}`,{comment},{
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            })
+        }catch (err) {
+            console.error(err)
+        }
+    }
+
     return (
         <AuthContext.Provider 
             value={{
@@ -156,7 +180,8 @@ export const AuthProvider = ({children}: TProviderProps) => {
                 setExistantUser,
                 setLoading,
                 sendResetPasswordEmail,
-                resetPassword
+                resetPassword,
+                createComment
             }}
         >
             {children}

@@ -39,10 +39,13 @@ button
     &:hover
         background-color: variables.$color-grey-5
 
-.disabled
+.disabled, button:disabled
     background-color: variables.$color-grey-5
     border: variables.$color-grey-5
     color: variables.$color-white-fixed
+    &:hover
+        background-color: variables.$color-grey-5
+        color: variables.$color-white-fixed
 
 .brand-1
     background-color: variables.$color-brand-1

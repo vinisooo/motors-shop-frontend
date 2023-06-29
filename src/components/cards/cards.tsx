@@ -6,6 +6,7 @@ import Button from '../button/button'
 import { TUser } from '@/schemas/userSchema'
 import Elipsis from '../tags/elipse'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 interface props{
     car: TCar,
@@ -17,7 +18,7 @@ interface props{
 
 const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
 
-
+    const router=useRouter()
     const owern= anunciant.id==user?.id
 
     const{brand,year,price,color,coverImage:img,model,quilometers:km,description,isAvailable,fuel, id}=car
@@ -27,7 +28,7 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
     }
 
     const detalhes=()=>{
-        console.log('detalhes')
+        router.push('/advertisements/b084d3ac-48d3-4028-8323-ac6d5f8924b7')
     }
 
     return(
