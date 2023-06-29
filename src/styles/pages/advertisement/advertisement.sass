@@ -1,0 +1,168 @@
+@use '../../_variables'
+
+.advertisement-header
+    width: 100vw
+    height: 80vw
+    max-height: 500px
+
+    position: absolute
+    top: 0
+
+    background-color: variables.$color-brand-1
+
+.container
+    position: relative
+    top: 150px
+    margin-bottom: 200px
+
+    p
+        font-size: 16px
+        font-weight: 400
+        line-height: 150%
+
+        color: variables.$color-grey-2
+
+    a
+        padding: 15px 20px
+        width: 100%
+        height: 100%
+        text-decoration: none
+        color: variables.$color-grey-10
+
+    .embla__container
+        cursor: grab
+
+    h2,h4
+        color: variables.$color-grey-1
+        font-family: variables.$heading-font
+    h4
+
+        font-size: 20px
+        font-weight: 600
+    
+        margin-bottom: 30px
+
+
+    .cover-image
+        width: 100%
+        height: 400px
+        
+        padding: 10px
+
+        display: flex
+        align-items: center
+        justify-content: center
+
+        figure
+            width: 100%
+            height: 100%
+
+        div, img
+            object-fit: cover
+            width: 100%
+            height: 100%
+    
+    .advert-description
+        h1
+            font-size: 2rem
+            font-weight: 600
+            font-family: variables.$heading-font
+
+            color: variables.$color-grey-1
+
+            margin-bottom: 50px
+
+        > div
+            width: 100%
+            display: flex
+            justify-content: space-between
+            align-items: center
+            h3
+                font-size: 16px
+                font-weight: 500
+
+            .year-km
+                display: flex
+                gap: 10px
+
+                align-items: center
+        button
+            margin-top: 30px
+            cursor: default
+            padding: 0
+    .car-pics
+        display: flex
+        align-items: center
+        flex-wrap: wrap
+        gap: 20px
+
+        list-style: none
+
+        li
+            cursor: pointer
+    
+        .car-pic
+            width: 108px
+            height: 108px
+
+            overflow: hidden
+
+            display: flex
+            align-items: center
+            justify-content: center
+
+            background-color: variables.$color-grey-4
+            border-radius: 4px
+
+            img
+                width: 100%
+                height: 100%
+                object-fit: cover
+
+    .advert-owner
+        display: flex
+        flex-direction: column
+        align-items: center
+
+        >p
+            margin: 30px
+
+        button
+            padding: 0
+            background-color: variables.$color-grey-1 
+
+        .user-description
+            margin-bottom: 30px
+            
+        .elipsis
+            width: 104px
+            height: 104px
+
+            p
+                font-size: 3.5rem
+
+        .div-elipsis
+            display:flex
+            flex-direction: column
+
+            >p
+                font-family: variables.$heading-font
+                font-size: 20px
+                font-weight: 600
+                color: variables.$color-grey-1
+
+.advert-info
+    display: flex
+    flex-direction: column
+
+@media (min-width: 768px)
+    .advert-info
+        justify-content: space-between
+        flex-direction: row
+        gap: 20px
+
+        >div
+            width: 65%
+
+        >aside
+            width: 35%

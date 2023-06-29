@@ -15,6 +15,10 @@ interface iModalContextValues{
     setResetPasswordModal: React.Dispatch<SetStateAction<boolean>>
     createAdvertModal: boolean
     setCreateAdvertModal: React.Dispatch<SetStateAction<boolean>>
+    carImageModal: boolean
+    setCarImageModal: React.Dispatch<SetStateAction<boolean>>
+    carImage: string
+    setCarImage: React.Dispatch<SetStateAction<string>>
 }
 
 
@@ -24,9 +28,11 @@ const ModalProvider = ({children}: iChildrenProps) => {
     const [filterDropdown, setFilterDropdown] = useState<boolean>(false)
     const [resetPasswordModal, setResetPasswordModal] = useState<boolean>(false)
     const [createAdvertModal, setCreateAdvertModal] = useState<boolean>(false)
+    const [carImageModal, setCarImageModal] = useState<boolean>(false)
+    const [carImage, setCarImage] = useState<string>("")
     
     return(
-        <ModalContext.Provider value={{filterDropdown, setFilterDropdown, resetPasswordModal, setResetPasswordModal, createAdvertModal, setCreateAdvertModal}}>
+        <ModalContext.Provider value={{filterDropdown, setFilterDropdown, resetPasswordModal, setResetPasswordModal, createAdvertModal, setCreateAdvertModal, carImageModal, setCarImageModal, carImage, setCarImage}}>
             {children}
         </ModalContext.Provider>
     )

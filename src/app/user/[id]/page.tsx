@@ -44,7 +44,7 @@ const Profile = async({params}:{params:any}) =>{
         <>
             <header>
                 <HeaderProfile/>
-                <HeaderAnunciant anunciant={anunciant} profile={profile}/>
+                <HeaderAnunciant anunciant={anunciant} profile={anunciant}/>
             </header>
             <main>
                 <section className="cars-section">

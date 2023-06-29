@@ -5,6 +5,7 @@ import { TCar } from '@/schemas/advertsSchema'
 import Button from '../button/button'
 import { TUser } from '@/schemas/userSchema'
 import Elipsis from '../tags/elipse'
+import Link from 'next/link'
 
 interface props{
     car: TCar,
@@ -19,7 +20,7 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
 
     const owern= anunciant.id==user?.id
 
-    const{brand,year,price,color,coverImage:img,model,quilometers:km,description,isAvailable,fuel}=car
+    const{brand,year,price,color,coverImage:img,model,quilometers:km,description,isAvailable,fuel, id}=car
 
     const editar=()=>{
         console.log('editar')
@@ -31,12 +32,16 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
 
     return(
         <div className="product">
-            <div className="img-product">
-                <img src={img} alt={`foto de ${model}`} />
-                <Tag type={advertisement}>{advertisement}</Tag>
-            </div>
+            <Link href={`/advertisements/${id}`}>
+                <div className="img-product">
+                    <img src={img} alt={`foto de ${model}`} />
+                    <Tag type={advertisement}>{advertisement}</Tag>
+                </div>
+            </Link>
             <div className="product-description">
-                <h2>{brand} {model} {color}</h2>
+                <Link href={`/advertisements/${id}`}>
+                    <h2>{brand} {model} {color}</h2>
+                </Link>
 
                 <p>{description}</p>
                 {
@@ -48,7 +53,7 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
                         <Tag>{Number(km)}KM</Tag>
                         <Tag>{year}</Tag>
                     </div>
-                    <span>RS:{price}</span>
+                    <span>R${Number(price).toFixed(0)}</span>
                 </div>
                 {
                     owern &&

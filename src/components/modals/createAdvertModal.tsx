@@ -34,6 +34,11 @@ const CreateAdvertisementModal = ( ) => {
 
     const onSubmitAd: SubmitHandler<any> = async(data) => {
         data.galleryAdvertisement = images.filter((image) => image !== null && image.trim() !== "")
+        data.galleryAdvertisement = data.galleryAdvertisement.map((img: string) => {
+            return {
+                imageUrl: img
+            }
+        })
         postAdvertisement(data)
     }
 

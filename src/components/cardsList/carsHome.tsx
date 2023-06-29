@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Cards } from "../cards/cards";
 import { Car } from "@/schemas/advertsSchema";
 import FilterButton from "../filterButton/filterButton";
+import "../../styles/pages/home/home.sass"
 
 const getAdvertisements = async(searchParams: iFilters) => {
     let params: URLSearchParams | string = new URLSearchParams();

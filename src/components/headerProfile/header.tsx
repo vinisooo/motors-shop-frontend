@@ -17,7 +17,7 @@ const getUserToken=async()=>{
 
 const HeaderProfile = async() => {
     const user=await getUserToken()
-
+    
     return(
         <div className="main-header">
             <Link href="/">

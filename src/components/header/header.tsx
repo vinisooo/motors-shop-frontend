@@ -18,7 +18,7 @@ const Header = () => {
                 <Link href="/register">Cadastrar</Link>
             </nav>
 
-            <button onClick={() => setDropdownMenu(!dropdownMenu)} className={dropdownMenu ? "active-dropdown": ""}>
+            <button onClick={() => setDropdownMenu(!dropdownMenu)} className={dropdownMenu ? "dropdown-btn active-dropdown": "dropdown-btn"}>
                 <span></span>
                 <span></span>
                 <span></span>
