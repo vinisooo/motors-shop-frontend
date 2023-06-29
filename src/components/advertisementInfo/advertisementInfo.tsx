@@ -18,7 +18,7 @@ const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) =>
 
     useEffect(() => {
         if (emblaApi) {
-            console.log(emblaApi.slideNodes()) // Access API
+            console.log(emblaApi.slideNodes())
         }
     }, [emblaApi])
 

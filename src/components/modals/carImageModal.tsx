@@ -17,27 +17,27 @@ const CarImageModal = () => {
     return(
         <Modal className="car-image-modal" title="Imagem do veículo">
             <figure className="figure-modal">
-            <TransformWrapper>
-                {
-                    ({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-                    <>
-                        <div className="tools">
-                            <Button Style="brand-opacity" onClick={() => zoomIn()}>
-                                <TbZoomInFilled/>
-                            </Button>
-                            <Button Style="brand-opacity" onClick={() => zoomOut()}>
-                                <TbZoomOutFilled/>
-                            </Button>
-                            <Button Style="brand-opacity" onClick={() => resetTransform()}>
-                                <TbZoomReset/>
-                            </Button>
-                        </div>
-                        <TransformComponent>
-                            <img src={carImage} />
-                        </TransformComponent>
-                    </>
-                )}
-            </TransformWrapper>
+                <TransformWrapper>
+                    {
+                        ({ zoomIn, zoomOut, resetTransform, ...rest }) => (
+                        <>
+                            <div className="tools">
+                                <Button Style="brand-opacity" onClick={() => zoomIn()}>
+                                    <TbZoomInFilled/>
+                                </Button>
+                                <Button Style="brand-opacity" onClick={() => zoomOut()}>
+                                    <TbZoomOutFilled/>
+                                </Button>
+                                <Button Style="brand-opacity" onClick={() => resetTransform()}>
+                                    <TbZoomReset/>
+                                </Button>
+                            </div>
+                            <TransformComponent>
+                                <img src={carImage} />
+                            </TransformComponent>
+                        </>
+                    )}
+                </TransformWrapper>
             </figure>
         </Modal>
     )
