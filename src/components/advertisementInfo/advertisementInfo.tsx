@@ -9,12 +9,14 @@ import PageCard from "../pageCard/pageCard"
 import Elipsis from "../tags/elipse"
 import { ModalContext } from "@/context/modalContext"
 import Autoplay from 'embla-carousel-autoplay'
+import nookies from "nookies"
 
 const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({delay: 2500})])
     const {carImageModal, setCarImageModal} = useContext(ModalContext)
 
     const {setCarImage} = useContext(ModalContext)
+    const userToken = nookies.get()['userToken']
 
     useEffect(() => {
         if (emblaApi) {
@@ -55,7 +57,7 @@ const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) =>
                         </div>
                     </PageCard>
                     <PageCard className="advert-description">
-                        <h1>{advertisement.brand}</h1>
+                        <h1>{advertisement.model}</h1>
                         <div>
                             <div className="year-km">
                                 <Tag>{advertisement.year}</Tag>
@@ -63,8 +65,14 @@ const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) =>
                             </div>
                             <h3>R$ {advertisement.price}</h3>
                         </div>
-                        <Button>
-                            <Link target="_blank" href={`http://api.whatsapp.com/send?1=pt_BR&phone=55${advertisement.user.phone}`}>Comprar</Link>
+                        <Button Style={!userToken ? "disabled" : undefined}>
+                            {
+                                userToken
+                                ?
+                                    <Link target="_blank" href={`http://api.whatsapp.com/send?1=pt_BR&phone=55${advertisement.user.phone}`}>Comprar</Link>
+                                :
+                                    <Link href="" className="disabled" title="Efetue o login para entrar em contato com o vendedor">Comprar</Link>
+                            }
                         </Button>
                     </PageCard>
                     {

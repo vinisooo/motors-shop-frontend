@@ -6,8 +6,9 @@ import { TCommentRes, TComments } from "@/schemas/comment.schema"
 import { cookies } from "next/headers"
 import { CommentInput } from "./commentForm"
 import { redirect } from "next/navigation"
+import Link from "next/link"
 
-const getComments = async(postId: string, token:string) => {
+const getComments = async(postId: string, token:string | undefined) => {
     try{
         const response=await getData(`/comments/${postId}`,{
             headers:{
@@ -26,12 +27,22 @@ const getComments = async(postId: string, token:string) => {
 
 const Comments = async({postId}:{postId: string}) => {
     const token = cookies().get("userToken")
-    !token && redirect('/login')
-    const comments: TCommentRes = await getComments(postId, token!.value)
+    const comments: TCommentRes = await getComments(postId, token?.value)
 
+    if(!token){
+        return (
+            <section className="comments">
+                <PageCard>
+                    <h3>Comentários</h3>
+                    <p>
+                        <Link href="/login">Efetue o login</Link> para ver os comentários deste veículo
+                    </p>
+                </PageCard>
+            </section>
+        )
+    }
     return(
         <section className="comments">
-
             <PageCard>
                 <h3>Comentários</h3>
                 {
@@ -49,6 +60,7 @@ const Comments = async({postId}:{postId: string}) => {
                         </ul>
                     )
                 }
+                {}
             </PageCard>
             <PageCard>
                 <CommentInput postId={postId}/>
