@@ -6,6 +6,7 @@ import HeaderProfile from "@/components/headerProfile/header"
 import AdvertisementInfo from "@/components/advertisementInfo/advertisementInfo"
 import Footer from "@/components/footer/footer"
 import CarImageModal from "@/components/modals/carImageModal"
+import Comments from "@/components/comment/comments"
 
 export const getAdvertisement = cache(async (id: string) => {
     try{
@@ -16,7 +17,6 @@ export const getAdvertisement = cache(async (id: string) => {
     }
 })
 
-
 const Advertisement = async({params}: {params:{id: string}}) => {
     const advertisement: TAdvertisementRes = await getAdvertisement(params.id)
 
@@ -26,6 +26,7 @@ const Advertisement = async({params}: {params:{id: string}}) => {
                 <div className="advertisement-header"/>
                 <main className="container">
                     <AdvertisementInfo advertisement={advertisement}/>
+                    <Comments postId={params.id}/>
                 </main>
                 <CarImageModal/>
                 <Footer/>

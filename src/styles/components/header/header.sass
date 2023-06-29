@@ -64,10 +64,7 @@
                     border: 1px solid variables.$color-grey-0
                     color: variables.$color-white-fixed
 
-    button
-        margin: 20px
-        width: 20px
-        height: 15px
+    .dropdown-btn
 
         display: flex
         flex-direction: column
@@ -77,6 +74,12 @@
         border: none
 
         transition: 0.3s ease
+
+        margin: 20px
+        width: 20px
+        height: 100%
+
+        border: 1px solid blue
         span
             transition: 0.3s ease
             width: 100%
@@ -110,7 +113,7 @@
             opacity: 1
             transform: translateX(0)
 
-        button
+        .dropdown-btn
             display: none
 
         nav

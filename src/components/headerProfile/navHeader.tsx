@@ -17,11 +17,11 @@ const NavHeader=({name}:{name:string})=>{
                 <Button onClick={logout}>Sair</Button>
             </nav>
 
-            <Button onClick={() => setDropdownMenu(!dropdownMenu)} className={dropdownMenu ? "active-dropdown": ""}>
+            <button onClick={() => setDropdownMenu(!dropdownMenu)} className={dropdownMenu ? "dropdown-btn active-dropdown": "dropdown-btn"}>
                 <span></span>
                 <span></span>
                 <span></span>
-            </Button> 
+            </button> 
         </>
     )
 }

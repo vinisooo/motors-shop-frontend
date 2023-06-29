@@ -1,0 +1,53 @@
+@use '../../_variables'
+
+.comment
+    width: 100%
+
+    header
+        display: flex
+        align-items: center
+        margin-bottom: 15px
+
+        >span
+            color: variables.$color-grey-3
+            font-size: 12px
+
+            position: relative
+            margin-left: 20px
+
+            &::before
+                content: ""
+                position: absolute
+                left: -15px
+                top: 35%
+                background-color: variables.$color-grey-4
+                width: 5px
+                height: 5px
+                border-radius: 50%
+
+    p
+        font-weight: 400
+        line-height: 150%
+        font-size: 14px
+        color: variables.$color-grey-2
+
+
+.comments
+    width: 100%
+
+    h3
+        font-size: 20px
+        font-weight: 600
+    
+        margin-bottom: 30px
+    
+    ul
+        list-style: none
+        
+        display: flex
+        flex-direction: column
+        gap: 50px
+
+@media (min-width: 768px) 
+    .comments
+        width: 64%

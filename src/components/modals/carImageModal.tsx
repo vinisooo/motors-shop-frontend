@@ -34,7 +34,6 @@ const CarImageModal = () => {
                         </div>
                         <TransformComponent>
                             <img src={carImage} />
-                            <div>Example text</div>
                         </TransformComponent>
                     </>
                 )}
