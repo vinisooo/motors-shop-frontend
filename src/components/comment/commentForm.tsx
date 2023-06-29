@@ -43,8 +43,10 @@ const CommentInput=({postId}:{postId:string})=>{
     const autoComments = ["Gostei Muito!", "Incrível", "Recomendarei para meus amigos!"]
     return(
         <form className="comment-form" onSubmit={handleSubmit(submit)}>
-            <TextArea value={comment} onChange={(e)=> setComment(e.target.value)} placeholder="Insira o seu comentário aqui..." onKeyUp={habilityButton} className='complete-last' register={{...register("comment")}}/>
-            <Button disabled={disabled} onClick={()=>setValue('postId',postId)}>Comentar</Button>
+            <div className="text-area-btn">
+                <TextArea value={comment} onChange={(e)=> setComment(e.target.value)} placeholder="Insira o seu comentário aqui..." onKeyUp={habilityButton} className='complete-last' register={{...register("comment")}}/>
+                <Button disabled={disabled} onClick={()=>setValue('postId',postId)}>Comentar</Button>
+            </div>
             <div className="auto-comment">
                 {
                     autoComments.map((autoComment, index) => {
