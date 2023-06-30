@@ -1,8 +1,9 @@
 @use '../../variables'
 
+.cars
+    width: 100%
 .cars-section
     width: 100%
-
     display: flex
     justify-content: space-between
     align-items: flex-start
@@ -19,12 +20,15 @@
         gap: 25px
 
         width: 100%
+        max-width: 100%
 
         overflow-x: scroll
         justify-content: flex-start
 
         padding: 20px
         margin-bottom: 30px
+
+        flex-wrap: nowrap
     
     .w80
         margin: 30px 0
@@ -54,6 +58,8 @@
 
 
 @media (min-width: 768px)
+    .cars
+        width: 100%
     .cars-section
         padding: 59px
 
@@ -72,4 +78,6 @@
             overflow: hidden
             justify-content: flex-end
             flex-wrap: wrap
+
+            gap: 40px
         

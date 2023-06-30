@@ -15,11 +15,10 @@ interface props{
     anunciant:TUser
 }
 
-
 const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
 
     const router=useRouter()
-    const owern= anunciant.id==user?.id
+    const owner= anunciant.id==user?.id
 
     const{brand,year,price,color,coverImage:img,model,quilometers:km,description,isAvailable,fuel, id}=car
 
@@ -41,12 +40,12 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
             </Link>
             <div className="product-description">
                 <Link href={`/advertisements/${id}`}>
-                    <h2>{brand} {model} {color}</h2>
+                    <h4 title={`${brand} ${model} ${color}`}>{brand} {model} {color}</h4>
                 </Link>
 
                 <p>{description}</p>
                 {
-                    !owern &&
+                    !owner &&
                     <Elipsis className={anunciant.id} name={anunciant.name}/>
                 }
                 <div className="product-infos">
@@ -57,7 +56,7 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
                     <span>R${Number(price).toFixed(0)}</span>
                 </div>
                 {
-                    owern &&
+                    owner &&
                     <div className='buttons'>
                         <Button onClick={editar} Style={'outline-brand-1'} size={'medium'}>Editar</Button>
                         <Button onClick={detalhes} Style={'outline-brand-1'} size={'medium'}>Ver Detalhes</Button>
