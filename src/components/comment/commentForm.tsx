@@ -35,7 +35,7 @@ const CommentInput=({postId}:{postId:string})=>{
         data.comment = comment
         setDisabled(true)
         setComment("")
-    };
+    }
 
     const setAutoComment = (autoComment: string) => {
         setComment(autoComment)

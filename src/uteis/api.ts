@@ -32,7 +32,7 @@ async function getData(url:string="",config:config={body:null,headers:{"Content-
                     body,
                     headers:head,
                     next
-                });
+                })
                 response = await res.json()
                 return response
             }catch(err){
@@ -51,7 +51,7 @@ async function getData(url:string="",config:config={body:null,headers:{"Content-
                     headers:head,
                     cache: cache || "force-cache",
                     next
-                });
+                })
                 response = await res.json()
                 return response
             }catch(err){

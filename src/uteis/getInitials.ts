@@ -7,10 +7,10 @@ const getInitials=(name:string)=>{
     switch (names.length) {
         case 1:
             iniciais= names[0][0]
-            break;
+            break
         default:
             iniciais=names[0][0]+names[1][0]
-            break;
+            break
     }
     return iniciais
 }

@@ -5,7 +5,7 @@ import Logo from "../logo/logo"
 import { useState } from "react"
 
 const Header = () => {
-    const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
+    const [dropdownMenu, setDropdownMenu] = useState<boolean>(false)
 
     return(
         <header className="main-header">

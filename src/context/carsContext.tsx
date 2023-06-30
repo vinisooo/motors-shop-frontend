@@ -1,28 +1,28 @@
 "use client"
-import { createContext, useContext } from "react";
-import { useState } from "react";
-import { AxiosResponse } from "axios";
-import nookies from "nookies";
-import { TAdvertisementReq, TAdvertisementRes } from "@/schemas/advertisement.schema";
-import api, { carsApi } from "@/services";
-import { ModalContext } from "./modalContext";
+import { createContext, useContext } from "react"
+import { useState } from "react"
+import { AxiosResponse } from "axios"
+import nookies from "nookies"
+import { TAdvertisementReq, TAdvertisementRes } from "@/schemas/advertisement.schema"
+import api, { carsApi } from "@/services"
+import { ModalContext } from "./modalContext"
 
 interface iChildrenProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 interface iModalContextValues {
-  getCarsByBrand: (brand?: string) => Promise<void>;
-  cars: iCar[];
-  postAdvertisement: (data: TAdvertisementReq) => Promise<AxiosResponse<TAdvertisementRes, any> | undefined>;
+  getCarsByBrand: (brand?: string) => Promise<void>
+  cars: iCar[]
+  postAdvertisement: (data: TAdvertisementReq) => Promise<AxiosResponse<TAdvertisementRes, any> | undefined>
 }
 
-export const CarsContext = createContext({} as iModalContextValues);
+export const CarsContext = createContext({} as iModalContextValues)
 
 export interface iCar {
-  name: string;
-  value?: number;
-  year?: number;
+  name: string
+  value?: number
+  year?: number
 }
 
 const CarsProvider = ({ children }: iChildrenProps) => {
@@ -35,27 +35,27 @@ const CarsProvider = ({ children }: iChildrenProps) => {
     try {
       const response: AxiosResponse<iCar[] | Record<string, iCar[]>> = await carsApi.get(
         `/cars${brand && brand !== "outra" ? `?brand=${brand}` : ""}`
-      );
-      const data = response.data;
+      )
+      const data = response.data
 
       if (Array.isArray(data)) {
-        setCars(data);
+        setCars(data)
       } else {
-        const carArray: iCar[] = [];
+        const carArray: iCar[] = []
 
         for (const brand in data) {
           if (Object.hasOwnProperty.call(data, brand)) {
-            const carsArray = data[brand];
-            carArray.push(...carsArray);
+            const carsArray = data[brand]
+            carArray.push(...carsArray)
           }
         }
 
-        setCars(carArray);
+        setCars(carArray)
       }
     } catch (err: unknown) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   const postAdvertisement = async (data: TAdvertisementReq) => {
     try {
@@ -63,19 +63,19 @@ const CarsProvider = ({ children }: iChildrenProps) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
+      })
       setCreateAdvertModal(false)
-      return request;
+      return request
     } catch (err: unknown) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   return (
     <CarsContext.Provider value={{ getCarsByBrand, cars, postAdvertisement }}>
       {children}
     </CarsContext.Provider>
-  );
-};
+  )
+}
 
-export default CarsProvider;
+export default CarsProvider

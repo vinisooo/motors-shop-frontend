@@ -24,7 +24,7 @@ export interface iFilters {
     maxKm: string | undefined,
     minPrice: string | undefined,
     maxPrice: string | undefined,
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
 }
 
 export interface iFilterListProps {
@@ -36,38 +36,38 @@ const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
     const {filterDropdown, setFilterDropdown} = useContext(ModalContext)
     const router=useRouter()
 
-    const [minKm, setMinKm] = useState<string>(searchParams.minKm ? searchParams.minKm : "");
-    const [maxKm, setMaxKm] = useState<string>(searchParams.maxKm ? searchParams.maxKm : "");
-    const [minPrice, setMinPrice] = useState<string>(searchParams.minPrice ? searchParams.minPrice : "");
-    const [maxPrice, setMaxPrice] = useState<string>(searchParams.maxPrice ? searchParams.maxPrice : "");
+    const [minKm, setMinKm] = useState<string>(searchParams.minKm ? searchParams.minKm : "")
+    const [maxKm, setMaxKm] = useState<string>(searchParams.maxKm ? searchParams.maxKm : "")
+    const [minPrice, setMinPrice] = useState<string>(searchParams.minPrice ? searchParams.minPrice : "")
+    const [maxPrice, setMaxPrice] = useState<string>(searchParams.maxPrice ? searchParams.maxPrice : "")
 
     const extractFilterData = (data: TAdvertisementRes[]) =>{
-        const brandList: string[] = [];
-        const modelList: string[] = [];
-        const colorList: string[] = [];
-        const yearList: number[] = [];
-        const fuelList: string[] = [];
+        const brandList: string[] = []
+        const modelList: string[] = []
+        const colorList: string[] = []
+        const yearList: number[] = []
+        const fuelList: string[] = []
         
         for (let item of data) {
             if (!brandList.includes(item.brand)) {
-                brandList.push(item.brand);
+                brandList.push(item.brand)
             }
             if (!modelList.includes(item.model)) {
-                modelList.push(item.model);
+                modelList.push(item.model)
             }
             if (!colorList.includes(item.color)) {
-                colorList.push(item.color);
+                colorList.push(item.color)
             }
             if (!yearList.includes(item.year)) {
-                yearList.push(item.year);
+                yearList.push(item.year)
             }
             if (!fuelList.includes(item.fuel)) {
-                fuelList.push(item.fuel);
+                fuelList.push(item.fuel)
             }
         }
         return {
             brand: brandList, model: modelList, color: colorList, year: yearList, fuel: fuelList,
-        };
+        }
     }
     
     const extractedFilter = extractFilterData(advertisements)
@@ -122,7 +122,7 @@ const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
     }
 
     let filterWithoutPage = {...searchParams}
-    delete filterWithoutPage["page"];
+    delete filterWithoutPage["page"]
 
     return(
         <aside className={`aside-filter ${filterDropdown ? "" : "hidden-aside-filter"}`}>
