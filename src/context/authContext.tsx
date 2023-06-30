@@ -52,8 +52,8 @@ export const AuthProvider = ({children}: TProviderProps) => {
     }
 
     const logout=()=>{
-        destroyCookie(null, 'userToken')
-        router.push('/')
+        destroyCookie(null, "userToken")
+        router.push("/")
     }
     
     const getUserProfile = async (token: string) => {

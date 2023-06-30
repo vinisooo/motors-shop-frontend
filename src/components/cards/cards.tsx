@@ -1,12 +1,12 @@
 "use client"
-import '../../styles/components/cards/cards.sass'
+import "../../styles/components/cards/cards.sass"
 import { Tag } from "../tags/tags"
-import { TCar } from '@/schemas/advertsSchema'
-import Button from '../button/button'
-import { TUser } from '@/schemas/userSchema'
-import Elipsis from '../tags/elipse'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { TCar } from "@/schemas/advertsSchema"
+import Button from "../button/button"
+import { TUser } from "@/schemas/userSchema"
+import Elipsis from "../tags/elipse"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 interface props{
     car: TCar,
@@ -23,11 +23,11 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
     const{brand,year,price,color,coverImage:img,model,quilometers:km,description,isAvailable,fuel, id}=car
 
     const editar=()=>{
-        console.log('editar')
+        console.log("editar")
     }
 
     const detalhes=()=>{
-        router.push('/advertisements/b084d3ac-48d3-4028-8323-ac6d5f8924b7')
+        router.push("/advertisements/b084d3ac-48d3-4028-8323-ac6d5f8924b7")
     }
 
     return(
@@ -61,9 +61,9 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
                 </div>
                 {
                     owner &&
-                    <div className='buttons'>
-                        <Button onClick={editar} Style={'outline-brand-1'} size={'medium'}>Editar</Button>
-                        <Button onClick={detalhes} Style={'outline-brand-1'} size={'medium'}>Ver Detalhes</Button>
+                    <div className="buttons">
+                        <Button onClick={editar} Style={"outline-brand-1"} size={"medium"}>Editar</Button>
+                        <Button onClick={detalhes} Style={"outline-brand-1"} size={"medium"}>Ver Detalhes</Button>
                     </div>
                 }
             </div>

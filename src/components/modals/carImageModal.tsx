@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { useContext } from "react"
 import Modal from "./modal"
 import { ModalContext } from "@/context/modalContext"

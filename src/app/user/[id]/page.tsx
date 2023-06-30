@@ -1,5 +1,5 @@
 import Footer from "@/components/footer/footer"
-import '../../../styles/pages/profile/profile.sass'
+import "../../../styles/pages/profile/profile.sass"
 import HeaderAnunciant from "@/components/headerAnunciant/headerAnunciant"
 import HeaderProfile from "@/components/headerProfile/header"
 import { TUser } from "@/schemas/userSchema"
@@ -14,12 +14,9 @@ import { redirect } from "next/navigation"
 
 const getUserLogged=async(token:string)=>{
     try{
-        const response=await getData('/users/loggedUser',{
+        const response=await getData("/users/loggedUser",{
             headers:{
                 Authorization: `Bearer ${token}`
-            },
-            next: {
-                revalidate: 0
             },
             cache: "no-cache"
         })
@@ -41,8 +38,8 @@ const getAdvertiser=async(id:string)=>{
 const Profile = async({params}:{params:any}) =>{
     const {id}=params
     const cookieStore = cookies()
-    const userToken= cookieStore.get('userToken')
-    // !userToken && redirect('/login')
+    const userToken= cookieStore.get("userToken")
+    // !userToken && redirect("/login")
     const profile:TUser=await getUserLogged(userToken!.value)
 
     const Advertiser=await getAdvertiser(id)

@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import "../../styles/components/header/header.sass"
 import Link from "next/link"
 import Logo from "../logo/logo"

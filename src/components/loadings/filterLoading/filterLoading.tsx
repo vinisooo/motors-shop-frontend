@@ -1,9 +1,9 @@
-import '../../../styles/components/loadings/filter/filter.sass'
+import "../../../styles/components/loadings/filter/filter.sass"
 
 const FilterLoading=()=>{
 
     return (
-        <div className='filter'>
+        <div className="filter">
             <div className="filter-field">
                 {
                     Array.from({ length: 9 }).map((el)=>

@@ -2,13 +2,13 @@
 import { TAdvertisementRes } from "@/schemas/advertisement.schema"
 import { Tag } from "../tags/tags"
 import Button from "../button/button"
-import useEmblaCarousel from 'embla-carousel-react'
+import useEmblaCarousel from "embla-carousel-react"
 import { useContext, useEffect, useState } from "react"
 import Link from "next/link"
 import PageCard from "../pageCard/pageCard"
 import Elipsis from "../tags/elipse"
 import { ModalContext } from "@/context/modalContext"
-import Autoplay from 'embla-carousel-autoplay'
+import Autoplay from "embla-carousel-autoplay"
 import nookies from "nookies"
 
 const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) => {
@@ -16,7 +16,7 @@ const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) =>
     const {carImageModal, setCarImageModal} = useContext(ModalContext)
 
     const {setCarImage} = useContext(ModalContext)
-    const userToken = nookies.get()['userToken']
+    const userToken = nookies.get()["userToken"]
 
     useEffect(() => {
         if (emblaApi) {

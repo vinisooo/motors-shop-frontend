@@ -47,8 +47,8 @@ const CommentInput=({postId}:{postId:string})=>{
     return(
         <form className="comment-form" onSubmit={handleSubmit(submit)}>
             <div className="text-area-btn">
-                <TextArea value={comment} onChange={(e)=> setComment(e.target.value)} placeholder="Insira o seu comentário aqui..." onKeyUp={habilityButton} className='complete-last' register={{...register("comment")}}/>
-                <Button disabled={disabled} onClick={()=>setValue('postId',postId)}>Comentar</Button>
+                <TextArea value={comment} onChange={(e)=> setComment(e.target.value)} placeholder="Insira o seu comentário aqui..." onKeyUp={habilityButton} className="complete-last" register={{...register("comment")}}/>
+                <Button disabled={disabled} onClick={()=>setValue("postId",postId)}>Comentar</Button>
             </div>
             <div className="auto-comment">
                 {

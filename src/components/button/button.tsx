@@ -1,6 +1,6 @@
-'use client'
+"use client"
 import {Children, MouseEventHandler, ReactNode} from "react"
-import '../../styles/components/button/button.sass'
+import "../../styles/components/button/button.sass"
 
 enum buttonSize{
     Big="big ",
@@ -72,7 +72,7 @@ interface iButton  {
 
 const Button=({children,Style,size,width, ...props}:IButton):React.JSX.Element=>{
 
-    let className= props.className ? props.className : ''
+    let className= props.className ? props.className : ""
 
     switch(size){
         case "big":
@@ -161,6 +161,6 @@ const Button=({children,Style,size,width, ...props}:IButton):React.JSX.Element=>
 }
 
 
-import React from 'react';
+import React from "react";
 
 export default Button

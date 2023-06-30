@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import Modal from "./modal"
 import {  useEffect  } from "react"
 

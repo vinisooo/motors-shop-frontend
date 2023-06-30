@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import "../../styles/pages/home/filterList.sass"
 import Link from "next/link"
 
@@ -7,7 +7,7 @@ import { useContext } from "react"
 import { ModalContext } from "@/context/modalContext"
 import { filterData } from "./filterData"
 
-import { AiOutlineClose } from 'react-icons/ai'
+import { AiOutlineClose } from "react-icons/ai"
 
 import { Dispatch, SetStateAction, EventHandler } from "react"
 import { useRouter } from "next/navigation"
