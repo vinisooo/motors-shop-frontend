@@ -1,5 +1,5 @@
-import '../../../styles/components/loadings/cards/cardsLoading.sass'
-import {BsFillImageFill} from 'react-icons/bs'
+import "../../../styles/components/loadings/cards/cardsLoading.sass"
+import {BsFillImageFill} from "react-icons/bs"
 
 
 const CardLoading=()=>{
@@ -30,7 +30,7 @@ const CardLoading=()=>{
 const CardsLoading=({cards=12}:{cards?:number})=>{
 
     return(
-        <div className='cars-list'>
+        <div className="cars-list">
             {Array.from({ length: cards }).map((el)=><CardLoading/>)}
         </div>
     )

@@ -1,5 +1,5 @@
-import { string, z } from "zod";
-import { advertisementSchema } from "./advertisement.schema";
+import { string, z } from "zod"
+import { advertisementSchema } from "./advertisement.schema"
 
 export const commentSchema = z.object({
     id: z.string(),

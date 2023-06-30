@@ -16,8 +16,8 @@ const CreateAdvertisementModal = ( ) => {
     const {setCreateAdvertModal} = useContext(ModalContext)
 
     const [brand, setBrand] = useState<string>("")
-    const [fipe, setFipe] = useState<number>()
-    const [year, setYear] = useState<number>()
+    const [fipe, setFipe] = useState<number>(0)
+    const [year, setYear] = useState<number>(0)
 
     const [images, setImages] = useState<(string | null)[]>([])
 
@@ -34,11 +34,14 @@ const CreateAdvertisementModal = ( ) => {
 
     const onSubmitAd: SubmitHandler<any> = async(data) => {
         data.galleryAdvertisement = images.filter((image) => image !== null && image.trim() !== "")
+        data.year = Number(year)
+        data.fipeDeal = data.price < Number(fipe)
         data.galleryAdvertisement = data.galleryAdvertisement.map((img: string) => {
             return {
                 imageUrl: img
             }
         })
+        console.log(data)
         postAdvertisement(data)
     }
 
@@ -151,7 +154,7 @@ const CreateAdvertisementModal = ( ) => {
                 </div>
                 <div>
                     <div className="input-box">
-                        <Input value={fipe?.toString()} onChange={(e)=>setFipe(Number(e.target.value))} min={0} type="number" children="Preço tabela FIPE" id="fipePrice" placeholder="R$ 48.000,00" register={register("fipePrice", { valueAsNumber: true })} />
+                        <Input value={fipe.toString()} onChange={(e)=>setFipe(Number(e.target.value))} min={0} type="number" children="Preço tabela FIPE" id="fipePrice" placeholder="R$ 48.000,00" register={register("fipePrice", { valueAsNumber: true })} />
                         {errors.fipePrice && <span className="error">{errors.fipePrice.message}</span>}
                     </div>
                     <div className="input-box">

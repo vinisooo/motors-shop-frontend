@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { addressReqSchema } from "./address.schema";
+import { z } from "zod"
+import { addressReqSchema } from "./address.schema"
 
 export const usersReqSchema = z.object({
     name: z.string().max(60),
@@ -20,7 +20,7 @@ export const usersReqSchema = z.object({
     isAdvertiser: z.boolean(),
     address: addressReqSchema,
     description: z.string().nullable()
-  });
+  })
 
 export const registerValidationSchema = usersReqSchema.extend({
     confirmPassword: z.string(),

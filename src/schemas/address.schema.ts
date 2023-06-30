@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "zod"
 
 export const addressReqSchema = z.object({
     zipCode: z.string().min(8).max(8),

@@ -1,7 +1,7 @@
-import { loginReqSchema } from "@/schemas/login.schema";
-import { registerValidationSchema, usersReqSchema, usersUpdateReqSchema } from "@/schemas/users.schema";
-import { ReactNode } from "react";
-import { z } from "zod";
+import { loginReqSchema } from "@/schemas/login.schema"
+import { registerValidationSchema, usersReqSchema, usersUpdateReqSchema } from "@/schemas/users.schema"
+import { ReactNode } from "react"
+import { z } from "zod"
 
 export type TLoginReq = z.infer<typeof loginReqSchema>
 

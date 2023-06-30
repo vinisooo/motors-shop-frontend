@@ -8,14 +8,14 @@ import Footer from "@/components/footer/footer"
 import CarImageModal from "@/components/modals/carImageModal"
 import Comments from "@/components/comment/comments"
 
-export const getAdvertisement = cache(async (id: string) => {
+export const getAdvertisement = async (id: string) => {
     try{
         const response = await getData(`/adverts/${id}`)
         return response
     }catch(err: unknown){
         console.log(err)
     }
-})
+}
 
 const Advertisement = async({params}: {params:{id: string}}) => {
     const advertisement: TAdvertisementRes = await getAdvertisement(params.id)
