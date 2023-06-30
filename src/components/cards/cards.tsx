@@ -36,6 +36,10 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
                 <div className="img-product">
                     <img src={img} alt={`foto de ${model}`} />
                     <Tag type={advertisement}>{advertisement}</Tag>
+                    {
+                        car.fipeDeal &&
+                        <Tag type="cash">{"cash"}</Tag>
+                    }
                 </div>
             </Link>
             <div className="product-description">

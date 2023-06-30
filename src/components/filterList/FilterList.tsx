@@ -161,19 +161,23 @@ const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
                 <ul className="filter-list">
                     {
                         extractedFilter.model.map((filter, index) => {
-                            return(
-                                <li key={index}>
-                                    <Link
-                                        scroll={false}
-                                        className={
-                                            searchParams.model === filter ? "selected" : ""
-                                        }
-                                        href={handleFilter("model", filter)}
-                                    >
-                                        {filter[0].toUpperCase() + filter.substring(1)}
-                                    </Link>
-                                </li>
-                            )
+                            if(filter){
+                                return(
+                                    <li key={index}>
+                                        <Link
+                                            scroll={false}
+                                            className={
+                                                searchParams.model === filter ? "selected" : ""
+                                            }
+                                            href={handleFilter("model", filter)}
+                                        >
+                                            {`${filter[0].toUpperCase() + filter.split(" ")[0].substring(1)}
+                                            ${filter.split(" ")[1] ? filter.split(" ")[1] : ""}
+                                            ${filter.split(" ")[2] ? filter.split(" ")[2] : ""}`}
+                                        </Link>
+                                    </li>
+                                )
+                            }
                         })
                     }
                 </ul>
@@ -183,19 +187,21 @@ const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
                 <ul className="filter-list">
                     {
                         extractedFilter.color.map((filter, index) => {
-                            return(
-                                <li key={index}>
-                                    <Link
-                                        scroll={false}
-                                        className={
-                                            searchParams.color === filter ? "selected" : ""
-                                        }
-                                        href={handleFilter("color", filter)}
-                                    >
-                                        {filter[0].toUpperCase() + filter.substring(1)}
-                                    </Link>
-                                </li>
-                            )
+                            if(filter){
+                                return(
+                                    <li key={index}>
+                                        <Link
+                                            scroll={false}
+                                            className={
+                                                searchParams.color === filter ? "selected" : ""
+                                            }
+                                            href={handleFilter("color", filter)}
+                                        >
+                                            {filter[0].toUpperCase() + filter.substring(1)}
+                                        </Link>
+                                    </li>
+                                )
+                            }
                         })
                     }
                 </ul>
@@ -227,19 +233,21 @@ const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
                 <ul className="filter-list">
                     {
                         extractedFilter.fuel.map((filter, index) => {
-                            return(
-                                <li key={index}>
-                                    <Link
-                                        scroll={false}
-                                        className={
-                                            searchParams.fuel === filter ? "selected" : ""
-                                        }
-                                        href={handleFilter("fuel", filter)}
-                                    >
-                                        {filter[0].toUpperCase() + filter.substring(1)}
-                                    </Link>
-                                </li>
-                            )
+                            if(filter){
+                                return(
+                                    <li key={index}>
+                                        <Link
+                                            scroll={false}
+                                            className={
+                                                searchParams.fuel === filter ? "selected" : ""
+                                            }
+                                            href={handleFilter("fuel", filter)}
+                                        >
+                                            {filter[0].toUpperCase() + filter.substring(1)}
+                                        </Link>
+                                    </li>
+                                )
+                            }
                         })
                     }
                 </ul>

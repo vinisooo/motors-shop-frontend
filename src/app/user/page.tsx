@@ -21,7 +21,6 @@ const getUser=async(token:string)=>{
             next: {
                 revalidate: 0
             },
-            cache: "no-cache"
         })
         return response
     }catch(err: unknown){
@@ -34,7 +33,7 @@ const Profile = async() =>{
 
     const cookieStore = cookies()
     const userToken= cookieStore.get('userToken')
-    // !userToken && redirect('/login')
+    !userToken && redirect('/login')
     const profile:TUser=userToken && await getUser( userToken!.value)
 
     return ( 

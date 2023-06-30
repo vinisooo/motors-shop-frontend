@@ -15,7 +15,7 @@ const getComments = async(postId: string, token:string | undefined) => {
                 Authorization: `Bearer ${token}`
             },
             next: {
-                revalidate: 60
+                revalidate: 30
             }
         })
 

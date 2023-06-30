@@ -31,8 +31,10 @@ const CommentInput=({postId}:{postId:string})=>{
 
     const submit = (data:TCommentReqSchema, e:any) => {
         e.target.reset()
-        createComment(data);
+        console.log(data)
+        data.comment = comment
         setDisabled(true)
+        setComment("")
     };
 
     const setAutoComment = (autoComment: string) => {
@@ -41,6 +43,7 @@ const CommentInput=({postId}:{postId:string})=>{
     }
 
     const autoComments = ["Gostei Muito!", "Incrível", "Recomendarei para meus amigos!"]
+
     return(
         <form className="comment-form" onSubmit={handleSubmit(submit)}>
             <div className="text-area-btn">
@@ -52,7 +55,7 @@ const CommentInput=({postId}:{postId:string})=>{
                     autoComments.map((autoComment, index) => {
                         if(autoComment.toLowerCase().includes(comment.toLowerCase())){
                             return(
-                                <Button key={index} Style="negative-1" onClick={()=>setAutoComment(autoComment)}>{autoComment}</Button>
+                                <Button type="button" key={index} Style="negative-1" onClick={()=>setAutoComment(autoComment)}>{autoComment}</Button>
                             )
                         }
                     })

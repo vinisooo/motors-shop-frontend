@@ -15,6 +15,7 @@ export const advertisementSchema = z.object({
     isAvailable: z.boolean(),
     user: z.any(),
     createdAt: z.date(),
+    fipeDeal: z.boolean().optional(),
     updatedAt: z.date().nullable(),
     galleryAdvertisement: galleryAdvertisementListSchema
 })
@@ -29,10 +30,10 @@ export const advertisementReqSchema = advertisementSchema.omit({
 }).extend({
     fipePrice: z.number(),
     galleryAdvertisement: z.array(z.string()).optional()
-}).refine((data) => data.year >= 1900 && data.year <= new Date().getFullYear(), {
+}).refine((data) => data.year >= 1900 || data.year === 0 && data.year <= new Date().getFullYear(), {
     message: "O ano deve ser válido.",
     path: ["year"],
-  });
+});
 
 export type TAdvertisementReq = z.infer<typeof advertisementReqSchema>
 export type TAdvertisementRes = z.infer<typeof advertisementSchema>
