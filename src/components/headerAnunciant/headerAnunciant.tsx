@@ -1,11 +1,12 @@
-'use client'
-import '../../styles/components/headerAnunciant/headerAnunciant.sass'
+"use client"
+
+import "../../styles/components/headerAnunciant/headerAnunciant.sass"
 import { TUser } from "@/schemas/userSchema"
 import Button from "../button/button"
-import { Elipsis, Tag } from '../tags/tags'
-import { useContext } from 'react'
-import { ModalContext } from '@/context/modalContext'
-import { CreateAdvertisementModal } from '../modals/createAdvertModal'
+import { Elipsis, Tag } from "../tags/tags"
+import { useContext } from "react"
+import { ModalContext } from "@/context/modalContext"
+import { CreateAdvertisementModal } from "../modals/createAdvertModal"
 
 const HeaderAnunciant=({anunciant,profile}:{anunciant:TUser,profile:TUser})=>{
 
@@ -24,7 +25,7 @@ const HeaderAnunciant=({anunciant,profile}:{anunciant:TUser,profile:TUser})=>{
                     </div> 
                     <p className="description">{anunciant.description}</p>
                     {
-                        profile.id==anunciant.id && profile.isAdvertiser && <Button Style={'outline-brand-1'} onClick={()=> setCreateAdvertModal(true)}>Criar anúncio</Button>        
+                        profile.id==anunciant.id && profile.isAdvertiser && <Button Style={"outline-brand-1"} onClick={()=> setCreateAdvertModal(true)}>Criar anúncio</Button>        
                     }
                 </div>
             </section>

@@ -10,7 +10,7 @@ import CarsHome from "@/components/cardsList/carsHome"
 import { HomePageLoading } from "@/components/loadings/homePageLoading/homePageLoading"
 
 const getUser=()=>{
-  const userToken=cookies().get('userToken')
+  const userToken=cookies().get("userToken")
   return userToken
 }
 

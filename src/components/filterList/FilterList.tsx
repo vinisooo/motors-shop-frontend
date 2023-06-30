@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import "../../styles/pages/home/filterList.sass"
 import Link from "next/link"
 
@@ -7,7 +7,7 @@ import { useContext } from "react"
 import { ModalContext } from "@/context/modalContext"
 import { filterData } from "./filterData"
 
-import { AiOutlineClose } from 'react-icons/ai'
+import { AiOutlineClose } from "react-icons/ai"
 
 import { Dispatch, SetStateAction, EventHandler } from "react"
 import { useRouter } from "next/navigation"
@@ -24,7 +24,7 @@ export interface iFilters {
     maxKm: string | undefined,
     minPrice: string | undefined,
     maxPrice: string | undefined,
-    [key: string]: string | undefined;
+    [key: string]: string | undefined
 }
 
 export interface iFilterListProps {
@@ -36,38 +36,38 @@ const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
     const {filterDropdown, setFilterDropdown} = useContext(ModalContext)
     const router=useRouter()
 
-    const [minKm, setMinKm] = useState<string>(searchParams.minKm ? searchParams.minKm : "");
-    const [maxKm, setMaxKm] = useState<string>(searchParams.maxKm ? searchParams.maxKm : "");
-    const [minPrice, setMinPrice] = useState<string>(searchParams.minPrice ? searchParams.minPrice : "");
-    const [maxPrice, setMaxPrice] = useState<string>(searchParams.maxPrice ? searchParams.maxPrice : "");
+    const [minKm, setMinKm] = useState<string>(searchParams.minKm ? searchParams.minKm : "")
+    const [maxKm, setMaxKm] = useState<string>(searchParams.maxKm ? searchParams.maxKm : "")
+    const [minPrice, setMinPrice] = useState<string>(searchParams.minPrice ? searchParams.minPrice : "")
+    const [maxPrice, setMaxPrice] = useState<string>(searchParams.maxPrice ? searchParams.maxPrice : "")
 
     const extractFilterData = (data: TAdvertisementRes[]) =>{
-        const brandList: string[] = [];
-        const modelList: string[] = [];
-        const colorList: string[] = [];
-        const yearList: number[] = [];
-        const fuelList: string[] = [];
+        const brandList: string[] = []
+        const modelList: string[] = []
+        const colorList: string[] = []
+        const yearList: number[] = []
+        const fuelList: string[] = []
         
         for (let item of data) {
             if (!brandList.includes(item.brand)) {
-                brandList.push(item.brand);
+                brandList.push(item.brand)
             }
             if (!modelList.includes(item.model)) {
-                modelList.push(item.model);
+                modelList.push(item.model)
             }
             if (!colorList.includes(item.color)) {
-                colorList.push(item.color);
+                colorList.push(item.color)
             }
             if (!yearList.includes(item.year)) {
-                yearList.push(item.year);
+                yearList.push(item.year)
             }
             if (!fuelList.includes(item.fuel)) {
-                fuelList.push(item.fuel);
+                fuelList.push(item.fuel)
             }
         }
         return {
             brand: brandList, model: modelList, color: colorList, year: yearList, fuel: fuelList,
-        };
+        }
     }
     
     const extractedFilter = extractFilterData(advertisements)
@@ -122,7 +122,7 @@ const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
     }
 
     let filterWithoutPage = {...searchParams}
-    delete filterWithoutPage["page"];
+    delete filterWithoutPage["page"]
 
     return(
         <aside className={`aside-filter ${filterDropdown ? "" : "hidden-aside-filter"}`}>
@@ -161,19 +161,23 @@ const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
                 <ul className="filter-list">
                     {
                         extractedFilter.model.map((filter, index) => {
-                            return(
-                                <li key={index}>
-                                    <Link
-                                        scroll={false}
-                                        className={
-                                            searchParams.model === filter ? "selected" : ""
-                                        }
-                                        href={handleFilter("model", filter)}
-                                    >
-                                        {filter[0].toUpperCase() + filter.substring(1)}
-                                    </Link>
-                                </li>
-                            )
+                            if(filter){
+                                return(
+                                    <li key={index}>
+                                        <Link
+                                            scroll={false}
+                                            className={
+                                                searchParams.model === filter ? "selected" : ""
+                                            }
+                                            href={handleFilter("model", filter)}
+                                        >
+                                            {`${filter[0].toUpperCase() + filter.split(" ")[0].substring(1)}
+                                            ${filter.split(" ")[1] ? filter.split(" ")[1] : ""}
+                                            ${filter.split(" ")[2] ? filter.split(" ")[2] : ""}`}
+                                        </Link>
+                                    </li>
+                                )
+                            }
                         })
                     }
                 </ul>
@@ -183,19 +187,21 @@ const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
                 <ul className="filter-list">
                     {
                         extractedFilter.color.map((filter, index) => {
-                            return(
-                                <li key={index}>
-                                    <Link
-                                        scroll={false}
-                                        className={
-                                            searchParams.color === filter ? "selected" : ""
-                                        }
-                                        href={handleFilter("color", filter)}
-                                    >
-                                        {filter[0].toUpperCase() + filter.substring(1)}
-                                    </Link>
-                                </li>
-                            )
+                            if(filter){
+                                return(
+                                    <li key={index}>
+                                        <Link
+                                            scroll={false}
+                                            className={
+                                                searchParams.color === filter ? "selected" : ""
+                                            }
+                                            href={handleFilter("color", filter)}
+                                        >
+                                            {filter[0].toUpperCase() + filter.substring(1)}
+                                        </Link>
+                                    </li>
+                                )
+                            }
                         })
                     }
                 </ul>
@@ -227,19 +233,21 @@ const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
                 <ul className="filter-list">
                     {
                         extractedFilter.fuel.map((filter, index) => {
-                            return(
-                                <li key={index}>
-                                    <Link
-                                        scroll={false}
-                                        className={
-                                            searchParams.fuel === filter ? "selected" : ""
-                                        }
-                                        href={handleFilter("fuel", filter)}
-                                    >
-                                        {filter[0].toUpperCase() + filter.substring(1)}
-                                    </Link>
-                                </li>
-                            )
+                            if(filter){
+                                return(
+                                    <li key={index}>
+                                        <Link
+                                            scroll={false}
+                                            className={
+                                                searchParams.fuel === filter ? "selected" : ""
+                                            }
+                                            href={handleFilter("fuel", filter)}
+                                        >
+                                            {filter[0].toUpperCase() + filter.substring(1)}
+                                        </Link>
+                                    </li>
+                                )
+                            }
                         })
                     }
                 </ul>

@@ -1,5 +1,5 @@
-import {z} from 'zod'
-import { User } from './userSchema'
+import {z} from "zod"
+import { User } from "./userSchema"
 
 const AdvertSchema=z.object({
     brand: z.string(),
@@ -12,6 +12,7 @@ const AdvertSchema=z.object({
     isAvailable: z.boolean(),
     model: z.string(),
     price: z.string(),
+    fipeDeal: z.boolean().optional(),
     quilometers: z.string(),
     year: z.number(),
     user:User

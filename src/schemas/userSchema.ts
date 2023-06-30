@@ -1,4 +1,4 @@
-import {z} from 'zod'
+import {z} from "zod"
 
 const User=z.object({
     birthdate:z.string().or(z.date()),

@@ -1,14 +1,13 @@
-'use client'
-
-import { useState } from "react";
-import { Elipsis } from "../tags/tags";
-import Button from "../button/button";
-import { useAuthContext } from "@/context/authContext";
-import { redirect } from "next/navigation";
+"use client"
+import { useState } from "react"
+import { Elipsis } from "../tags/tags"
+import Button from "../button/button"
+import { useAuthContext } from "@/context/authContext"
+import { redirect } from "next/navigation"
 
 const NavHeader=({name}:{name:string})=>{
 
-    const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
+    const [dropdownMenu, setDropdownMenu] = useState<boolean>(false)
     const{logout}=useAuthContext()
 
     return (

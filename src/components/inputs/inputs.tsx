@@ -34,7 +34,7 @@ const TextArea=({ children,size,register, ...props}:iTextArea)=>{
     return(
         <div className="label">
             <label htmlFor={props.id}>{children}</label>
-            <textarea name={props.id}  cols={props.cols || 50} rows={props.rows || 10} {...props} {...register}></textarea>
+            <textarea {...register} name={props.id}  cols={props.cols || 50} rows={props.rows || 10} {...props}></textarea>
         </div>
     )
 }

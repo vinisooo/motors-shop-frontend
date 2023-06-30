@@ -1,8 +1,8 @@
-@use '../../_variables'
+@use "../../_variables"
 
 .comment
     width: 100%
-
+    
     header
         display: flex
         align-items: center
@@ -35,6 +35,11 @@
 .comments
     width: 100%
 
+    a
+        color: variables.$color-brand-1
+        padding: 0
+        margin: 0
+        font-weight: 500
     h3
         font-size: 20px
         font-weight: 600
@@ -47,6 +52,30 @@
         display: flex
         flex-direction: column
         gap: 50px
+
+.comment-form
+    .text-area-btn
+        position: relative
+
+        textarea
+            min-height: 170px
+        > button
+            position: absolute
+            right: 17px
+            bottom: 25px
+        
+    .auto-comment
+        display: flex
+        align-items: center
+        flex-wrap: wrap
+        gap: 10px
+
+        button
+            color: variables.$color-grey-3
+
+            font-size: 12px
+            padding: 5px 10px
+            border-radius: 20px
 
 @media (min-width: 768px) 
     .comments
