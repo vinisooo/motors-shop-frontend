@@ -14,11 +14,11 @@ const RootLayout=({children}:iRootLayout)=>{
     <html>
       <body>
         <AuthProvider>
-          <ModalProvider>
-            <CarsProvider>
-              {children}
-            </CarsProvider>
-          </ModalProvider>
+            <ModalProvider>
+              <CarsProvider>
+                {children}
+              </CarsProvider>
+            </ModalProvider>
         </AuthProvider>
       </body>
     </html>

@@ -5,7 +5,6 @@ import { getData } from "@/uteis/api"
 import { TCommentRes, TComments } from "@/schemas/comment.schema"
 import { cookies } from "next/headers"
 import { CommentInput } from "./commentForm"
-import { redirect } from "next/navigation"
 import Link from "next/link"
 
 const getComments = async(postId: string, token:string | undefined) => {
@@ -46,16 +45,12 @@ const Comments = async({postId}:{postId: string}) => {
             <PageCard>
                 <h3>Comentários</h3>
                 {
-                    (!token || comments.postComments.length === 0) ? 
-                    <p>nenhum comentario</p> :
+                    (!token || !comments.postComments) ?
+                    <p>nenhum comentario</p>:
                     (
                         <ul>
                             {
-                                comments.postComments.map((comment: TComments) => {
-                                    return(
-                                        <Comment comment={comment}/>
-                                    )
-                                })
+                                comments.postComments.map((comment: TComments) =><Comment comment={comment}/>)
                             }
                         </ul>
                     )

@@ -1,6 +1,7 @@
 import getInitials from "@/uteis/getInitials"
 import "../../styles/components/tags/tags.sass"
 import {TbBrandCashapp} from "react-icons/tb"
+import { redirect } from "next/navigation"
 
 interface iTag{
     children: React.ReactNode
@@ -16,6 +17,7 @@ interface iElipsis{
 const Elipsis=({color="purple-1",name="nome",className}:iElipsis)=>{
 
     const initials = getInitials(name)
+
 
     return(
         <div className={`div-elipsis ${className}`}>

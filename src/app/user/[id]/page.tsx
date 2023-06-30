@@ -6,7 +6,6 @@ import { TUser } from "@/schemas/userSchema"
 import { getData } from "@/uteis/api"
 import { cookies } from "next/headers"
 import { Suspense } from "react"
-
 import CarsList from "@/components/cardsList/cardsList"
 import { CardsLoading } from "@/components/loadings/cardsLoading/cardsLoading"
 import { redirect } from "next/navigation"
@@ -42,8 +41,8 @@ const Profile = async({params}:{params:any}) =>{
     // !userToken && redirect("/login")
     const profile:TUser=await getUserLogged(userToken!.value)
 
-    const Advertiser=await getAdvertiser(id)
-    const {user:anunciant}:{user:TUser}=Advertiser.data
+    const advertiser=await getAdvertiser(id)
+    const {user:anunciant}:{user:TUser}=advertiser.data
 
     return ( 
         <>

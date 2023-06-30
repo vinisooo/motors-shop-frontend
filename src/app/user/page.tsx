@@ -6,10 +6,8 @@ import { getData } from "@/uteis/api"
 import { TUser } from "@/schemas/userSchema"
 import { cookies } from "next/dist/client/components/headers"
 import { Suspense } from "react"
-
 import CarsList from "@/components/cardsList/cardsList"
 import { CardsLoading } from "@/components/loadings/cardsLoading/cardsLoading"
-import Link from "next/link"
 import { redirect } from "next/navigation"
 
 const getUser=async(token:string)=>{
