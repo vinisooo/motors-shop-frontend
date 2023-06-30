@@ -1,5 +1,4 @@
 'use client'
-
 import '../../styles/components/headerAnunciant/headerAnunciant.sass'
 import { TUser } from "@/schemas/userSchema"
 import Button from "../button/button"

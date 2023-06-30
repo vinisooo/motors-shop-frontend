@@ -1,0 +1,44 @@
+.backdrop
+    background-color: rgba(0,0 ,0 ,0.5 )
+    display: flex
+    justify-content: center
+    align-items: center
+
+    position: fixed
+    top: 0
+    left: 0
+    z-index: 120
+
+    height: 100vh
+    width: 100vw
+
+    .modal
+        background-color: white
+        min-width: 500px
+        padding: 18px
+        border-radius: 10px
+
+        &-header
+            display: flex
+            justify-content: space-between
+            margin-bottom: 10px
+            height: 30px
+            overflow-x: auto
+
+            button
+                background-color: transparent
+                margin: 0px
+                padding: 0px
+
+                svg
+                    color: red
+                    height: 30px
+                    width: 30px
+        &-body
+            padding: 18px
+            max-width: 80vw
+            max-height: 80vh
+            overflow: auto
+
+.fake-modal
+    display: contents

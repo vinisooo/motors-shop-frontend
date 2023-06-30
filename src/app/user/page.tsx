@@ -6,28 +6,26 @@ import { getData } from "@/uteis/api"
 import { TUser } from "@/schemas/userSchema"
 import { cookies } from "next/dist/client/components/headers"
 import { Suspense } from "react"
-
 import CarsList from "@/components/cardsList/cardsList"
 import { CardsLoading } from "@/components/loadings/cardsLoading/cardsLoading"
-import Link from "next/link"
 import { redirect } from "next/navigation"
 
 const getUser=async(token:string)=>{
     const response=await getData('/users/loggedUser',{
         headers:{
             Authorization: `Bearer ${token}`
-        },
-        cache: "no-cache"
+        }
     })
+
     return response
 }
 
 const Profile = async() =>{
 
     const cookieStore = cookies()
-    const userToken= cookieStore.get('userToken')
+    const userToken = cookieStore.get('userToken')
     !userToken && redirect('/login')
-    const profile:TUser=userToken && await getUser( userToken!.value)
+    const profile:TUser=await getUser( userToken!.value)
 
 return ( 
         <div>

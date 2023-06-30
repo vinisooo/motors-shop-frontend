@@ -7,6 +7,8 @@ import { TUser } from '@/schemas/userSchema'
 import Elipsis from '../tags/elipse'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { Modal } from '../modal/modalBase/modal'
+import { EditAdvertForm } from '../forms/adverts/editAdvertForm'
 
 interface props{
     car: TCar,
@@ -18,24 +20,21 @@ interface props{
 
 const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
 
+
     const router=useRouter()
     const owern= anunciant.id==user?.id
 
     const{brand,year,price,color,coverImage:img,model,quilometers:km,description,isAvailable,fuel, id}=car
 
-    const editar=()=>{
-        console.log('editar')
-    }
-
     const detalhes=()=>{
-        router.push('/advertisements/b084d3ac-48d3-4028-8323-ac6d5f8924b7')
+        router.push(`/advertisements/${car.id}`)
     }
 
     return(
         <div className="product">
             <Link href={`/advertisements/${id}`}>
                 <div className="img-product">
-                    <img src={img} alt={`foto de ${model}`} />
+                    <img className={car.id} src={img} alt={`foto de ${model}`} />
                     <Tag type={advertisement}>{advertisement}</Tag>
                 </div>
             </Link>
@@ -59,7 +58,9 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
                 {
                     owern &&
                     <div className='buttons'>
-                        <Button onClick={editar} Style={'outline-brand-1'} size={'medium'}>Editar</Button>
+                        <Modal modalContent={<EditAdvertForm car={car}/>} title='Editar Anuncio' >
+                            <Button Style={'outline-brand-1'} size={'medium'}>Editar</Button>
+                        </Modal>
                         <Button onClick={detalhes} Style={'outline-brand-1'} size={'medium'}>Ver Detalhes</Button>
                     </div>
                 }

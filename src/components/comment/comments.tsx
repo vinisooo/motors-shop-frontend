@@ -13,9 +13,7 @@ const getComments = async(postId: string, token:string) => {
             headers:{
                 Authorization: `Bearer ${token}`
             },
-            next: {
-                revalidate: 60
-            }
+            cache:"no-store"
         })
 
         return response
@@ -31,20 +29,15 @@ const Comments = async({postId}:{postId: string}) => {
 
     return(
         <section className="comments">
-
             <PageCard>
                 <h3>Comentários</h3>
                 {
-                    (!token || comments.postComments.length === 0) ? 
-                    <p>nenhum comentario</p> :
+                    (!token || !comments.postComments) ?
+                    <p>nenhum comentario</p>:
                     (
                         <ul>
                             {
-                                comments.postComments.map((comment: TComments) => {
-                                    return(
-                                        <Comment comment={comment}/>
-                                    )
-                                })
+                                comments.postComments.map((comment: TComments) =><Comment comment={comment}/>)
                             }
                         </ul>
                     )

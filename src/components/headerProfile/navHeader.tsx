@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Elipsis } from "../tags/tags";
 import Button from "../button/button";
 import { useAuthContext } from "@/context/authContext";
+import { redirect } from "next/navigation";
 
 const NavHeader=({name}:{name:string})=>{
 
@@ -13,7 +14,9 @@ const NavHeader=({name}:{name:string})=>{
     return (
         <>
             <nav className={dropdownMenu ? "" : "hidden-dropdown-menu"}>
-                <Elipsis name={name}/>
+                <div onClick={()=>{redirect('/user')}}>
+                    <Elipsis name={name}/>
+                </div>
                 <Button onClick={logout}>Sair</Button>
             </nav>
 
