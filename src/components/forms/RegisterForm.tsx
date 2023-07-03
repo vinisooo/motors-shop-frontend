@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import "../../styles/components/forms/registerForm.sass"
 import Button from "../button/button"
 import { useAuthContext } from "@/context/authContext"
-import { useState } from "react"
+import React, { useState } from "react"
 
 const RegisterForm = () => {
     const {
@@ -54,12 +54,12 @@ const RegisterForm = () => {
                 </div>
                 <div>
                     <label htmlFor="cpf">CPF</label>
-                    <input type="text" id="cpf" {...register("cpf")}/>
+                    <input type="number" onInput={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value = e.target.value.slice(0, 11)} id="cpf" {...register("cpf")}/>
                     {errors.cpf && <span className="error">{errors.cpf.message}</span>}
                 </div>
                 <div>
                     <label htmlFor="phone">Celular</label>
-                    <input type="text" id="phone" {...register("phone")}/>
+                    <input type="number" onInput={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value = e.target.value.slice(0, 11)} id="phone" {...register("phone")}/>
                     {errors.phone && <span className="error">{errors.phone.message}</span>}
                 </div>
                 <div>
@@ -75,7 +75,7 @@ const RegisterForm = () => {
                 <h1>Informações de endereço</h1>
                 <div>
                     <label htmlFor="zipCode">CEP</label>
-                    <input type="text" id="zipCode" {...register("address.zipCode")}/>
+                    <input type="number" onInput={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value = e.target.value.slice(0, 8)} id="zipCode" {...register("address.zipCode")}/>
                     {errors.address?.zipCode && <span className="error">{errors.address?.zipCode.message}</span>}
                 </div>
                 <div className="flex-horizontal">
