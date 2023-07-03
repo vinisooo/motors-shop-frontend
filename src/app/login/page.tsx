@@ -8,7 +8,6 @@ const LoginPage = () => {
     <main className="forms">
       <LoginForm/>
       <Footer/>
-      
     </main>
   )
 }

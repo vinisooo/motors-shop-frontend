@@ -113,6 +113,8 @@ export const AuthProvider = ({children}: TProviderProps) => {
             router.push("/")
             router.refresh()
             toast.success("Login efetuado com sucesso!")
+
+            getUserProfile(token)
       } catch (err) {
             if (axios.isAxiosError(err)) {
                 if (err.response) {
