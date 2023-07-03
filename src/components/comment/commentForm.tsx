@@ -6,12 +6,15 @@ import { useAuthContext } from "@/context/authContext"
 import { useForm } from "react-hook-form"
 import { TCommentReqSchema, commentReqSchema } from "@/schemas/comment.schema"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from "next/navigation"
 
 const CommentInput=({postId}:{postId:string})=>{
 
     const [disabled,setDisabled]=useState(true)
     const [comment, setComment] = useState("")
     const {createComment}=useAuthContext()
+
+    const router = useRouter()
 
     const {
         register,
@@ -36,6 +39,7 @@ const CommentInput=({postId}:{postId:string})=>{
         setDisabled(true)
         setComment("")
         createComment(data)
+        router.refresh()
     }
 
     const setAutoComment = (autoComment: string) => {
