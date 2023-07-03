@@ -79,7 +79,8 @@ export const AuthProvider = ({children}: TProviderProps) => {
             })
             setUser(data)
         } catch (err) {
-            toast.error("Token de acesso expirado. Realize o login novamente.")
+            destroyCookie(null, "userToken")
+            toast.error("Sessão Expirada. Realize o login novamente.")
             router.push("/login")
             console.error(err)
         }

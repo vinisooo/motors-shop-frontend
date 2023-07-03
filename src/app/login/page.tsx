@@ -6,8 +6,7 @@ import "../../styles/pages/formsPages/forms.sass"
 const LoginPage = () => {
   return (
     <main className="forms">
-      <Header/>
-        <LoginForm/>
+      <LoginForm/>
       <Footer/>
       
     </main>

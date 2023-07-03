@@ -22,7 +22,6 @@ const Advertisement = async({params}: {params:{id: string}}) => {
 
     return(
             <div className="darker-bg">
-                <HeaderProfile/>
                 <div className="advertisement-header"/>
                 <main className="container">
                     <AdvertisementInfo advertisement={advertisement}/>

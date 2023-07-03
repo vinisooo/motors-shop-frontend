@@ -50,7 +50,6 @@ const Profile = async({params}:{params:any}) =>{
     return ( 
         <>
             <header>
-                <HeaderProfile/>
                 <HeaderAnunciant anunciant={anunciant} profile={profile}/>
             </header>
             <main>

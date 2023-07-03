@@ -6,7 +6,6 @@ import "../../styles/pages/formsPages/forms.sass"
 const RegisterPage = () => {
   return (
     <main className="forms">
-      <Header/>
       <RegisterForm/>
       <Footer/>
     </main>
