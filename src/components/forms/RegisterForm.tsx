@@ -20,10 +20,22 @@ const RegisterForm = () => {
         resolver: zodResolver(registerValidationSchema)
     })
     const [isAdvertiser, setIsAdvertiser] = useState<boolean>(false)
+    const [state, setState] = useState<string>("")
+    const [city, setCity] = useState<string>("")
+    const [street, setStreet] = useState<string>("")
+    const [complement, setComplement] = useState<string>("")
+
 
     const { registerUser } = useAuthContext()
 
     const onSubmitRegister: SubmitHandler<any> = async (data) => {
+      data.address = {
+        ...data.address,
+        city: city,
+        state: state,
+        street: street,
+        complement: complement
+      }
       await registerUser(data)
     }
 
@@ -35,6 +47,30 @@ const RegisterForm = () => {
     const setAdvertiser = () => {
         setValue("isAdvertiser", true)
         setIsAdvertiser(true)
+    }
+
+    const onInputCep = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const cep = e.target.value
+
+        e.target.value = cep.slice(0, 8)
+        if(cep.length === 8){
+            console.log(cep)
+            getCepAddress(cep)
+        }
+    }
+
+    const getCepAddress = async(cep: string) => {
+        try{
+            const request = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
+
+            const response = await request.json()
+            setState(response.uf)
+            setCity(response.localidade)
+            setStreet(response.logradouro)
+            setComplement(complement)
+        }catch(err: unknown){
+            console.log(err)
+        }
     }
 
     return(
@@ -75,18 +111,18 @@ const RegisterForm = () => {
                 <h1>Informações de endereço</h1>
                 <div>
                     <label htmlFor="zipCode">CEP</label>
-                    <input type="number" onInput={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value = e.target.value.slice(0, 8)} id="zipCode" {...register("address.zipCode")}/>
+                    <input type="number" onInput={onInputCep} id="zipCode" {...register("address.zipCode")}/>
                     {errors.address?.zipCode && <span className="error">{errors.address?.zipCode.message}</span>}
                 </div>
                 <div className="flex-horizontal">
                     <div>
                         <label htmlFor="state">Estado</label>
-                        <input type="text" id="state" {...register("address.state")}/>
+                        <input value={state} type="text" id="state" maxLength={2} {...register("address.state")} onChange={(e) => setState(e.target.value)}/>
                         {errors.address?.state && <span className="error">{errors.address?.state.message}</span>}
                     </div>
                     <div>
                         <label htmlFor="city">Cidade</label>
-                        <input type="text" id="city" {...register("address.city")}/>
+                        <input value={city} type="text" id="city" {...register("address.city")} onChange={(e) => setCity(e.target.value)}/>
                         {errors.address?.city && <span className="error">{errors.address?.city.message}</span>}
                     </div>
                 </div>
@@ -103,7 +139,7 @@ const RegisterForm = () => {
                     </div>
                     <div>
                         <label htmlFor="complement">Complemento</label>
-                        <input type="text" id="complement" {...register("address.complement")}/>
+                        <input value={complement} type="text" id="complement" {...register("address.complement")} onChange={(e)=>setComplement(e.target.value)}/>
                         {errors.address?.complement && <span className="error">{errors.address?.complement.message}</span>}
                     </div>
                 </div>
