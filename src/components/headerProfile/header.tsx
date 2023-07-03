@@ -6,7 +6,7 @@ import { cookies } from "next/headers"
 import NavHeader from "./navHeader"
 import { redirect } from "next/navigation"
 
-const getUserToken=async()=>{
+const getUser=async()=>{
     try{
         const userToken = cookies().get("userToken")
         const request= userToken && await getData("/users/loggedUser",{
@@ -23,7 +23,7 @@ const getUserToken=async()=>{
 }
 
 const HeaderProfile = async() => {
-    const user=await getUserToken()
+    const user=await getUser()
     
     return(
         <div className="main-header">

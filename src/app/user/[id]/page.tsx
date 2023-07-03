@@ -9,6 +9,7 @@ import { Suspense } from "react"
 import CarsList from "@/components/cardsList/cardsList"
 import { CardsLoading } from "@/components/loadings/cardsLoading/cardsLoading"
 import { redirect } from "next/navigation"
+import {toast} from "react-toastify"
 
 
 const getUserLogged=async(token:string)=>{
@@ -38,6 +39,9 @@ const Profile = async({params}:{params:any}) =>{
     const {id}=params
     const cookieStore = cookies()
     const userToken= cookieStore.get("userToken")
+    if(!userToken){
+        redirect("/login")
+    }
     const profile:TUser=await getUserLogged(userToken!.value)
 
     const advertiser=await getAdvertiser(id)

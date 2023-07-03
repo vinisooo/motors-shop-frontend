@@ -2,8 +2,8 @@
 import api from "@/services"
 import { TLoginReq, TLoginRes, TProviderProps, TUserRes, TValidationSchema } from "@/types/user.types"
 import { useRouter } from "next/navigation"
-import { setCookie,destroyCookie, parseCookies } from "nookies"
-import { createContext, useContext, useState } from "react"
+import nookies,{ setCookie,destroyCookie, parseCookies } from "nookies"
+import { createContext, useContext, useEffect, useState } from "react"
 import { TResetPasswordEmailReq, TResetPasswordReq } from "@/schemas/users.schema"
 import axios,{ AxiosError, AxiosResponse } from "axios"
 
@@ -36,7 +36,9 @@ export const AuthProvider = ({children}: TProviderProps) => {
     const [sentEmail, setSentEmail] = useState<boolean>(false)
     const [existantUser, setExistantUser] = useState<boolean>(true)
     const [loading, setLoading] = useState<boolean>(false)
-    
+
+    const token = nookies.get()["userToken"]
+
     const registerUser = async (data: TValidationSchema) => {
         try {
             const newUser: TUserRes = await api.post("/users/register", data, {
@@ -64,7 +66,7 @@ export const AuthProvider = ({children}: TProviderProps) => {
 
     const logout=()=>{
         destroyCookie(null, "userToken")
-        router.push("/")
+        router.refresh()
     }
     
     const getUserProfile = async (token: string) => {
@@ -76,10 +78,17 @@ export const AuthProvider = ({children}: TProviderProps) => {
                 }
             })
             setUser(data)
-            router.push("/user")
         } catch (err) {
+            toast.error("Token de acesso expirado. Realize o login novamente.")
+            router.push("/login")
             console.error(err)
         }
+    }
+
+    if(token){
+        useEffect(()=> {
+            getUserProfile(token)
+        },[])
     }
 
     const getUserToken=()=>{

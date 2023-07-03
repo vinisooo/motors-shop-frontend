@@ -9,6 +9,7 @@ import { Suspense } from "react"
 import CarsList from "@/components/cardsList/cardsList"
 import { CardsLoading } from "@/components/loadings/cardsLoading/cardsLoading"
 import { redirect } from "next/navigation"
+import {toast} from "react-toastify"
 
 const getUser=async(token:string)=>{
     try{
@@ -31,7 +32,9 @@ const Profile = async() =>{
 
     const cookieStore = cookies()
     const userToken= cookieStore.get("userToken")
-    !userToken && redirect("/login")
+    if(!userToken){
+        redirect("/login")
+    }
     const profile:TUser=userToken && await getUser( userToken!.value)
 
     return ( 
