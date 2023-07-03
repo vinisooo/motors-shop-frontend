@@ -7,3 +7,5 @@ const EditAddressModal = () => {
         </Modal>
     )
 }
+
+export default EditAddressModal
