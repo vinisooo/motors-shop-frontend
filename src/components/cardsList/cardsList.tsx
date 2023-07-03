@@ -1,7 +1,7 @@
-import { Cards } from "../cards/cards";
-import { Car,TCar, TCars } from "@/schemas/advertsSchema";
-import { TUser } from "@/schemas/userSchema";
-import { getData } from "@/uteis/api";
+import { Cards } from "../cards/cards"
+import { Car,TCar, TCars } from "@/schemas/advertsSchema"
+import { TUser } from "@/schemas/userSchema"
+import { getData } from "@/uteis/api"
 
 
 const getAdverts=async(id:string)=>{

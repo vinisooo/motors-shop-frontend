@@ -7,21 +7,34 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import "../../styles/components/forms/registerForm.sass"
 import Button from "../button/button"
 import { useAuthContext } from "@/context/authContext"
+import { useState } from "react"
 
 const RegisterForm = () => {
     const {
         register,
         handleSubmit,
         setValue,
+        getValues,
         formState: { errors }
     } = useForm<TValidationSchema>({
         resolver: zodResolver(registerValidationSchema)
     })
+    const [isAdvertiser, setIsAdvertiser] = useState<boolean>(false)
 
     const { registerUser } = useAuthContext()
 
     const onSubmitRegister: SubmitHandler<any> = async (data) => {
       await registerUser(data)
+    }
+
+    const setNotAdvertiser = () => {
+        setValue("isAdvertiser", false)
+        setIsAdvertiser(false)
+    }
+
+    const setAdvertiser = () => {
+        setValue("isAdvertiser", true)
+        setIsAdvertiser(true)
     }
 
     return(
@@ -96,10 +109,10 @@ const RegisterForm = () => {
                 </div>
                 <h1>Tipo de conta</h1>
                 <div className="flex-horizontal">
-                    <Button onClick={() => setValue("isAdvertiser", false)}>
+                    <Button type="button" Style={!isAdvertiser ? "brand-1" : "negative-1"} onClick={setNotAdvertiser}>
                         Comprador      
                     </Button>
-                    <Button onClick={() => setValue("isAdvertiser", true)}>
+                    <Button type="button" Style={isAdvertiser ? "brand-1" : "negative-1"} onClick={setAdvertiser}>
                         Anunciante
                     </Button>
                 </div>
