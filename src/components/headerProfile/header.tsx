@@ -23,7 +23,7 @@ const getUser=async()=>{
 }
 
 const HeaderProfile = async() => {
-    const user=await getUser()
+    const user= await getUser()
     
     return(
         <div className="main-header">

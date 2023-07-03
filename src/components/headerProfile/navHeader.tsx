@@ -8,7 +8,7 @@ import { redirect } from "next/navigation"
 const NavHeader=({name}:{name:string})=>{
 
     const [dropdownMenu, setDropdownMenu] = useState<boolean>(false)
-    const{logout}=useAuthContext()
+    const{logout} = useAuthContext()
 
     return (
         <>

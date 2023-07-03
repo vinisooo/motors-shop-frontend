@@ -37,8 +37,6 @@ export const AuthProvider = ({children}: TProviderProps) => {
     const [existantUser, setExistantUser] = useState<boolean>(true)
     const [loading, setLoading] = useState<boolean>(false)
 
-    const token = nookies.get()["userToken"]
-
     const registerUser = async (data: TValidationSchema) => {
         try {
             const newUser: TUserRes = await api.post("/users/register", data, {
@@ -85,17 +83,20 @@ export const AuthProvider = ({children}: TProviderProps) => {
             console.error(err)
         }
     }
-
-    if(token){
-        useEffect(()=> {
-            getUserProfile(token)
-        },[])
-    }
+    
 
     const getUserToken=()=>{
         const {userToken}=parseCookies()
         return userToken
     }
+    
+    useEffect(()=> {
+        const token = getUserToken()
+        if(token){
+            getUserProfile(token)
+        }
+    },[])
+
 
     const login = async (dataLogin: TLoginReq, callback: () => void) => {
         setExistantUser(true)
@@ -110,6 +111,7 @@ export const AuthProvider = ({children}: TProviderProps) => {
                 callback()
             }
             router.push("/")
+            router.refresh()
             toast.success("Login efetuado com sucesso!")
       } catch (err) {
             if (axios.isAxiosError(err)) {
