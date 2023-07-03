@@ -125,14 +125,9 @@ const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
     let filterWithoutPage = {...searchParams}
     delete filterWithoutPage["page"]
 
-    const toastify = () => {
-        console.log("toastify")
-        toast.success("toasty")
-    }
 
     return(
         <aside className={`aside-filter ${filterDropdown ? "" : "hidden-aside-filter"}`}>
-            <button onClick={toastify}>toast</button>
             <header className="filter-header">
                 <h3>
                     Filtro

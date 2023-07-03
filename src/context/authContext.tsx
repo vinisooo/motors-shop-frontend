@@ -172,7 +172,9 @@ export const AuthProvider = ({children}: TProviderProps) => {
                     Authorization: `Bearer ${token}`
                 }
             })
+            toast.success("Comentário adicionado")
         }catch (err) {
+            toast.error("Oops! Houve algo de errado ao adicionar comentário. Tente Mais tarde.")
             console.error(err)
         }
     }

@@ -1,16 +1,27 @@
 @use "../../variables"
     
 .cars
+    width: 100%
+    margin: 20px
     h2
         font-size: 24px
         font-weight: 600
         font-family: variables.$default-font
+        color: variables.$color-grey-1
 
-    &-list
+    .cars-list
+        max-width: 100%
         display: flex
-        margin: 50px auto
+        flex-wrap: nowrap
+        overflow-x: auto
+
+        margin: 45px auto
+        padding-bottom: 20px
+
+@media (min-width: 768px)
+    .cars
         width: 80%
-        flex-wrap: wrap
-        justify-content: center
-        align-items: center
-        gap: 25px
+        margin: 0 auto
+
+        .cars-list
+            flex-wrap: wrap

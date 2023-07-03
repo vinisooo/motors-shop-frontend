@@ -38,7 +38,6 @@ const Profile = async({params}:{params:any}) =>{
     const {id}=params
     const cookieStore = cookies()
     const userToken= cookieStore.get("userToken")
-    // !userToken && redirect("/login")
     const profile:TUser=await getUserLogged(userToken!.value)
 
     const advertiser=await getAdvertiser(id)
@@ -51,7 +50,7 @@ const Profile = async({params}:{params:any}) =>{
                 <HeaderAnunciant anunciant={anunciant} profile={profile}/>
             </header>
             <main>
-                <section className="cars-section">
+                <section className="cars">
                     <h2>Anúncios</h2>
                     <div className="cars-list">
                         <Suspense fallback={
