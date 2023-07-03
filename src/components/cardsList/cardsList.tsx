@@ -5,7 +5,11 @@ import { getData } from "@/uteis/api"
 
 
 const getAdverts=async(id:string)=>{
-    const response=await getData(`/users/${id}/adverts`)
+    const response=await getData(`/users/${id}/adverts/?perPage=999`, {
+        next: {
+            revalidate: 30
+        }
+    })
     return response
 }
   
