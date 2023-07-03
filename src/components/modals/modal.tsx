@@ -15,12 +15,14 @@ interface iModalProps{
 const Modal = ({children, title, className}: iModalProps) => {
     const modalRef = useRef<HTMLDivElement>(null)
 
-    const { setResetPasswordModal, setCreateAdvertModal, createAdvertModal, setCarImageModal } = useContext(ModalContext)
+    const { setResetPasswordModal, setCreateAdvertModal, createAdvertModal, setCarImageModal, setEditProfileModal, setDeleteProfileModal } = useContext(ModalContext)
 
     const closeModal = () => {
         setResetPasswordModal(false)
         setCreateAdvertModal(false)
         setCarImageModal(false)
+        setEditProfileModal(false)
+        setDeleteProfileModal(false)
     }
     
     useEffect(() => {
