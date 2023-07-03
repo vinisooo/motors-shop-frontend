@@ -19,7 +19,8 @@ const RegisterForm = () => {
     } = useForm<TValidationSchema>({
         resolver: zodResolver(registerValidationSchema)
     })
-    const [isAdvertiser, setIsAdvertiser] = useState<boolean>(false)
+    const [isAdvertiser, setIsAdvertiser] = useState<boolean | null>(null)
+
     const [state, setState] = useState<string>("")
     const [city, setCity] = useState<string>("")
     const [street, setStreet] = useState<string>("")
@@ -29,15 +30,17 @@ const RegisterForm = () => {
     const { registerUser } = useAuthContext()
 
     const onSubmitRegister: SubmitHandler<any> = async (data) => {
-      data.address = {
-        ...data.address,
-        city: city,
-        state: state,
-        street: street,
-        complement: complement
-      }
-      await registerUser(data)
+        data.address = {
+            ...data.address,
+            city: city || data.address.city,
+            state: state || data.address.state,
+            street: street || data.address.street,
+            complement: complement || data.address.complement
+        }
+        console.log("data",data)
+        await registerUser(data)
     }
+    console.log("erros:", errors)
 
     const setNotAdvertiser = () => {
         setValue("isAdvertiser", false)
@@ -67,7 +70,7 @@ const RegisterForm = () => {
             setState(response.uf)
             setCity(response.localidade)
             setStreet(response.logradouro)
-            setComplement(complement)
+            setComplement(response.complement)
         }catch(err: unknown){
             console.log(err)
         }
@@ -145,13 +148,14 @@ const RegisterForm = () => {
                 </div>
                 <h1>Tipo de conta</h1>
                 <div className="flex-horizontal">
-                    <Button type="button" Style={!isAdvertiser ? "brand-1" : "negative-1"} onClick={setNotAdvertiser}>
+                    <Button type="button" Style={isAdvertiser === false ? "brand-1" : "negative-1"} onClick={setNotAdvertiser}>
                         Comprador      
                     </Button>
                     <Button type="button" Style={isAdvertiser ? "brand-1" : "negative-1"} onClick={setAdvertiser}>
                         Anunciante
                     </Button>
                 </div>
+                    {errors.isAdvertiser && <span className="error">Selecione o tipo da sua conta</span>}
                 <div>
                     <label htmlFor="password">Senha</label>
                     <input type="password" id="password" {...register("password")}/>

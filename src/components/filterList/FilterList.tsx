@@ -12,6 +12,7 @@ import { AiOutlineClose } from "react-icons/ai"
 import { Dispatch, SetStateAction, EventHandler } from "react"
 import { useRouter } from "next/navigation"
 import { TAdvertisementRes } from "@/schemas/advertisement.schema"
+import {toast} from "react-toastify"
 
 export interface iFilters {
     brand: string | undefined,
@@ -124,8 +125,14 @@ const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
     let filterWithoutPage = {...searchParams}
     delete filterWithoutPage["page"]
 
+    const toastify = () => {
+        console.log("toastify")
+        toast.success("toasty")
+    }
+
     return(
         <aside className={`aside-filter ${filterDropdown ? "" : "hidden-aside-filter"}`}>
+            <button onClick={toastify}>toast</button>
             <header className="filter-header">
                 <h3>
                     Filtro

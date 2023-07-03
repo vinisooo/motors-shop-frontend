@@ -5,10 +5,11 @@ import { useRouter } from "next/navigation"
 import { setCookie,destroyCookie, parseCookies } from "nookies"
 import { createContext, useContext, useState } from "react"
 import { TResetPasswordEmailReq, TResetPasswordReq } from "@/schemas/users.schema"
-import axios,{ AxiosResponse } from "axios"
+import axios,{ AxiosError, AxiosResponse } from "axios"
 
 import { SetStateAction } from "react"
 import { TCommentReqSchema } from "@/schemas/comment.schema"
+import {toast} from "react-toastify"
 
 export interface IAuthContext {
   registerUser: (data: TValidationSchema) => Promise<void>
@@ -44,9 +45,19 @@ export const AuthProvider = ({children}: TProviderProps) => {
                 }
             })
             setUser(newUser)
+            
             console.log(newUser)
+            toast.success("Usuário registrado com sucesso!")
             router.push("/login")
-        } catch (err) {
+        } catch (err: unknown) {
+            if ((err as AxiosError).response && (err as AxiosError).response!.status === 409) {
+                if((err as any).response.data.details.includes("Email")){
+                    toast.error("O Email inserido já está em uso")
+                }
+                if((err as any).response.data.details.includes("CPF")){
+                    toast.error("O CPF inserido já está em uso")
+                }
+            }
             console.error(err)
         }
     }
@@ -89,6 +100,7 @@ export const AuthProvider = ({children}: TProviderProps) => {
                 callback()
             }
             router.push("/")
+            toast.success("Login efetuado com sucesso!")
       } catch (err) {
             if (axios.isAxiosError(err)) {
                 if (err.response) {

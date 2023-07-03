@@ -24,12 +24,12 @@ const Home = async({searchParams}: iFilterListProps) => {
         <Header/> : <HeaderProfile/>
       }
       <main>
-      <HomeHeader/>
-      <section className="cars-section">
-        <Suspense fallback={<HomePageLoading/>}>
-          <CarsHome searchParams={searchParams}/>
-        </Suspense>
-      </section>
+        <HomeHeader/>
+        <section className="cars-section">
+          <Suspense fallback={<HomePageLoading/>}>
+            <CarsHome searchParams={searchParams}/>
+          </Suspense>
+        </section>
       </main>
       <Footer/>
     </>
