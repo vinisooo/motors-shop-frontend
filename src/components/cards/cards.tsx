@@ -33,7 +33,7 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
         <div className="product">
             <Link href={`/advertisements/${id}`}>
                 <div className="img-product">
-                    <img className={car.id} src={img} alt={`foto de ${model}`} />
+                    <img className={car.id} src={img}/>
                     <Tag type={advertisement}>{advertisement}</Tag>
                     {
                         car.fipeDeal &&
