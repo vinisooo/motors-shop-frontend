@@ -70,7 +70,6 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
             return image
         })
         setImages(imagesAux)
-        console.log(imagesAux)
     }
 
     return (
@@ -166,9 +165,11 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
             {errors.coverImage && <span className="error">{errors.coverImage.message}</span>}
             {
                 images.map((_image, index) => {
-                    return(
-                        <Input value={images[index] || ""} onChange={(e:ChangeEvent<HTMLInputElement>)=>addImage(e, index)}>{`${index + 1}ª`} Imagem da galeria</Input>
-                    )
+                    if(index !== 0){
+                        return(
+                            <Input value={images[index] || ""} onChange={(e:ChangeEvent<HTMLInputElement>)=>addImage(e, index)}>{`${index + 1}ª`} Imagem da galeria</Input>
+                        )
+                    }
                 })
             }
             {
