@@ -5,6 +5,8 @@
     max-height: 80px
 
     border-bottom: 1px solid variables.$color-grey-5
+
+    animation: header-show-up 0.8s ease
     
     position: fixed
     top: 0
@@ -203,3 +205,9 @@
                 height: 100px
                 width: 1px
                 background-color: variables.$color-grey-6
+
+@keyframes header-show-up 
+    from
+        transform: translateY(-10vh)
+    to
+        transform: translateY(0) scale(1)

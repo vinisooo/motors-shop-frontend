@@ -5,7 +5,7 @@ import "../../styles/pages/formsPages/forms.sass"
 
 const RegisterPage = () => {
   return (
-    <main className="forms">
+    <main className="forms page-show-up">
       <RegisterForm/>
       <Footer/>
     </main>

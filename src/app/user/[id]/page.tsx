@@ -49,10 +49,10 @@ const Profile = async({params}:{params:any}) =>{
 
     return ( 
         <>
-            <header>
+            <header className="page-show-up">
                 <HeaderAnunciant anunciant={anunciant} profile={profile}/>
             </header>
-            <main>
+            <main className="page-show-up">
                 <section className="cars">
                     <h2>Anúncios</h2>
                     <div className="cars-list">

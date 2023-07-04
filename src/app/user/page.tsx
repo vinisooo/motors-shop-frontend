@@ -39,7 +39,7 @@ const Profile = async() =>{
     const profile:TUser=userToken && await getUser( userToken!.value)
 
     return ( 
-        <div>
+        <div className="page-show-up">
             <header>
                 <HeaderAnunciant anunciant={profile} profile={profile}/>
             </header>

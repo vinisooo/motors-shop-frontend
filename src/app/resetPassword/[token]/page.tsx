@@ -11,7 +11,7 @@ interface iResetPasswordProps{
 const ResetPassword = ({params}: iResetPasswordProps) => {
     const {token} = params
     return (
-        <main className="forms">
+        <main className="forms page-show-up">
             <ResetPasswordForm token={token}/>
             <Footer/>
         </main>
