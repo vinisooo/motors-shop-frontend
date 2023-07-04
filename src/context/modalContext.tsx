@@ -30,7 +30,7 @@ interface iModalContextValues{
 
 export const ModalContext = createContext({} as iModalContextValues)
 
-const ModalProvider = ({children}: iChildrenProps) => {
+export const ModalProvider = ({children}: iChildrenProps) => {
     const [filterDropdown, setFilterDropdown] = useState<boolean>(false)
     const [resetPasswordModal, setResetPasswordModal] = useState<boolean>(false)
     const [createAdvertModal, setCreateAdvertModal] = useState<boolean>(false)
@@ -50,4 +50,4 @@ const ModalProvider = ({children}: iChildrenProps) => {
     )
 }
 
-export default ModalProvider
+export const useModalContext =() => useContext(ModalContext)

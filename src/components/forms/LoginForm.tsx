@@ -8,8 +8,7 @@ import Link from "next/link"
 import { SubmitHandler, useForm } from "react-hook-form"
 import Button from "../button/button"
 import { useUserContext } from "@/context/userContext"
-import { useContext } from "react"
-import { ModalContext } from "@/context/modalContext"
+import {useModalContext } from "@/context/modalContext"
 import ResetPasswordModal from "../modals/resetPasswordModal"
 
 const LoginForm = () => {
@@ -22,7 +21,7 @@ const LoginForm = () => {
         resolver: zodResolver(loginReqSchema)
     })
 
-    const { resetPasswordModal, setResetPasswordModal } = useContext(ModalContext)
+    const { resetPasswordModal, setResetPasswordModal } = useModalContext()
 
     const { login, existantUser } = useUserContext()
 

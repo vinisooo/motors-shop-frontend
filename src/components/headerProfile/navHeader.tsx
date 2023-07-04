@@ -5,7 +5,7 @@ import Button from "../button/button"
 import { useUserContext } from "@/context/userContext"
 import { redirect } from "next/navigation"
 import Link from "next/link"
-import { ModalContext } from "@/context/modalContext"
+import { useModalContext } from "@/context/modalContext"
 import EditProfileModal from "../modals/editProfileModal"
 import DeleteProfileModal from "../modals/deleteProfileModal"
 import EditAddressModal from "../modals/editAddressModal"
@@ -14,7 +14,7 @@ const NavHeader=({name}:{name:string})=>{
 
     const [dropdownMenu, setDropdownMenu] = useState<boolean>(false)
     const{logout, user} = useUserContext()
-    const {setEditProfileModal, editProfileModal, setDeleteProfileModal, deleteProfileModal, setEditAddressModal, editAddressModal} = useContext(ModalContext)
+    const {setEditProfileModal, editProfileModal, setDeleteProfileModal, deleteProfileModal, setEditAddressModal, editAddressModal} = useModalContext()
 
     return (
         <>

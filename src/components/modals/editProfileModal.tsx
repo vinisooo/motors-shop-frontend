@@ -3,8 +3,8 @@ import "../../styles/components/modals/editProfileModal.sass"
 import { Input, TextArea } from "../inputs/inputs"
 import Modal from "./modal"
 import Button from "../button/button"
-import { useContext, useState } from "react"
-import { ModalContext } from "@/context/modalContext"
+import { useState } from "react"
+import { useModalContext } from "@/context/modalContext"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { usersUpdateReqSchema } from "@/schemas/users.schema"
@@ -30,7 +30,7 @@ const EditProfileModal = () => {
     const [birthdate, setBirthdate] = useState<string>(user.birthdate)
     const [description, setDescription] = useState<string>(user.description)
 
-    const {setDeleteProfileModal, setEditProfileModal} = useContext(ModalContext)
+    const {setDeleteProfileModal, setEditProfileModal} = useModalContext()
 
     const submitUpdate: SubmitHandler<any> = (data) => {
         editUser({...data, description: description})

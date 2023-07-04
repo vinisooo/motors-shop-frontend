@@ -1,6 +1,6 @@
 "use client"
-import { ModalContext } from "@/context/modalContext"
-import { useContext, useEffect, useRef } from "react"
+import { useModalContext } from "@/context/modalContext"
+import { useEffect, useRef } from "react"
 import { AiOutlineClose } from "react-icons/ai"
 
 import "../../styles/components/modals/modal.sass"
@@ -17,7 +17,7 @@ const Modal = ({children, title, className}: iModalProps) => {
 
     const { setResetPasswordModal, setCreateAdvertModal, createAdvertModal,
         setCarImageModal, setEditProfileModal, setDeleteProfileModal,
-        setEditAddressModal } = useContext(ModalContext)
+        setEditAddressModal } = useModalContext()
 
     const closeModal = () => {
         setResetPasswordModal(false)

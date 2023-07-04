@@ -7,15 +7,15 @@ import { useContext, useEffect, useState } from "react"
 import Link from "next/link"
 import PageCard from "../pageCard/pageCard"
 import Elipsis from "../tags/elipse"
-import { ModalContext } from "@/context/modalContext"
 import Autoplay from "embla-carousel-autoplay"
 import nookies from "nookies"
+import { useModalContext } from "@/context/modalContext"
 
 const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({delay: 2500})])
-    const {carImageModal, setCarImageModal} = useContext(ModalContext)
+    const {carImageModal, setCarImageModal} = useModalContext()
 
-    const {setCarImage} = useContext(ModalContext)
+    const {setCarImage} = useModalContext()
     const userToken = nookies.get()["userToken"]
 
     useEffect(() => {

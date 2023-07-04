@@ -1,11 +1,10 @@
 "use client"
 import Button from "../button/button"
 
-import { useContext } from "react"
-import { ModalContext } from "@/context/modalContext"
+import {  useModalContext } from "@/context/modalContext"
 
 const FilterButton = () => { 
-    const { filterDropdown,setFilterDropdown} = useContext(ModalContext)
+    const { filterDropdown,setFilterDropdown} = useModalContext()
 
     return(
         <Button onClick={() => setFilterDropdown(true)} width={80} size="medium">Filtros</Button>

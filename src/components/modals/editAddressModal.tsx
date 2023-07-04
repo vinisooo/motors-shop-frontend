@@ -4,8 +4,8 @@ import { Input } from "../inputs/inputs"
 import "../../styles/components/modals/editAddressModal.sass"
 import Button from "../button/button"
 import { useUserContext } from "@/context/userContext"
-import { useContext, useState } from "react"
-import { ModalContext } from "@/context/modalContext"
+import { useState } from "react"
+import { useModalContext } from "@/context/modalContext"
 import { TAddressUpdateReq } from "@/types/address.types"
 import { addressReqUpdateSchema } from "@/schemas/address.schema"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -23,7 +23,7 @@ const EditAddressModal = () => {
     })
 
     const {user, editAddress} = useUserContext()
-    const {setEditAddressModal} = useContext(ModalContext)
+    const {setEditAddressModal} = useModalContext()
     
     const [zipCode, setZipCode] = useState<string>(user.address.zipCode || "")
     const [state, setState] = useState<string>(user.address.state || "")

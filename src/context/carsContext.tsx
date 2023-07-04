@@ -5,7 +5,7 @@ import { AxiosResponse } from "axios"
 import nookies from "nookies"
 import { TAdvertisementReq, TAdvertisementRes } from "@/schemas/advertisement.schema"
 import api, { carsApi } from "@/services"
-import { ModalContext } from "./modalContext"
+import { useModalContext } from "./modalContext"
 
 interface iChildrenProps {
   children: React.ReactNode
@@ -25,9 +25,9 @@ export interface iCar {
   year?: number
 }
 
-const CarsProvider = ({ children }: iChildrenProps) => {
+export const CarsProvider = ({ children }: iChildrenProps) => {
   const [cars, setCars] = useState<iCar[]>([])
-  const {setCreateAdvertModal} = useContext(ModalContext)
+  const {setCreateAdvertModal} = useModalContext()
 
   const token = nookies.get()["userToken"]
 
@@ -78,4 +78,4 @@ const CarsProvider = ({ children }: iChildrenProps) => {
   )
 }
 
-export default CarsProvider
+export const useCarsContext =() => useContext(CarsContext)

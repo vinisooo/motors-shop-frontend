@@ -7,13 +7,13 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { TAdvertisementReq, advertisementReqSchema } from "@/schemas/advertisement.schema"
 import Modal from "./modal"
 import Button from "../button/button"
-import { ModalContext } from "@/context/modalContext"
-import { CarsContext} from "@/context/carsContext"
+import { useModalContext } from "@/context/modalContext"
+import { useCarsContext} from "@/context/carsContext"
 
 
 const CreateAdvertisementModal = ( ) => {
 
-    const {setCreateAdvertModal} = useContext(ModalContext)
+    const {setCreateAdvertModal} = useModalContext()
 
     const [brand, setBrand] = useState<string>("")
     const [fipe, setFipe] = useState<number>(0)
@@ -21,7 +21,7 @@ const CreateAdvertisementModal = ( ) => {
 
     const [images, setImages] = useState<(string | null)[]>([])
 
-    const {getCarsByBrand, cars, postAdvertisement} = useContext(CarsContext)
+    const {getCarsByBrand, cars, postAdvertisement} = useCarsContext()
 
     const {
         register,

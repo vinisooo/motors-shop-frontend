@@ -3,7 +3,7 @@ import { ChangeEvent, useContext, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { TAdvertisementReq, advertisementReqSchema } from "@/schemas/advertisement.schema"
-import { CarsContext} from "@/context/carsContext"
+import { useCarsContext} from "@/context/carsContext"
 import { Input, Select, TextArea } from "@/components/inputs/inputs"
 import Button from "@/components/button/button"
 import { TCar } from "@/schemas/advertsSchema"
@@ -19,7 +19,7 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
 
     const [images, setImages] = useState<(string | null)[]>([])
 
-    const {getCarsByBrand, cars, postAdvertisement} = useContext(CarsContext)
+    const {getCarsByBrand, cars, postAdvertisement} = useCarsContext()
 
     const {
         register,
