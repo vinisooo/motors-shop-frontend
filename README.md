@@ -1,15 +1,21 @@
 <h1>Documentação - Motors Shop</h1>
 
   <h2>Descrição</h2>
-  <p>Este é o repositório do projeto de frontend do Motors Shop, um e-commerce de carros.</p>
+  <p>Este é o repositório do FrontEnd do Projeto FullStack Motors Shop, uma aplicação completa para publicar postar veículos.</p>
+
+  <h3>Tecnologias usadas no front-end</h3>
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="typescript"/> <img src="https://img.shields.io/badge/Next.js-000?logo=nextdotjs&logoColor=fff&style=for-the-badge" alt="NextJS"/> <img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white" alt="Sass"/> <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" alt="figma"/> 
 
   <h2>Funcionalidades</h2>
   <ul>
-    <li>Postar veículos</li>
     <li>Criar contas de usuário</li>
+    <li>Logar com conta de usuário</li>
+    <li>Recuperar senha com email de acesso</li>
+    <li>Anunciar veículos</li>
+    <li>Vizualizar veiculos a venda</li>
+    <li>Editar anúncio veículos</li>
     <li>Avaliar veículos com comentários</li>
-    <li>Editar postagens</li>
-    <li>Entrar em contato com o vendedor pelo WhatsApp</li>
+    <li>Entrar em contato com o vendedor pelo WhatsApp para realizar a compra</li>
   </ul>
 
   <h2>Deploy</h2>
