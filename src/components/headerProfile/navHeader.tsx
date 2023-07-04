@@ -1,15 +1,20 @@
 "use client"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Elipsis } from "../tags/tags"
 import Button from "../button/button"
 import { useAuthContext } from "@/context/authContext"
 import { redirect } from "next/navigation"
 import Link from "next/link"
+import { ModalContext } from "@/context/modalContext"
+import EditProfileModal from "../modals/editProfileModal"
+import DeleteProfileModal from "../modals/deleteProfileModal"
+import EditAddressModal from "../modals/editAddressModal"
 
 const NavHeader=({name}:{name:string})=>{
 
     const [dropdownMenu, setDropdownMenu] = useState<boolean>(false)
     const{logout, user} = useAuthContext()
+    const {setEditProfileModal, editProfileModal, setDeleteProfileModal, deleteProfileModal, setEditAddressModal, editAddressModal} = useContext(ModalContext)
 
     return (
         <>
@@ -18,21 +23,32 @@ const NavHeader=({name}:{name:string})=>{
                     <Elipsis name={name}/>
                 </div>
                 <nav className="user-dropdown">
-                    <Button>Editar Perfil</Button>
-                    <Button>Editar Endereço</Button>
+                    <Button type="button" onClick={()=> setEditProfileModal(true)}>Editar Perfil</Button>
+                    <Button type="button" onClick={()=> setEditAddressModal(true)}>Editar Endereço</Button>
                     {
                         user.isAdvertiser &&
                         <Link href={"/user"}>Meus Anúncios</Link>
                     }
-                    <Button onClick={logout}>Sair</Button>
+                    <Button type="button" onClick={logout}>Sair</Button>
                 </nav>
             </nav>
-
             <button onClick={() => setDropdownMenu(!dropdownMenu)} className={dropdownMenu ? "dropdown-btn active-dropdown": "dropdown-btn"}>
                 <span></span>
                 <span></span>
                 <span></span>
-            </button> 
+            </button>
+            {
+                editProfileModal &&
+                <EditProfileModal/>
+            }
+            {
+                deleteProfileModal &&
+                <DeleteProfileModal/>
+            }
+            {
+                editAddressModal &&
+                <EditAddressModal/>
+            }
         </>
     )
 }
