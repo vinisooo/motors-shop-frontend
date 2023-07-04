@@ -10,6 +10,7 @@ import axios,{ AxiosError, AxiosResponse } from "axios"
 import { SetStateAction } from "react"
 import { TCommentReqSchema } from "@/schemas/comment.schema"
 import {toast} from "react-toastify"
+import { TAddressUpdateReq } from "@/types/address.types"
 
 export interface IAuthContext {
   registerUser: (data: TValidationSchema) => Promise<void>
@@ -27,6 +28,7 @@ export interface IAuthContext {
   resetPassword: (data: TResetPasswordReq, token: string) => Promise<AxiosResponse<any, any> | undefined>
   createComment:(data:TCommentReqSchema)=>void
   editUser: (data: TuserUpdateReq) => Promise<void>
+  editAddress: (addressId: string, data: TAddressUpdateReq) => Promise<void>
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext)
@@ -211,24 +213,32 @@ export const AuthProvider = ({children}: TProviderProps) => {
         }
     }
 
+    const editAddress = async(addressId: string, data: TAddressUpdateReq) => {
+        try{
+            const token = getUserToken()
+            const response = await api.patch(`/address/${addressId}`,data, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            toast.success("Endereço atualizado com sucesso!")
+            getUserProfile(token)
+        }catch(err: unknown){
+            console.log(err)
+            toast.error("Algo deu errado ao atualizar seu endereço. Tente novamente mais tarde")
+        }
+    }
+
     return (
         <AuthContext.Provider 
             value={{
-                registerUser,
-                login,
-                user,
-                getUserProfile,
-                logout,
-                sentEmail,
-                existantUser,
-                loading,
-                setSentEmail,
-                setExistantUser,
-                setLoading,
-                sendResetPasswordEmail,
-                resetPassword,
-                createComment,
-                editUser
+                registerUser, login, user,
+                getUserProfile, logout, sentEmail,
+                existantUser, loading, setSentEmail,
+                setExistantUser, setLoading,
+                sendResetPasswordEmail, resetPassword,
+                createComment, editUser, editAddress
             }}
         >
             {children}

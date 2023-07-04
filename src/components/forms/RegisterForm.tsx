@@ -108,7 +108,7 @@ const RegisterForm = () => {
                 </div>
                 <div>
                     <label htmlFor="description">Descrição</label>
-                    <textarea id="description" {...register("description")}/>
+                    <textarea maxLength={300} id="description" {...register("description")}/>
                     {errors.description && <span className="error">{errors.description.message}</span>}
                 </div>
                 <h1>Informações de endereço</h1>
@@ -125,13 +125,13 @@ const RegisterForm = () => {
                     </div>
                     <div>
                         <label htmlFor="city">Cidade</label>
-                        <input value={city} type="text" id="city" {...register("address.city")} onChange={(e) => setCity(e.target.value)}/>
+                        <input maxLength={100} value={city} type="text" id="city" {...register("address.city")} onChange={(e) => setCity(e.target.value)}/>
                         {errors.address?.city && <span className="error">{errors.address?.city.message}</span>}
                     </div>
                 </div>
                 <div>
                     <label htmlFor="street">Rua</label>
-                    <input type="text" id="street" {...register("address.street")}/>
+                    <input maxLength={100} type="text" id="street" {...register("address.street")}/>
                     {errors.address?.street && <span className="error">{errors.address?.street.message}</span>}
                 </div>
                 <div className="flex-horizontal">
