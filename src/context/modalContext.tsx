@@ -19,23 +19,35 @@ interface iModalContextValues{
     setCarImageModal: React.Dispatch<SetStateAction<boolean>>
     carImage: string
     setCarImage: React.Dispatch<SetStateAction<string>>
+    editProfileModal: boolean
+    setEditProfileModal: React.Dispatch<SetStateAction<boolean>>
+    deleteProfileModal: boolean
+    setDeleteProfileModal: React.Dispatch<SetStateAction<boolean>>
+    editAddressModal: boolean
+    setEditAddressModal: React.Dispatch<SetStateAction<boolean>>
 }
 
 
 export const ModalContext = createContext({} as iModalContextValues)
 
-const ModalProvider = ({children}: iChildrenProps) => {
+export const ModalProvider = ({children}: iChildrenProps) => {
     const [filterDropdown, setFilterDropdown] = useState<boolean>(false)
     const [resetPasswordModal, setResetPasswordModal] = useState<boolean>(false)
     const [createAdvertModal, setCreateAdvertModal] = useState<boolean>(false)
     const [carImageModal, setCarImageModal] = useState<boolean>(false)
     const [carImage, setCarImage] = useState<string>("")
-    
+    const [editProfileModal, setEditProfileModal] = useState<boolean>(false)
+    const [deleteProfileModal, setDeleteProfileModal] = useState<boolean>(false)
+    const [editAddressModal, setEditAddressModal] = useState<boolean>(false)
+
     return(
-        <ModalContext.Provider value={{filterDropdown, setFilterDropdown, resetPasswordModal, setResetPasswordModal, createAdvertModal, setCreateAdvertModal, carImageModal, setCarImageModal, carImage, setCarImage}}>
+        <ModalContext.Provider value={{filterDropdown, setFilterDropdown, resetPasswordModal, 
+            setResetPasswordModal, createAdvertModal, setCreateAdvertModal, carImageModal, setCarImageModal, 
+            carImage, setCarImage, editProfileModal, setEditProfileModal, deleteProfileModal, setDeleteProfileModal,
+            editAddressModal, setEditAddressModal}}>
             {children}
         </ModalContext.Provider>
     )
 }
 
-export default ModalProvider
+export const useModalContext =() => useContext(ModalContext)

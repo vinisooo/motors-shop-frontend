@@ -3,15 +3,13 @@ import "../../styles/pages/home/filterList.sass"
 import Link from "next/link"
 
 import { useState } from "react"
-import { useContext } from "react"
-import { ModalContext } from "@/context/modalContext"
-import { filterData } from "./filterData"
 
 import { AiOutlineClose } from "react-icons/ai"
 
 import { Dispatch, SetStateAction, EventHandler } from "react"
 import { useRouter } from "next/navigation"
 import { TAdvertisementRes } from "@/schemas/advertisement.schema"
+import { useModalContext } from "@/context/modalContext"
 
 export interface iFilters {
     brand: string | undefined,
@@ -33,7 +31,7 @@ export interface iFilterListProps {
 }
 
 const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
-    const {filterDropdown, setFilterDropdown} = useContext(ModalContext)
+    const {filterDropdown, setFilterDropdown} = useModalContext()
     const router=useRouter()
 
     const [minKm, setMinKm] = useState<string>(searchParams.minKm ? searchParams.minKm : "")
@@ -123,6 +121,7 @@ const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
 
     let filterWithoutPage = {...searchParams}
     delete filterWithoutPage["page"]
+
 
     return(
         <aside className={`aside-filter ${filterDropdown ? "" : "hidden-aside-filter"}`}>

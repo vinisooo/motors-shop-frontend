@@ -1,16 +1,18 @@
 "use client"
 import api from "@/services"
-import { TLoginReq, TLoginRes, TProviderProps, TUserRes, TValidationSchema } from "@/types/user.types"
+import { TLoginReq, TLoginRes, TProviderProps, TUserRes, TValidationSchema, TuserUpdateReq } from "@/types/user.types"
 import { useRouter } from "next/navigation"
-import { setCookie,destroyCookie, parseCookies } from "nookies"
-import { createContext, useContext, useState } from "react"
+import nookies,{ setCookie,destroyCookie, parseCookies } from "nookies"
+import { createContext, useContext, useEffect, useState } from "react"
 import { TResetPasswordEmailReq, TResetPasswordReq } from "@/schemas/users.schema"
-import axios,{ AxiosResponse } from "axios"
+import axios,{ AxiosError, AxiosResponse } from "axios"
 
 import { SetStateAction } from "react"
 import { TCommentReqSchema } from "@/schemas/comment.schema"
+import {toast} from "react-toastify"
+import { TAddressUpdateReq } from "@/types/address.types"
 
-export interface IAuthContext {
+export interface IUserContext {
   registerUser: (data: TValidationSchema) => Promise<void>
   login: (dataLogin: TLoginReq, callback: () => void) => Promise<void>
   getUserProfile: (token: string) => Promise<void>
@@ -25,17 +27,20 @@ export interface IAuthContext {
   sendResetPasswordEmail: (data: TResetPasswordEmailReq) => Promise<AxiosResponse<any, any> | undefined>
   resetPassword: (data: TResetPasswordReq, token: string) => Promise<AxiosResponse<any, any> | undefined>
   createComment:(data:TCommentReqSchema)=>void
+  editUser: (data: TuserUpdateReq) => Promise<void>
+  editAddress: (addressId: string, data: TAddressUpdateReq) => Promise<void>
+  deleteUser: () => Promise<void>
 }
 
-const AuthContext = createContext<IAuthContext>({} as IAuthContext)
+const UserContext = createContext<IUserContext>({} as IUserContext)
 
-export const AuthProvider = ({children}: TProviderProps) => {
+export const UserProvider = ({children}: TProviderProps) => {
     const [user, setUser] = useState({} as TUserRes)
     const router = useRouter()
     const [sentEmail, setSentEmail] = useState<boolean>(false)
     const [existantUser, setExistantUser] = useState<boolean>(true)
     const [loading, setLoading] = useState<boolean>(false)
-    
+
     const registerUser = async (data: TValidationSchema) => {
         try {
             const newUser: TUserRes = await api.post("/users/register", data, {
@@ -44,16 +49,26 @@ export const AuthProvider = ({children}: TProviderProps) => {
                 }
             })
             setUser(newUser)
+            
             console.log(newUser)
+            toast.success("Usuário registrado com sucesso!")
             router.push("/login")
-        } catch (err) {
+        } catch (err: unknown) {
+            if ((err as AxiosError).response && (err as AxiosError).response!.status === 409) {
+                if((err as any).response.data.details.includes("Email")){
+                    toast.error("O Email inserido já está em uso")
+                }
+                if((err as any).response.data.details.includes("CPF")){
+                    toast.error("O CPF inserido já está em uso")
+                }
+            }
             console.error(err)
         }
     }
 
     const logout=()=>{
         destroyCookie(null, "userToken")
-        router.push("/")
+        router.refresh()
     }
     
     const getUserProfile = async (token: string) => {
@@ -65,16 +80,27 @@ export const AuthProvider = ({children}: TProviderProps) => {
                 }
             })
             setUser(data)
-            router.push("/user")
         } catch (err) {
+            destroyCookie(null, "userToken")
+            toast.error("Sessão Expirada. Realize o login novamente.")
+            router.push("/login")
             console.error(err)
         }
     }
+    
 
     const getUserToken=()=>{
         const {userToken}=parseCookies()
         return userToken
     }
+    
+    useEffect(()=> {
+        const token = getUserToken()
+        if(token){
+            getUserProfile(token)
+        }
+    },[])
+
 
     const login = async (dataLogin: TLoginReq, callback: () => void) => {
         setExistantUser(true)
@@ -89,6 +115,10 @@ export const AuthProvider = ({children}: TProviderProps) => {
                 callback()
             }
             router.push("/")
+            router.refresh()
+            toast.success("Login efetuado com sucesso!")
+
+            getUserProfile(token)
       } catch (err) {
             if (axios.isAxiosError(err)) {
                 if (err.response) {
@@ -160,33 +190,82 @@ export const AuthProvider = ({children}: TProviderProps) => {
                     Authorization: `Bearer ${token}`
                 }
             })
+            toast.success("Comentário adicionado")
         }catch (err) {
+            toast.error("Oops! Houve algo de errado ao adicionar comentário. Tente Mais tarde.")
             console.error(err)
         }
     }
 
+    const editUser = async(data: TuserUpdateReq) => {
+        const token = getUserToken()
+        try{
+            const response = await api.patch("/users/update", data, {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            toast.success("Usuário atualizado com sucesso")
+            getUserProfile(token)
+        }catch(err){
+            console.log(err)
+            toast.error("Algo deu errado ao atualizar os dados. Tente novamente mais tarde")
+        }
+    }
+
+    const editAddress = async(addressId: string, data: TAddressUpdateReq) => {
+        try{
+            const token = getUserToken()
+            const response = await api.patch(`/address/${addressId}`,data, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            toast.success("Endereço atualizado com sucesso!")
+            getUserProfile(token)
+        }catch(err: unknown){
+            console.log(err)
+            toast.error("Algo deu errado ao atualizar seu endereço. Tente novamente mais tarde")
+        }
+    }
+
+    const deleteUser = async() => {
+        try{
+            const token = getUserToken()
+            const response = await api.delete("/users/delete", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            
+            destroyCookie(null, "userToken")
+            toast.success("Conta deletada com sucesso!")
+            router.push("/")
+            router.refresh()
+
+        }catch(err: unknown){
+            console.log(err)
+            toast.error("Algo deu errado ao deletar seu perfil. Tente novamente mais tarde")
+        }
+    }
+
     return (
-        <AuthContext.Provider 
+        <UserContext.Provider 
             value={{
-                registerUser,
-                login,
-                user,
-                getUserProfile,
-                logout,
-                sentEmail,
-                existantUser,
-                loading,
-                setSentEmail,
-                setExistantUser,
-                setLoading,
-                sendResetPasswordEmail,
-                resetPassword,
-                createComment
+                registerUser, login, user,
+                getUserProfile, logout, sentEmail,
+                existantUser, loading, setSentEmail,
+                setExistantUser, setLoading,
+                sendResetPasswordEmail, resetPassword,
+                createComment, editUser, editAddress,
+                deleteUser
             }}
         >
             {children}
-        </AuthContext.Provider>
+        </UserContext.Provider>
     )
 }
 
-export const useAuthContext =() => useContext(AuthContext)
+export const useUserContext =() => useContext(UserContext)

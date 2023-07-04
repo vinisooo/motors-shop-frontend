@@ -1,17 +1,17 @@
-import { TAdvertisementRes } from "@/schemas/advertisement.schema";
-import FilterList, { iFilterListProps, iFilters } from "../filterList/FilterList";
-import Link from "next/link";
-import { Cards } from "../cards/cards";
-import { Car } from "@/schemas/advertsSchema";
-import FilterButton from "../filterButton/filterButton";
+import { TAdvertisementRes } from "@/schemas/advertisement.schema"
+import FilterList, { iFilterListProps, iFilters } from "../filterList/FilterList"
+import Link from "next/link"
+import { Cards } from "../cards/cards"
+import { Car } from "@/schemas/advertsSchema"
+import FilterButton from "../filterButton/filterButton"
 import "../../styles/pages/home/home.sass"
 
 const getAdvertisements = async(searchParams: iFilters) => {
-    let params: URLSearchParams | string = new URLSearchParams();
+    let params: URLSearchParams | string = new URLSearchParams()
   
     for (const key in searchParams) {
       if (searchParams.hasOwnProperty(key) && searchParams[key] !== undefined) {
-        params.append(key, searchParams[key]!);
+        params.append(key, searchParams[key]!)
       }
     }
     try{

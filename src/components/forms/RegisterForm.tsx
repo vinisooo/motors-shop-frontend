@@ -6,22 +6,74 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import "../../styles/components/forms/registerForm.sass"
 import Button from "../button/button"
-import { useAuthContext } from "@/context/authContext"
+import { useUserContext } from "@/context/userContext"
+import React, { useState } from "react"
 
 const RegisterForm = () => {
     const {
         register,
         handleSubmit,
         setValue,
+        getValues,
         formState: { errors }
     } = useForm<TValidationSchema>({
         resolver: zodResolver(registerValidationSchema)
     })
+    const [isAdvertiser, setIsAdvertiser] = useState<boolean | null>(null)
 
-    const { registerUser } = useAuthContext()
+    const [state, setState] = useState<string>("")
+    const [city, setCity] = useState<string>("")
+    const [street, setStreet] = useState<string>("")
+    const [complement, setComplement] = useState<string>("")
+
+
+    const { registerUser } = useUserContext()
 
     const onSubmitRegister: SubmitHandler<any> = async (data) => {
-      await registerUser(data)
+        data.address = {
+            ...data.address,
+            city: city || data.address.city,
+            state: state || data.address.state,
+            street: street || data.address.street,
+            complement: complement || data.address.complement
+        }
+        console.log("data",data)
+        await registerUser(data)
+    }
+    console.log("erros:", errors)
+
+    const setNotAdvertiser = () => {
+        setValue("isAdvertiser", false)
+        setIsAdvertiser(false)
+    }
+
+    const setAdvertiser = () => {
+        setValue("isAdvertiser", true)
+        setIsAdvertiser(true)
+    }
+
+    const onInputCep = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const cep = e.target.value
+
+        e.target.value = cep.slice(0, 8)
+        if(cep.length === 8){
+            console.log(cep)
+            getCepAddress(cep)
+        }
+    }
+
+    const getCepAddress = async(cep: string) => {
+        try{
+            const request = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
+
+            const response = await request.json()
+            setState(response.uf)
+            setCity(response.localidade)
+            setStreet(response.logradouro)
+            setComplement(response.complement)
+        }catch(err: unknown){
+            console.log(err)
+        }
     }
 
     return(
@@ -41,12 +93,12 @@ const RegisterForm = () => {
                 </div>
                 <div>
                     <label htmlFor="cpf">CPF</label>
-                    <input type="text" id="cpf" {...register("cpf")}/>
+                    <input type="number" onInput={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value = e.target.value.slice(0, 11)} id="cpf" {...register("cpf")}/>
                     {errors.cpf && <span className="error">{errors.cpf.message}</span>}
                 </div>
                 <div>
                     <label htmlFor="phone">Celular</label>
-                    <input type="text" id="phone" {...register("phone")}/>
+                    <input type="number" onInput={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value = e.target.value.slice(0, 11)} id="phone" {...register("phone")}/>
                     {errors.phone && <span className="error">{errors.phone.message}</span>}
                 </div>
                 <div>
@@ -56,30 +108,30 @@ const RegisterForm = () => {
                 </div>
                 <div>
                     <label htmlFor="description">Descrição</label>
-                    <textarea id="description" {...register("description")}/>
+                    <textarea maxLength={300} id="description" {...register("description")}/>
                     {errors.description && <span className="error">{errors.description.message}</span>}
                 </div>
                 <h1>Informações de endereço</h1>
                 <div>
                     <label htmlFor="zipCode">CEP</label>
-                    <input type="text" id="zipCode" {...register("address.zipCode")}/>
+                    <input type="number" onInput={onInputCep} id="zipCode" {...register("address.zipCode")}/>
                     {errors.address?.zipCode && <span className="error">{errors.address?.zipCode.message}</span>}
                 </div>
                 <div className="flex-horizontal">
                     <div>
                         <label htmlFor="state">Estado</label>
-                        <input type="text" id="state" {...register("address.state")}/>
+                        <input value={state} type="text" id="state" maxLength={2} {...register("address.state")} onChange={(e) => setState(e.target.value)}/>
                         {errors.address?.state && <span className="error">{errors.address?.state.message}</span>}
                     </div>
                     <div>
                         <label htmlFor="city">Cidade</label>
-                        <input type="text" id="city" {...register("address.city")}/>
+                        <input maxLength={100} value={city} type="text" id="city" {...register("address.city")} onChange={(e) => setCity(e.target.value)}/>
                         {errors.address?.city && <span className="error">{errors.address?.city.message}</span>}
                     </div>
                 </div>
                 <div>
                     <label htmlFor="street">Rua</label>
-                    <input type="text" id="street" {...register("address.street")}/>
+                    <input maxLength={100} type="text" id="street" {...register("address.street")}/>
                     {errors.address?.street && <span className="error">{errors.address?.street.message}</span>}
                 </div>
                 <div className="flex-horizontal">
@@ -90,19 +142,20 @@ const RegisterForm = () => {
                     </div>
                     <div>
                         <label htmlFor="complement">Complemento</label>
-                        <input type="text" id="complement" {...register("address.complement")}/>
+                        <input value={complement} type="text" id="complement" {...register("address.complement")} onChange={(e)=>setComplement(e.target.value)}/>
                         {errors.address?.complement && <span className="error">{errors.address?.complement.message}</span>}
                     </div>
                 </div>
                 <h1>Tipo de conta</h1>
                 <div className="flex-horizontal">
-                    <Button onClick={() => setValue("isAdvertiser", false)}>
+                    <Button type="button" Style={isAdvertiser === false ? "brand-1" : "negative-1"} onClick={setNotAdvertiser}>
                         Comprador      
                     </Button>
-                    <Button onClick={() => setValue("isAdvertiser", true)}>
+                    <Button type="button" Style={isAdvertiser ? "brand-1" : "negative-1"} onClick={setAdvertiser}>
                         Anunciante
                     </Button>
                 </div>
+                    {errors.isAdvertiser && <span className="error">Selecione o tipo da sua conta</span>}
                 <div>
                     <label htmlFor="password">Senha</label>
                     <input type="password" id="password" {...register("password")}/>

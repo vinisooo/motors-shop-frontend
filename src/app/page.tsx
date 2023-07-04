@@ -8,6 +8,7 @@ import HeaderProfile from "@/components/headerProfile/header"
 import { Suspense } from "react"
 import CarsHome from "@/components/cardsList/carsHome"
 import { HomePageLoading } from "@/components/loadings/homePageLoading/homePageLoading"
+import HeaderHandler from "@/components/header/headerHandler"
 
 const getUser=()=>{
   const userToken=cookies().get("userToken")
@@ -19,17 +20,13 @@ const Home = async({searchParams}: iFilterListProps) => {
 
   return (
     <>
-      {
-        !userToken ?
-        <Header/> : <HeaderProfile/>
-      }
       <main>
-      <HomeHeader/>
-      <section className="cars-section">
-        <Suspense fallback={<HomePageLoading/>}>
-          <CarsHome searchParams={searchParams}/>
-        </Suspense>
-      </section>
+        <HomeHeader/>
+        <section className="cars-section">
+          <Suspense fallback={<HomePageLoading/>}>
+            <CarsHome searchParams={searchParams}/>
+          </Suspense>
+        </section>
       </main>
       <Footer/>
     </>

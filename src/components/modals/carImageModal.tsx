@@ -1,7 +1,6 @@
 "use client"
-import { useContext } from "react"
 import Modal from "./modal"
-import { ModalContext } from "@/context/modalContext"
+import { useModalContext } from "@/context/modalContext"
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 
 import "../../styles/components/modals/carImageModal.sass"
@@ -9,7 +8,7 @@ import Button from "../button/button"
 import { TbZoomInFilled, TbZoomOutFilled, TbZoomReset } from "react-icons/tb"
 
 const CarImageModal = () => {
-    const {carImageModal, carImage} = useContext(ModalContext)
+    const {carImageModal, carImage} = useModalContext()
 
     if(!carImageModal){
         return <></>

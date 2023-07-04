@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import Button from "../button/button"
 import { Input } from "../inputs/inputs"
 import { TResetPasswordReq, resetPasswordReqSchema } from "@/schemas/users.schema"
-import { useAuthContext } from "@/context/authContext"
+import { useUserContext } from "@/context/userContext"
 
 interface iResetPasswordFormProps{
     token: string
@@ -22,7 +22,7 @@ const ResetPasswordForm = ({token}: iResetPasswordFormProps) => {
         resolver: zodResolver(resetPasswordReqSchema)
     })
 
-    const { resetPassword, existantUser } = useAuthContext()
+    const { resetPassword, existantUser } = useUserContext()
 
     const resetPasswordSubmit: SubmitHandler<TResetPasswordReq> = async (data) => {
         resetPassword(data, token)

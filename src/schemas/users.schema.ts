@@ -14,7 +14,7 @@ export const usersReqSchema = z.object({
       .regex(/^(?=.*[?!*$&@#])/, "A senha deve conter pelo menos um dos seguintes caracteres especiais: ?!*$&@#.")
       .regex(/^[0-9a-zA-Z?!*$&@#]{8,}$/, "A senha deve ter no mínimo 8 caracteres."),
     cpf: z.string().min(11, "Seu CPF deve conter exatamente 11 caracteres").max(11, "Seu CPF deve conter exatamente 11 caracteres"),
-    phone: z.string(),
+    phone: z.string().min(11, "Seu número de telefone deve conter exatamente 11 caracteres").max(11, "Seu número de telefone deve conter exatamente 11 caracteres"),
     birthdate: z.string(),
     profileImg: z.string().url().optional(),
     isAdvertiser: z.boolean(),

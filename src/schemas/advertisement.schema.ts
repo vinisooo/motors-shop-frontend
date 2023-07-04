@@ -35,6 +35,17 @@ export const advertisementReqSchema = advertisementSchema.omit({
     path: ["year"],
 })
 
+export const advertisementReqUpdateSchema = advertisementSchema.omit({
+    id: true,
+    isAvailable: true,
+    use: true,
+    createdAt: true,
+    updatedAt: true,
+}).extend({
+    fipePrice: z.number()
+}).partial()
+
+export type TAdvertisementReqUpdate = z.infer<typeof advertisementReqUpdateSchema>
 export type TAdvertisementReq = z.infer<typeof advertisementReqSchema>
 export type TAdvertisementRes = z.infer<typeof advertisementSchema>
 

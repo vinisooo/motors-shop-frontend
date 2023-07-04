@@ -11,11 +11,10 @@ interface iResetPasswordProps{
 const ResetPassword = ({params}: iResetPasswordProps) => {
     const {token} = params
     return (
-    <main className="forms">
-        <Header/>
-        <ResetPasswordForm token={token}/>
-        <Footer/>
-    </main>
+        <main className="forms">
+            <ResetPasswordForm token={token}/>
+            <Footer/>
+        </main>
     )
 }
 

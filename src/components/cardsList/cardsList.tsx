@@ -1,11 +1,15 @@
-import { Cards } from "../cards/cards";
-import { Car,TCar, TCars } from "@/schemas/advertsSchema";
-import { TUser } from "@/schemas/userSchema";
-import { getData } from "@/uteis/api";
+import { Cards } from "../cards/cards"
+import { Car,TCar, TCars } from "@/schemas/advertsSchema"
+import { TUser } from "@/schemas/userSchema"
+import { getData } from "@/uteis/api"
 
 
 const getAdverts=async(id:string)=>{
-    const response=await getData(`/users/${id}/adverts`)
+    const response=await getData(`/users/${id}/adverts/?perPage=999`, {
+        next: {
+            revalidate: 30
+        }
+    })
     return response
 }
   

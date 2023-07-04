@@ -9,6 +9,7 @@ import { Suspense } from "react"
 import CarsList from "@/components/cardsList/cardsList"
 import { CardsLoading } from "@/components/loadings/cardsLoading/cardsLoading"
 import { redirect } from "next/navigation"
+import {toast} from "react-toastify"
 
 
 const getUserLogged=async(token:string)=>{
@@ -38,7 +39,9 @@ const Profile = async({params}:{params:any}) =>{
     const {id}=params
     const cookieStore = cookies()
     const userToken= cookieStore.get("userToken")
-    // !userToken && redirect("/login")
+    if(!userToken){
+        redirect("/login")
+    }
     const profile:TUser=await getUserLogged(userToken!.value)
 
     const advertiser=await getAdvertiser(id)
@@ -47,11 +50,10 @@ const Profile = async({params}:{params:any}) =>{
     return ( 
         <>
             <header>
-                <HeaderProfile/>
                 <HeaderAnunciant anunciant={anunciant} profile={profile}/>
             </header>
             <main>
-                <section className="cars-section">
+                <section className="cars">
                     <h2>Anúncios</h2>
                     <div className="cars-list">
                         <Suspense fallback={
