@@ -6,6 +6,7 @@ import nookies from "nookies"
 import { TAdvertisementReq, TAdvertisementRes } from "@/schemas/advertisement.schema"
 import api, { carsApi } from "@/services"
 import { useModalContext } from "./modalContext"
+import {toast} from "react-toastify"
 
 interface iChildrenProps {
   children: React.ReactNode
@@ -59,14 +60,16 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
 
   const postAdvertisement = async (data: TAdvertisementReq) => {
     try {
-      const request = await api.post<TAdvertisementRes>("/adverts", data, {
+      const response = await api.post<TAdvertisementRes>("/adverts", data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       setCreateAdvertModal(false)
-      return request
+      toast.success("Veículo publicado com sucesso!")
+      return response
     } catch (err: unknown) {
+      toast.error("Erro ao publicar veículo. Tente novamente mais tarde.")
       console.log(err)
     }
   }
