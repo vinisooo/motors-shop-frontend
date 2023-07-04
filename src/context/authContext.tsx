@@ -1,6 +1,6 @@
 "use client"
 import api from "@/services"
-import { TLoginReq, TLoginRes, TProviderProps, TUserRes, TValidationSchema } from "@/types/user.types"
+import { TLoginReq, TLoginRes, TProviderProps, TUserRes, TValidationSchema, TuserUpdateReq } from "@/types/user.types"
 import { useRouter } from "next/navigation"
 import nookies,{ setCookie,destroyCookie, parseCookies } from "nookies"
 import { createContext, useContext, useEffect, useState } from "react"
@@ -26,6 +26,7 @@ export interface IAuthContext {
   sendResetPasswordEmail: (data: TResetPasswordEmailReq) => Promise<AxiosResponse<any, any> | undefined>
   resetPassword: (data: TResetPasswordReq, token: string) => Promise<AxiosResponse<any, any> | undefined>
   createComment:(data:TCommentReqSchema)=>void
+  editUser: (data: TuserUpdateReq) => Promise<void>
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext)
@@ -193,6 +194,23 @@ export const AuthProvider = ({children}: TProviderProps) => {
         }
     }
 
+    const editUser = async(data: TuserUpdateReq) => {
+        const token = getUserToken()
+        try{
+            const response = await api.patch("/users/update", data, {
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            toast.success("Usuário atualizado com sucesso")
+            getUserProfile(token)
+        }catch(err){
+            console.log(err)
+            toast.error("Algo deu errado ao atualizar os dados. Tente novamente mais tarde")
+        }
+    }
+
     return (
         <AuthContext.Provider 
             value={{
@@ -209,7 +227,8 @@ export const AuthProvider = ({children}: TProviderProps) => {
                 setLoading,
                 sendResetPasswordEmail,
                 resetPassword,
-                createComment
+                createComment,
+                editUser
             }}
         >
             {children}
