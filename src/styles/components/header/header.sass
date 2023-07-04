@@ -5,6 +5,8 @@
     max-height: 80px
 
     border-bottom: 1px solid variables.$color-grey-5
+
+    animation: header-show-up 0.8s ease
     
     position: fixed
     top: 0
@@ -113,37 +115,37 @@
 
         display: flex
         flex-direction: column
-        justify-content: space-between
+        gap: 2px
 
         background-color: transparent
         border: none
 
         transition: 0.3s ease
 
-        margin: 20px
+        margin: 10px
         width: 20px
-        height: 100%
+        height: 20px
 
-        border: 1px solid blue
         span
             transition: 0.3s ease
             width: 100%
             height: 20%
+            min-height: 1.5px
 
-            background-color: variables.$color-grey-0
+            background-color: variables.$color-grey-1
     
     .active-dropdown
         transform: translateX(8px)
         span
-            height: 15%
+            background-color: variables.$color-brand-1
             &:nth-child(1)
-                transform: rotate(45deg) translateY(8px)
+                transform: rotate(45deg) translateY(9px)
             &:nth-child(2)
                 filter: blur(2px)
                 opacity: 0.5
                 transform: translateX(20vw)
             &:nth-child(3)
-                transform: rotate(-45deg) translateY(-8px)
+                transform: rotate(-45deg) translateY(-9px)
 
     .hidden-dropdown-menu
         opacity: 0.4
@@ -203,3 +205,9 @@
                 height: 100px
                 width: 1px
                 background-color: variables.$color-grey-6
+
+@keyframes header-show-up 
+    from
+        transform: translateY(-10vh)
+    to
+        transform: translateY(0) scale(1)

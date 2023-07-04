@@ -10,6 +10,7 @@ import EditProfileModal from "../modals/editProfileModal"
 import DeleteProfileModal from "../modals/deleteProfileModal"
 import EditAddressModal from "../modals/editAddressModal"
 import { AiOutlineLoading } from "react-icons/ai"
+import "../../styles/components/header/header.sass"
 
 const NavHeader=({name}:{name:string})=>{
 

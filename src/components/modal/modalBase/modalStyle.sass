@@ -32,7 +32,9 @@
 
     .modal
         background-color: white
-        min-width: 500px
+        width: 500px
+        max-width: 100%
+        margin: 10px
         padding: 18px
         border-radius: 10px
 
@@ -49,12 +51,11 @@
                 padding: 0px
 
                 svg
-                    color: red
+                    color: variables.$color-grey-3
                     height: 30px
                     width: 30px
         &-body
             padding: 18px
-            max-width: 80vw
             max-height: 80vh
             overflow: auto
 

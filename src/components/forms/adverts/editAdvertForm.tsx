@@ -19,7 +19,7 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
 
 
     const galleryImages = car.galleryAdvertisement?.map((carOnList)=> carOnList.imageUrl)
-    const [images, setImages] = useState<(string | null)[]>([car.coverImage, ...galleryImages || []])
+    const [images, setImages] = useState<(string | null)[]>([...galleryImages || []])
 
     const {getCarsByBrand, cars, editAdvert} = useCarsContext()
 
@@ -40,6 +40,7 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
                 imageUrl: img
             }
         })
+        console.log(data)
         editAdvert(car.id,data)
     }
 
@@ -70,7 +71,6 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
             return image
         })
         setImages(imagesAux)
-        console.log(imagesAux)
     }
 
     return (
@@ -152,11 +152,11 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
             </div>
             <div>
                 <div className="input-box">
-                    <Input value={fipe?.toString()} onChange={(e)=>setFipe(Number(e.target.value))} min={0} type="number" children="Preço tabela FIPE" id="fipePrice" placeholder="R$ 48.000,00" register={register("fipePrice", { valueAsNumber: true })} />
+                    <Input onInput={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value = e.target.value.slice(0, 9)} value={fipe?.toString()} onChange={(e)=>setFipe(Number(e.target.value))} min={0} type="number" children="Preço tabela FIPE" id="fipePrice" placeholder="R$ 48.000,00" register={register("fipePrice", { valueAsNumber: true })} />
                     {errors.fipePrice && <span className="error">{errors.fipePrice.message}</span>}
                 </div>
                 <div className="input-box">
-                    <Input type="number" children="Preço" id="price" placeholder={car.price} defaultValue={car.price} min={0} register={register("price", { valueAsNumber: true })}/>
+                    <Input onInput={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value = e.target.value.slice(0, 9)} type="number" children="Preço" id="price" placeholder={car.price} defaultValue={car.price} min={0} register={register("price", { valueAsNumber: true })}/>
                     {errors.price && <span className="error">{errors.price.message}</span>}
                 </div>
             </div>
@@ -166,9 +166,9 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
             {errors.coverImage && <span className="error">{errors.coverImage.message}</span>}
             {
                 images.map((_image, index) => {
-                    return(
-                        <Input value={images[index] || ""} onChange={(e:ChangeEvent<HTMLInputElement>)=>addImage(e, index)}>{`${index + 1}ª`} Imagem da galeria</Input>
-                    )
+                        return(
+                            <Input value={images[index] || ""} onChange={(e:ChangeEvent<HTMLInputElement>)=>addImage(e, index)}>{`${index + 1}ª`} Imagem da galeria</Input>
+                        )
                 })
             }
             {

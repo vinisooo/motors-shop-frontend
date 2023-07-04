@@ -20,7 +20,7 @@ const Home = async({searchParams}: iFilterListProps) => {
 
   return (
     <>
-      <main>
+      <main className="page-show-up">
         <HomeHeader/>
         <section className="cars-section">
           <Suspense fallback={<HomePageLoading/>}>

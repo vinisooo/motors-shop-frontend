@@ -5,7 +5,7 @@ import "../../styles/pages/formsPages/forms.sass"
 
 const LoginPage = () => {
   return (
-    <main className="forms">
+    <main className="forms page-show-up">
       <LoginForm/>
       <Footer/>
     </main>
