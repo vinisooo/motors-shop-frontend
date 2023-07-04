@@ -1,34 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1>Documentação - Motors Shop</h1>
 
-## Getting Started
+  <h2>Descrição</h2>
+  <p>Este é o repositório do projeto de frontend do Motors Shop, um e-commerce de carros.</p>
 
-First, run the development server:
+  <h2>Funcionalidades</h2>
+  <ul>
+    <li>Postar veículos</li>
+    <li>Criar contas de usuário</li>
+    <li>Avaliar veículos com comentários</li>
+    <li>Editar postagens</li>
+    <li>Entrar em contato com o vendedor pelo WhatsApp</li>
+  </ul>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+  <h2>Deploy</h2>
+  <p>O projeto de frontend está implantado e disponível em: <a href="https://www.example.com">Link para o deploy do frontend</a></p>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+  <h2>Repositório da API</h2>
+  <p>O repositório da API associada a este projeto está disponível em: <a href="https://github.com/seu-usuario/repo-da-api">Link para o repositório da API</a></p>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  <h2>Como executar o projeto localmente</h2>
+  <ol>
+    <li>Faça o clone deste repositório para o seu ambiente de desenvolvimento:</li>
+    <code>git clone https://github.com/seu-usuario/repo-do-frontend.git</code>
+    <li>Navegue até o diretório do projeto:</li>
+    <code>cd repo-do-frontend</code>
+    <li>Instale as dependências do projeto utilizando o npm:</li>
+    <code>npm install</code>
+    <li>Inicie o servidor de desenvolvimento:</li>
+    <code>npm run dev</code>
+  </ol>
