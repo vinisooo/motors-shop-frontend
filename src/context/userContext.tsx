@@ -29,6 +29,7 @@ export interface IUserContext {
   createComment:(data:TCommentReqSchema)=>void
   editUser: (data: TuserUpdateReq) => Promise<void>
   editAddress: (addressId: string, data: TAddressUpdateReq) => Promise<void>
+  deleteUser: () => Promise<void>
 }
 
 const UserContext = createContext<IUserContext>({} as IUserContext)
@@ -230,6 +231,26 @@ export const UserProvider = ({children}: TProviderProps) => {
         }
     }
 
+    const deleteUser = async() => {
+        try{
+            const token = getUserToken()
+            const response = await api.delete("/users/delete", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            
+            destroyCookie(null, "userToken")
+            toast.success("Conta deletada com sucesso!")
+            router.push("/")
+            router.refresh()
+
+        }catch(err: unknown){
+            console.log(err)
+            toast.error("Algo deu errado ao deletar seu perfil. Tente novamente mais tarde")
+        }
+    }
+
     return (
         <UserContext.Provider 
             value={{
@@ -238,7 +259,8 @@ export const UserProvider = ({children}: TProviderProps) => {
                 existantUser, loading, setSentEmail,
                 setExistantUser, setLoading,
                 sendResetPasswordEmail, resetPassword,
-                createComment, editUser, editAddress
+                createComment, editUser, editAddress,
+                deleteUser
             }}
         >
             {children}
