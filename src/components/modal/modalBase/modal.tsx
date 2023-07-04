@@ -1,7 +1,7 @@
 import Button from '@/components/button/button'
 import '../modalBase/modalStyle.sass'
 import { ReactNode, useEffect, useRef, useState } from "react"
-import {AiFillCloseCircle} from "react-icons/ai"
+import { AiOutlineClose } from 'react-icons/ai'
 
 interface IModal{
     children: ReactNode,
@@ -37,7 +37,7 @@ export const Modal=({children,modalContent,title}:IModal)=>{
                 <div className="modal">
                     <div className="modal-header">
                         <h2>{title}</h2>
-                        <Button onClick={()=>setModalOpen(false)}><AiFillCloseCircle/></Button>
+                        <Button onClick={()=>setModalOpen(false)}><AiOutlineClose/></Button>
                     </div>
                     <div className="modal-body">
                         {modalContent}
