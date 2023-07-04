@@ -12,6 +12,7 @@ import Button from "../button/button"
 
 import { Input } from "../inputs/inputs"
 import { useUserContext } from "@/context/userContext"
+import { AiOutlineLoading } from "react-icons/ai"
 
 const ResetPasswordModal = () => {
 
@@ -52,7 +53,7 @@ const ResetPasswordModal = () => {
                     {
                         loading && 
                         <div className="sending-email">
-                            <img className="loading" src="https://cdn.onlinewebfonts.com/svg/img_376341.png"/>
+                            <AiOutlineLoading className="loading-icon"/>
                             <span className="loading-msg">Enviando email de recuperação</span>
                         </div>
                     }

@@ -37,47 +37,6 @@
         z-index: 8
         top: 65px
 
-        .user-dropdown
-            transition: 0.3s ease
-            position: absolute
-            top: 80px
-            left: 0
-
-            display: flex
-            flex-direction: column
-            align-items: flex-start
-            gap: 0
-
-            border-radius: 4px
-            
-            width: 100%
-            height: 200px
-            background-color: variables.$color-grey-10
-            
-            padding: 0
-            margin: 0
-            padding: 20px 0
-
-            a,button
-                font--weight: 400
-                color: variables.$color-grey-3
-                background-color: transparent
-
-                width: 100%
-                padding: 10px
-
-                display: flex
-                justify-content: flex-start
-
-                padding: 10px 20px
-                margin: 0
-
-                transition: 0.3s ease
-
-                &:hover
-                    background-color: variables.$color-grey-7
-
-
         button
             display: flex
             justify-content: center
@@ -102,6 +61,53 @@
                     background-color: variables.$color-grey-0
                     border: 1px solid variables.$color-grey-0
                     color: variables.$color-white-fixed
+
+    .user-dropdown
+        transition: 0.3s ease
+        position: absolute
+        top: 80px
+        left: 0
+
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        gap: 0
+
+        border-radius: 4px
+        
+        width: 100%
+        height: 200px
+        background-color: variables.$color-grey-10
+        
+        padding: 0
+        margin: 0
+        padding: 20px 0
+
+        .loading-icon
+            width: 30px
+            height: 30px
+
+        a,button
+            font--weight: 400
+            color: variables.$color-grey-3
+            background-color: transparent
+
+            width: 100%
+            padding: 10px
+
+            display: flex
+            justify-content: flex-start
+
+            padding: 10px 20px
+            margin: 0
+
+            transition: 0.3s ease
+
+            &:hover
+                background-color: variables.$color-grey-7
+
+
 
     .dropdown-btn
 

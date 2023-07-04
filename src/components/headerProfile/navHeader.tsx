@@ -9,13 +9,15 @@ import { useModalContext } from "@/context/modalContext"
 import EditProfileModal from "../modals/editProfileModal"
 import DeleteProfileModal from "../modals/deleteProfileModal"
 import EditAddressModal from "../modals/editAddressModal"
+import { AiOutlineLoading } from "react-icons/ai"
 
 const NavHeader=({name}:{name:string})=>{
 
     const [dropdownMenu, setDropdownMenu] = useState<boolean>(false)
     const{logout, user} = useUserContext()
-    const {setEditProfileModal, editProfileModal, setDeleteProfileModal, deleteProfileModal, setEditAddressModal, editAddressModal} = useModalContext()
+    const {setEditProfileModal, editProfileModal, deleteProfileModal, setEditAddressModal, editAddressModal} = useModalContext()
 
+    console.log(user)
     return (
         <>
             <nav className={dropdownMenu ? "" : "hidden-dropdown-menu"}>
@@ -23,13 +25,20 @@ const NavHeader=({name}:{name:string})=>{
                     <Elipsis name={name}/>
                 </div>
                 <nav className="user-dropdown">
-                    <Button type="button" onClick={()=> setEditProfileModal(true)}>Editar Perfil</Button>
-                    <Button type="button" onClick={()=> setEditAddressModal(true)}>Editar Endereço</Button>
                     {
-                        user.isAdvertiser &&
-                        <Link href={"/user"}>Meus Anúncios</Link>
+                        Object.keys(user).length === 0 ?
+                            <AiOutlineLoading className="loading-icon"/>
+                        :
+                            <>
+                                <Button type="button" onClick={()=> setEditProfileModal(true)}>Editar Perfil</Button>
+                                <Button type="button" onClick={()=> setEditAddressModal(true)}>Editar Endereço</Button>
+                                {
+                                    user.isAdvertiser &&
+                                    <Link href={"/user"}>Meus Anúncios</Link>
+                                }
+                                <Button type="button" onClick={logout}>Sair</Button>
+                            </>
                     }
-                    <Button type="button" onClick={logout}>Sair</Button>
                 </nav>
             </nav>
             <button onClick={() => setDropdownMenu(!dropdownMenu)} className={dropdownMenu ? "dropdown-btn active-dropdown": "dropdown-btn"}>
