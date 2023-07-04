@@ -3,10 +3,11 @@ import { createContext, useContext } from "react"
 import { useState } from "react"
 import { AxiosResponse } from "axios"
 import nookies from "nookies"
-import { TAdvertisementReq, TAdvertisementRes } from "@/schemas/advertisement.schema"
+import { TAdvertisementReq, TAdvertisementReqUpdate, TAdvertisementRes } from "@/schemas/advertisement.schema"
 import api, { carsApi } from "@/services"
 import { useModalContext } from "./modalContext"
 import {toast} from "react-toastify"
+import { useRouter } from "next/navigation"
 
 interface iChildrenProps {
   children: React.ReactNode
@@ -15,7 +16,9 @@ interface iChildrenProps {
 interface iModalContextValues {
   getCarsByBrand: (brand?: string) => Promise<void>
   cars: iCar[]
+  deleteAdvert: (id: string) => Promise<void>
   postAdvertisement: (data: TAdvertisementReq) => Promise<AxiosResponse<TAdvertisementRes, any> | undefined>
+  editAdvert: (id: string, data: TAdvertisementReqUpdate) => Promise<void>
 }
 
 export const CarsContext = createContext({} as iModalContextValues)
@@ -31,6 +34,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   const {setCreateAdvertModal} = useModalContext()
 
   const token = nookies.get()["userToken"]
+  const router = useRouter()
 
   const getCarsByBrand = async (brand?: string) => {
     try {
@@ -74,8 +78,40 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
     }
   }
 
+  const deleteAdvert=async(id:string)=>{
+    try{
+      const response = await api.delete(`/adverts/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      toast.success("Publicação removida com sucesso!")
+      router.push("/user")
+    }catch(err: unknown){
+      console.log(err)
+      toast.error("Algo deu errado ao deletar o anúncio. Tente novamente mais tarde")
+    }
+  }
+
+  const editAdvert=async(id:string, data: TAdvertisementReqUpdate)=>{
+    try{
+      const token = nookies.get()["userToken"]
+      const response = await api.patch(`/adverts/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      toast.success("Publicação editada com sucesso!")
+      router.push("/user")
+    }catch(err: unknown){
+      console.log(err)
+      toast.error("Algo deu errado ao deletar o anúncio. Tente novamente mais tarde")
+    }
+  }
+
   return (
-    <CarsContext.Provider value={{ getCarsByBrand, cars, postAdvertisement }}>
+    <CarsContext.Provider value={{ getCarsByBrand, cars,
+      postAdvertisement, deleteAdvert, editAdvert }}>
       {children}
     </CarsContext.Provider>
   )

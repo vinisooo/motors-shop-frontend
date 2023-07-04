@@ -2,7 +2,7 @@
 import { ChangeEvent, useContext, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { TAdvertisementReq, advertisementReqSchema } from "@/schemas/advertisement.schema"
+import { TAdvertisementReq, TAdvertisementReqUpdate, advertisementReqSchema, advertisementReqUpdateSchema } from "@/schemas/advertisement.schema"
 import { useCarsContext} from "@/context/carsContext"
 import { Input, Select, TextArea } from "@/components/inputs/inputs"
 import Button from "@/components/button/button"
@@ -17,17 +17,19 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
     const [fipe, setFipe] = useState<number>()
     const [year, setYear] = useState<number>()
 
-    const [images, setImages] = useState<(string | null)[]>([])
 
-    const {getCarsByBrand, cars, postAdvertisement} = useCarsContext()
+    const galleryImages = car.galleryAdvertisement?.map((carOnList)=> carOnList.imageUrl)
+    const [images, setImages] = useState<(string | null)[]>([car.coverImage, ...galleryImages || []])
+
+    const {getCarsByBrand, cars, editAdvert} = useCarsContext()
 
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors }
-    } = useForm<TAdvertisementReq>({
-        resolver: zodResolver(advertisementReqSchema)
+    } = useForm<TAdvertisementReqUpdate>({
+        resolver: zodResolver(advertisementReqUpdateSchema)
     })
 
 
@@ -38,7 +40,7 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
                 imageUrl: img
             }
         })
-        postAdvertisement(data)
+        editAdvert(car.id,data)
     }
 
     const getFipePrice = (e:ChangeEvent<HTMLInputElement>) => {
@@ -165,7 +167,7 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
             {
                 images.map((_image, index) => {
                     return(
-                        <Input onChange={(e:ChangeEvent<HTMLInputElement>)=>addImage(e, index)}>{`${index + 1}ª`} Imagem da galeria</Input>
+                        <Input value={images[index] || ""} onChange={(e:ChangeEvent<HTMLInputElement>)=>addImage(e, index)}>{`${index + 1}ª`} Imagem da galeria</Input>
                     )
                 })
             }

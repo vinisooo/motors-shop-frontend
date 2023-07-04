@@ -1,5 +1,6 @@
 import {z} from "zod"
 import { User } from "./userSchema"
+import { galleryAdvertisementListSchema } from "./galleryAdvertisement.schema"
 
 const AdvertSchema=z.object({
     brand: z.string(),
@@ -22,6 +23,8 @@ const Adverts=z.array(AdvertSchema)
 
 const Car=AdvertSchema.omit({
     user:true
+}).extend({
+    galleryAdvertisement: galleryAdvertisementListSchema.optional()
 })
 
 const Cars=z.array(Car)
