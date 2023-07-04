@@ -19,7 +19,7 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
 
 
     const galleryImages = car.galleryAdvertisement?.map((carOnList)=> carOnList.imageUrl)
-    const [images, setImages] = useState<(string | null)[]>([car.coverImage, ...galleryImages || []])
+    const [images, setImages] = useState<(string | null)[]>([...galleryImages || []])
 
     const {getCarsByBrand, cars, editAdvert} = useCarsContext()
 
@@ -40,6 +40,7 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
                 imageUrl: img
             }
         })
+        console.log(data)
         editAdvert(car.id,data)
     }
 
@@ -165,11 +166,9 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
             {errors.coverImage && <span className="error">{errors.coverImage.message}</span>}
             {
                 images.map((_image, index) => {
-                    if(index !== 0){
                         return(
                             <Input value={images[index] || ""} onChange={(e:ChangeEvent<HTMLInputElement>)=>addImage(e, index)}>{`${index + 1}ª`} Imagem da galeria</Input>
                         )
-                    }
                 })
             }
             {
