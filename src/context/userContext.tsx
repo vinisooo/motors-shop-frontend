@@ -12,7 +12,7 @@ import { TCommentReqSchema } from "@/schemas/comment.schema"
 import {toast} from "react-toastify"
 import { TAddressUpdateReq } from "@/types/address.types"
 
-export interface IAuthContext {
+export interface IUserContext {
   registerUser: (data: TValidationSchema) => Promise<void>
   login: (dataLogin: TLoginReq, callback: () => void) => Promise<void>
   getUserProfile: (token: string) => Promise<void>
@@ -31,9 +31,9 @@ export interface IAuthContext {
   editAddress: (addressId: string, data: TAddressUpdateReq) => Promise<void>
 }
 
-const AuthContext = createContext<IAuthContext>({} as IAuthContext)
+const UserContext = createContext<IUserContext>({} as IUserContext)
 
-export const AuthProvider = ({children}: TProviderProps) => {
+export const UserProvider = ({children}: TProviderProps) => {
     const [user, setUser] = useState({} as TUserRes)
     const router = useRouter()
     const [sentEmail, setSentEmail] = useState<boolean>(false)
@@ -231,7 +231,7 @@ export const AuthProvider = ({children}: TProviderProps) => {
     }
 
     return (
-        <AuthContext.Provider 
+        <UserContext.Provider 
             value={{
                 registerUser, login, user,
                 getUserProfile, logout, sentEmail,
@@ -242,8 +242,8 @@ export const AuthProvider = ({children}: TProviderProps) => {
             }}
         >
             {children}
-        </AuthContext.Provider>
+        </UserContext.Provider>
     )
 }
 
-export const useAuthContext =() => useContext(AuthContext)
+export const useUserContext =() => useContext(UserContext)

@@ -2,7 +2,7 @@
 import { useState } from "react"
 import Button from "../button/button"
 import { TextArea } from "../inputs/inputs"
-import { useAuthContext } from "@/context/authContext"
+import { useUserContext } from "@/context/userContext"
 import { useForm } from "react-hook-form"
 import { TCommentReqSchema, commentReqSchema } from "@/schemas/comment.schema"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -12,7 +12,7 @@ const CommentInput=({postId}:{postId:string})=>{
 
     const [disabled,setDisabled]=useState(true)
     const [comment, setComment] = useState("")
-    const {createComment}=useAuthContext()
+    const {createComment}=useUserContext()
 
     const router = useRouter()
 

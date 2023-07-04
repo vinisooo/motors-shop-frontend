@@ -11,7 +11,7 @@ import Button from "../button/button"
 
 
 import { Input } from "../inputs/inputs"
-import { useAuthContext } from "@/context/authContext"
+import { useUserContext } from "@/context/userContext"
 
 const ResetPasswordModal = () => {
 
@@ -19,7 +19,7 @@ const ResetPasswordModal = () => {
         sentEmail, setSentEmail,
         existantUser, setExistantUser,
         loading, setLoading, sendResetPasswordEmail
-    }= useAuthContext()
+    }= useUserContext()
 
     const {
         register,

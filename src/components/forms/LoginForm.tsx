@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import Link from "next/link"
 import { SubmitHandler, useForm } from "react-hook-form"
 import Button from "../button/button"
-import { useAuthContext } from "@/context/authContext"
+import { useUserContext } from "@/context/userContext"
 import { useContext } from "react"
 import { ModalContext } from "@/context/modalContext"
 import ResetPasswordModal from "../modals/resetPasswordModal"
@@ -24,7 +24,7 @@ const LoginForm = () => {
 
     const { resetPasswordModal, setResetPasswordModal } = useContext(ModalContext)
 
-    const { login, existantUser } = useAuthContext()
+    const { login, existantUser } = useUserContext()
 
     const onLoginSubmit: SubmitHandler<TLoginReq> = async (data) => {
         await login(data, () => {

@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import "../../styles/components/forms/registerForm.sass"
 import Button from "../button/button"
-import { useAuthContext } from "@/context/authContext"
+import { useUserContext } from "@/context/userContext"
 import React, { useState } from "react"
 
 const RegisterForm = () => {
@@ -27,7 +27,7 @@ const RegisterForm = () => {
     const [complement, setComplement] = useState<string>("")
 
 
-    const { registerUser } = useAuthContext()
+    const { registerUser } = useUserContext()
 
     const onSubmitRegister: SubmitHandler<any> = async (data) => {
         data.address = {

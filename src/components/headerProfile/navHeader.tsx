@@ -2,7 +2,7 @@
 import { useContext, useState } from "react"
 import { Elipsis } from "../tags/tags"
 import Button from "../button/button"
-import { useAuthContext } from "@/context/authContext"
+import { useUserContext } from "@/context/userContext"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { ModalContext } from "@/context/modalContext"
@@ -13,7 +13,7 @@ import EditAddressModal from "../modals/editAddressModal"
 const NavHeader=({name}:{name:string})=>{
 
     const [dropdownMenu, setDropdownMenu] = useState<boolean>(false)
-    const{logout, user} = useAuthContext()
+    const{logout, user} = useUserContext()
     const {setEditProfileModal, editProfileModal, setDeleteProfileModal, deleteProfileModal, setEditAddressModal, editAddressModal} = useContext(ModalContext)
 
     return (

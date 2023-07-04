@@ -3,7 +3,7 @@ import Modal from "./modal"
 import { Input } from "../inputs/inputs"
 import "../../styles/components/modals/editAddressModal.sass"
 import Button from "../button/button"
-import { useAuthContext } from "@/context/authContext"
+import { useUserContext } from "@/context/userContext"
 import { useContext, useState } from "react"
 import { ModalContext } from "@/context/modalContext"
 import { TAddressUpdateReq } from "@/types/address.types"
@@ -22,7 +22,7 @@ const EditAddressModal = () => {
         resolver: zodResolver(addressReqUpdateSchema)
     })
 
-    const {user, editAddress} = useAuthContext()
+    const {user, editAddress} = useUserContext()
     const {setEditAddressModal} = useContext(ModalContext)
     
     const [zipCode, setZipCode] = useState<string>(user.address.zipCode || "")

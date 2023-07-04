@@ -8,7 +8,7 @@ import { ModalContext } from "@/context/modalContext"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { usersUpdateReqSchema } from "@/schemas/users.schema"
-import { useAuthContext } from "@/context/authContext"
+import { useUserContext } from "@/context/userContext"
 import { TuserUpdateReq } from "@/types/user.types"
 
 const EditProfileModal = () => {    
@@ -21,7 +21,7 @@ const EditProfileModal = () => {
         resolver: zodResolver(usersUpdateReqSchema)
     })
 
-    const {user, editUser} = useAuthContext()
+    const {user, editUser} = useUserContext()
 
     console.log(user)
     const [name, setName] = useState<string>(user.name)
