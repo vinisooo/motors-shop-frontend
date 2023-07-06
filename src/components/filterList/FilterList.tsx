@@ -239,7 +239,7 @@ const FilterList = ({searchParams, advertisements}: iFilterListProps) => {
                 <ul className="filter-list">
                     {
                         extractedFilter.year.map((filter, index) => {
-                            if(filter){
+                            if(filter){                                
                                 return(
                                     <li key={index}>
                                         <Link

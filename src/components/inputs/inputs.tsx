@@ -1,6 +1,7 @@
 interface iInput extends React.InputHTMLAttributes<HTMLInputElement>{
     children?:React.ReactNode
     register?: object
+    imgUrl?: string
 }
 
 interface iTextArea extends React.TextareaHTMLAttributes<HTMLTextAreaElement>{
@@ -22,7 +23,7 @@ interface iSelect extends React.SelectHTMLAttributes<HTMLSelectElement>{
 
 const Input=({children,register, ...props}:iInput)=>{
     return(
-        <div className="label">
+        <div className={`label ${props.accept === "image/*" ? "img-input" : ""}`}>
             <label htmlFor={ props.id}>{children}</label>
             <input {...register}  {...props}/>
         </div>

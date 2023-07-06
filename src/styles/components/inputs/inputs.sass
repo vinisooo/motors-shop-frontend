@@ -56,3 +56,19 @@ select
     option
         color: variables.$color-grey-2
 
+.img-input
+    cursor: pointer
+
+    ::-webkit-file-upload-button
+        display: none
+
+    input
+        cursor: pointer
+
+        background-color: variables.$color-brand-4
+
+        &:hover
+            border: 1px solid variables.$color-brand-1
+    
+    label
+        width: 100%
