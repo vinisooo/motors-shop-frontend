@@ -23,7 +23,6 @@ const EditProfileModal = () => {
 
     const {user, editUser} = useUserContext()
 
-    console.log(user)
     const [name, setName] = useState<string>(user.name)
     const [email, setEmail] = useState<string>(user.email)
     const [phone, setPhone] = useState<string>(user.phone)

@@ -14,6 +14,10 @@ const RootLayout=({children}:iRootLayout)=>{
   
   return (
     <html>
+      <head>
+        <link rel='icon' href='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Eo_circle_purple_letter-m.svg/1200px-Eo_circle_purple_letter-m.svg.png'/>
+        <title>Motors Shop</title>
+      </head>
       <body>
         <UserProvider>
             <ModalProvider>

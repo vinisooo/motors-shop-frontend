@@ -9,6 +9,7 @@ import Button from "@/components/button/button"
 import { TCar } from "@/schemas/advertsSchema"
 import { Modal } from "@/components/modal/modalBase/modal"
 import { DeleteAdvert } from "./deleteAdvertForm"
+import { MdDelete } from "react-icons/md"
 
 
 const EditAdvertForm = ({car}:{car:TCar}) => {
@@ -17,9 +18,10 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
     const [fipe, setFipe] = useState<number>()
     const [year, setYear] = useState<number>()
 
+    const galleryImages: string[] | undefined = car.galleryAdvertisement?.map((carOnList)=> carOnList.imageUrl)
+    const [images, setImages] = useState<(string | null | FileList)[]>([...galleryImages || []])
 
-    const galleryImages = car.galleryAdvertisement?.map((carOnList)=> carOnList.imageUrl)
-    const [images, setImages] = useState<(string | null)[]>([...galleryImages || []])
+    const [editedCoverImage, setEditedCoverImage] = useState<boolean>(false)
 
     const {getCarsByBrand, cars, editAdvert} = useCarsContext()
 
@@ -32,16 +34,28 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
         resolver: zodResolver(advertisementReqUpdateSchema)
     })
 
-
-    const onSubmitAd: SubmitHandler<any> = async(data) => {
-        data.galleryAdvertisement = images.filter((image) => image !== null && image.trim() !== "")
-        data.galleryAdvertisement = data.galleryAdvertisement.map((img: string) => {
-            return {
-                imageUrl: img
-            }
-        })
-        console.log(data)
-        editAdvert(car.id,data)
+    const onSubmitAd: SubmitHandler<any> = async (data) => {
+        const transformedImages = images.map((item) => {
+          if (typeof item === "string") {
+            return item;
+          } else if (item instanceof FileList) {
+            const fileArray = Array.from(item);
+            return fileArray[0];
+          }
+          return null;
+        });
+      
+        data.galleryAdvertisement = transformedImages.filter((item) => item !== null);
+        data.year = Number(year) || car.year
+        data.fipeDeal = data.price < Number(fipe)
+        data.coverImage = data.coverImage[0]
+      
+        if (!data.coverImage) {
+          delete data["coverImage"]
+        }
+        
+        console.log(data);
+        editAdvert(car.id, data)
     }
 
     const getFipePrice = (e:ChangeEvent<HTMLInputElement>) => {
@@ -66,15 +80,22 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
     const addImage = (e:ChangeEvent<HTMLInputElement>, index: number) => {
         let imagesAux = images.map((image,imageIndex) => {
             if(imageIndex === index){
-                return image = e.target.value
+                return image = e.target.files
             }
             return image
         })
         setImages(imagesAux)
     }
 
+    const deleteImage = (index: number) => {
+        let imagesAux = images.filter((image, i) => {
+            return i !== index
+        })
+        setImages(imagesAux)
+    }
+
     return (
-        <form className="modal-form" onSubmit={handleSubmit(onSubmitAd)}>
+        <form encType="multipart/form-data" className="modal-form" onSubmit={handleSubmit(onSubmitAd)}>
             <h2>Informações do veículo</h2>
             <Input onChange={(e) => setBrand(e.target.value)} children="Marca" id="model" defaultValue={car.brand} placeholder={car.brand} register={register("brand")} list="brands"/>
             <datalist id="brands">
@@ -162,12 +183,29 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
             </div>
             <TextArea children="Descrição" id="description" placeholder={car.description} defaultValue={car.description} register={register("description")}/>
             {errors.description && <span className="error">{errors.description.message}</span>}
-            <Input children="Imagem da capa" id="coverImage" placeholder={car.coverImage} defaultValue={car.coverImage} register={register("coverImage")}/>
+            <div className="img-input-car">
+                <Input onChange={()=>setEditedCoverImage(true)} type="file" accept="image/*" children="Imagem da capa" id="coverImage" placeholder={car.coverImage} register={register("coverImage")}/>
+                {
+                    !editedCoverImage &&
+                    <figure>
+                        <img src={car.coverImage}/>
+                    </figure>
+                }
+            </div>
             {errors.coverImage && <span className="error">{errors.coverImage.message}</span>}
             {
                 images.map((_image, index) => {
                         return(
-                            <Input value={images[index] || ""} onChange={(e:ChangeEvent<HTMLInputElement>)=>addImage(e, index)}>{`${index + 1}ª`} Imagem da galeria</Input>
+                            <div className="img-input-car">
+                                <Input type="file" accept="image/*" onChange={(e:ChangeEvent<HTMLInputElement>)=>addImage(e, index)}>{`${index + 1}ª`} Imagem da galeria</Input>
+                                <button onClick={()=>deleteImage(index)}><MdDelete/></button>
+                                {
+                                    typeof _image === "string" &&
+                                    <figure>
+                                        <img src={_image}/>
+                                    </figure>
+                                }
+                            </div>
                         )
                 })
             }
