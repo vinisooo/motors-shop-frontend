@@ -99,6 +99,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
       const token = nookies.get()["userToken"]
       const response = await api.patch(`/adverts/${id}`, data, {
         headers: {
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`
         }
       })

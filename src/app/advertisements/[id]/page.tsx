@@ -10,7 +10,11 @@ import Comments from "@/components/comment/comments"
 
 export const getAdvertisement = async (id: string) => {
     try{
-        const response = await getData(`/adverts/${id}`)
+        const response = await getData(`/adverts/${id}`, {
+            next: {
+                revalidate: 60
+            }
+        })
         return response
     }catch(err: unknown){
         console.log(err)

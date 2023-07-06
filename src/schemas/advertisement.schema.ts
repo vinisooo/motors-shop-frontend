@@ -1,6 +1,11 @@
 import { object, z } from "zod"
 import { galleryAdvertisementListSchema } from "./galleryAdvertisement.schema"
 
+const FileOrFileList = z.custom((value) => {
+    return value instanceof File || value instanceof FileList;
+}, { message: "Expected File or FileList" })
+  
+
 export const advertisementSchema = z.object({
     id: z.string(),
     brand: z.string().max(60, "Marca deve ter no máximo 60 caracteres"),
@@ -10,7 +15,7 @@ export const advertisementSchema = z.object({
     color: z.string().max(20, "Cor deve conter no máximo 20 caracteres"),
     quilometers: z.number(),
     price: z.number(),
-    coverImage: z.string().max(150, "Imagem deve conter no máximo 150 caracteres").or(z.any()),
+    coverImage: FileOrFileList,
     description: z.string(),
     isAvailable: z.boolean(),
     user: z.any(),

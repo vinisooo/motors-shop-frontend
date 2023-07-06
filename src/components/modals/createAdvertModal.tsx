@@ -71,6 +71,7 @@ const CreateAdvertisementModal = ( ) => {
         setImages(imagesAux)
         console.log(imagesAux)
     }
+    console.log(errors)
 
     return (
         <Modal title="Cadastro de veículo">
@@ -161,8 +162,7 @@ const CreateAdvertisementModal = ( ) => {
                 </div>
                 <TextArea children="Descrição" id="description" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et ante ac enim porta luctus. Sed leo est, tempus ac sapien ut, rhoncus ultrices mauris. Phasellus consectetur non neque at varius." register={register("description")}/>
                 {errors.description && <span className="error">{errors.description.message}</span>}
-                <Input name="coverImage" type="file" accept="image/*" children="Imagem da capa" id="coverImage" register={register("coverImage")}/>
-                {/* {errors.coverImage && <span className="error">{errors.coverImage.message}</span>} */}
+                <Input required name="coverImage" type="file" accept="image/*" children="Imagem da capa" id="coverImage" register={register("coverImage")}/>
                 {
                     images.map((image, index) => {
                         return(
