@@ -118,7 +118,7 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
                 <option value="volkswagen">Volkswagen</option>
             </datalist>
             {errors.brand && <span className="error">{errors.brand.message}</span>}
-            <Input onClick={()=>getCarsByBrand(brand)} onChange={(e)=>getFipePrice(e)} children="Modelo" id="model" defaultValue={car.model} placeholder={car.model} register={register("model", {valueAsNumber:true})} list="models"/>
+            <Input onClick={()=>getCarsByBrand(brand)} onChange={(e)=>getFipePrice(e)} children="Modelo" id="model" defaultValue={car.model} placeholder={car.model} register={register("model")} list="models"/>
             <datalist id="models">
                 {
                     cars?.map((car) => {
