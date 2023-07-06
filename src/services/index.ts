@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const api = axios.create({
-  baseURL: "https://motorsshop-w0l3.onrender.com",
+  baseURL: "http://localhost:3001",
   timeout: 15000,
 })
 
