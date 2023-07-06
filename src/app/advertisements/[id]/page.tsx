@@ -1,14 +1,12 @@
 import { TAdvertisementRes } from "@/schemas/advertisement.schema"
 import { getData } from "@/uteis/api"
-import { cache } from "react"
 import "../../../styles/pages/advertisement/advertisement.sass"
-import HeaderProfile from "@/components/headerProfile/header"
 import AdvertisementInfo from "@/components/advertisementInfo/advertisementInfo"
 import Footer from "@/components/footer/footer"
 import CarImageModal from "@/components/modals/carImageModal"
 import Comments from "@/components/comment/comments"
 
-export const getAdvertisement = async (id: string) => {
+const getAdvertisement = async (id: string) => {
     try{
         const response = await getData(`/adverts/${id}`, {
             next: {
