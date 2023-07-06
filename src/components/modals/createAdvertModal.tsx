@@ -19,7 +19,7 @@ const CreateAdvertisementModal = ( ) => {
     const [fipe, setFipe] = useState<number>(0)
     const [year, setYear] = useState<number>(0)
 
-    const [images, setImages] = useState<(string | null)[]>([])
+    const [images, setImages] = useState<(FileList | null)[]>([])
 
     const {getCarsByBrand, cars, postAdvertisement} = useCarsContext()
 
@@ -33,14 +33,11 @@ const CreateAdvertisementModal = ( ) => {
     })
 
     const onSubmitAd: SubmitHandler<any> = async(data) => {
-        data.galleryAdvertisement = images.filter((image) => image !== null && image.trim() !== "")
+        const mergedFiles = images.map((fileList) => Array.from(fileList || [])).flat()
+        data.galleryAdvertisement = mergedFiles
         data.year = Number(year)
         data.fipeDeal = data.price < Number(fipe)
-        data.galleryAdvertisement = data.galleryAdvertisement.map((img: string) => {
-            return {
-                imageUrl: img
-            }
-        })
+        data.coverImage = data.coverImage[0]
         console.log(data)
         postAdvertisement(data)
     }
@@ -67,7 +64,7 @@ const CreateAdvertisementModal = ( ) => {
     const addImage = (e:ChangeEvent<HTMLInputElement>, index: number) => {
         let imagesAux = images.map((image,imageIndex) => {
             if(imageIndex === index){
-                return image = e.target.value
+                return image = e.target.files
             }
             return image
         })
@@ -77,7 +74,7 @@ const CreateAdvertisementModal = ( ) => {
 
     return (
         <Modal title="Cadastro de veículo">
-            <form className="modal-form" onSubmit={handleSubmit(onSubmitAd)}>
+            <form encType="multipart/form-data" className="modal-form" onSubmit={handleSubmit(onSubmitAd)}>
                 <h2>Informações do veículo</h2>
                 <Input value={brand} onChange={(e) => setBrand(e.target.value)} children="Marca" id="model" placeholder="Marca do Veículo" register={register("brand")} list="brands"/>
                 <datalist id="brands">
@@ -164,12 +161,12 @@ const CreateAdvertisementModal = ( ) => {
                 </div>
                 <TextArea children="Descrição" id="description" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et ante ac enim porta luctus. Sed leo est, tempus ac sapien ut, rhoncus ultrices mauris. Phasellus consectetur non neque at varius." register={register("description")}/>
                 {errors.description && <span className="error">{errors.description.message}</span>}
-                <Input children="Imagem da capa" id="coverImage" placeholder="https://image.com" register={register("coverImage")}/>
-                {errors.coverImage && <span className="error">{errors.coverImage.message}</span>}
+                <Input name="coverImage" type="file" accept="image/*" children="Imagem da capa" id="coverImage" register={register("coverImage")}/>
+                {/* {errors.coverImage && <span className="error">{errors.coverImage.message}</span>} */}
                 {
                     images.map((image, index) => {
                         return(
-                            <Input onChange={(e:ChangeEvent<HTMLInputElement>)=>addImage(e, index)}>{`${index + 1}ª`} Imagem da galeria</Input>
+                            <Input type="file" accept="image/*" onChange={(e:ChangeEvent<HTMLInputElement>)=>addImage(e, index)}>{`${index + 1}ª`} Imagem da galeria</Input>
                         )
                     })
                 }

@@ -138,19 +138,21 @@ const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
                 <ul className="filter-list">
                     {
                         extractedFilter.brand.map((filter, index) => {
-                            return(
-                                <li key={index}>
-                                    <Link
-                                        scroll={false}
-                                        className={
-                                            searchParams.brand === filter ? "selected" : ""
-                                        }
-                                        href={handleFilter("brand", filter)}
-                                    >
-                                        {filter[0].toUpperCase() + filter.substring(1)}
-                                    </Link>
-                                </li>
-                            )
+                            if(filter){
+                                return(
+                                    <li key={index}>
+                                        <Link
+                                            scroll={false}
+                                            className={
+                                                searchParams.brand === filter ? "selected" : ""
+                                            }
+                                            href={handleFilter("brand", filter)}
+                                        >
+                                            {filter[0].toUpperCase() + filter.substring(1)}
+                                        </Link>
+                                    </li>
+                                )
+                            }
                         })
                     }
                 </ul>
@@ -210,19 +212,21 @@ const FilterList = async({searchParams, advertisements}: iFilterListProps) => {
                 <ul className="filter-list">
                     {
                         extractedFilter.year.map((filter, index) => {
-                            return(
-                                <li key={index}>
-                                    <Link
-                                        scroll={false}
-                                        className={
-                                            Number(searchParams.year) == filter ? "selected" : ""
-                                        }
-                                        href={handleFilter("year", filter.toString())}
-                                    >
-                                        {filter}
-                                    </Link>
-                                </li>
-                            )
+                            if(filter){                                
+                                return(
+                                    <li key={index}>
+                                        <Link
+                                            scroll={false}
+                                            className={
+                                                Number(searchParams.year) == filter ? "selected" : ""
+                                            }
+                                            href={handleFilter("year", filter.toString())}
+                                        >
+                                            {filter}
+                                        </Link>
+                                    </li>
+                                )
+                            }
                         })
                     }
                 </ul>

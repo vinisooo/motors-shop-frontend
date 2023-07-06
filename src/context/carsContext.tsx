@@ -66,6 +66,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
     try {
       const response = await api.post<TAdvertisementRes>("/adverts", data, {
         headers: {
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       })

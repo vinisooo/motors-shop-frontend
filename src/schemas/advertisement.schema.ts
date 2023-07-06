@@ -10,7 +10,7 @@ export const advertisementSchema = z.object({
     color: z.string().max(20, "Cor deve conter no máximo 20 caracteres"),
     quilometers: z.number(),
     price: z.number(),
-    coverImage: z.string().max(150, "Imagem deve conter no máximo 150 caracteres"),
+    coverImage: z.string().max(150, "Imagem deve conter no máximo 150 caracteres").or(z.any()),
     description: z.string(),
     isAvailable: z.boolean(),
     user: z.any(),
