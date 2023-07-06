@@ -17,7 +17,6 @@ const getUser=async()=>{
         })
         return request
     }catch(err: unknown){
-        console.log(err)
         cookies().delete("userToken")
     }
 }

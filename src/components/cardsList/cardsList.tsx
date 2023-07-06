@@ -20,7 +20,6 @@ const CarsList = async ({ id, userLogged }: { id: string, userLogged: TUser }) =
   }
 
   const { adverts, user }: { adverts: TCars, user: TUser } = advertisements.data
-  console.log(user)
   return (
     <>
       {adverts.length > 0 ?

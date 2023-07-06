@@ -38,7 +38,6 @@ const CreateAdvertisementModal = ( ) => {
         data.year = Number(year)
         data.fipeDeal = data.price < Number(fipe)
         data.coverImage = data.coverImage[0]
-        console.log(data)
         postAdvertisement(data)
     }
 

@@ -50,7 +50,6 @@ export const UserProvider = ({children}: TProviderProps) => {
             })
             setUser(newUser)
             
-            console.log(newUser)
             toast.success("Usuário registrado com sucesso!")
             router.push("/login")
         } catch (err: unknown) {

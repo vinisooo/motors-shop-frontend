@@ -11,7 +11,6 @@ import { CardsLoading } from "@/components/loadings/cardsLoading/cardsLoading"
 import { redirect } from "next/navigation"
 
 const getUser=async(token:string)=>{
-    console.log(token)
     try{
         const response=await getData("/users/loggedUser",{
             headers:{

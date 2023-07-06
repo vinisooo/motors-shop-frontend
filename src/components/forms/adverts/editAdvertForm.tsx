@@ -54,7 +54,6 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
           delete data["coverImage"]
         }
         
-        console.log(data);
         editAdvert(car.id, data)
     }
 
