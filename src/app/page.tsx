@@ -2,20 +2,20 @@ import Footer from "@/components/footer/footer"
 import Header from "@/components/header/header"
 import HomeHeader from "@/components/homeHeader/HomeHeader"
 import "../styles/pages/home/home.sass"
-import { iFilterListProps } from "@/components/filterList/FilterList"
 import { cookies } from "next/headers"
 import HeaderProfile from "@/components/headerProfile/header"
 import { Suspense } from "react"
 import CarsHome from "@/components/cardsList/carsHome"
 import { HomePageLoading } from "@/components/loadings/homePageLoading/homePageLoading"
 import HeaderHandler from "@/components/header/headerHandler"
+import { iFilters } from "@/components/filterList/FilterList"
 
 const getUser=()=>{
   const userToken=cookies().get("userToken")
   return userToken
 }
 
-const Home = async({searchParams}: iFilterListProps) => {
+const Home = async({searchParams}: {searchParams: iFilters}) => {
   const userToken=getUser()
 
   return (

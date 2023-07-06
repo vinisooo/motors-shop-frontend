@@ -28,12 +28,8 @@ export interface iFilters {
     [key: string]: string | undefined;
 }
 
-export interface iFilterListProps {
-    searchParams: iFilters
-    advertisements: TAdvertisementRes[]
-}
 
-const FilterList = ({searchParams, advertisements}: iFilterListProps) => {
+const FilterList = ({searchParams, advertisements}: {searchParams: iFilters, advertisements: TAdvertisementRes[]}) => {
     const {filterDropdown, setFilterDropdown} = useContext(ModalContext)
     const router = useRouter()
 

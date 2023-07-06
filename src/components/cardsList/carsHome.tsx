@@ -1,5 +1,5 @@
 import { TAdvertisementRes } from "@/schemas/advertisement.schema"
-import FilterList, { iFilterListProps, iFilters } from "../filterList/FilterList"
+import FilterList, { iFilters } from "../filterList/FilterList"
 import Link from "next/link"
 import { Cards } from "../cards/cards"
 import { Car } from "@/schemas/advertsSchema"
