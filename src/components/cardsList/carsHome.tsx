@@ -41,7 +41,7 @@ const getAdvertisements = async(searchParams: iFilters) => {
     }
 }
 
-const CarsHome=async({searchParams}:{searchParams:iFilters})=>{
+const CarsHome= (async({searchParams}:{searchParams:iFilters})=>{
 
     const advertisements = await getAdvertisements(searchParams)
     const notPaginatedAdverts: TAdvertisementRes[] = await getNotPaginated()
@@ -96,6 +96,6 @@ const CarsHome=async({searchParams}:{searchParams:iFilters})=>{
         </>
     )
 
-}
+}) as unknown as ({searchParams}:{searchParams:iFilters}) => JSX.Element
 
 export default CarsHome
