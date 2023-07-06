@@ -39,6 +39,11 @@ const FilterList = ({searchParams, advertisements}: {searchParams: iFilters, adv
     const [maxPrice, setMaxPrice] = useState<string>(searchParams.maxPrice ? searchParams.maxPrice : "");
 
     const extractFilterData = (data: TAdvertisementRes[]) =>{
+        if(!Array.isArray(data)){
+            return {
+                brand: [], model: [], color: [], year: [], fuel: [],
+            } 
+        }
         const brandList: string[] = [];
         const modelList: string[] = [];
         const colorList: string[] = [];
@@ -50,16 +55,16 @@ const FilterList = ({searchParams, advertisements}: {searchParams: iFilters, adv
                 brandList.push(item.brand);
             }
             if (!modelList.includes(item.model)) {
-            modelList.push(item.model);
+                modelList.push(item.model);
             }
             if (!colorList.includes(item.color)) {
-            colorList.push(item.color);
+                colorList.push(item.color);
             }
             if (!yearList.includes(item.year)) {
-            yearList.push(item.year);
+                yearList.push(item.year);
             }
             if (!fuelList.includes(item.fuel)) {
-            fuelList.push(item.fuel);
+                fuelList.push(item.fuel);
             }
         }
         return {
