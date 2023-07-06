@@ -49,7 +49,7 @@ const CarsHome=async({searchParams}:{searchParams:iFilters})=>{
     return (
         <>
             <FilterList searchParams={searchParams} advertisements={notPaginatedAdverts}/> 
-            <div className="cars">
+            <div className="cars" id="filter-applied">
               <div className="cars-page">
                   <div className="cars-list">
                       {
