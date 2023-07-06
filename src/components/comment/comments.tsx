@@ -1,7 +1,7 @@
 import PageCard from "../pageCard/pageCard"
 import Comment from "./comment"
 import "../../styles/pages/advertisement/comments.sass"
-import { getData } from "@/uteis/api"
+import { getData } from "@/utils/api"
 import { TCommentRes, TComments } from "@/schemas/comment.schema"
 import { cookies } from "next/headers"
 import { CommentInput } from "./commentForm"

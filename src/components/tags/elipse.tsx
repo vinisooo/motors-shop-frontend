@@ -1,7 +1,7 @@
 "use client"
 
 import "../../styles/components/tags/tags.sass"
-import getInitials from "@/uteis/getInitials"
+import getInitials from "@/utils/getInitials"
 import { useRouter } from "next/navigation"
 
 interface iElipsis{

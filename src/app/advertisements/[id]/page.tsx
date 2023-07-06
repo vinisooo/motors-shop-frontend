@@ -1,5 +1,5 @@
 import { TAdvertisementRes } from "@/schemas/advertisement.schema"
-import { getData } from "@/uteis/api"
+import { getData } from "@/utils/api"
 import "../../../styles/pages/advertisement/advertisement.sass"
 import AdvertisementInfo from "@/components/advertisementInfo/advertisementInfo"
 import Footer from "@/components/footer/footer"
