@@ -24,7 +24,7 @@ const getComments = async(postId: string, token:string | undefined) => {
     }
 }
 
-const Comments = (async({postId}:{postId: string}) => {
+const Comments = async({postId}:{postId: string}) => {
     const token = cookies().get("userToken")
     const comments: TCommentRes = await getComments(postId, token?.value)
 
@@ -62,6 +62,6 @@ const Comments = (async({postId}:{postId: string}) => {
             </PageCard>
         </section>
     )
-}) as unknown as ({postId}:{postId: string}) => JSX.Element
+}
 
 export default Comments

@@ -6,7 +6,7 @@ import { getData } from "@/uteis/api"
 import { useCarsContext } from "@/context/carsContext"
 
 
-const DeleteAdvert= (async({id}:{id:string})=>{
+const DeleteAdvert= async({id}:{id:string})=>{
 
     const {deleteAdvert} = useCarsContext()
 
@@ -23,6 +23,6 @@ const DeleteAdvert= (async({id}:{id:string})=>{
         </div>
 
     )
-}) as unknown as ({id}: {id: string}) => JSX.Element
+}
 
 export {DeleteAdvert}
