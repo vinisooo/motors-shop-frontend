@@ -22,7 +22,7 @@ const getUser=async()=>{
     }
 }
 
-const HeaderProfile = async() => {
+const HeaderProfile = (async() => {
     const user= await getUser()
     
     return(
@@ -33,6 +33,6 @@ const HeaderProfile = async() => {
             <NavHeader {...user}/>
         </div>
     )
-}
+}) as unknown as () => JSX.Element
 
 export default HeaderProfile

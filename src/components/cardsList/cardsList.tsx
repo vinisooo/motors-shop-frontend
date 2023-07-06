@@ -13,7 +13,7 @@ const getAdverts=async(id:string)=>{
     return response
 }
   
-const CarsList=async({id,userLogged}:{id:string,userLogged:TUser})=>{
+const CarsList= (async({id,userLogged}:{id:string,userLogged:TUser})=>{
 
     const advertisements=await getAdverts(id)
     const {data}=advertisements
@@ -32,7 +32,6 @@ const CarsList=async({id,userLogged}:{id:string,userLogged:TUser})=>{
             }
         </>
     )
-        
-}
+}) as unknown as ({id,userLogged}:{id:string,userLogged:TUser}) => JSX.Element
 
 export default CarsList

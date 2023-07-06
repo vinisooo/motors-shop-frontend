@@ -48,9 +48,11 @@ const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) =>
                             <figure className="embla__container">
                                 {
                                     images.map((img, index) => {
-                                        return(
-                                            <img src={img} key={index} className="embla__slide"/>
+                                        if(typeof img === "string"){
+                                            return(
+                                                <img src={img} key={index} className="embla__slide"/>
                                             )
+                                        }
                                     })
                                 }
                             </figure>
@@ -95,13 +97,15 @@ const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) =>
                             <ul className="car-pics">
                                 {
                                     images.map((img, index) => {
-                                        return (
-                                            <li onClick={()=>setModalImageCallBack(img)} key={index}>
-                                                <figure className="car-pic">
-                                                    <img src={img}/>
-                                                </figure>
-                                            </li>
-                                        )
+                                        if(typeof img === "string"){
+                                            return (
+                                                <li onClick={()=>setModalImageCallBack(img)} key={index}>
+                                                    <figure className="car-pic">
+                                                        <img src={img}/>
+                                                    </figure>
+                                                </li>
+                                            )
+                                        }
                                     })
                                 }
                             </ul>
