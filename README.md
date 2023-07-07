@@ -14,6 +14,7 @@
 * [Deploy do FrontEnd](https://github.com/grupo32-t14-gustavo/frontend).
   
 * [Repositório do BackEnd](https://github.com/grupo32-t14-gustavo/backend).
+* [Documentação da API](https://github.com/grupo32-t14-gustavo/backend).
 * [Deploy da API](https://motorsshop-w0l3.onrender.com).
 
 # Motors Shop
@@ -23,7 +24,7 @@
 > Este projeto é um e-commerce de veículos que permite com que o usuário anuncie e compre veículos
 > de forma fácil e intuitiva, dentre diversas outras funcionalidades.
 
-Este projeto foi desenvolvido como **< parte de um estudo realizado em resposta a um desafio proposto pela Kenzie Academy Brasil. >**.  
+Este projeto foi desenvolvido como ** parte de um estudo realizado em resposta a um desafio proposto pela Kenzie Academy Brasil. **.  
 
 ### Descrição do ambiente técnico
 
