@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation"
 
 const Comment = ({ comment }: { comment: TComments }) => {
     const [readyToDelete, setReadyToDelete] = useState<boolean>(false)
+    const [deleted, setDeleted] = useState<boolean>(false)
     const deleteButtonRef = useRef<HTMLButtonElement>(null)
 
     const router = useRouter()
@@ -19,6 +20,7 @@ const Comment = ({ comment }: { comment: TComments }) => {
     const handleDeleteComment = () => {
         if(readyToDelete){
             deleteComment(comment.id)
+            setDeleted(true)
             router.refresh()
         }else{
             setReadyToDelete(true)
@@ -42,32 +44,32 @@ const Comment = ({ comment }: { comment: TComments }) => {
     }, [])
 
     return (
-        <li className="comment">
-        <header>
-            <Elipsis name={comment.user.name} />
-            <span>{comment.timeSince}</span>
-            {user.id === comment.user.id && (
-            <button
-                ref={deleteButtonRef}
-                onClick={handleDeleteComment}
-                className={`delete-comment ${readyToDelete ? "confirm-delete" : ""}`}
-            >
-                {readyToDelete ? (
-                <>
-                    <BsCheck />
-                </>
-                ) : (
-                <MdDelete />
+        <li className={`comment ${deleted && "delete-animation"}`}>
+            <header>
+                <Elipsis name={comment.user.name} />
+                <span>{comment.timeSince}</span>
+                {user.id === comment.user.id && (
+                <button
+                    ref={deleteButtonRef}
+                    onClick={handleDeleteComment}
+                    className={`delete-comment ${readyToDelete ? "confirm-delete" : ""}`}
+                >
+                    {readyToDelete ? (
+                    <>
+                        <BsCheck />
+                    </>
+                    ) : (
+                    <MdDelete />
+                    )}
+                </button>
                 )}
-            </button>
-            )}
-            {readyToDelete && (
-            <span className="delete-message">
-                confirmar exclusão
-            </span>
-            )}
-        </header>
-        <p>{comment.comment}</p>
+                {readyToDelete && (
+                <span className="delete-message">
+                    confirmar exclusão
+                </span>
+                )}
+            </header>
+            <p>{comment.comment}</p>
         </li>
     )
 }
