@@ -8,8 +8,10 @@ Front-end
 * <img width="30px" height="30px" src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png" alt="Typescript"> Typescript
 * <img width="30px" height="30px" src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" alt="React - NextJS"> React - NextJS(App Router)
 * <img width="30px" height="30px" src="https://user-images.githubusercontent.com/25181517/192158956-48192682-23d5-4bfc-9dfb-6511ade346bc.png" alt="SASS"> Sass
-* Backend
+Backend
+* <img width="30px" height="30px" src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png" alt="Typescript"> Yypescript
 * <img width="30px" height="30px" src="https://user-images.githubusercontent.com/25181517/183568594-85e280a7-0d7e-4d1a-9028-c8c2209e073c.png" alt="nodeJS"> NodeJS
+* <img width="30px" height="30px" src="https://user-images.githubusercontent.com/25181517/183859966-a3462d8d-1bc7-4880-b353-e2cbed900ed6.png" alt="ExpressJS"> ExpressJS
 
 ## Links importantes
 * [Repositório do FrontEnd](https://github.com/grupo32-t14-gustavo/frontend).
