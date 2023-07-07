@@ -27,6 +27,7 @@ export interface IUserContext {
   sendResetPasswordEmail: (data: TResetPasswordEmailReq) => Promise<AxiosResponse<any, any> | undefined>
   resetPassword: (data: TResetPasswordReq, token: string) => Promise<AxiosResponse<any, any> | undefined>
   createComment:(data:TCommentReqSchema)=>void
+  deleteComment: (commentId: string) => Promise<void>
   editUser: (data: TuserUpdateReq) => Promise<void>
   editAddress: (addressId: string, data: TAddressUpdateReq) => Promise<void>
   deleteUser: () => Promise<void>
@@ -197,6 +198,22 @@ export const UserProvider = ({children}: TProviderProps) => {
         }
     }
 
+    const deleteComment = async(commentId: string) => {
+        const token = getUserToken()
+        try{
+            const response = api.delete(`/comments/${commentId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            toast.success("Comentário removido")
+        }catch(err: unknown){
+            console.log(err)
+            toast.error("Oops! Algo deu errado ao deletar comentário")
+        }
+    }
+
     const editUser = async(data: TuserUpdateReq) => {
         const token = getUserToken()
         try{
@@ -260,7 +277,7 @@ export const UserProvider = ({children}: TProviderProps) => {
                 setExistantUser, setLoading,
                 sendResetPasswordEmail, resetPassword,
                 createComment, editUser, editAddress,
-                deleteUser
+                deleteUser, deleteComment
             }}
         >
             {children}
