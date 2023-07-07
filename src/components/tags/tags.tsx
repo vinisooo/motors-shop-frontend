@@ -1,4 +1,4 @@
-import getInitials from "@/uteis/getInitials"
+import getInitials from "@/utils/getInitials"
 import "../../styles/components/tags/tags.sass"
 import {TbBrandCashapp} from "react-icons/tb"
 import { redirect } from "next/navigation"
@@ -31,7 +31,6 @@ const Elipsis=({color="purple-1",name="nome",className}:iElipsis)=>{
 
 
 const Tag=({children,type="advertisement"}:iTag)=>{
-
 
     switch(type){
         case "advertisement":

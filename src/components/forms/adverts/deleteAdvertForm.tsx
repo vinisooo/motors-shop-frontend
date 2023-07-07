@@ -2,7 +2,7 @@
 import Button from "@/components/button/button"
 import "../../../styles/components/modals/deleteModal.sass"
 
-import { getData } from "@/uteis/api"
+import { getData } from "@/utils/api"
 import { useCarsContext } from "@/context/carsContext"
 
 

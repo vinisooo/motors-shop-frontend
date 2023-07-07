@@ -50,7 +50,6 @@ export const UserProvider = ({children}: TProviderProps) => {
             })
             setUser(newUser)
             
-            console.log(newUser)
             toast.success("Usuário registrado com sucesso!")
             router.push("/login")
         } catch (err: unknown) {
@@ -165,6 +164,7 @@ export const UserProvider = ({children}: TProviderProps) => {
             const request = await api.patch(`/users/resetPassword/${token}`,data)
 
             router.push("/login")
+            toast.success("Senha redefinida com sucesso")
             return request
         }catch(err: unknown){
             if (axios.isAxiosError(err)) {
@@ -192,7 +192,7 @@ export const UserProvider = ({children}: TProviderProps) => {
             })
             toast.success("Comentário adicionado")
         }catch (err) {
-            toast.error("Oops! Houve algo de errado ao adicionar comentário. Tente Mais tarde.")
+            toast.error("Oops! Algo deu errado ao adicionar comentário. Tente Mais tarde.")
             console.error(err)
         }
     }

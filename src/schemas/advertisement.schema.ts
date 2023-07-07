@@ -47,7 +47,7 @@ export const advertisementReqUpdateSchema = advertisementSchema.omit({
     createdAt: true,
     updatedAt: true,
 }).extend({
-    fipePrice: z.number()
+    fipePrice: z.number().optional()
 }).partial()
 
 export type TAdvertisementReqUpdate = z.infer<typeof advertisementReqUpdateSchema>

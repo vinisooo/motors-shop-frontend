@@ -7,7 +7,7 @@ export const usersReqSchema = z.object({
     password: z
       .string()
       .min(8, "A senha deve conter pelo menos 8 caracteres.")
-      .max(60, "A senha deve conter pelo menos 8 caracteres.")
+      .max(60, "A senha deve conter no máximo 60 caracteres.")
       .regex(/^(?=.*\d)/, "A senha deve conter pelo menos um dígito numérico.")
       .regex(/^(?=.*[a-z])/, "A senha deve conter pelo menos uma letra minúscula.")
       .regex(/^(?=.*[A-Z])/, "A senha deve conter pelo menos uma letra maiúscula.")
@@ -20,7 +20,7 @@ export const usersReqSchema = z.object({
     isAdvertiser: z.boolean(),
     address: addressReqSchema,
     description: z.string().nullable()
-  })
+})
 
 export const registerValidationSchema = usersReqSchema.extend({
     confirmPassword: z.string(),

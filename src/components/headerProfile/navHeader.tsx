@@ -1,5 +1,5 @@
 "use client"
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { Elipsis } from "../tags/tags"
 import Button from "../button/button"
 import { useUserContext } from "@/context/userContext"
@@ -12,18 +12,17 @@ import EditAddressModal from "../modals/editAddressModal"
 import { AiOutlineLoading } from "react-icons/ai"
 import "../../styles/components/header/header.sass"
 
-const NavHeader=({name}:{name:string})=>{
+const NavHeader=()=>{
 
     const [dropdownMenu, setDropdownMenu] = useState<boolean>(false)
     const{logout, user} = useUserContext()
     const {setEditProfileModal, editProfileModal, deleteProfileModal, setEditAddressModal, editAddressModal} = useModalContext()
 
-    console.log(user)
     return (
         <>
             <nav className={dropdownMenu ? "" : "hidden-dropdown-menu"}>
                 <div onClick={()=>{redirect('/user')}}>
-                    <Elipsis name={name}/>
+                    <Elipsis name={user.name}/>
                 </div>
                 <nav className="user-dropdown">
                     {

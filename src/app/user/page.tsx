@@ -2,15 +2,13 @@ import Footer from "@/components/footer/footer"
 import HeaderProfile from "@/components/headerProfile/header"
 import "../../styles/pages/profile/profile.sass"
 import HeaderAnunciant from "@/components/headerAnunciant/headerAnunciant"
-import { getData } from "@/uteis/api"
+import { getData } from "@/utils/api"
 import { TUser } from "@/schemas/userSchema"
 import { cookies } from "next/dist/client/components/headers"
 import { Suspense } from "react"
 import CarsList from "@/components/cardsList/cardsList"
 import { CardsLoading } from "@/components/loadings/cardsLoading/cardsLoading"
 import { redirect } from "next/navigation"
-import {toast} from "react-toastify"
-import HeaderHandler from "@/components/header/headerHandler"
 
 const getUser=async(token:string)=>{
     try{
@@ -18,9 +16,7 @@ const getUser=async(token:string)=>{
             headers:{
                 Authorization: `Bearer ${token}`
             },
-            next: {
-                revalidate: 0
-            },
+            cache: "no-cache"
         })
         return response
     }catch(err: unknown){
@@ -30,14 +26,11 @@ const getUser=async(token:string)=>{
 }
 
 const Profile = async() =>{
-
-    const cookieStore = cookies()
-    const userToken= cookieStore.get("userToken")
+    const userToken= cookies().get("userToken")
     if(!userToken){
         redirect("/login")
     }
-    const profile:TUser=userToken && await getUser( userToken!.value)
-
+    const profile:TUser=await getUser( userToken.value)
     return ( 
         <div className="page-show-up">
             <header>

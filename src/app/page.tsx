@@ -10,13 +10,7 @@ import { HomePageLoading } from "@/components/loadings/homePageLoading/homePageL
 import HeaderHandler from "@/components/header/headerHandler"
 import { iFilters } from "@/components/filterList/FilterList"
 
-const getUser=()=>{
-  const userToken=cookies().get("userToken")
-  return userToken
-}
-
 const Home = async({searchParams}: {searchParams: iFilters}) => {
-  const userToken=getUser()
 
   return (
     <>

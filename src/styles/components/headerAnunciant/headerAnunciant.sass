@@ -14,7 +14,25 @@
 
     background-color: variables.$color-brand-1
 
+    h1
+        font-size: 2rem
+        font-weight: 600
+        color: variables.$color-grey-1
+        font-family: variables.$heading-font
+
+    .description
+        line-height: 150%
+        font-size: 1.6rem
+        font-weight: 400
+        color: variables.$color-grey-2
+        margin-bottom: 15px
+        overflow: hidden
+        display: -webkit-box
+        -webkit-line-clamp: 2
+        -webkit-box-orient: vertical
+
     .profile
+        overflow: hidden
         position: relative
         display: flex
         justify-content: space-evenly
@@ -25,10 +43,11 @@
         top: 150px
         align-items: flex-start
         flex-direction: column
-    
+
         div
             display: flex
-            align-items: flex-end
+            flex-direction: column
+            align-items: flex-start
 
             .tag
                 margin-left: 18px
@@ -37,6 +56,10 @@
             .div-elipsis
                 flex-direction: column
                 align-items: center
+
+                >p
+                    display: none
+
                 .elipsis
                     display: flex
                     align-items: center
@@ -45,3 +68,21 @@
                     p
                         margin: 12px
                         font-size: 36px
+
+        .name-advertiser
+            display: flex
+            flex-direction: row
+            align-items: center
+
+            gap: 13px
+            margin-bottom: 15px
+        
+        button
+            border: 2px solid variables.$color-brand-1
+            color: variables.$color-brand-1
+            transition: 0.3s ease
+
+            &:hover
+                background-color: variables.$color-brand-1
+                color: variables.$color-grey-10
+                

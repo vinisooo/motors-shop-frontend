@@ -37,7 +37,6 @@ const RegisterForm = () => {
             street: street || data.address.street,
             complement: complement || data.address.complement
         }
-        console.log("data",data)
         await registerUser(data)
     }
     console.log("erros:", errors)
@@ -57,7 +56,6 @@ const RegisterForm = () => {
 
         e.target.value = cep.slice(0, 8)
         if(cep.length === 8){
-            console.log(cep)
             getCepAddress(cep)
         }
     }

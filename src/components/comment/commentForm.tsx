@@ -34,7 +34,6 @@ const CommentInput=({postId}:{postId:string})=>{
 
     const submit = (data:TCommentReqSchema, e:any) => {
         e.target.reset()
-        console.log(data)
         data.comment = comment
         setDisabled(true)
         setComment("")
