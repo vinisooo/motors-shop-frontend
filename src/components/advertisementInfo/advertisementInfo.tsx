@@ -1,5 +1,5 @@
 "use client"
-import { TAdvertisementRes } from "@/schemas/advertisement.schema"
+import { TAdvertisementRes, advertisementReqUpdateSchema } from "@/schemas/advertisement.schema"
 import { Tag } from "../tags/tags"
 import Button from "../button/button"
 import useEmblaCarousel from "embla-carousel-react"
@@ -10,13 +10,17 @@ import Elipsis from "../tags/elipse"
 import Autoplay from "embla-carousel-autoplay"
 import nookies from "nookies"
 import { useModalContext } from "@/context/modalContext"
+import { toast } from "react-toastify"
+import { useRouter } from "next/navigation"
 
 const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) => {
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({delay: 2500})])
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [Autoplay({delay: 2500})])
     const {carImageModal, setCarImageModal} = useModalContext()
 
     const {setCarImage} = useModalContext()
     const userToken = nookies.get()["userToken"]
+
+    const router = useRouter()
 
     useEffect(() => {
         if (emblaApi) {
@@ -40,7 +44,6 @@ const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) =>
 
     return(
         <>
-        
             <section className="advert-info">
                 <div>
                     <PageCard className="cover-image">
