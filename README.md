@@ -1,37 +1,47 @@
-<h1>Documentação - Motors Shop</h1>
+# Motors Shop
+<fig>
+<img src="https://rockcontent.com/br/wp-content/uploads/sites/2/elementor/thumbs/modelo-de-projeto-p2he6clp7uhmwqd16ikv9jgz30a5liixoon908hej0.png" alt="Uma imagem relacionada ao projeto">
+</fig>
 
-  <h2>Descrição</h2>
-  <p>Este é o repositório do FrontEnd do Projeto FullStack Motors Shop, uma aplicação completa para publicar postar veículos.</p>
+## Ferramentas e tecnologias utilizadas
+* <img width="30px" height="30px" src="https://user-images.githubusercontent.com/25181517/183568594-85e280a7-0d7e-4d1a-9028-c8c2209e073c.png" alt="nodeJS"> NodeJS
+* <img width="30px" height="30px" src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png" alt="Typescript"> Typescript
+* <img width="30px" height="30px" src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" alt="React - NextJS"> React - NextJS(App Router)
+* <img width="30px" height="30px" src="https://user-images.githubusercontent.com/25181517/192158956-48192682-23d5-4bfc-9dfb-6511ade346bc.png" alt="SASS"> Sass
 
-  <h3>Tecnologias usadas no front-end</h3>
-  <a><img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="typescript"/></a> <a><img src="https://img.shields.io/badge/Next.js-000?logo=nextdotjs&logoColor=fff&style=for-the-badge" alt="NextJS"/></a> <a><img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white" alt="Sass"/></a> <a><img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" alt="figma"/></a> 
+## Links importantes
+* [Repositório do FrontEnd](https://github.com/grupo32-t14-gustavo/frontend).
+* [Deploy do FrontEnd](https://github.com/grupo32-t14-gustavo/frontend).
+  
+* [Repositório do BackEnd](https://github.com/grupo32-t14-gustavo/backend).
+* [Documentação da API](https://github.com/grupo32-t14-gustavo/backend).
+* [Deploy da API](https://motorsshop-w0l3.onrender.com).
 
-  <h2>Funcionalidades</h2>
-  <ul>
-    <li>Criar contas de usuário</li>
-    <li>Logar com conta de usuário</li>
-    <li>Recuperar senha com email de acesso</li>
-    <li>Anunciar veículos</li>
-    <li>Vizualizar veiculos a venda</li>
-    <li>Editar anúncio veículos</li>
-    <li>Avaliar veículos com comentários</li>
-    <li>Entrar em contato com o vendedor pelo WhatsApp para realizar a compra</li>
-  </ul>
+# Motors Shop
 
-  <h2>Deploy</h2>
-  <p>O projeto de frontend está implantado e disponível em: <a href="https://www.example.com">Link para o deploy do frontend</a></p>
+## Introdução
 
-  <h2>Repositório da API</h2>
-  <p>O repositório da API associada a este projeto está disponível em: <a href="https://github.com/seu-usuario/repo-da-api">Link para o repositório da API</a></p>
+> Este projeto é um e-commerce de veículos que permite com que o usuário anuncie e compre veículos
+> de forma fácil e intuitiva, dentre diversas outras funcionalidades.
 
-  <h2>Como executar o projeto localmente</h2>
-  <ol>
-    <li>Faça o clone deste repositório para o seu ambiente de desenvolvimento:</li>
-    <code>git clone https://github.com/seu-usuario/repo-do-frontend.git</code>
-    <li>Navegue até o diretório do projeto:</li>
-    <code>cd repo-do-frontend</code>
-    <li>Instale as dependências do projeto utilizando o npm:</li>
-    <code>npm install</code>
-    <li>Inicie o servidor de desenvolvimento:</li>
-    <code>npm run dev</code>
-  </ol>
+Este projeto foi desenvolvido como ** parte de um estudo realizado em resposta a um desafio proposto pela Kenzie Academy Brasil. **.  
+
+### Descrição do ambiente técnico
+
+O sistema é composto por um banco de dados, API's, e uma interface web. Funcionalidades principais:
+
+* **F1** - Registrar uma conta.
+* **F2** - Entrar com um usuário.
+* **F3** - Publicar veículos para venda.
+* **F3** - Entrar em contato com vendedor.
+* **F4** - Comentar em postagens.
+
+## Regras de Negócio principais
+
+Respeitando a proposta, o sistema atende os seguintes requisitos:
+
+**RGN1** -  O cliente só fará a publicação de anúncios se for um anunciante.
+**RGN2** -  O cliente só poderá ver as publicações inativas se for anunciante dela.
+**RGN3** -  O cliente só poderá gerenciar o próprio perfil.
+**RGN4** -  O cliente poderá entrar em contato com o vendedor se estiver logado.
+**RGN5** -  O cliente só comentará em publicações se estiver logado.
