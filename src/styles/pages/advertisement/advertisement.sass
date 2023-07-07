@@ -31,20 +31,6 @@
 
     .disabled
         cursor: not-allowed
-        
-    .embla__container
-        cursor: grab
-
-    .embla 
-        overflow: hidden
-        height: 100%
-
-    .embla__container 
-        display: flex
-
-    .embla__slide 
-        flex: 0 0 100%
-        min-width: 0
 
 
     h2,h4
@@ -67,6 +53,11 @@
         display: flex
         align-items: center
         justify-content: center
+
+        cursor: grab
+
+        &:active
+            cursor: grabbing
     
     .advert-description
         h1
