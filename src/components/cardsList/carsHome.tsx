@@ -5,6 +5,7 @@ import { Cards } from "../cards/cards"
 import { Car } from "@/schemas/advertsSchema"
 import FilterButton from "../filterButton/filterButton"
 import "../../styles/pages/home/home.sass"
+import { getData } from "@/utils/api"
 
 const getAdvertisements = async(searchParams: iFilters) => {
     let params: URLSearchParams | string = new URLSearchParams()
@@ -15,7 +16,7 @@ const getAdvertisements = async(searchParams: iFilters) => {
       }
     }
     try{
-      const advertisements = await fetch(`http://localhost:3001/adverts/?perPage=12&${params}`, {
+      const advertisements = await getData(`/adverts/?perPage=12&${params}`, {
         next: {
           revalidate: 20
         }
@@ -29,7 +30,7 @@ const getAdvertisements = async(searchParams: iFilters) => {
   
   const getNotPaginated = async() => {
     try{
-      const notPaginatedAdverts = await fetch(`http://localhost:3001/adverts/?perPage=999`, {
+      const notPaginatedAdverts = await getData(`/adverts/?perPage=999`, {
         next: {
           revalidate: 60
         }
