@@ -9,6 +9,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { EditAdvertForm } from "../forms/adverts/editAdvertForm"
 import { Modal } from "../modal/modalBase/modal"
+import formatToPrice from "@/utils/formatToBrl"
 
 interface props{
     car: TCar,
@@ -60,7 +61,7 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
                         <Tag>{Number(km)}KM</Tag>
                         <Tag>{year}</Tag>
                     </div>
-                    <span>R${Number(price).toFixed(0)}</span>
+                    <span>{formatToPrice(price)}</span>
                 </div>
                 {
                     owner &&
