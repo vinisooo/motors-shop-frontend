@@ -1,4 +1,4 @@
-const baseUrl="https://motorsshop-w0l3.onrender.com"
+const baseUrl="http://localhost:3001"
 
 interface config{
     method?:"GET"| "POST" | "PATCH" | "PUT" | "DELETE"

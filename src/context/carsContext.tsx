@@ -87,7 +87,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
         }
       })
       toast.success("Publicação removida com sucesso!")
-      router.push("/user")
+      window.location.reload()
     }catch(err: unknown){
       console.log(err)
       toast.error("Algo deu errado ao deletar o anúncio. Tente novamente mais tarde")
@@ -104,10 +104,10 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
         }
       })
       toast.success("Publicação editada com sucesso!")
-      router.push("/user")
+      window.location.reload()
     }catch(err: unknown){
       console.log(err)
-      toast.error("Algo deu errado ao deletar o anúncio. Tente novamente mais tarde")
+      toast.error("Algo deu errado ao editar o anúncio. Tente novamente mais tarde")
     }
   }
 

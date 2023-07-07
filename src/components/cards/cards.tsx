@@ -29,12 +29,16 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
         router.push(`/advertisements/${car.id}`)
     }
 
+    console.log(anunciant.id, user?.id)
+    if(!car.isAvailable && !owner){
+        return <></>
+    }
     return(
         <div className="product">
             <Link href={`/advertisements/${id}`}>
                 <div className="img-product">
                     <img className={car.id} src={img}/>
-                    <Tag type={advertisement}>{advertisement}</Tag>
+                    <Tag type={car.isAvailable ? "ative" : "inative"}>{advertisement}</Tag>
                     {
                         car.fipeDeal &&
                         <Tag type="cash">{"cash"}</Tag>

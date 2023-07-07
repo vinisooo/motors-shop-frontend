@@ -61,7 +61,7 @@ const CarsHome= async({searchParams}:{searchParams:iFilters})=>{
                           )
                         })
                         :
-                        <h1>Não encontrado nenhum carro com esses filtros</h1>
+                        <h2>Não foi encontrado nenhum veículo ativo com os filtros selecionados</h2>
                       }
                   </div>
                   <FilterButton/>

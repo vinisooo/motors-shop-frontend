@@ -9,7 +9,7 @@ import Button from "@/components/button/button"
 import { TCar } from "@/schemas/advertsSchema"
 import { Modal } from "@/components/modal/modalBase/modal"
 import { DeleteAdvert } from "./deleteAdvertForm"
-import { MdDelete } from "react-icons/md"
+import { MdDelete, MdWidthFull } from "react-icons/md"
 
 
 const EditAdvertForm = ({car}:{car:TCar}) => {
@@ -17,6 +17,7 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
     const [brand, setBrand] = useState<string>("")
     const [fipe, setFipe] = useState<number>()
     const [year, setYear] = useState<number>()
+    const [isAvailable, setIsAvailable] = useState<boolean>(car.isAvailable)
 
     const galleryImages: string[] | undefined = car.galleryAdvertisement?.map((carOnList)=> carOnList.imageUrl)
     const [images, setImages] = useState<(string | null | FileList)[]>([...galleryImages || []])
@@ -49,6 +50,7 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
         data.year = Number(year) || car.year
         data.fipeDeal = data.price < Number(fipe)
         data.coverImage = data.coverImage[0]
+        data.isAvailable = isAvailable
       
         if (!data.coverImage) {
           delete data["coverImage"]
@@ -170,18 +172,17 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
                     {errors.color && <span className="error">{errors.color.message}</span>}
                 </div>
             </div>
-            <div>
-                <div className="input-box">
-                    <Input onInput={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value = e.target.value.slice(0, 9)} value={fipe?.toString()} onChange={(e)=>setFipe(Number(e.target.value))} min={0} type="number" children="Preço tabela FIPE" id="fipePrice" placeholder="R$ 48.000,00" register={register("fipePrice", { valueAsNumber: true })} />
-                    {errors.fipePrice && <span className="error">{errors.fipePrice.message}</span>}
-                </div>
-                <div className="input-box">
-                    <Input onInput={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value = e.target.value.slice(0, 9)} type="number" children="Preço" id="price" placeholder={car.price} defaultValue={car.price} min={0} register={register("price", { valueAsNumber: true })}/>
-                    {errors.price && <span className="error">{errors.price.message}</span>}
-                </div>
-            </div>
+            <Input onInput={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value = e.target.value.slice(0, 9)} type="number" children="Preço" id="price" placeholder={car.price} defaultValue={car.price} min={0} register={register("price", { valueAsNumber: true })}/>
+            {errors.price && <span className="error">{errors.price.message}</span>}
             <TextArea children="Descrição" id="description" placeholder={car.description} defaultValue={car.description} register={register("description")}/>
             {errors.description && <span className="error">{errors.description.message}</span>}
+            <div className="available-box">
+                <label>Publicado</label>
+                <div className="input-box">
+                    <Button type="button" onClick={()=> setIsAvailable(true)} Style={isAvailable ? "brand-1" : "negative-1"}>Sim</Button>
+                    <Button type="button" onClick={()=> setIsAvailable(false)} Style={!isAvailable ? "brand-1" : "negative-1"}>Não</Button>
+                </div>
+            </div>
             <div className="img-input-car">
                 <Input onChange={()=>setEditedCoverImage(true)} type="file" accept="image/*" children="Imagem da capa" id="coverImage" placeholder={car.coverImage} register={register("coverImage")}/>
                 {

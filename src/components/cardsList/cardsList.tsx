@@ -16,7 +16,7 @@ const CarsList = async ({ id, userLogged }: { id: string, userLogged: TUser }) =
   const advertisements = await getAdverts(id)
 
   if (!advertisements || !advertisements.data) {
-    return <h1>você não possui nenhum anúncio ainda {}</h1>
+    return <h2>você não possui nenhum anúncio</h2>
   }
 
   const { adverts, user }: { adverts: TCars, user: TUser } = advertisements.data
@@ -27,7 +27,7 @@ const CarsList = async ({ id, userLogged }: { id: string, userLogged: TUser }) =
           <Cards key={advert.id} car={Car.parse(advert)} anunciant={user} user={userLogged} />
         ))
         :
-        <h1>você não possui nenhum anúncio ainda</h1>
+        <h2>você não possui nenhum anúncio</h2>
       }
     </>
   )
