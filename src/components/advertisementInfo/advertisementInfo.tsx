@@ -12,6 +12,7 @@ import nookies from "nookies"
 import { useModalContext } from "@/context/modalContext"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
+import formatToPrice from "@/utils/formatToBrl"
 
 const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [Autoplay({delay: 2500})])
@@ -62,13 +63,13 @@ const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) =>
                         </div>
                     </PageCard>
                     <PageCard className="advert-description">
-                        <h1>{advertisement.model}</h1>
+                        <h1>{advertisement.brand} {advertisement.model} {advertisement.color}</h1>
                         <div>
                             <div className="year-km">
                                 <Tag>{advertisement.year}</Tag>
                                 <Tag>{advertisement.quilometers} KM</Tag>
                             </div>
-                            <h3>R$ {advertisement.price}</h3>
+                            <h3>{formatToPrice(advertisement.price)}</h3>
                         </div>
                         <Button Style={!userToken ? "disabled" : undefined}>
                             {

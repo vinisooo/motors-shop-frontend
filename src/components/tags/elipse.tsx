@@ -16,7 +16,7 @@ const Elipsis=({color="purple-1",name="nome",className}:iElipsis)=>{
 
     const visitAnunciant=(e:any)=>{
         const page=e.currentTarget.classList[1]
-        router.push(`http://localhost:3000/user/${page}`)
+        router.push(`/user/${page}`)
     }
 
     const initials = getInitials(name)

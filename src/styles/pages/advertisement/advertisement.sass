@@ -31,9 +31,7 @@
 
     .disabled
         cursor: not-allowed
-        
-    .embla__container
-        cursor: grab
+
 
     h2,h4
         color: variables.$color-grey-1
@@ -55,6 +53,11 @@
         display: flex
         align-items: center
         justify-content: center
+
+        cursor: grab
+
+        &:active
+            cursor: grabbing
     
     .advert-description
         h1
