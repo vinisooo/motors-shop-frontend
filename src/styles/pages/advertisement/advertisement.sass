@@ -30,8 +30,13 @@
         color: variables.$color-grey-10
 
     .disabled
+        padding: 15px 20px
         cursor: not-allowed
 
+    .disabled-message
+        margin-top: 20px
+        animation: disabled-animation 10s ease
+        opacity: 0
 
     h2,h4
         color: variables.$color-grey-1
@@ -149,8 +154,16 @@
                 color: variables.$color-grey-1
 
 .advert-info
-    display: flex
+    display: flex 
     flex-direction: column
+
+@keyframes disabled-animation 
+    0%
+        opacity: 1
+    90%
+        opacity: 1
+    100%
+        opacity: 0
 
 @media (min-width: 768px)
     .advert-info
