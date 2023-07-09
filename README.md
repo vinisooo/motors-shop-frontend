@@ -95,7 +95,7 @@ O front-end do projeto agora deve estar disponível em `http://localhost:3000`.
 
 O back-end do projeto agora deve estar disponível na porta escolhida em seu .env ou em `http://localhost:3001`.
 
-**Desenvolvedores
+## Desenvolvedores
 <table>
   <tr>
     
