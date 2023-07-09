@@ -1,4 +1,5 @@
 "use client"
+
 import { useState } from "react"
 import { Elipsis } from "../tags/tags"
 import Button from "../button/button"
@@ -11,18 +12,25 @@ import DeleteProfileModal from "../modals/deleteProfileModal"
 import EditAddressModal from "../modals/editAddressModal"
 import { AiOutlineLoading } from "react-icons/ai"
 import "../../styles/components/header/header.sass"
+import getRandomColor from "@/utils/randomElipsisColor"
+
 
 const NavHeader=()=>{
-
     const [dropdownMenu, setDropdownMenu] = useState<boolean>(false)
     const{logout, user} = useUserContext()
     const {setEditProfileModal, editProfileModal, deleteProfileModal, setEditAddressModal, editAddressModal} = useModalContext()
+
 
     return (
         <>
             <nav className={dropdownMenu ? "" : "hidden-dropdown-menu"}>
                 <div onClick={()=>{redirect('/user')}}>
-                    <Elipsis name={user.name}/>
+                    {
+                        Object.keys(user).length === 0 ?
+                            <Elipsis color={getRandomColor()} loading={true} name={"Carregando"}/>
+                        :
+                            <Elipsis color="purple-1" name={user.name}/>
+                    }
                 </div>
                 <nav className="user-dropdown">
                     {

@@ -1,8 +1,10 @@
 "use client"
+
 import "../../styles/components/header/header.sass"
 import Link from "next/link"
 import Logo from "../logo/logo"
 import { useState } from "react"
+
 
 const Header = () => {
     const [dropdownMenu, setDropdownMenu] = useState<boolean>(false)

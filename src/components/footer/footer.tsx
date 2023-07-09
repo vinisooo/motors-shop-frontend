@@ -1,6 +1,8 @@
 "use client"
+
 import "../../styles/components/footer/footer.sass"
 import { MdOutlineKeyboardArrowUp } from "react-icons/md"
+
 
 const Footer=()=>{
 

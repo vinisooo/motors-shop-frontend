@@ -1,15 +1,16 @@
 "use client"
 
 import "../../styles/components/headerAnunciant/headerAnunciant.sass"
-import { TUser } from "@/schemas/userSchema"
+import { TUser } from "@/types/user.types"
 import Button from "../button/button"
 import { Elipsis, Tag } from "../tags/tags"
 import {  useModalContext } from "@/context/modalContext"
 import { CreateAdvertisementModal } from "../modals/createAdvertModal"
 
-const HeaderAnunciant=({anunciant,profile}:{anunciant:TUser,profile:TUser})=>{
 
+const HeaderAnunciant=({anunciant,profile}:{anunciant:TUser,profile:TUser})=>{
     const { createAdvertModal, setCreateAdvertModal } = useModalContext()
+    
     return(
         <>
             <section className="header-profile">

@@ -1,4 +1,5 @@
-'use client'
+"use client"
+
 import "../../styles/pages/home/filterList.sass"
 import Link from "next/link"
 
@@ -11,10 +12,10 @@ import { AiOutlineClose } from 'react-icons/ai'
 
 import { Dispatch, SetStateAction, EventHandler } from "react"
 import { useRouter } from "next/navigation"
-import { TAdvertisementRes } from "@/schemas/advertisement.schema"
+import { TAdvertisementRes } from "@/types/advertisement.types"
 
 
-export interface iFilters {
+export interface IFilters {
     brand: string | undefined,
     model: string | undefined,
     color: string | undefined,
@@ -29,7 +30,7 @@ export interface iFilters {
 }
 
 
-const FilterList = ({searchParams, advertisements}: {searchParams: iFilters, advertisements: TAdvertisementRes[]}) => {
+const FilterList = ({searchParams, advertisements}: {searchParams:IFilters, advertisements: TAdvertisementRes[]}) => {
     const {filterDropdown, setFilterDropdown} = useContext(ModalContext)
     const router = useRouter()
 

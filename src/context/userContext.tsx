@@ -1,16 +1,18 @@
 "use client"
+
 import api from "@/services"
 import { TLoginReq, TLoginRes, TProviderProps, TUserRes, TValidationSchema, TuserUpdateReq } from "@/types/user.types"
 import { useRouter } from "next/navigation"
 import nookies,{ setCookie,destroyCookie, parseCookies } from "nookies"
 import { createContext, useContext, useEffect, useState } from "react"
-import { TResetPasswordEmailReq, TResetPasswordReq } from "@/schemas/users.schema"
+import { TResetPasswordEmailReq, TResetPasswordReq } from "@/types/user.types"
 import axios,{ AxiosError, AxiosResponse } from "axios"
 
 import { SetStateAction } from "react"
-import { TCommentReqSchema } from "@/schemas/comment.schema"
+import { TCommentReqSchema } from "@/types/comment.types"
 import {toast} from "react-toastify"
 import { TAddressUpdateReq } from "@/types/address.types"
+
 
 export interface IUserContext {
   registerUser: (data: TValidationSchema) => Promise<void>
@@ -285,4 +287,4 @@ export const UserProvider = ({children}: TProviderProps) => {
     )
 }
 
-export const useUserContext =() => useContext(UserContext)
+export const useUserContext = () => useContext(UserContext)

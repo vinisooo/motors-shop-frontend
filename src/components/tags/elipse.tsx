@@ -4,13 +4,14 @@ import "../../styles/components/tags/tags.sass"
 import getInitials from "@/utils/getInitials"
 import { useRouter } from "next/navigation"
 
-interface iElipsis{
+interface IElipsis{
     name:string
     className?:string
     color?: "purple-1" | "purple-2" |"purple-3"| "purple-4" | "purple-5" |"purple-6" | "green-1" | "green-2" | "green-3" | "pink-1" | "pink-2" | "pink-3" 
 } 
 
-const Elipsis=({color="purple-1",name="nome",className}:iElipsis)=>{
+
+const Elipsis=({color="purple-1",name="nome",className}:IElipsis)=>{
 
     const router=useRouter()
 

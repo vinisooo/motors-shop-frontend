@@ -1,7 +1,8 @@
 import { z } from "zod"
 import { addressReqSchema } from "./address.schema"
 
-export const usersReqSchema = z.object({
+export const userSchema = z.object({
+    id: z.string(),
     name: z.string().max(60),
     email: z.string().email("Email inválido").max(60, "Seu email deve conter no máximo 60 caracteres"),
     password: z
@@ -21,6 +22,8 @@ export const usersReqSchema = z.object({
     address: addressReqSchema,
     description: z.string().nullable()
 })
+
+export const usersReqSchema = userSchema.omit({id: true})
 
 export const registerValidationSchema = usersReqSchema.extend({
     confirmPassword: z.string(),
@@ -54,7 +57,4 @@ export const resetPasswordReqSchema = usersReqSchema.omit({
     }
 )
     
-
-export type TResetPasswordEmailReq= z.infer<typeof resetPasswordEmailReqSchema>
-export type TResetPasswordReq = z.infer<typeof resetPasswordReqSchema>
 export const usersUpdateReqSchema = usersReqSchema.partial()

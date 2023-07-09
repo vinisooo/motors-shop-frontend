@@ -1,15 +1,13 @@
 import Footer from "@/components/footer/footer"
 import "../../../styles/pages/profile/profile.sass"
 import HeaderAnunciant from "@/components/headerAnunciant/headerAnunciant"
-import HeaderProfile from "@/components/headerProfile/header"
-import { TUser } from "@/schemas/userSchema"
+import { TUser } from "@/types/user.types"
 import { getData } from "@/utils/api"
 import { cookies } from "next/headers"
 import { Suspense } from "react"
 import CarsList from "@/components/cardsList/cardsList"
 import { CardsLoading } from "@/components/loadings/cardsLoading/cardsLoading"
 import { redirect } from "next/navigation"
-import {toast} from "react-toastify"
 
 
 const getUserLogged=async(token:string)=>{

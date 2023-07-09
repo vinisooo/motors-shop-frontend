@@ -1,15 +1,17 @@
 "use client"
+
 import "../../styles/components/cards/cards.sass"
 import { Tag } from "../tags/tags"
-import { TCar } from "@/schemas/advertsSchema"
+import { TCar } from "@/types/advertisement.types"
 import Button from "../button/button"
-import { TUser } from "@/schemas/userSchema"
+import { TUser } from "@/types/user.types"
 import Elipsis from "../tags/elipse"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { EditAdvertForm } from "../forms/adverts/editAdvertForm"
 import { Modal } from "../modal/modalBase/modal"
 import formatToPrice from "@/utils/formatToBrl"
+import getRandomColor from "@/utils/randomElipsisColor"
 
 interface props{
     car: TCar,
@@ -24,7 +26,8 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
     const router=useRouter()
     const owner= anunciant.id==user?.id
 
-    const{brand,year,price,color,coverImage:img,model,quilometers:km,description,isAvailable,fuel, id}=car
+    const{brand, year, price, color, coverImage:img ,
+        model, quilometers:km, description, id}=car
 
     const detalhes=()=>{
         router.push(`/advertisements/${car.id}`)
@@ -54,7 +57,7 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
                 <p>{description}</p>
                 {
                     !owner &&
-                    <Elipsis className={anunciant.id} name={anunciant.name}/>
+                    <Elipsis color={getRandomColor()} className={anunciant.id} name={anunciant.name}/>
                 }
                 <div className="product-infos">
                     <div className="km-year">

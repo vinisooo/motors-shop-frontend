@@ -1,10 +1,10 @@
-interface iInput extends React.InputHTMLAttributes<HTMLInputElement>{
+interface IInput extends React.InputHTMLAttributes<HTMLInputElement>{
     children?:React.ReactNode
     register?: object
     imgUrl?: string
 }
 
-interface iTextArea extends React.TextareaHTMLAttributes<HTMLTextAreaElement>{
+interface ITextArea extends React.TextareaHTMLAttributes<HTMLTextAreaElement>{
     children?:React.ReactNode
     register?:object,
     size?:{
@@ -15,13 +15,13 @@ interface iTextArea extends React.TextareaHTMLAttributes<HTMLTextAreaElement>{
     }
 }
 
-interface iSelect extends React.SelectHTMLAttributes<HTMLSelectElement>{
+interface ISelect extends React.SelectHTMLAttributes<HTMLSelectElement>{
     children?:React.ReactNode
     label?: string
     register?: object
 }
 
-const Input=({children,register, ...props}:iInput)=>{
+const Input=({children,register, ...props}:IInput)=>{
     return(
         <div className={`label ${props.accept === "image/*" ? "img-input" : ""}`}>
             <label htmlFor={ props.id}>{children}</label>
@@ -30,7 +30,7 @@ const Input=({children,register, ...props}:iInput)=>{
     )
 }
 
-const TextArea=({ children,size,register, ...props}:iTextArea)=>{
+const TextArea=({ children,size,register, ...props}:ITextArea)=>{
 
     return(
         <div className="label">
@@ -40,7 +40,7 @@ const TextArea=({ children,size,register, ...props}:iTextArea)=>{
     )
 }
 
-const Select=({label,children, register, ...props}:iSelect)=>{
+const Select=({label,children, register, ...props}:ISelect)=>{
     return(
         <div className="label">
             <label htmlFor={props.id}>{label}</label>

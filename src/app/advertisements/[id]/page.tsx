@@ -1,4 +1,4 @@
-import { TAdvertisementRes } from "@/schemas/advertisement.schema"
+import { TAdvertisementRes } from "@/types/advertisement.types"
 import { getData } from "@/utils/api"
 import "../../../styles/pages/advertisement/advertisement.sass"
 import AdvertisementInfo from "@/components/advertisementInfo/advertisementInfo"

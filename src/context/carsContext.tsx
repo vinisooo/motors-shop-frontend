@@ -1,36 +1,38 @@
 "use client"
+
 import { createContext, useContext } from "react"
 import { useState } from "react"
 import { AxiosResponse } from "axios"
 import nookies from "nookies"
-import { TAdvertisementReq, TAdvertisementReqUpdate, TAdvertisementRes } from "@/schemas/advertisement.schema"
+import { TAdvertisementReq, TAdvertisementReqUpdate, TAdvertisementRes } from "@/types/advertisement.types"
 import api, { carsApi } from "@/services"
 import { useModalContext } from "./modalContext"
 import {toast} from "react-toastify"
 import { useRouter } from "next/navigation"
 
-interface iChildrenProps {
+interface IChildrenProps {
   children: React.ReactNode
 }
 
-interface iModalContextValues {
+interface IModalContextValues {
   getCarsByBrand: (brand?: string) => Promise<void>
-  cars: iCar[]
+  cars: ICar[]
   deleteAdvert: (id: string) => Promise<void>
   postAdvertisement: (data: TAdvertisementReq) => Promise<AxiosResponse<TAdvertisementRes, any> | undefined>
   editAdvert: (id: string, data: TAdvertisementReqUpdate) => Promise<void>
 }
 
-export const CarsContext = createContext({} as iModalContextValues)
+export const CarsContext = createContext({} as IModalContextValues)
 
-export interface iCar {
+export interface ICar {
   name: string
   value?: number
   year?: number
 }
 
-export const CarsProvider = ({ children }: iChildrenProps) => {
-  const [cars, setCars] = useState<iCar[]>([])
+
+export const CarsProvider = ({ children }: IChildrenProps) => {
+  const [cars, setCars] = useState<ICar[]>([])
   const {setCreateAdvertModal} = useModalContext()
 
   const token = nookies.get()["userToken"]
@@ -38,7 +40,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
 
   const getCarsByBrand = async (brand?: string) => {
     try {
-      const response: AxiosResponse<iCar[] | Record<string, iCar[]>> = await carsApi.get(
+      const response: AxiosResponse<ICar[] | Record<string, ICar[]>> = await carsApi.get(
         `/cars${brand && brand !== "outra" ? `?brand=${brand}` : ""}`
       )
       const data = response.data
@@ -46,7 +48,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
       if (Array.isArray(data)) {
         setCars(data)
       } else {
-        const carArray: iCar[] = []
+        const carArray: ICar[] = []
 
         for (const brand in data) {
           if (Object.hasOwnProperty.call(data, brand)) {
@@ -74,7 +76,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
       toast.success("Veículo publicado com sucesso!")
       return response
     } catch (err: unknown) {
-      toast.error("Erro ao publicar veículo. Tente novamente mais tarde.")
+      toast.error("Erro ao publICar veículo. Tente novamente mais tarde.")
       console.log(err)
     }
   }

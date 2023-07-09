@@ -1,10 +1,12 @@
 "use client"
-import { ChangeEvent, useContext, useState } from "react"
+
+import { ChangeEvent, useState } from "react"
 import { Input, Select, TextArea } from "../inputs/inputs"
 import "../../styles/components/modals/createAdvertisementModal.sass"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { TAdvertisementReq, advertisementReqSchema } from "@/schemas/advertisement.schema"
+import { advertisementReqSchema } from "@/schemas/advertisement.schema"
+import { TAdvertisementReq } from "@/types/advertisement.types"
 import Modal from "./modal"
 import Button from "../button/button"
 import { useModalContext } from "@/context/modalContext"
@@ -12,7 +14,6 @@ import { useCarsContext} from "@/context/carsContext"
 
 
 const CreateAdvertisementModal = ( ) => {
-
     const {setCreateAdvertModal} = useModalContext()
 
     const [brand, setBrand] = useState<string>("")
@@ -22,6 +23,7 @@ const CreateAdvertisementModal = ( ) => {
     const [images, setImages] = useState<(FileList | null)[]>([])
 
     const {getCarsByBrand, cars, postAdvertisement} = useCarsContext()
+
 
     const {
         register,
@@ -70,7 +72,7 @@ const CreateAdvertisementModal = ( ) => {
         setImages(imagesAux)
         console.log(imagesAux)
     }
-    console.log(errors)
+
 
     return (
         <Modal title="Cadastro de veículo">

@@ -1,4 +1,5 @@
-'use client'
+"use client"
+
 import {Children, MouseEventHandler, ReactNode} from "react"
 import '../../styles/components/button/button.sass'
 
@@ -57,17 +58,6 @@ interface IButton extends React.ButtonHTMLAttributes<HTMLButtonElement>{
     size?: tSizeButton
     Style?:  tTypes
     width?: number
-}
-
-interface iButton  {
-    children: ReactNode
-    onClick?: MouseEventHandler<HTMLButtonElement>
-    style?: tTypes
-    size?: tSizeButton
-    type?: "submit" | "button" | "reset"
-    id?: string
-    width?: number
-    className?: string
 }
 
 const Button=({children,Style,size,width, ...props}:IButton):React.JSX.Element=>{

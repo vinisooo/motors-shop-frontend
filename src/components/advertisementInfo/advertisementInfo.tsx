@@ -1,27 +1,25 @@
 "use client"
-import { TAdvertisementRes, advertisementReqUpdateSchema } from "@/schemas/advertisement.schema"
+
+import { TAdvertisementRes } from "@/types/advertisement.types"
 import { Tag } from "../tags/tags"
 import Button from "../button/button"
 import useEmblaCarousel from "embla-carousel-react"
-import { useContext, useEffect, useState } from "react"
+import { useEffect } from "react"
 import Link from "next/link"
 import PageCard from "../pageCard/pageCard"
 import Elipsis from "../tags/elipse"
 import Autoplay from "embla-carousel-autoplay"
 import nookies from "nookies"
 import { useModalContext } from "@/context/modalContext"
-import { toast } from "react-toastify"
-import { useRouter } from "next/navigation"
 import formatToPrice from "@/utils/formatToBrl"
 
+
 const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) => {
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [Autoplay({delay: 2500})])
-    const {carImageModal, setCarImageModal} = useModalContext()
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({delay: 2500})])
+    const {setCarImageModal} = useModalContext()
 
     const {setCarImage} = useModalContext()
     const userToken = nookies.get()["userToken"]
-
-    const router = useRouter()
 
     useEffect(() => {
         if (emblaApi) {

@@ -1,5 +1,5 @@
 import { loginReqSchema } from "@/schemas/login.schema"
-import { registerValidationSchema, usersReqSchema, usersUpdateReqSchema } from "@/schemas/users.schema"
+import { registerValidationSchema, resetPasswordEmailReqSchema, resetPasswordReqSchema, userSchema, usersReqSchema, usersUpdateReqSchema } from "@/schemas/users.schema"
 import { ReactNode } from "react"
 import { z } from "zod"
 
@@ -42,3 +42,7 @@ export type TProviderProps = {
 export type TLoginRes = {
   token: string
 }
+
+export type TResetPasswordEmailReq= z.infer<typeof resetPasswordEmailReqSchema>
+export type TResetPasswordReq = z.infer<typeof resetPasswordReqSchema>
+export type TUser = z.infer<typeof userSchema>

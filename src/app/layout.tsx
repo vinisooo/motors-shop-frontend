@@ -7,10 +7,12 @@ import { CarsProvider } from "@/context/carsContext"
 import Toastify from "@/components/toastify.tsx/toastify"
 import HeaderHandler from "@/components/header/headerHandler"
 
-interface iRootLayout{
+interface IRootLayout{
   children:ReactNode
 }
-const RootLayout=({children}:iRootLayout)=>{
+
+
+const RootLayout=({children}:IRootLayout)=>{
   
   return (
     <html>

@@ -5,14 +5,17 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import Button from "../button/button"
 import { Input } from "../inputs/inputs"
-import { TResetPasswordReq, resetPasswordReqSchema } from "@/schemas/users.schema"
+import { resetPasswordReqSchema } from "@/schemas/users.schema"
+import { TResetPasswordReq } from "@/types/user.types"
 import { useUserContext } from "@/context/userContext"
 
-interface iResetPasswordFormProps{
+
+interface IResetPasswordFormProps{
     token: string
 }
 
-const ResetPasswordForm = ({token}: iResetPasswordFormProps) => {
+
+const ResetPasswordForm = ({token}: IResetPasswordFormProps) => {
     const {
         register,
         handleSubmit,
