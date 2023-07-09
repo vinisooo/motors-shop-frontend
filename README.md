@@ -50,12 +50,60 @@ Respeitando a proposta, o sistema atende os seguintes requisitos:
 * **RGN3** -  O cliente só poderá gerenciar o próprio perfil.
 * **RGN4** -  O cliente poderá entrar em contato com o vendedor se estiver logado.
 * **RGN5** -  O cliente só comentará em publicações se estiver logado.
+  
+## Instalação local
+
+Para instalar e executar o front-end e o back-end do projeto Motors Shop localmente, siga estas etapas:
+
+### Front-end
+
+1. Clone o repositório do front-end do projeto Motors Shop em seu computador:
+
+git clone https://github.com/grupo32-t14-gustavo/frontend.git
+
+2. Navegue até a pasta do projeto clonado:
+cd frontend
+
+
+3. Instale as dependências do projeto usando o npm:
+
+npm install
+
+
+4. Inicie o servidor de desenvolvimento local:
+
+npm run dev
+
+
+O front-end do projeto agora deve estar disponível em `http://localhost:3000`.
+
+### Back-end
+
+1. Clone o repositório do back-end do projeto Motors Shop em seu computador:
+git clone https://github.com/grupo32-t14-gustavo/backend.git
+
+
+2. Navegue até a pasta do projeto clonado:
+cd backend
+
+
+3. Crie um arquivo `.env` na raiz do projeto e preencha-o com as informações necessárias seguindo o modelo fornecido no arquivo `.env.example`.
+
+4. Instale as dependências do projeto usando o npm:
+npm install
+
+
+5. Inicie o servidor de desenvolvimento local:
+npm run dev
+
+
+O back-end do projeto agora deve estar disponível em `http://localhost:3001`.
 
 **Desenvolvedores
 <table>
   <tr>
     
-  <td align="center"><a href="https://github.com/vinisooo" title="GitHub"><img style="border-radius: 50%;" src="https://github.com/vinisooo.png width="75px;" alt=""/><br /><sub><b>Vinícius Lira</b></sub></a><br /><a href="https://www.linkedin.com/in/vinicius-lira-web-dev/" title="Linkedin"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white"></a></td>
+  <td align="center"><a href="https://github.com/vinisooo" title="GitHub"><img style="border-radius: 50%;" src="https://github.com/vinisooo.png" width="75px;" alt=""/><br /><sub><b>Vinícius Lira</b></sub></a><br /><a href="https://www.linkedin.com/in/vinicius-lira-web-dev/" title="Linkedin"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white"></a></td>
   
   <td align="center"><a href="https://github.com/MSOliver1998" title="GitHub"><img style="border-radius: 50%;" src="https://github.com/MSOliver1998.png" width="75px;" alt=""/><br /><sub><b>Matheus Silva</b></sub></a><br /><a href="https://www.linkedin.com/in/matheus-silva-6021ab246/" title="Linkedin"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white"></a></td>
   
