@@ -12,11 +12,13 @@ import Autoplay from "embla-carousel-autoplay"
 import nookies from "nookies"
 import { useModalContext } from "@/context/modalContext"
 import formatToPrice from "@/utils/formatToBrl"
+import { useState } from "react"
 
 
 const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({delay: 2500})])
     const {setCarImageModal} = useModalContext()
+    const [disabledMessage, setDisabledMessage] = useState(false)
 
     const {setCarImage} = useModalContext()
     const userToken = nookies.get()["userToken"]
@@ -69,15 +71,19 @@ const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) =>
                             </div>
                             <h3>{formatToPrice(advertisement.price)}</h3>
                         </div>
-                        <Button Style={!userToken ? "disabled" : undefined}>
+                        <Button Style={!userToken ? "disabled" : undefined} onClick={()=> setDisabledMessage(userToken ? false : true)}>
                             {
                                 userToken
-                                ?
+                                ? 
                                     <Link target="_blank" href={`http://api.whatsapp.com/send?1=pt_BR&phone=55${advertisement.user.phone}`}>Comprar</Link>
                                 :
-                                    <Link href="" className="disabled" title="Efetue o login para entrar em contato com o vendedor">Comprar</Link>
+                                    <span className="disabled" title="Efetue o login para entrar em contato com o vendedor">Comprar</span>
                             }
                         </Button>
+                        {
+                            disabledMessage &&
+                            <span className="disabled-message error">Você precisa estar logado para comprar um veículo</span>
+                        }
                     </PageCard>
                     {
                         advertisement.description &&
