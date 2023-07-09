@@ -1,5 +1,5 @@
 import { TAdvertisementRes } from "@/types/advertisement.types"
-import FilterList, { iFilters } from "../filterList/FilterList"
+import FilterList, { IFilters } from "../filterList/FilterList"
 import Link from "next/link"
 import { Cards } from "../cards/cards"
 import { Car } from "@/schemas/advertisement.schema"
@@ -7,7 +7,7 @@ import FilterButton from "../filterButton/filterButton"
 import "../../styles/pages/home/home.sass"
 import { getData } from "@/utils/api"
 
-const getAdvertisements = async(searchParams: iFilters) => {
+const getAdvertisements = async(searchParams: IFilters) => {
     let params: URLSearchParams | string = new URLSearchParams()
   
     for (const key in searchParams) {
@@ -42,7 +42,7 @@ const getAdvertisements = async(searchParams: iFilters) => {
     }
 }
 
-const CarsHome= async({searchParams}:{searchParams:iFilters})=>{
+const CarsHome= async({searchParams}:{searchParams:IFilters})=>{
 
     const advertisements = await getAdvertisements(searchParams)
     const notPaginatedAdverts: TAdvertisementRes[] = await getNotPaginated()
@@ -56,13 +56,13 @@ const CarsHome= async({searchParams}:{searchParams:iFilters})=>{
                       {
                         advertisements?.count > 0 
                         ?
-                        advertisements?.adverts.map((ad: TAdvertisementRes) => {
-                          return(
-                              <Cards key={ad.id} car={ Car.parse(ad)} anunciant={ad.user}/>
-                          )
-                        })
+                          advertisements?.adverts.map((ad: TAdvertisementRes) => {
+                            return(
+                                <Cards key={ad.id} car={ Car.parse(ad)} anunciant={ad.user}/>
+                            )
+                          })
                         :
-                        <h2>Não foi encontrado nenhum veículo ativo com os filtros selecionados</h2>
+                          <h2>Não foi encontrado nenhum veículo ativo com os filtros selecionados</h2>
                       }
                   </div>
                   <FilterButton/>

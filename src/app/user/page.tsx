@@ -1,5 +1,4 @@
 import Footer from "@/components/footer/footer"
-import HeaderProfile from "@/components/headerProfile/header"
 import "../../styles/pages/profile/profile.sass"
 import HeaderAnunciant from "@/components/headerAnunciant/headerAnunciant"
 import { getData } from "@/utils/api"

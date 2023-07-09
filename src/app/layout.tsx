@@ -10,6 +10,8 @@ import HeaderHandler from "@/components/header/headerHandler"
 interface IRootLayout{
   children:ReactNode
 }
+
+
 const RootLayout=({children}:IRootLayout)=>{
   
   return (
