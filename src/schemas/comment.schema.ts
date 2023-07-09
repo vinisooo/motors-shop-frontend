@@ -19,7 +19,3 @@ export const commentReqSchema=z.object({
     postId:z.string(),
     comment:z.string()
 })
-
-export type TCommentRes = z.infer<typeof commentsSchemaRes>
-export type TComments = z.infer<typeof commentSchema>
-export type TCommentReqSchema=z.infer<typeof commentReqSchema>

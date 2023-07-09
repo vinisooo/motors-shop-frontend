@@ -1,9 +1,11 @@
 "use client"
+
 import Button from "../button/button"
 import Modal from "./modal"
 import { useModalContext } from "@/context/modalContext"
 import "../../styles/components/modals/deleteModal.sass"
 import { useUserContext } from "@/context/userContext"
+
 
 const DeleteProfileModal = () =>{ 
     const { setDeleteProfileModal, setEditProfileModal } = useModalContext()

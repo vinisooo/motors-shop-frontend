@@ -1,7 +1,8 @@
 "use client"
+
 import { Elipsis } from "../tags/tags"
 import "../../styles/pages/advertisement/comments.sass"
-import { TComments } from "@/schemas/comment.schema"
+import { TComments } from "@/types/comment.types"
 import { useUserContext } from "@/context/userContext"
 import { MdDelete } from "react-icons/md"
 import { useState, useEffect, useRef } from "react"

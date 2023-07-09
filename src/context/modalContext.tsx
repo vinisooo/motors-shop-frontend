@@ -1,14 +1,15 @@
 "use client"
+
 import { createContext, useContext } from "react"
 import { useState } from "react"
 
 import { SetStateAction } from "react"
 
-interface iChildrenProps{
+interface IChildrenProps{
     children: React.ReactNode
 }
 
-interface iModalContextValues{
+interface IModalContextValues{
     filterDropdown: boolean
     setFilterDropdown: React.Dispatch<SetStateAction<boolean>>
     resetPasswordModal: boolean
@@ -28,9 +29,9 @@ interface iModalContextValues{
 }
 
 
-export const ModalContext = createContext({} as iModalContextValues)
+export const ModalContext = createContext({} as IModalContextValues)
 
-export const ModalProvider = ({children}: iChildrenProps) => {
+export const ModalProvider = ({children}: IChildrenProps) => {
     const [filterDropdown, setFilterDropdown] = useState<boolean>(false)
     const [resetPasswordModal, setResetPasswordModal] = useState<boolean>(false)
     const [createAdvertModal, setCreateAdvertModal] = useState<boolean>(false)
@@ -50,4 +51,4 @@ export const ModalProvider = ({children}: iChildrenProps) => {
     )
 }
 
-export const useModalContext =() => useContext(ModalContext)
+export const useModalContext = () => useContext(ModalContext)

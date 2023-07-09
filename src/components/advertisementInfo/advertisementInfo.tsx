@@ -1,5 +1,6 @@
 "use client"
-import { TAdvertisementRes, advertisementReqUpdateSchema } from "@/schemas/advertisement.schema"
+
+import { TAdvertisementRes } from "@/types/advertisement.types"
 import { Tag } from "../tags/tags"
 import Button from "../button/button"
 import useEmblaCarousel from "embla-carousel-react"

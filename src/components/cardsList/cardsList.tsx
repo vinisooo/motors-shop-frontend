@@ -1,6 +1,7 @@
 import { Cards } from "../cards/cards"
-import { Car, TCars, TCar } from "@/schemas/advertsSchema"
-import { TUser } from "@/schemas/userSchema"
+import { TCar, TCars } from "@/types/advertisement.types"
+import { Car } from "@/schemas/advertisement.schema"
+import { TUser } from "@/types/user.types"
 import { getData } from "@/utils/api"
 
 const getAdverts = async (id: string) => {

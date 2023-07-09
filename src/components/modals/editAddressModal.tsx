@@ -1,4 +1,5 @@
 "use client"
+
 import Modal from "./modal"
 import { Input } from "../inputs/inputs"
 import "../../styles/components/modals/editAddressModal.sass"
@@ -11,8 +12,8 @@ import { addressReqUpdateSchema } from "@/schemas/address.schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 
+
 const EditAddressModal = () => {
-    
     const {
         register,
         handleSubmit,

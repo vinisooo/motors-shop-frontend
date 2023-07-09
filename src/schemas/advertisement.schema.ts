@@ -1,4 +1,4 @@
-import { object, z } from "zod"
+import { z } from "zod"
 import { galleryAdvertisementListSchema } from "./galleryAdvertisement.schema"
 
 const FileOrFileList = z.custom((value) => {
@@ -15,14 +15,14 @@ export const advertisementSchema = z.object({
     color: z.string().max(20, "Cor deve conter no máximo 20 caracteres"),
     quilometers: z.number(),
     price: z.number(),
-    coverImage: FileOrFileList,
+    coverImage: FileOrFileList.or(z.string()),
     description: z.string(),
     isAvailable: z.boolean(),
     user: z.any(),
     createdAt: z.date(),
     fipeDeal: z.boolean().optional(),
     updatedAt: z.date().nullable(),
-    galleryAdvertisement: galleryAdvertisementListSchema
+    galleryAdvertisement: galleryAdvertisementListSchema,
 })
 
 export const advertisementReqSchema = advertisementSchema.omit({
@@ -50,15 +50,13 @@ export const advertisementReqUpdateSchema = advertisementSchema.omit({
     fipePrice: z.number().optional()
 }).partial()
 
-export type TAdvertisementReqUpdate = z.infer<typeof advertisementReqUpdateSchema>
-export type TAdvertisementReq = z.infer<typeof advertisementReqSchema>
-export type TAdvertisementRes = z.infer<typeof advertisementSchema>
 
-export interface iPaginatedAdverts {
-    prev?: string | null,
-    page?: string | null,
-    next?: string | null,
-    maxPage?: string | null,
-    count?: number,
-    adverts: TAdvertisementRes[]
-}
+export const Car=advertisementSchema.omit({
+    user:true,
+    coverImage: true
+}).extend({
+    coverImage: z.string(),
+    galleryAdvertisement: galleryAdvertisementListSchema.optional()
+})
+
+export const Cars=z.array(Car)

@@ -1,4 +1,5 @@
 "use client"
+
 import { useModalContext } from "@/context/modalContext"
 import { useEffect, useRef } from "react"
 import { AiOutlineClose } from "react-icons/ai"
@@ -6,13 +7,14 @@ import { AiOutlineClose } from "react-icons/ai"
 import "../../styles/components/modals/modal.sass"
 import Button from "../button/button"
 
-interface iModalProps{
+interface IModalProps{
     children?: React.ReactNode
     title?: string
     className?: string
 }
 
-const Modal = ({children, title, className}: iModalProps) => {
+
+const Modal = ({children, title, className}: IModalProps) => {
     const modalRef = useRef<HTMLDivElement>(null)
 
     const { setResetPasswordModal, setCreateAdvertModal, createAdvertModal,

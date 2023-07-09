@@ -1,4 +1,5 @@
 "use client"
+
 import "../../styles/components/modals/editProfileModal.sass"
 import { Input, TextArea } from "../inputs/inputs"
 import Modal from "./modal"
@@ -10,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { usersUpdateReqSchema } from "@/schemas/users.schema"
 import { useUserContext } from "@/context/userContext"
 import { TuserUpdateReq } from "@/types/user.types"
+
 
 const EditProfileModal = () => {    
     const {

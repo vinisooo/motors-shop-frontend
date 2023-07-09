@@ -1,4 +1,5 @@
 "use client"
+
 import Button from "@/components/button/button"
 import "../../../styles/components/modals/deleteModal.sass"
 

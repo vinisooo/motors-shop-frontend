@@ -1,9 +1,10 @@
 "use client"
+
 import "../../styles/components/cards/cards.sass"
 import { Tag } from "../tags/tags"
-import { TCar } from "@/schemas/advertsSchema"
+import { TCar } from "@/types/advertisement.types"
 import Button from "../button/button"
-import { TUser } from "@/schemas/userSchema"
+import { TUser } from "@/types/user.types"
 import Elipsis from "../tags/elipse"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -24,7 +25,8 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
     const router=useRouter()
     const owner= anunciant.id==user?.id
 
-    const{brand,year,price,color,coverImage:img,model,quilometers:km,description,isAvailable,fuel, id}=car
+    const{brand, year, price, color, coverImage:img ,
+        model, quilometers:km, description, id}=car
 
     const detalhes=()=>{
         router.push(`/advertisements/${car.id}`)

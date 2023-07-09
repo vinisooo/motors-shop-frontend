@@ -1,4 +1,5 @@
 "use client"
+
 import Modal from "./modal"
 import {  useEffect  } from "react"
 
@@ -14,8 +15,8 @@ import { Input } from "../inputs/inputs"
 import { useUserContext } from "@/context/userContext"
 import { AiOutlineLoading } from "react-icons/ai"
 
-const ResetPasswordModal = () => {
 
+const ResetPasswordModal = () => {
     const {
         sentEmail, setSentEmail,
         existantUser, setExistantUser,

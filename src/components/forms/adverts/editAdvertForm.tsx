@@ -1,15 +1,17 @@
 "use client"
-import { ChangeEvent, useContext, useState } from "react"
+
+import { ChangeEvent, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { TAdvertisementReq, TAdvertisementReqUpdate, advertisementReqSchema, advertisementReqUpdateSchema } from "@/schemas/advertisement.schema"
+import { advertisementReqUpdateSchema } from "@/schemas/advertisement.schema"
+import { TAdvertisementReqUpdate } from "@/types/advertisement.types"
 import { useCarsContext} from "@/context/carsContext"
 import { Input, Select, TextArea } from "@/components/inputs/inputs"
 import Button from "@/components/button/button"
-import { TCar } from "@/schemas/advertsSchema"
+import { TCar } from "@/types/advertisement.types"
 import { Modal } from "@/components/modal/modalBase/modal"
 import { DeleteAdvert } from "./deleteAdvertForm"
-import { MdDelete, MdWidthFull } from "react-icons/md"
+import { MdDelete } from "react-icons/md"
 
 
 const EditAdvertForm = ({car}:{car:TCar}) => {
@@ -151,7 +153,7 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
             </div>
             <div>
                 <div className="input-box">
-                    <Input type="number" maxLength={10} min={0}  children="Quilometragem" id="quilometers" defaultValue={car.price} placeholder={car.price} register={register("quilometers", { valueAsNumber: true })}/>
+                    <Input type="number" maxLength={10} min={0}  children="Quilometragem" id="quilometers" defaultValue={car.price} placeholder={car.price.toString()} register={register("quilometers", { valueAsNumber: true })}/>
                     {errors.quilometers && <span className="error">{errors.quilometers.message}</span>}
                 </div>
                 <div className="input-box">
@@ -172,7 +174,7 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
                     {errors.color && <span className="error">{errors.color.message}</span>}
                 </div>
             </div>
-            <Input onInput={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value = e.target.value.slice(0, 9)} type="number" children="Preço" id="price" placeholder={car.price} defaultValue={car.price} min={0} register={register("price", { valueAsNumber: true })}/>
+            <Input onInput={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value = e.target.value.slice(0, 9)} type="number" children="Preço" id="price" placeholder={car.price.toString()} defaultValue={car.price} min={0} register={register("price", { valueAsNumber: true })}/>
             {errors.price && <span className="error">{errors.price.message}</span>}
             <TextArea children="Descrição" id="description" placeholder={car.description} defaultValue={car.description} register={register("description")}/>
             {errors.description && <span className="error">{errors.description.message}</span>}

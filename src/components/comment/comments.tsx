@@ -2,7 +2,7 @@ import PageCard from "../pageCard/pageCard"
 import Comment from "./comment"
 import "../../styles/pages/advertisement/comments.sass"
 import { getData } from "@/utils/api"
-import { TCommentRes, TComments } from "@/schemas/comment.schema"
+import { TCommentRes, TComments } from "@/types/comment.types"
 import { cookies } from "next/headers"
 import { CommentInput } from "./commentForm"
 import Link from "next/link"
@@ -50,7 +50,7 @@ const Comments = async({postId}:{postId: string}) => {
                     (
                         <ul>
                             {
-                                comments.postComments.map((comment: TComments, index) =><Comment key={index} comment={comment}/>)
+                                comments.postComments.map((comment: TComments, index: number) =><Comment key={index} comment={comment}/>)
                             }
                         </ul>
                     )

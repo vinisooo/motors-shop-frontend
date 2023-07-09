@@ -1,10 +1,12 @@
 "use client"
+
 import { useState } from "react"
 import Button from "../button/button"
 import { TextArea } from "../inputs/inputs"
 import { useUserContext } from "@/context/userContext"
 import { useForm } from "react-hook-form"
-import { TCommentReqSchema, commentReqSchema } from "@/schemas/comment.schema"
+import { commentReqSchema } from "@/schemas/comment.schema"
+import { TCommentReqSchema } from "@/types/comment.types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 
