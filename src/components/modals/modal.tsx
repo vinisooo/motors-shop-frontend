@@ -38,7 +38,7 @@ const Modal = ({children, title, className}: IModalProps) => {
             const isButton = target.tagName.toLowerCase() === "button"
             if (modalRef.current && !modalRef.current.contains(event.target as Node) && !isButton) {
                 closeModal()
-            }
+            } 
         }
 
         document.addEventListener("click", handleClickOutside)

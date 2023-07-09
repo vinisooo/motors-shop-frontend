@@ -51,7 +51,9 @@
 
     .cover-image
         width: 100%
+        min-height: 200px
         height: 400px
+        max-height: 400
         
         padding: 10px
 
@@ -170,6 +172,11 @@
         opacity: 1
     100%
         opacity: 0
+
+@media (max-width: 500px)
+    .cover-image
+        height: 300px
+         
 
 @media (min-width: 768px)
     .advert-info
