@@ -58,21 +58,17 @@ Para instalar e executar o front-end e o back-end do projeto Motors Shop localme
 ### Front-end
 
 1. Clone o repositório do front-end do projeto Motors Shop em seu computador:
-
-git clone https://github.com/grupo32-t14-gustavo/frontend.git
+`git clone https://github.com/grupo32-t14-gustavo/frontend.git`
 
 2. Navegue até a pasta do projeto clonado:
-cd frontend
-
+`cd frontend`
 
 3. Instale as dependências do projeto usando o npm:
-
-npm install
+`npm install`
 
 
 4. Inicie o servidor de desenvolvimento local:
-
-npm run dev
+`npm run dev`
 
 
 O front-end do projeto agora deve estar disponível em `http://localhost:3000`.
@@ -80,24 +76,24 @@ O front-end do projeto agora deve estar disponível em `http://localhost:3000`.
 ### Back-end
 
 1. Clone o repositório do back-end do projeto Motors Shop em seu computador:
-git clone https://github.com/grupo32-t14-gustavo/backend.git
+`git clone https://github.com/grupo32-t14-gustavo/backend.git`
 
 
 2. Navegue até a pasta do projeto clonado:
-cd backend
+`cd backend`
 
 
 3. Crie um arquivo `.env` na raiz do projeto e preencha-o com as informações necessárias seguindo o modelo fornecido no arquivo `.env.example`.
 
 4. Instale as dependências do projeto usando o npm:
-npm install
+`npm install`
 
 
 5. Inicie o servidor de desenvolvimento local:
-npm run dev
+`npm run dev`
 
 
-O back-end do projeto agora deve estar disponível em `http://localhost:3001`.
+O back-end do projeto agora deve estar disponível na porta escolhida em seu .env ou em `http://localhost:3001`.
 
 **Desenvolvedores
 <table>
