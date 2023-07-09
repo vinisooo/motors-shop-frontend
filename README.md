@@ -12,6 +12,7 @@
 * <img width="30px" height="30px" src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png" alt="Typescript"> Typescript
 * <img width="30px" height="30px" src="https://user-images.githubusercontent.com/25181517/183568594-85e280a7-0d7e-4d1a-9028-c8c2209e073c.png" alt="nodeJS"> NodeJS
 * <img width="30px" height="30px" src="https://user-images.githubusercontent.com/25181517/183859966-a3462d8d-1bc7-4880-b353-e2cbed900ed6.png" alt="ExpressJS"> ExpressJS
+* <img width="30px" height="30px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/540px-Postgresql_elephant.svg.png" alt="PostgreSQL"> PostgreSQL
 
 ## Links importantes
 * [Repositório do FrontEnd](https://github.com/grupo32-t14-gustavo/frontend).
@@ -44,8 +45,24 @@ O sistema é composto por um banco de dados, API's, e uma interface web. Funcion
 
 Respeitando a proposta, o sistema atende os seguintes requisitos:
 
-**RGN1** -  O cliente só fará a publicação de anúncios se for um anunciante.
-**RGN2** -  O cliente só poderá ver as publicações inativas se for anunciante dela.
-**RGN3** -  O cliente só poderá gerenciar o próprio perfil.
-**RGN4** -  O cliente poderá entrar em contato com o vendedor se estiver logado.
-**RGN5** -  O cliente só comentará em publicações se estiver logado.
+* **RGN1** -  O cliente só fará a publicação de anúncios se for um anunciante.
+* **RGN2** -  O cliente só poderá ver as publicações inativas se for anunciante dela.
+* **RGN3** -  O cliente só poderá gerenciar o próprio perfil.
+* **RGN4** -  O cliente poderá entrar em contato com o vendedor se estiver logado.
+* **RGN5** -  O cliente só comentará em publicações se estiver logado.
+
+**Desenvolvedores
+<table>
+  <tr>
+    
+  <td align="center"><a href="https://github.com/vinisooo" title="GitHub"><img style="border-radius: 50%;" src="https://github.com/vinisooo.png width="75px;" alt=""/><br /><sub><b>Vinícius Lira</b></sub></a><br /><a href="https://www.linkedin.com/in/vinicius-lira-web-dev/" title="Linkedin"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white"></a></td>
+  
+  <td align="center"><a href="https://github.com/MSOliver1998" title="GitHub"><img style="border-radius: 50%;" src="https://github.com/MSOliver1998.png" width="75px;" alt=""/><br /><sub><b>Matheus Silva</b></sub></a><br /><a href="https://www.linkedin.com/in/matheus-silva-6021ab246/" title="Linkedin"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white"></a></td>
+  
+  <td align="center"><a href="https://github.com/robertopnts" title="GitHub"><img style="border-radius: 50%;" src="https://github.com/robertopnts.png" width="75px;" alt=""/><br /><sub><b>Roberto Pontes</b></sub></a><br /><a href="https://www.linkedin.com/in/roberto-pontess/" title="Linkedin"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white"></a></td>
+  
+  <td align="center"><a href="https://github.com/jamilylima" title="GitHub"><img style="border-radius: 50%;" src="https://github.com/jamilylima.png" width="75px;" alt=""/><br /><sub><b>Jamily Lima</b></sub></a><br /><a href="https://www.linkedin.com/in/jamilylima/" title="Linkedin"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white"></a></td>
+  
+  <td align="center"><a href="https://github.com/felipedsalmeida" title="GitHub"><img style="border-radius: 50%;" src="https://github.com/felipedsalmeida.png" width="75px;" alt=""/><br /><sub><b>Felipe Almeida</b></sub></a><br /><a href="" title="Linkedin"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?&style=flat-square&logo=linkedin&logoColor=white"></a></td>
+  </tr>
+</table>
