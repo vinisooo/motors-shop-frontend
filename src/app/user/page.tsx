@@ -8,7 +8,7 @@ import { Suspense } from "react"
 import CarsList from "@/components/cardsList/cardsList"
 import { CardsLoading } from "@/components/loadings/cardsLoading/cardsLoading"
 import { redirect } from "next/navigation"
-import { toast } from "react-toastify"
+import DeleteAdvertModal from "@/components/modals/deleteAdvertModal"
 
 const getUser=async(token:string)=>{
     try{
@@ -28,7 +28,6 @@ const getUser=async(token:string)=>{
 const Profile = async() =>{
     const userToken= cookies().get("userToken")
     if(!userToken){
-        toast.error("Você precisa estar logado para acessar o perfil de um usuário")
         redirect("/login")
     }
     const profile:TUser=await getUser( userToken.value)
@@ -48,7 +47,8 @@ const Profile = async() =>{
                         </Suspense>
                     </div>
                 </section>
-            </main>        
+            </main>       
+            <DeleteAdvertModal/> 
             <Footer/>
         </div>
     )

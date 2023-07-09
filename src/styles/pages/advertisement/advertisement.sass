@@ -28,10 +28,10 @@
         height: 100%
         text-decoration: none
         color: variables.$color-grey-10
-
+        
     .disabled
-        padding: 15px 20px
         cursor: not-allowed
+        background-color: variables.$color-grey-7
 
     .disabled-message
         margin-top: 20px
@@ -79,6 +79,7 @@
             display: flex
             justify-content: space-between
             align-items: center
+            margin-bottom: 40px
             h3
                 font-size: 16px
                 font-weight: 500
@@ -88,10 +89,14 @@
                 gap: 10px
 
                 align-items: center
-        button
+
+        .buy-car
+            padding: 12px 20px
+            background-color: variables.$color-brand-1
             margin-top: 30px
-            cursor: default
-            padding: 0
+            border-radius: 4px
+            font-size: 1.6rem
+
     .car-pics
         display: flex
         align-items: center
@@ -152,6 +157,7 @@
                 font-size: 20px
                 font-weight: 600
                 color: variables.$color-grey-1
+
 
 .advert-info
     display: flex 

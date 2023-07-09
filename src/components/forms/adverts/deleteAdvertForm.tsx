@@ -1,16 +1,25 @@
 "use client"
-
 import Button from "@/components/button/button"
 import "../../../styles/components/modals/deleteModal.sass"
 
-import { getData } from "@/utils/api"
 import { useCarsContext } from "@/context/carsContext"
+import { useModalContext } from "@/context/modalContext"
 
 
 const DeleteAdvert= async({id}:{id:string})=>{
 
     const {deleteAdvert} = useCarsContext()
+    const { deleteAdvertModal,setDeleteAdvertModal, setEditAdvertModal} = useModalContext()
 
+    const closeModal = () =>{
+        setDeleteAdvertModal(false)
+        setEditAdvertModal(true)
+    }
+
+
+    if(!deleteAdvert){
+        return <></>
+    }
     return(
         <div className="div-delete">
             <div className="advice">
@@ -19,7 +28,7 @@ const DeleteAdvert= async({id}:{id:string})=>{
             </div>
             <div className="delete-modal-buttons">
                 <Button type={"button"} Style={"confirm"} onClick={()=>deleteAdvert(id)}>Sim</Button>
-                <Button type={"button"} Style={"cancel"} onClick={()=>console.log('fechar modal')}>Não</Button>
+                <Button type={"button"} Style={"cancel"} onClick={closeModal}>Não</Button>
             </div>
         </div>
 

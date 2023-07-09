@@ -15,13 +15,12 @@ import formatToPrice from "@/utils/formatToBrl"
 import { useState } from "react"
 
 
-const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) => {
+const AdvertisementInfo = ({advertisement, userToken}:{advertisement:TAdvertisementRes, userToken?:string}) => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({delay: 2500})])
     const {setCarImageModal} = useModalContext()
     const [disabledMessage, setDisabledMessage] = useState(false)
 
     const {setCarImage} = useModalContext()
-    const userToken = nookies.get()["userToken"]
 
     useEffect(() => {
         if (emblaApi) {
@@ -32,7 +31,7 @@ const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) =>
     let images = [advertisement.coverImage]
     
     if(advertisement.galleryAdvertisement){
-        const galleryImages = advertisement.galleryAdvertisement.map((img) => {
+        const galleryImages = advertisement.galleryAdvertisement.map((img: {id: string, imageUrl: string}) => {
             return img.imageUrl
         })
         images = [...images, ...galleryImages]
@@ -71,15 +70,12 @@ const AdvertisementInfo = ({advertisement}:{advertisement:TAdvertisementRes}) =>
                             </div>
                             <h3>{formatToPrice(advertisement.price)}</h3>
                         </div>
-                        <Button Style={!userToken ? "disabled" : undefined} onClick={()=> setDisabledMessage(userToken ? false : true)}>
-                            {
-                                userToken
-                                ? 
-                                    <Link target="_blank" href={`http://api.whatsapp.com/send?1=pt_BR&phone=55${advertisement.user.phone}`}>Comprar</Link>
-                                :
-                                    <span className="disabled" title="Efetue o login para entrar em contato com o vendedor">Comprar</span>
-                            }
-                        </Button>
+                        {
+                            userToken ?
+                                <Link className="buy-car" target="_blank" href={`http://api.whatsapp.com/send?1=pt_BR&phone=55${advertisement.user.phone}`}>Comprar</Link>
+                            :     
+                                <Button onClick={()=>setDisabledMessage(true)} Style="disabled">Comprar</Button>
+                        }
                         {
                             disabledMessage &&
                             <span className="disabled-message error">Você precisa estar logado para comprar um veículo</span>
