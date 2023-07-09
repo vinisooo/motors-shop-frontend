@@ -1,10 +1,10 @@
 "use client"
 
-import { createContext, useContext } from "react"
+import { Dispatch, SetStateAction, createContext, useContext } from "react"
 import { useState } from "react"
 import { AxiosResponse } from "axios"
 import nookies from "nookies"
-import { TAdvertisementReq, TAdvertisementReqUpdate, TAdvertisementRes } from "@/types/advertisement.types"
+import { TAdvertisementReq, TAdvertisementReqUpdate, TAdvertisementRes, TCar } from "@/types/advertisement.types"
 import api, { carsApi } from "@/services"
 import { useModalContext } from "./modalContext"
 import {toast} from "react-toastify"
@@ -20,6 +20,8 @@ interface IModalContextValues {
   deleteAdvert: (id: string) => Promise<void>
   postAdvertisement: (data: TAdvertisementReq) => Promise<AxiosResponse<TAdvertisementRes, any> | undefined>
   editAdvert: (id: string, data: TAdvertisementReqUpdate) => Promise<void>
+  currentAdvert: TCar | null
+  setCurrentAdvert: Dispatch<SetStateAction<TCar| null>>
 }
 
 export const CarsContext = createContext({} as IModalContextValues)
@@ -34,9 +36,9 @@ export interface ICar {
 export const CarsProvider = ({ children }: IChildrenProps) => {
   const [cars, setCars] = useState<ICar[]>([])
   const {setCreateAdvertModal} = useModalContext()
+  const [currentAdvert, setCurrentAdvert] = useState<TCar | null>(null)
 
   const token = nookies.get()["userToken"]
-  const router = useRouter()
 
   const getCarsByBrand = async (brand?: string) => {
     try {
@@ -115,7 +117,7 @@ export const CarsProvider = ({ children }: IChildrenProps) => {
 
   return (
     <CarsContext.Provider value={{ getCarsByBrand, cars,
-      postAdvertisement, deleteAdvert, editAdvert }}>
+      postAdvertisement, deleteAdvert, editAdvert, currentAdvert, setCurrentAdvert }}>
       {children}
     </CarsContext.Provider>
   )

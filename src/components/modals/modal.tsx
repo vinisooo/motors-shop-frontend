@@ -17,9 +17,9 @@ interface IModalProps{
 const Modal = ({children, title, className}: IModalProps) => {
     const modalRef = useRef<HTMLDivElement>(null)
 
-    const { setResetPasswordModal, setCreateAdvertModal, createAdvertModal,
+    const { setResetPasswordModal, setCreateAdvertModal,
         setCarImageModal, setEditProfileModal, setDeleteProfileModal,
-        setEditAddressModal } = useModalContext()
+        setEditAddressModal, setDeleteAdvertModal, setEditAdvertModal } = useModalContext()
 
     const closeModal = () => {
         setResetPasswordModal(false)
@@ -28,6 +28,8 @@ const Modal = ({children, title, className}: IModalProps) => {
         setEditProfileModal(false)
         setDeleteProfileModal(false)
         setEditAddressModal(false)
+        setDeleteAdvertModal(false)
+        setEditAdvertModal(false)
     }
     
     useEffect(() => {

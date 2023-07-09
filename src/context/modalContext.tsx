@@ -26,6 +26,10 @@ interface IModalContextValues{
     setDeleteProfileModal: React.Dispatch<SetStateAction<boolean>>
     editAddressModal: boolean
     setEditAddressModal: React.Dispatch<SetStateAction<boolean>>
+    deleteAdvertModal: boolean
+    setDeleteAdvertModal: React.Dispatch<SetStateAction<boolean>>
+    editAdvertModal: boolean
+    setEditAdvertModal: React.Dispatch<SetStateAction<boolean>>
 }
 
 
@@ -40,12 +44,14 @@ export const ModalProvider = ({children}: IChildrenProps) => {
     const [editProfileModal, setEditProfileModal] = useState<boolean>(false)
     const [deleteProfileModal, setDeleteProfileModal] = useState<boolean>(false)
     const [editAddressModal, setEditAddressModal] = useState<boolean>(false)
+    const [deleteAdvertModal, setDeleteAdvertModal] = useState<boolean>(false)
+    const [editAdvertModal, setEditAdvertModal] = useState<boolean>(false)
 
     return(
         <ModalContext.Provider value={{filterDropdown, setFilterDropdown, resetPasswordModal, 
             setResetPasswordModal, createAdvertModal, setCreateAdvertModal, carImageModal, setCarImageModal, 
             carImage, setCarImage, editProfileModal, setEditProfileModal, deleteProfileModal, setDeleteProfileModal,
-            editAddressModal, setEditAddressModal}}>
+            editAddressModal, setEditAddressModal, deleteAdvertModal, setDeleteAdvertModal, editAdvertModal, setEditAdvertModal}}>
             {children}
         </ModalContext.Provider>
     )

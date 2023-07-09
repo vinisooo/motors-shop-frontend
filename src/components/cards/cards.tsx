@@ -8,10 +8,11 @@ import { TUser } from "@/types/user.types"
 import Elipsis from "../tags/elipse"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { EditAdvertForm } from "../forms/adverts/editAdvertForm"
-import { Modal } from "../modal/modalBase/modal"
 import formatToPrice from "@/utils/formatToBrl"
 import getRandomColor from "@/utils/randomElipsisColor"
+import { useModalContext } from "@/context/modalContext"
+import { useCarsContext } from "@/context/carsContext"
+import EditAdvertModal from "../modals/editAdvertModal"
 
 interface props{
     car: TCar,
@@ -21,6 +22,9 @@ interface props{
 }
 
 const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
+
+    const {setEditAdvertModal} = useModalContext()
+    const {setCurrentAdvert} = useCarsContext() 
 
 
     const router=useRouter()
@@ -33,50 +37,57 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
         router.push(`/advertisements/${car.id}`)
     }
 
-    console.log(anunciant.id, user?.id)
     if(!car.isAvailable && !owner){
         return <></>
     }
+
+
+    const openEditModal = () => {
+        setCurrentAdvert(car)
+        setEditAdvertModal(true)
+    }
+
     return(
-        <div className="product">
-            <Link href={`/advertisements/${id}`}>
-                <div className="img-product">
-                    <img className={car.id} src={img}/>
-                    <Tag type={car.isAvailable ? "ative" : "inative"}>{advertisement}</Tag>
+        <>
+            <div className="product">
+                <Link href={`/advertisements/${id}`}>
+                    <div className="img-product">
+                        <img className={car.id} src={img}/>
+                        <Tag type={car.isAvailable ? "ative" : "inative"}>{advertisement}</Tag>
+                        {
+                            car.fipeDeal &&
+                            <Tag type="cash">{"cash"}</Tag>
+                        }
+                    </div>
+                </Link>
+                <div className="product-description">
+                    <Link href={`/advertisements/${id}`}>
+                        <h4 title={`${brand} ${model} ${color}`}>{brand} {model} {color}</h4>
+                    </Link>
+
+                    <p>{description}</p>
                     {
-                        car.fipeDeal &&
-                        <Tag type="cash">{"cash"}</Tag>
+                        !owner &&
+                        <Elipsis color={getRandomColor()} className={anunciant.id} name={anunciant.name}/>
+                    }
+                    <div className="product-infos">
+                        <div className="km-year">
+                            <Tag>{Number(km)}KM</Tag>
+                            <Tag>{year}</Tag>
+                        </div>
+                        <span>{formatToPrice(price)}</span>
+                    </div>
+                    {
+                        owner &&
+                        <div className='buttons'>
+                            <Button onClick={openEditModal} Style={'outline-brand-1'} size={'medium'}>Editar</Button>
+                            <Button onClick={detalhes} Style={'outline-brand-1'} size={'medium'}>Ver Detalhes</Button>
+                        </div>
                     }
                 </div>
-            </Link>
-            <div className="product-description">
-                <Link href={`/advertisements/${id}`}>
-                    <h4 title={`${brand} ${model} ${color}`}>{brand} {model} {color}</h4>
-                </Link>
-
-                <p>{description}</p>
-                {
-                    !owner &&
-                    <Elipsis color={getRandomColor()} className={anunciant.id} name={anunciant.name}/>
-                }
-                <div className="product-infos">
-                    <div className="km-year">
-                        <Tag>{Number(km)}KM</Tag>
-                        <Tag>{year}</Tag>
-                    </div>
-                    <span>{formatToPrice(price)}</span>
-                </div>
-                {
-                    owner &&
-                    <div className='buttons'>
-                        <Modal modalContent={<EditAdvertForm car={car}/>} title='Editar Anuncio' >
-                            <Button Style={'outline-brand-1'} size={'medium'}>Editar</Button>
-                        </Modal>
-                        <Button onClick={detalhes} Style={'outline-brand-1'} size={'medium'}>Ver Detalhes</Button>
-                    </div>
-                }
             </div>
-        </div>
+            <EditAdvertModal/>
+        </>
     )
 }
 

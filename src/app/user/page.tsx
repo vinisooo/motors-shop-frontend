@@ -9,6 +9,8 @@ import CarsList from "@/components/cardsList/cardsList"
 import { CardsLoading } from "@/components/loadings/cardsLoading/cardsLoading"
 import { redirect } from "next/navigation"
 import { toast } from "react-toastify"
+import DeleteAdvertModal from "@/components/modals/deleteAdvertModal"
+import { EditAdvertForm } from "@/components/forms/adverts/editAdvertForm"
 
 const getUser=async(token:string)=>{
     try{
@@ -48,7 +50,8 @@ const Profile = async() =>{
                         </Suspense>
                     </div>
                 </section>
-            </main>        
+            </main>       
+            <DeleteAdvertModal/> 
             <Footer/>
         </div>
     )

@@ -9,9 +9,8 @@ import { useCarsContext} from "@/context/carsContext"
 import { Input, Select, TextArea } from "@/components/inputs/inputs"
 import Button from "@/components/button/button"
 import { TCar } from "@/types/advertisement.types"
-import { Modal } from "@/components/modal/modalBase/modal"
-import { DeleteAdvert } from "./deleteAdvertForm"
 import { MdDelete } from "react-icons/md"
+import { useModalContext } from "@/context/modalContext"
 
 
 const EditAdvertForm = ({car}:{car:TCar}) => {
@@ -26,7 +25,10 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
 
     const [editedCoverImage, setEditedCoverImage] = useState<boolean>(false)
 
+
     const {getCarsByBrand, cars, editAdvert} = useCarsContext()
+    const {setDeleteAdvertModal, setEditAdvertModal} = useModalContext()
+
 
     const {
         register,
@@ -95,6 +97,11 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
             return i !== index
         })
         setImages(imagesAux)
+    }
+
+    const openDeleteAdvertModal = () => {
+        setDeleteAdvertModal(true)
+        setEditAdvertModal(false)
     }
 
     return (
@@ -217,9 +224,7 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
             }
             <div className="modal-form-buttons">
                 <Button Style="brand-1" type="submit" width={50} size="big">Editar</Button>
-                <Modal title="deletar anuncio" modalContent={<DeleteAdvert id={car.id}/>}>
-                    <Button Style="alert" width={50} type="button">Excluir</Button>
-                </Modal>
+                <Button Style="alert" width={50} type="button" onClick={openDeleteAdvertModal}>Excluir</Button>
             </div>
         </form>
     )
