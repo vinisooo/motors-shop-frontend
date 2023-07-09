@@ -205,9 +205,9 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
             {
                 images.map((_image, index) => {
                         return(
-                            <div className="img-input-car">
+                            <div className="img-input-car" key={index}>
                                 <Input type="file" accept="image/*" onChange={(e:ChangeEvent<HTMLInputElement>)=>addImage(e, index)}>{`${index + 1}ª`} Imagem da galeria</Input>
-                                <button onClick={()=>deleteImage(index)}><MdDelete/></button>
+                                <button type="button" onClick={()=>deleteImage(index)}><MdDelete/></button>
                                 {
                                     typeof _image === "string" &&
                                     <figure>
