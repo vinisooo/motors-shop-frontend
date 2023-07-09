@@ -6,6 +6,7 @@ import { AiOutlineClose } from "react-icons/ai"
 
 import "../../styles/components/modals/modal.sass"
 import Button from "../button/button"
+import { MdClose } from "react-icons/md"
 
 interface IModalProps{
     children?: React.ReactNode
@@ -53,7 +54,7 @@ const Modal = ({children, title, className}: IModalProps) => {
                 <header>
                     <h2>{title}</h2>
                     <Button onClick={closeModal}>
-                        <AiOutlineClose/>
+                        <MdClose/>
                     </Button>
                 </header>
                 {children}
