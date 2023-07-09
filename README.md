@@ -93,7 +93,7 @@ O front-end do projeto agora deve estar disponível em `http://localhost:3000`.
 `npm run dev`
 
 
-O back-end do projeto agora deve estar disponível na porta escolhida em seu .env ou em `http://localhost:3001`.
+O back-end do projeto agora deve estar disponível na porta escolhida em seu .env ou em `https://motorsshop-w0l3.onrender.com`.
 
 ## Desenvolvedores
 <table>
