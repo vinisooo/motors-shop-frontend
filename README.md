@@ -16,7 +16,7 @@
 
 ## Links importantes
 * [Repositório do FrontEnd](https://github.com/grupo32-t14-gustavo/frontend).
-* [Deploy do FrontEnd](https://github.com/grupo32-t14-gustavo/frontend).
+* [Deploy do FrontEnd](https://motors-shop-frontend-theta.vercel.app/).
   
 * [Repositório do BackEnd](https://github.com/grupo32-t14-gustavo/backend).
 * [Documentação da API](https://github.com/grupo32-t14-gustavo/backend).
