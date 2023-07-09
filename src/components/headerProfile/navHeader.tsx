@@ -12,6 +12,7 @@ import DeleteProfileModal from "../modals/deleteProfileModal"
 import EditAddressModal from "../modals/editAddressModal"
 import { AiOutlineLoading } from "react-icons/ai"
 import "../../styles/components/header/header.sass"
+import getRandomColor from "@/utils/randomElipsisColor"
 
 
 const NavHeader=()=>{
@@ -26,9 +27,9 @@ const NavHeader=()=>{
                 <div onClick={()=>{redirect('/user')}}>
                     {
                         Object.keys(user).length === 0 ?
-                            <Elipsis loading={true} name={"Carregando"}/>
+                            <Elipsis color={getRandomColor()} loading={true} name={"Carregando"}/>
                         :
-                            <Elipsis name={user.name}/>
+                            <Elipsis color="purple-1" name={user.name}/>
                     }
                 </div>
                 <nav className="user-dropdown">

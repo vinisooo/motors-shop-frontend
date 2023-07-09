@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation"
 import { EditAdvertForm } from "../forms/adverts/editAdvertForm"
 import { Modal } from "../modal/modalBase/modal"
 import formatToPrice from "@/utils/formatToBrl"
+import getRandomColor from "@/utils/randomElipsisColor"
 
 interface props{
     car: TCar,
@@ -56,7 +57,7 @@ const Cards=({car,advertisement="ative", user,anunciant}:props)=>{
                 <p>{description}</p>
                 {
                     !owner &&
-                    <Elipsis className={anunciant.id} name={anunciant.name}/>
+                    <Elipsis color={getRandomColor()} className={anunciant.id} name={anunciant.name}/>
                 }
                 <div className="product-infos">
                     <div className="km-year">
