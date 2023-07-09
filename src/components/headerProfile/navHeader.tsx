@@ -19,11 +19,17 @@ const NavHeader=()=>{
     const{logout, user} = useUserContext()
     const {setEditProfileModal, editProfileModal, deleteProfileModal, setEditAddressModal, editAddressModal} = useModalContext()
 
+
     return (
         <>
             <nav className={dropdownMenu ? "" : "hidden-dropdown-menu"}>
                 <div onClick={()=>{redirect('/user')}}>
-                    <Elipsis name={user.name}/>
+                    {
+                        Object.keys(user).length === 0 ?
+                            <Elipsis loading={true} name={"Carregando"}/>
+                        :
+                            <Elipsis name={user.name}/>
+                    }
                 </div>
                 <nav className="user-dropdown">
                     {

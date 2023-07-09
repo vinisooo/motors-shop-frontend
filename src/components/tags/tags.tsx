@@ -1,7 +1,7 @@
 import getInitials from "@/utils/getInitials"
 import "../../styles/components/tags/tags.sass"
 import {TbBrandCashapp} from "react-icons/tb"
-import { redirect } from "next/navigation"
+import { AiOutlineLoading } from "react-icons/ai"
 
 interface ITag{
     children: React.ReactNode
@@ -11,14 +11,23 @@ interface ITag{
 interface IElipsis{
     name:string
     className?:string
+    loading?: boolean
     color?: "purple-1" | "purple-2" |"purple-3"| "purple-4" | "purple-5" |"purple-6" | "green-1" | "green-2" | "green-3" | "pink-1" | "pink-2" | "pink-3" 
 } 
 
-const Elipsis=({color="purple-1",name="nome",className}:IElipsis)=>{
+const Elipsis=({color="purple-1",name="nome",className, loading}:IElipsis)=>{
 
     const initials = getInitials(name)
 
-
+    if(loading === true){
+        return(
+            <div className={`div-elipsis ${className}`}>
+                <div className={`elipsis loading ${color}`}>
+                    <AiOutlineLoading className="loading-icon white"/>
+                </div> 
+            </div>
+        )
+    }
     return(
         <div className={`div-elipsis ${className}`}>
             <div className={`elipsis ${color}`}>
