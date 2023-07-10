@@ -74,7 +74,6 @@ export const CarsProvider = ({ children }: IChildrenProps) => {
           Authorization: `Bearer ${token}`,
         },
       })
-      setCreateAdvertModal(false)
       toast.success("Veículo publicado com sucesso!")
       return response
     } catch (err: unknown) {

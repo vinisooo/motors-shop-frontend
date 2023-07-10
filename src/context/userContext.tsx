@@ -194,6 +194,7 @@ export const UserProvider = ({children}: TProviderProps) => {
                 }
             })
             toast.success("Comentário adicionado")
+            router.refresh()
         }catch (err) {
             toast.error("Oops! Algo deu errado ao adicionar comentário. Tente Mais tarde.")
             console.error(err)
@@ -209,6 +210,7 @@ export const UserProvider = ({children}: TProviderProps) => {
                 }
             })
 
+            router.refresh()
             toast.success("Comentário removido")
         }catch(err: unknown){
             console.log(err)

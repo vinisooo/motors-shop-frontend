@@ -40,7 +40,9 @@ const CreateAdvertisementModal = ( ) => {
         data.year = Number(year)
         data.fipeDeal = data.price < Number(fipe)
         data.coverImage = data.coverImage[0]
+
         postAdvertisement(data)
+        setCreateAdvertModal(false)
     }
 
     const getFipePrice = (e:ChangeEvent<HTMLInputElement>) => {
