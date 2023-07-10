@@ -153,6 +153,7 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
                         <option value="diesel">Diesel</option>
                         <option value="etanol">Etanol</option>
                         <option value="eletrecidade">Eletrecidade</option>
+                        <option value="flex">Flex</option>
                         <option value="gás natural">Gás natural</option>
                     </Select>
                     {errors.fuel && <span className="error">{errors.fuel.message}</span>}
