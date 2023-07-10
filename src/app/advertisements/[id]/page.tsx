@@ -25,7 +25,7 @@ const Advertisement = async({params}: {params:{id: string}}) => {
     const userToken = cookies().get("userToken")
 
     return(
-        <div className="darker-bg page-show-up">
+        <div className="darker-bg">
             <div className="advertisement-header"/>
                 <main className="container">
                     <AdvertisementInfo userToken={userToken?.value} advertisement={advertisement}/>
