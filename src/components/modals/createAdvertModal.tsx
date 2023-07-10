@@ -99,7 +99,7 @@ const CreateAdvertisementModal = ( ) => {
                     <option value="volkswagen">Volkswagen</option>
                 </datalist>
                 {errors.brand && <span className="error">{errors.brand.message}</span>}
-                <Input onClick={()=>getCarsByBrand(brand)} onChange={(e)=>getFipePrice(e)} children="Modelo" id="model" placeholder="A 200 CGI ADVANCE SEDAN" register={register("model")} list="models"/>
+                <Input onClick={()=>getCarsByBrand(brand)} onChange={(e)=>getFipePrice(e)} children="Modelo" id="model" placeholder="Modelo do veículo" register={register("model")} list="models"/>
                 <datalist id="models">
                     {
                         cars?.map((car) => {
@@ -114,11 +114,11 @@ const CreateAdvertisementModal = ( ) => {
                 {errors.model && <span className="error">{errors.model.message}</span>}
                 <div className="div-labels">
                     <div className="input-box">
-                        <Input value={year?.toString()} onChange={(e) => setYear(Number(e.target.value))} type="number"  min="1900" max="2099"  children="Ano" id="year" placeholder="2018"  register={register("year", { valueAsNumber: true })}/>
+                        <Input value={year?.toString()} onChange={(e) => setYear(Number(e.target.value))} type="number"  min="1900" max="2099"  children="Ano" id="year" placeholder="Ano do veículo"  register={register("year", { valueAsNumber: true })}/>
                         {errors.year && <span className="error">{errors.year.message}</span>}
                     </div>
                     <div className="input-box">
-                        <Select placeholder="combustível" label="Combustível" id="fuel" register={register("fuel")}>
+                        <Select placeholder="Combustível" label="Combustível" id="fuel" register={register("fuel")}>
                             <option>Insira o Combustível</option>
                             <option value="gasolina">Gasolina</option>
                             <option value="diesel">Diesel</option>
@@ -131,22 +131,22 @@ const CreateAdvertisementModal = ( ) => {
                 </div>
                 <div>
                     <div className="input-box">
-                        <Input type="number" maxLength={10} min={0}  children="Quilometragem" id="quilometers" placeholder="30.000" register={register("quilometers", { valueAsNumber: true })}/>
+                        <Input type="number" maxLength={10} min={0}  children="Quilometragem" id="quilometers" placeholder="Quilometragem" register={register("quilometers", { valueAsNumber: true })}/>
                         {errors.quilometers && <span className="error">{errors.quilometers.message}</span>}
                     </div>
                     <div className="input-box">
-                        <Input children="Cor" id="color" placeholder="Branco" register={register("color")} list="colors"/>
+                        <Input children="Cor" id="color" placeholder="Cor do veículo" register={register("color")} list="colors"/>
                         <datalist id="colors">
-                            <option value="vermelho">Vermelho</option>
-                            <option value="azul">Azul</option>
-                            <option value="verde" >Verde</option>
-                            <option value="amarelo">Amarelo</option>
-                            <option value="laranja">Laranja</option>
-                            <option value="rosa">Rosa</option>
-                            <option value="roxo">Roxo</option>
-                            <option value="preto">Preto</option>
-                            <option value="branco">Branco</option>
-                            <option value="cinza">Cinza</option>
+                            <option value="Vermelho">Vermelho</option>
+                            <option value="Azul">Azul</option>
+                            <option value="Verde" >Verde</option>
+                            <option value="Amarelo">Amarelo</option>
+                            <option value="Laranja">Laranja</option>
+                            <option value="Rosa">Rosa</option>
+                            <option value="Roxo">Roxo</option>
+                            <option value="Preto">Preto</option>
+                            <option value="Branco">Branco</option>
+                            <option value="Cinza">Cinza</option>
                         </datalist>
                         {errors.color && <span className="error">{errors.color.message}</span>}
                     </div>
@@ -157,11 +157,11 @@ const CreateAdvertisementModal = ( ) => {
                         {errors.fipePrice && <span className="error">{errors.fipePrice.message}</span>}
                     </div>
                     <div className="input-box">
-                        <Input onInput={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value = e.target.value.slice(0, 9)} type="number" children="Preço" id="price" placeholder="R$ 50.000,00" min={0} register={register("price", { valueAsNumber: true })}/>
+                        <Input onInput={(e: React.ChangeEvent<HTMLInputElement>) => e.target.value = e.target.value.slice(0, 9)} type="number" children="Preço" id="price" placeholder="Preço. Ex: 50000 (50 mil)" min={0} register={register("price", { valueAsNumber: true })}/>
                         {errors.price && <span className="error">{errors.price.message}</span>}
                     </div>
                 </div>
-                <TextArea children="Descrição" id="description" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam et ante ac enim porta luctus. Sed leo est, tempus ac sapien ut, rhoncus ultrices mauris. Phasellus consectetur non neque at varius." register={register("description")}/>
+                <TextArea children="Descrição" id="description" placeholder="Escreva uma descrição sobreo veículo." register={register("description")}/>
                 {errors.description && <span className="error">{errors.description.message}</span>}
                 <Input required name="coverImage" type="file" accept="image/*" children="Imagem da capa" id="coverImage" register={register("coverImage")}/>
                 {
