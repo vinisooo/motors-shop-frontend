@@ -160,7 +160,7 @@ const EditAdvertForm = ({car}:{car:TCar}) => {
             </div>
             <div>
                 <div className="input-box">
-                    <Input type="number" maxLength={10} min={0}  children="Quilometragem" id="quilometers" defaultValue={car.price} placeholder={car.price.toString()} register={register("quilometers", { valueAsNumber: true })}/>
+                    <Input type="number" maxLength={10} min={0}  children="Quilometragem" id="quilometers" defaultValue={car.quilometers} placeholder={car.quilometers.toString()} register={register("quilometers", { valueAsNumber: true })}/>
                     {errors.quilometers && <span className="error">{errors.quilometers.message}</span>}
                 </div>
                 <div className="input-box">

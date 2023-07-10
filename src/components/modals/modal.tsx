@@ -35,18 +35,20 @@ const Modal = ({children, title, className}: IModalProps) => {
     
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            const target = event.target as HTMLElement
-            const isButton = target.tagName.toLowerCase() === "button"
-            if (modalRef.current && !modalRef.current.contains(event.target as Node) && !isButton) {
-                closeModal()
-            } 
+          const target = event.target as HTMLElement
+          if (modalRef.current && !modalRef.current.contains(target)) {
+            if (target.classList.contains("modal-bg")) {
+              closeModal()
+            }
+          }
         }
-
+    
         document.addEventListener("click", handleClickOutside)
         return () => {
-            document.removeEventListener("click", handleClickOutside)
+          document.removeEventListener("click", handleClickOutside)
         }
-    }, [])
+      }, [])
+    
 
     return(
         <div className="modal-bg">
