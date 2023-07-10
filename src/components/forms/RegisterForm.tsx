@@ -21,7 +21,7 @@ const RegisterForm = () => {
     })
     const [isAdvertiser, setIsAdvertiser] = useState<boolean | null>(null)
 
-    const [state, setState] = useState<string>("")
+    const [state, setState] = useState<string>("OO")
     const [city, setCity] = useState<string>("")
     const [street, setStreet] = useState<string>("")
     const [complement, setComplement] = useState<string>("")
@@ -39,7 +39,6 @@ const RegisterForm = () => {
         }
         await registerUser(data)
     }
-    console.log("erros:", errors)
 
     const setNotAdvertiser = () => {
         setValue("isAdvertiser", false)
